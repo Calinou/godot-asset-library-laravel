@@ -7,6 +7,8 @@
     <meta name="theme-color" content="#3d8fcc">
     <title>Godot Asset Library</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script defer src="{{ mix('js/manifest.js') }}"></script>
+    <script defer src="{{ mix('js/vendor.js') }}"></script>
     <script defer src="{{ mix('js/app.js') }}"></script>
   </head>
   <body>

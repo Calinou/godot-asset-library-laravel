@@ -1,4 +1,8 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+require('laravel-mix-purgecss')
+const postCssImport = require('postcss-import')
+const postCssNesting = require('postcss-nesting')
+const tailwindCss = require('tailwindcss')
 
 /*
  |--------------------------------------------------------------------------
@@ -13,4 +17,10 @@ const mix = require('laravel-mix');
 
 mix
   .js('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css');
+  .extract(['vue', 'vue-router'])
+  .postCss('resources/css/app.css', 'public/css', [postCssImport, postCssNesting, tailwindCss])
+  .purgeCss()
+
+if (mix.inProduction()) {
+  mix.version()
+}
