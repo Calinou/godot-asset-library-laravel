@@ -11,5 +11,9 @@
 |
 */
 
-Route::get('/asset', 'AssetController@index');
-Route::get('/asset/{id}', 'AssetController@single');
+Route::group([
+    'namespace' => 'Api\v1',
+    'prefix' => 'v1',
+], function () {
+    Route::get('/asset/{id}', 'AssetController@show');
+});

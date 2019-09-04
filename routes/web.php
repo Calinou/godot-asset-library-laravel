@@ -11,6 +11,5 @@
 |
 */
 
-// Routing is handled using Vue.js, so the backend just needs to return the HTML shell
-// regardless of the initial URL.
-Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/', 'AssetController@index')->name('asset.index');
+Route::get('/asset/{id}', 'AssetController@show')->name('asset.show');

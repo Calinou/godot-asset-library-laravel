@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="theme-color" content="#3d8fcc">
-    <title>Godot Asset Library</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <script defer src="{{ mix('js/manifest.js') }}"></script>
-    <script defer src="{{ mix('js/vendor.js') }}"></script>
-    <script defer src="{{ mix('js/app.js') }}"></script>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
+@extends('layouts.app')
+
+@section('title', 'Home')
+
+@section('content')
+<h2>Welcome</h2>
+<a href="{{ route('asset.show', ['id' => 1]) }}">Snake</a>
+<a href="{{ route('asset.show', ['id' => 2]) }}">Tetris</a>
+<a href="{{ route('asset.show', ['id' => 3]) }}">Pong</a>
+@endsection

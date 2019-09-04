@@ -17,7 +17,7 @@ const tailwindCss = require('tailwindcss')
 
 mix
   .js('resources/js/app.js', 'public/js')
-  .extract(['vue', 'vue-router'])
+  .extract(['@barba/core'])
   .postCss('resources/css/app.css', 'public/css', [postCssImport, postCssNesting, tailwindCss])
   .purgeCss()
 

@@ -6,11 +6,11 @@ class AssetController extends Controller
 {
     public function index()
     {
-        return ['hello' => 'world', 'foo' => 'bar'];
+        return view('index');
     }
 
-    public function single(int $id)
+    public function show(int $id)
     {
-        return $id;
+        return view('asset', ['id' => $id]);
     }
 }
