@@ -1,24 +1,24 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api\v1;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class AssetsTest extends TestCase
 {
     use RefreshDatabase;
 
     public function testAssetIndex()
     {
-        $response = $this->get('/api/asset');
+        $response = $this->get('/api/v1/asset');
 
         $response->assertOk();
     }
 
-    public function testAssetSingle()
+    public function testAssetShow()
     {
-        $response = $this->get('/api/asset/1');
+        $response = $this->get('/api/v1/asset/1');
 
         $response->assertOk();
     }
