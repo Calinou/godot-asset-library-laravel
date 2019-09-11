@@ -13,3 +13,5 @@
 
 Route::get('/', 'AssetController@index')->name('asset.index');
 Route::get('/asset/{id}', 'AssetController@show')->name('asset.show');
+
+Auth::routes();
