@@ -31,6 +31,21 @@
     "eslint-plugin-import": "^2.18.2",
     "stylelint-config-standard": "^18.3.0"
   },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "extends": ["airbnb-base"],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    }
+  },
   "stylelint": {
     "extends": "stylelint-config-standard"
   }
