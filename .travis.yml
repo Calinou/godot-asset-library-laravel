@@ -1,14 +1,31 @@
 dist: bionic
 language: php
 
+env:
+  - APP_ENV=testing
+
 php:
   - '7.2'
+
+services:
+  - mysql
 
 install:
   - composer install
   - yarn install --frozen-lockfile
 
 script:
+  # Lint source files
   - vendor/bin/php-cs-fixer fix --dry-run --diff
   - php artisan code:analyse
   - yarn lint
+
+  # Build assets
+  - yarn production
+
+  # Run tests
+  - mysql -e "CREATE DATABASE godotassetlibrary;"
+  - php artisan key:generate
+  - php artisan migrate
+  - php artisan db:seed
+  - vendor/bin/phpunit
