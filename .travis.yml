@@ -6,7 +6,9 @@ php:
 
 install:
   - composer install
+  - yarn install --frozen-lockfile
 
 script:
   - vendor/bin/php-cs-fixer fix --dry-run --diff
   - php artisan code:analyse
+  - yarn lint
