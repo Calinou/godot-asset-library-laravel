@@ -1,30 +1,37 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "lint": "eslint \"resources/js/**/*.js\"",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll"
-    },
-    "dependencies": {
-        "@barba/core": "^2.6.0",
-        "cross-env": "^5.1",
-        "laravel-mix": "^4.0.7",
-        "laravel-mix-purgecss": "^4.1.0",
-        "postcss-import": "^12.0.1",
-        "postcss-nesting": "^7.0.1",
-        "resolve-url-loader": "^2.3.1",
-        "tailwindcss": "^1.1.2",
-        "vue-template-compiler": "^2.6.10",
-        "webpack": "^4.39.3"
-    },
-    "devDependencies": {
-        "eslint": "^6.3.0",
-        "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-plugin-import": "^2.18.2"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "lint": "npm-run-all --sequential lint:css lint:js",
+    "lint:css": "stylelint \"resources/css/**/*.css\"",
+    "lint:js": "eslint \"resources/js/**/*.js\"",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll"
+  },
+  "dependencies": {
+    "@barba/core": "^2.6.0",
+    "cross-env": "^5.1",
+    "laravel-mix": "^4.0.7",
+    "laravel-mix-purgecss": "^4.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-import": "^12.0.1",
+    "postcss-nesting": "^7.0.1",
+    "resolve-url-loader": "^2.3.1",
+    "tailwindcss": "^1.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.39.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "stylelint-config-standard": "^18.3.0"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
+  }
 }
