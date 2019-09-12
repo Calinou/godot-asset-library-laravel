@@ -18,10 +18,10 @@ script:
   # Lint source files
   - vendor/bin/php-cs-fixer fix --dry-run --diff
   - php artisan code:analyse
-  - yarn lint
+  - yarn run lint
 
   # Build assets
-  - yarn production
+  - yarn run prod
 
   # Run tests
   - mysql -e "CREATE DATABASE godotassetlibrary;"
