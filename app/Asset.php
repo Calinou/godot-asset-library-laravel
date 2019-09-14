@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class Asset extends Model
 {
@@ -20,4 +22,18 @@ class Asset extends Model
         'browse_url',
         'download_url',
     ];
+
+    /**
+     * Filter the list of assets according to user-specified parameters.
+     *
+     * TODO: Implement more search filters.
+     */
+    public function scopeFilterSearch($query, Request $request): Collection
+    {
+        if ($request->has('user')) {
+            $query->where('author', $request->input('user'));
+        }
+
+        return $query->get();
+    }
 }
