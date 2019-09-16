@@ -24,7 +24,7 @@ script:
   - yarn run prod
 
   # Run tests
-  - mysql -e "CREATE DATABASE godotassetlibrary;"
+  - php artisan db:create
   - php artisan key:generate
   - php artisan migrate
   - php artisan db:seed
