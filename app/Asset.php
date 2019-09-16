@@ -24,7 +24,7 @@ class Asset extends Model
     ];
 
     /**
-     * Filter the list of assets according to user-specified parameters.
+     * Filter and sort the list of assets according to user-specified parameters.
      *
      * TODO: Implement more search filters.
      */
@@ -34,6 +34,12 @@ class Asset extends Model
             $query->where('author', $request->input('user'));
         }
 
-        return $query->get();
+        $result = $query->get();
+
+        if ($request->has('reverse')) {
+            $result = $result->reverse()->values();
+        }
+
+        return $result;
     }
 }
