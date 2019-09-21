@@ -1,5 +1,6 @@
 <?php
 
+use App\Asset;
 use Illuminate\Database\Seeder;
 
 class AssetsTableSeeder extends Seeder
@@ -11,6 +12,6 @@ class AssetsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Asset::class, 100)->create();
+        factory(Asset::class, 100)->create();
     }
 }
