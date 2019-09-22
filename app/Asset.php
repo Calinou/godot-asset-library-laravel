@@ -159,11 +159,32 @@ class Asset extends Model
      */
     public function scopeFilterSearch($query, Request $request): Collection
     {
+        $request->validate([
+            'category_id' => 'nullable|integer|gte:0|lt:'.self::CATEGORY_MAX,
+        ]);
+
+        if ($request->has('category_id')) {
+            $query->where('category', $request->input('category_id'));
+        }
+
         if ($request->has('user')) {
             $query->where('author', $request->input('user'));
         }
 
+        if ($request->has('godot_version')) {
+            $query->where('godot_version', $request->input('godot_version'));
+        }
+
+        if ($request->has('filter')) {
+            // Search anywhere in the asset's title
+            $query->where('title', 'like', '%'.$request->input('filter').'%');
+        }
+
+        // Filtering must be done above
+
         $result = $query->get();
+
+        // Sorting must be done below
 
         if ($request->has('reverse')) {
             $result = $result->reverse()->values();
