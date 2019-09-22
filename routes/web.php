@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'AssetController@index')->name('asset.index');
+// Redirect for compatibility with the old asset library homepage URL
+Route::permanentRedirect('/asset', '/');
 Route::get('/asset/{id}', 'AssetController@show')->name('asset.show');
 
 Auth::routes();
