@@ -41,12 +41,14 @@ class Asset extends Model
     public const CATEGORY_MAX = 10;
 
     /**
-     * The category type that will be displayed in the editor's AssetLib tab.
+     * Assets that are part of the Add-ons category type will be displayed
+     * in the editor's AssetLib tab.
      */
     public const CATEGORY_TYPE_ADDONS = 0;
 
     /**
-     * The category type that will be displayed in the Project Manager's Templates tab.
+     * Assets that are part of the Projects category type will be displayed
+     * in the Project Manager's Templates tab.
      */
     public const CATEGORY_TYPE_PROJECTS = 1;
 
@@ -82,7 +84,7 @@ class Asset extends Model
                 return 'Official';
                 break;
             default:
-                throw new \Exception('Invalid support level.');
+                throw new \Exception("Invalid support level: $supportLevel");
                 break;
         }
     }
@@ -124,7 +126,7 @@ class Asset extends Model
                 return 'Demos';
                 break;
             default:
-                throw new \Exception('Invalid category.');
+                throw new \Exception("Invalid category: $category");
                 break;
         }
     }
@@ -145,7 +147,7 @@ class Asset extends Model
                     return self::CATEGORY_TYPE_ADDONS;
                 }
 
-                throw new \Exception('Invalid category.');
+                throw new \Exception("Invalid category: $category");
                 break;
         }
     }
