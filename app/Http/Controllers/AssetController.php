@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
-use Illuminate\Http\Request;
+use App\Http\Requests\ListAssets;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetController extends Controller
 {
-    public function index(Request $request)
+    public function index(ListAssets $request)
     {
-        $assets = Asset::filterSearch($request);
+        $validated = $request->validated();
 
-        return view('index', ['assets' => $assets]);
+        $itemsPerPage = $validated['max_results'] ?? Asset::ASSETS_PER_PAGE;
+        $page = $validated['page'] ?? 1;
+
+        $assets = Asset::filterSearch($validated);
+        $paginator = new LengthAwarePaginator(
+            $assets->slice(($page - 1) * $itemsPerPage, $itemsPerPage)->values(),
+            $assets->count(),
+            $itemsPerPage
+        );
+
+        return view('index', ['assets' => $paginator->items()]);
     }
 
     public function show(int $id)

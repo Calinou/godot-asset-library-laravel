@@ -2,12 +2,16 @@
 
 namespace App;
 
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 class Asset extends Model
 {
+    /**
+     * The number of assets per page to display by default.
+     */
+    public const ASSETS_PER_PAGE = 10;
+
     /**
      * The support level voluntarily set by users who are submitting assets
      * in "testing" version (can be unstable).
@@ -154,30 +158,30 @@ class Asset extends Model
 
     /**
      * Filter and sort the list of assets according to user-specified parameters.
+     * This function doesn't perform any validation. The data passed must be
+     * validated first!
      *
      * TODO: Implement more search filters.
+     *
+     * @see App\Http\Requests\ListAssets
      */
-    public function scopeFilterSearch($query, Request $request): Collection
+    public function scopeFilterSearch($query, array $validated): Collection
     {
-        $request->validate([
-            'category_id' => 'nullable|integer|gte:0|lt:'.self::CATEGORY_MAX,
-        ]);
-
-        if ($request->has('category_id')) {
-            $query->where('category', $request->input('category_id'));
+        if (isset($validated['category_id'])) {
+            $query->where('category', $validated['category_id']);
         }
 
-        if ($request->has('user')) {
-            $query->where('author', $request->input('user'));
+        if (isset($validated['user'])) {
+            $query->where('author', $validated['user']);
         }
 
-        if ($request->has('godot_version')) {
-            $query->where('godot_version', $request->input('godot_version'));
+        if (isset($validated['godot_version'])) {
+            $query->where('godot_version', $validated['godot_version']);
         }
 
-        if ($request->has('filter')) {
+        if (isset($validated['filter'])) {
             // Search anywhere in the asset's title
-            $query->where('title', 'like', '%'.$request->input('filter').'%');
+            $query->where('title', 'like', '%'.$validated['filter'].'%');
         }
 
         // Filtering must be done above
@@ -186,7 +190,7 @@ class Asset extends Model
 
         // Sorting must be done below
 
-        if ($request->has('reverse')) {
+        if (isset($validated['reverse'])) {
             $result = $result->reverse()->values();
         }
 
