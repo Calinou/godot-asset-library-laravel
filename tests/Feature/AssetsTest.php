@@ -7,12 +7,33 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AssetsTest extends TestCase
 {
-    use RefreshDatabase;
+    // https://stackoverflow.com/questions/42350138/how-to-seed-database-migrations-for-laravel-tests
+    use RefreshDatabase {
+        refreshDatabase as baseRefreshDatabase;
+    }
+
+    public function refreshDatabase()
+    {
+        $this->baseRefreshDatabase();
+        $this->seed();
+    }
 
     public function testAssetIndex()
     {
         $response = $this->get('/');
         $response->assertOk();
+    }
+
+    public function testAssetIndexPaginationValid()
+    {
+        $response = $this->get('/?page=2');
+        $response->assertOk();
+    }
+
+    public function testAssetIndexPaginationInvalid()
+    {
+        $response = $this->get('/?page=-5');
+        $response->assertRedirect();
     }
 
     public function testAssetSearchCategoryValid()
