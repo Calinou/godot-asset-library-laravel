@@ -17,4 +17,6 @@ Route::group([
 ], function () {
     Route::get('/asset', 'AssetController@index');
     Route::get('/asset/{id}', 'AssetController@show');
+
+    Route::get('/configure', 'ConfigureController@index');
 });
