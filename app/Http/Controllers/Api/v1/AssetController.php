@@ -16,7 +16,16 @@ class AssetController extends Controller
         $itemsPerPage = $validated['max_results'] ?? Asset::ASSETS_PER_PAGE;
         $page = $validated['page'] ?? 1;
 
-        $assets = Asset::filterSearch($validated);
+        $assets = Asset::with('author')->filterSearch($validated)->map(function (Asset $asset) {
+            // Flatten the author array for compatibility with the existing API
+            // We have to unset the old value before setting it with the string
+            // for some reason...
+            $authorName = $asset['author']['name'];
+            unset($asset['author']);
+            $asset['author'] = $authorName;
+
+            return $asset;
+        });
         $paginator = new LengthAwarePaginator(
             $assets->slice(($page - 1) * $itemsPerPage, $itemsPerPage)->values(),
             $assets->count(),
@@ -32,6 +41,9 @@ class AssetController extends Controller
         ];
     }
 
+    /**
+     * TODO: Implement single asset display.
+     */
     public function show(int $id)
     {
         return ['name' => $id];

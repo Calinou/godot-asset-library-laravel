@@ -23,6 +23,7 @@ class ListAssets extends FormRequest
         return [
             'page' => 'nullable|integer|gte:1',
             'max_results' => 'nullable|integer|gte:1|lte:500',
+            'user' => 'nullable|string',
             'category' => 'nullable|integer|gte:0|lt:'.Asset::CATEGORY_MAX,
             'reverse' => 'nullable|string',
             'filter' => 'nullable|string',

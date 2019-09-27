@@ -63,14 +63,41 @@ class Asset extends Model
      */
     protected $fillable = [
         'title',
-        'author',
-        'category',
+        'author_id',
+        'category_id',
         'cost',
         'godot_version',
         'support_level',
         'browse_url',
         'download_url',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'support_level_id',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'category',
+        'support_level',
+    ];
+
+    /**
+     * Get the user that posted the asset.
+     */
+    public function author()
+    {
+        return $this->belongsTo('App\User', 'author_id');
+    }
 
     /**
      * Returns the given support level's name.
@@ -136,6 +163,22 @@ class Asset extends Model
     }
 
     /**
+     * Non-static variant of `getCategoryName()` (used in serialization).
+     */
+    public function getCategoryAttribute(): string
+    {
+        return self::getCategoryName($this->category_id);
+    }
+
+    /**
+     * Non-static variant of `getSupportLevelName()` (used in serialization).
+     */
+    public function getSupportLevelAttribute(): string
+    {
+        return self::getSupportLevelName($this->support_level_id);
+    }
+
+    /**
      * Returns the given category's type.
      */
     public static function getCategoryType(int $category): int
@@ -172,7 +215,8 @@ class Asset extends Model
         }
 
         if (isset($validated['user'])) {
-            $query->where('author', $validated['user']);
+            $queryAuthorId = User::where('name', $validated['user'])->first()['id'];
+            $query->where('author_id', $queryAuthorId);
         }
 
         if (isset($validated['godot_version'])) {

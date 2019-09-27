@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+use App\Asset;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AssetsTableSeeder::class);
+        factory(User::class, 20)->create()->each(function (User $user) {
+            $user->assets()->saveMany(factory(Asset::class, 3)->make());
+        });
     }
 }

@@ -17,15 +17,17 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('author');
-            $table->tinyInteger('category');
+            $table->unsignedBigInteger('author_id');
+            $table->tinyInteger('category_id');
             $table->string('cost'); // SPDX license identifier
             $table->string('godot_version');
-            $table->tinyInteger('support_level')->default(Asset::SUPPORT_LEVEL_COMMUNITY);
+            $table->tinyInteger('support_level_id')->default(Asset::SUPPORT_LEVEL_COMMUNITY);
             $table->text('description');
             $table->text('browse_url');
             $table->text('download_url');
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 

@@ -38,4 +38,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user's assets.
+     */
+    public function assets()
+    {
+        return $this->hasMany('App\Asset', 'author_id');
+    }
 }

@@ -41,6 +41,7 @@
       <button>{{ __('Search') }}</button>
     </form>
   </section>
+
   <section class="flex flex-wrap -mx-2">
     @foreach ($assets as $asset)
       <div class="w-full lg:w-1/2 px-2 my-2">
@@ -51,11 +52,11 @@
             </div>
             <div class="ml-6 pt-1">
               <div class="title leading-relaxed">{{ $asset->title }}</div>
-              <div class="author text-gray-600 text-sm">{{ $asset->author }}</div>
+              <div class="author text-gray-600 text-sm">{{ $asset->author->name }}</div>
               <div class="text-sm -ml-px mt-2">
-                <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset::getCategoryName($asset->category) }}</span>
+                <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->category }}</span>
                 <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->godot_version }}</span>
-                <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset::getSupportLevelName($asset->support_level) }}</span>
+                <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->support_level }}</span>
               </div>
             </div>
           </article>
