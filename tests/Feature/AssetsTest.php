@@ -38,16 +38,16 @@ class AssetsTest extends TestCase
 
     public function testAssetSearchCategoryValid()
     {
-        $response = $this->get('/?category_id=0');
+        $response = $this->get('/?category=0');
         $response->assertOk();
     }
 
     public function testAssetSearchCategoryInvalid()
     {
-        $response = $this->get('/?category_id=-1');
+        $response = $this->get('/?category=-1');
         $response->assertRedirect();
 
-        $response = $this->get('/?category_id=1234');
+        $response = $this->get('/?category=1234');
         $response->assertRedirect();
     }
 

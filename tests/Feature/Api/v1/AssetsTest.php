@@ -50,16 +50,16 @@ class AssetsTest extends TestCase
 
     public function testAssetSearchCategoryValid()
     {
-        $response = $this->get('/api/v1/asset/?category_id=0');
+        $response = $this->get('/api/v1/asset/?category=0');
         $response->assertOk();
     }
 
     public function testAssetSearchCategoryInvalid()
     {
-        $response = $this->get('/api/v1/asset/?category_id=-1');
+        $response = $this->get('/api/v1/asset/?category=-1');
         $response->assertStatus(422);
 
-        $response = $this->get('/api/v1/asset/?category_id=1234');
+        $response = $this->get('/api/v1/asset/?category=1234');
         $response->assertStatus(422);
     }
 

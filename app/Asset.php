@@ -167,8 +167,8 @@ class Asset extends Model
      */
     public function scopeFilterSearch($query, array $validated): Collection
     {
-        if (isset($validated['category_id'])) {
-            $query->where('category', $validated['category_id']);
+        if (isset($validated['category'])) {
+            $query->where('category', $validated['category']);
         }
 
         if (isset($validated['user'])) {

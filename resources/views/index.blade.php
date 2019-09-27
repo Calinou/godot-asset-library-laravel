@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@inject('assetClass', 'App\Asset')
 
 @section('title', 'Home')
 
@@ -10,16 +11,36 @@
     {{ session('status') }}
   @endif
 
-  <a href="{{ route('register') }}">Sign up</a>
-  <a href="{{ route('login') }}">Log in</a>
+  <a href="{{ route('register') }}">{{ __('Sign up') }}</a>
+  <a href="{{ route('login') }}">{{ __('Log in') }}</a>
 
   <form method="POST" action="{{ route('logout') }}">
     @csrf
-    <button type="submit">Log out</button>
+    <button type="submit">{{ __('Log out') }}</button>
   </form>
 
   <hr>
 
+  <section>
+    <form method="GET" action="{{ route('asset.index') }}">
+      <label for="category">{{ __('Category') }}</label>
+      <select id="category" name="category">
+        <option value="" @if (Request::get('category') === null) selected @endif>Any</option>
+
+        @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
+          <option value="{{ $categoryId }}" @if (intval(Request::get('category')) === $categoryId) selected @endif>
+          {{ $assetClass::getCategoryName($categoryId) }}
+          </option>
+        @endforeach
+      </select>
+
+      <label for="reverse">{{ __('Reverse') }}</label>
+      <input type="checkbox" id="reverse" name="reverse" @if (Request::get('reverse')) checked @endif>
+
+      <input name="filter" placeholder="Search assets" value="{{ Request::get('filter') }}">
+      <button>{{ __('Search') }}</button>
+    </form>
+  </section>
   <section class="flex flex-wrap -mx-2">
     @foreach ($assets as $asset)
       <div class="w-full lg:w-1/2 px-2 my-2">
