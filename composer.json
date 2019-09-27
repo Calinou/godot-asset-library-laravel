@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.0",
+        "facade/ignition": "^1.9",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "6.0.*",
         "laravel/tinker": "^1.0"
@@ -16,7 +17,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
-        "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "matt-allan/laravel-code-style": "^0.4.0",
         "mockery/mockery": "^1.0",
