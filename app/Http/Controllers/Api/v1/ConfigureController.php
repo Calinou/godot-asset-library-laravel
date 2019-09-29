@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Asset;
-use Illuminate\Http\Request;
+use App\Http\Requests\Configure;
 use App\Http\Controllers\Controller;
 
 class ConfigureController extends Controller
@@ -11,11 +11,9 @@ class ConfigureController extends Controller
     /**
      * Return the list of available categories (used for editor integration).
      */
-    public function index(Request $request)
+    public function index(Configure $request)
     {
-        $validated = $request->validate([
-            'type' => 'nullable|string|in:any,addon,project',
-        ]);
+        $validated = $request->validated();
 
         if (! isset($validated['type'])) {
             // Default to 'addon' for compatibility with the old asset library
