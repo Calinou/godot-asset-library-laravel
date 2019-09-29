@@ -38,7 +38,7 @@ class ConfigureController extends Controller
         $categories = [];
         foreach (range(0, Asset::CATEGORY_MAX - 1) as $categoryId) {
             if ($validated['type'] === 'any' || Asset::getCategoryType($categoryId) === $typeId) {
-                $categories[$categoryId] = [
+                $categories[] = [
                     'id' => $categoryId,
                     'name' => Asset::getCategoryName($categoryId),
                     'type' => Asset::getCategoryType($categoryId),
