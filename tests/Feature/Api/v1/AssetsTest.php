@@ -21,7 +21,28 @@ class AssetsTest extends TestCase
     public function testAssetIndex()
     {
         $response = $this->get('/api/v1/asset');
-        $response->assertOk();
+        $response->assertOk()->assertJsonStructure([
+            'page',
+            'page_length',
+            'pages',
+            'total_items',
+            'result' => [
+                [
+                    'id',
+                    'title',
+                    'author_id',
+                    'category_id',
+                    'cost',
+                    'godot_version',
+                    'description',
+                    'browse_url',
+                    'download_url',
+                    'modify_date',
+                    'category',
+                    'support_level',
+                ],
+            ],
+        ]);
     }
 
     public function testAssetIndexPaginationValid()
