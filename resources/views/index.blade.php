@@ -45,7 +45,7 @@
   <section class="flex flex-wrap -mx-2">
     @foreach ($assets as $asset)
       <div class="w-full lg:w-1/2 px-2 my-2">
-        <a href="{{ route('asset.show', ['id' => $asset->id ]) }}">
+        <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
           <article class="flex bg-white rounded shadow p-3">
             <div class="flex-shrink-0 self-center">
               <img class="w-16 h-16">
