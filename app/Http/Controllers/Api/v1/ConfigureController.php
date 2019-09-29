@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class ConfigureController extends Controller
 {
     /**
-     * Returns the list of available categories (used for editor integration).
+     * Return the list of available categories (used for editor integration).
      */
     public function index(Request $request)
     {

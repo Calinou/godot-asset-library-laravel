@@ -105,7 +105,7 @@ class Asset extends Model
     }
 
     /**
-     * Returns the given support level's name.
+     * Return the given support level's name.
      */
     public static function getSupportLevelName(int $supportLevel): string
     {
@@ -126,7 +126,7 @@ class Asset extends Model
     }
 
     /**
-     * Returns the given category's name.
+     * Return the given category's name.
      */
     public static function getCategoryName(int $category): string
     {

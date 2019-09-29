@@ -5,7 +5,7 @@ namespace App\Http\Middleware\Api;
 use Closure;
 
 /**
- * Forces incoming API requests to be treated as JSON.
+ * Force incoming API requests to be treated as JSON.
  * This way, a JSON response is always returned by Laravel
  * (including validation errors).
  */

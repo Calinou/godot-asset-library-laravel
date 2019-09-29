@@ -8,6 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetController extends Controller
 {
+    /**
+     * Display a paginated list of assets.
+     */
     public function index(ListAssets $request)
     {
         $validated = $request->validated();
