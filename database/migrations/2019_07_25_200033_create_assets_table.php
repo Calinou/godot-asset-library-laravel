@@ -25,7 +25,10 @@ class CreateAssetsTable extends Migration
             $table->text('description');
             $table->text('browse_url');
             $table->text('download_url');
-            $table->timestamps();
+            // The update date must be named `modify_date` for compatibility
+            // with the existing asset library API
+            $table->dateTime('created_at');
+            $table->dateTime('modify_date');
 
             $table->foreign('author_id')->references('id')->on('users');
         });

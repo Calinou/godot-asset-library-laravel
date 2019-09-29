@@ -66,6 +66,19 @@ class AssetsTest extends TestCase
     public function testAssetShow()
     {
         $response = $this->get('/api/v1/asset/1');
-        $response->assertOk();
+        $response->assertOk()->assertJsonStructure([
+            'id',
+            'title',
+            'author_id',
+            'category_id',
+            'cost',
+            'godot_version',
+            'description',
+            'browse_url',
+            'download_url',
+            'modify_date',
+            'category',
+            'support_level',
+        ]);
     }
 }

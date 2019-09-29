@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 class Asset extends Model
 {
     /**
+     * For compatibility with the existing API.
+     */
+    public const UPDATED_AT = 'modify_date';
+
+    /**
      * The number of assets per page to display by default.
      */
     public const ASSETS_PER_PAGE = 10;
