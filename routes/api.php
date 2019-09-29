@@ -16,7 +16,7 @@ Route::group([
     'prefix' => 'v1',
 ], function () {
     Route::get('/asset', 'AssetController@index');
-    Route::get('/asset/{id}', 'AssetController@show');
+    Route::get('/asset/{asset}', 'AssetController@show');
 
     Route::get('/configure', 'ConfigureController@index');
 });

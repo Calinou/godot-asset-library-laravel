@@ -42,10 +42,10 @@ class AssetController extends Controller
     }
 
     /**
-     * TODO: Implement single asset display.
+     * Return information about a single asset.
      */
-    public function show(int $id)
+    public function show(Asset $asset)
     {
-        return ['name' => $id];
+        return $asset;
     }
 }
