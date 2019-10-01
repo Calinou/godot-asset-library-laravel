@@ -84,6 +84,7 @@ class Asset extends Model
      */
     protected $hidden = [
         'support_level_id',
+        'created_at',
     ];
 
     /**
