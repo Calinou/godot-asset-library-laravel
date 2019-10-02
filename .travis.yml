@@ -14,7 +14,7 @@ install:
 script:
   # Lint source files
   - vendor/bin/php-cs-fixer fix --dry-run --diff
-  - php artisan code:analyse
+  - php artisan code:analyse --level 7
   - yarn run lint
 
   # Build assets and generate API documentation
