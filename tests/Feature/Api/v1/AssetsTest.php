@@ -28,7 +28,7 @@ class AssetsTest extends TestCase
             'total_items',
             'result' => [
                 [
-                    'id',
+                    'asset_id',
                     'title',
                     'author_id',
                     'category_id',
@@ -88,7 +88,7 @@ class AssetsTest extends TestCase
     {
         $response = $this->get('/api/v1/asset/1');
         $response->assertOk()->assertJsonStructure([
-            'id',
+            'asset_id',
             'title',
             'author_id',
             'category_id',

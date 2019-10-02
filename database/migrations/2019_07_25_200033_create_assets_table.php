@@ -15,7 +15,8 @@ class CreateAssetsTable extends Migration
     public function up()
     {
         Schema::create('assets', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            // The primary key must be named `asset_id` for compatibility with the existing asset library API
+            $table->bigIncrements('asset_id');
             $table->string('title');
             $table->unsignedBigInteger('author_id');
             $table->tinyInteger('category_id');

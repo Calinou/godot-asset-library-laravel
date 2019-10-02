@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 class Asset extends Model
 {
     /**
-     * For compatibility with the existing API.
+     * The key used to store the last modification date and time.
+     * This value has been changed from the default for compatibility with the
+     * existing asset library API.
      */
     public const UPDATED_AT = 'modify_date';
 
@@ -60,6 +62,15 @@ class Asset extends Model
      * in the Project Manager's Templates tab.
      */
     public const CATEGORY_TYPE_PROJECTS = 1;
+
+    /**
+     * The primary key associated with the table.
+     * This value has been changed from the default for compatibility with the
+     * existing asset library API.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'asset_id';
 
     /**
      * The attributes that are mass assignable.
