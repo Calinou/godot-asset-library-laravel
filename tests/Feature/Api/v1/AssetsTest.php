@@ -12,13 +12,13 @@ class AssetsTest extends TestCase
         refreshDatabase as baseRefreshDatabase;
     }
 
-    public function refreshDatabase()
+    public function refreshDatabase(): void
     {
         $this->baseRefreshDatabase();
         $this->seed();
     }
 
-    public function testAssetIndex()
+    public function testAssetIndex(): void
     {
         $response = $this->get('/api/v1/asset');
         $response->assertOk()->assertJsonStructure([
@@ -45,37 +45,37 @@ class AssetsTest extends TestCase
         ]);
     }
 
-    public function testAssetIndexPaginationValid()
+    public function testAssetIndexPaginationValid(): void
     {
         $response = $this->get('/api/v1/asset?page=2');
         $response->assertOk();
     }
 
-    public function testAssetIndexPaginationInvalid()
+    public function testAssetIndexPaginationInvalid(): void
     {
         $response = $this->get('/api/v1/asset?page=-5');
         $response->assertStatus(422);
     }
 
-    public function testAssetIndexMaxResultsValid()
+    public function testAssetIndexMaxResultsValid(): void
     {
         $response = $this->get('/api/v1/asset?max_results=15');
         $response->assertJsonCount(15, 'result');
     }
 
-    public function testAssetIndexMaxResultsInvalid()
+    public function testAssetIndexMaxResultsInvalid(): void
     {
         $response = $this->get('/api/v1/asset?max_results=0');
         $response->assertStatus(422);
     }
 
-    public function testAssetSearchCategoryValid()
+    public function testAssetSearchCategoryValid(): void
     {
         $response = $this->get('/api/v1/asset/?category=0');
         $response->assertOk();
     }
 
-    public function testAssetSearchCategoryInvalid()
+    public function testAssetSearchCategoryInvalid(): void
     {
         $response = $this->get('/api/v1/asset/?category=-1');
         $response->assertStatus(422);
@@ -84,7 +84,7 @@ class AssetsTest extends TestCase
         $response->assertStatus(422);
     }
 
-    public function testAssetShow()
+    public function testAssetShow(): void
     {
         $response = $this->get('/api/v1/asset/1');
         $response->assertOk()->assertJsonStructure([

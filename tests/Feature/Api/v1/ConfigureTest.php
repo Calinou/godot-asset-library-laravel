@@ -19,7 +19,7 @@ class ConfigureTest extends TestCase
         ],
     ];
 
-    public function testConfigureIndexValid()
+    public function testConfigureIndexValid(): void
     {
         $response = $this->get('/api/v1/configure');
         $response->assertOk()->assertJsonStructure(self::configureStructure);
@@ -34,7 +34,7 @@ class ConfigureTest extends TestCase
         $response->assertOk()->assertJsonStructure(self::configureStructure);
     }
 
-    public function testConfigureIndexInvalid()
+    public function testConfigureIndexInvalid(): void
     {
         $response = $this->get('/api/v1/configure?type=something');
         $response->assertStatus(422);

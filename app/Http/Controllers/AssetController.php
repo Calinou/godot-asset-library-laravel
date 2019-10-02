@@ -20,7 +20,7 @@ class AssetController extends Controller
 
         $assets = Asset::with('author')->filterSearch($validated);
         $paginator = new LengthAwarePaginator(
-            $assets->slice(($page - 1) * $itemsPerPage, $itemsPerPage)->values(),
+            $assets->slice(intval(($page - 1) * $itemsPerPage), $itemsPerPage)->values(),
             $assets->count(),
             $itemsPerPage
         );

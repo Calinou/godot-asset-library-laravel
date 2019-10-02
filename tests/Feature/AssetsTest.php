@@ -12,37 +12,37 @@ class AssetsTest extends TestCase
         refreshDatabase as baseRefreshDatabase;
     }
 
-    public function refreshDatabase()
+    public function refreshDatabase(): void
     {
         $this->baseRefreshDatabase();
         $this->seed();
     }
 
-    public function testAssetIndex()
+    public function testAssetIndex(): void
     {
         $response = $this->get('/');
         $response->assertOk()->assertViewIs('index');
     }
 
-    public function testAssetIndexPaginationValid()
+    public function testAssetIndexPaginationValid(): void
     {
         $response = $this->get('/?page=2');
         $response->assertOk()->assertViewIs('index');
     }
 
-    public function testAssetIndexPaginationInvalid()
+    public function testAssetIndexPaginationInvalid(): void
     {
         $response = $this->get('/?page=-5');
         $response->assertRedirect();
     }
 
-    public function testAssetSearchCategoryValid()
+    public function testAssetSearchCategoryValid(): void
     {
         $response = $this->get('/?category=0');
         $response->assertOk()->assertViewIs('index');
     }
 
-    public function testAssetSearchCategoryInvalid()
+    public function testAssetSearchCategoryInvalid(): void
     {
         $response = $this->get('/?category=-1');
         $response->assertRedirect();
@@ -55,13 +55,13 @@ class AssetsTest extends TestCase
      * Tests the redirect for the old asset library homepage URL.
      * This ensures that existing links posted to the asset library don't break.
      */
-    public function testAssetIndexRedirect()
+    public function testAssetIndexRedirect(): void
     {
         $response = $this->get('/asset');
         $response->assertRedirect('/');
     }
 
-    public function testAssetShow()
+    public function testAssetShow(): void
     {
         $response = $this->get('/asset/1');
         $response->assertOk()->assertViewIs('asset');
