@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "doc": "redoc-cli bundle public/developer/v1/openapi.yaml && mv redoc-static.html public/developer/v1/index.html",
+    "doc": "redoc-cli bundle public/developer/v1/openapi.yaml && move-file redoc-static.html public/developer/v1/index.html",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "lint": "npm-run-all --sequential lint:css lint:js",
     "lint:css": "stylelint \"resources/css/**/*.css\"",
@@ -16,6 +16,7 @@
     "cross-env": "^5.1",
     "laravel-mix": "^4.0.7",
     "laravel-mix-purgecss": "^4.1.0",
+    "move-file-cli": "^1.0.0",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^12.0.1",
     "postcss-nesting": "^7.0.1",
