@@ -17,8 +17,9 @@ script:
   - php artisan code:analyse
   - yarn run lint
 
-  # Build assets
+  # Build assets and generate API documentation
   - yarn run prod
+  - yarn run doc
 
   # Run tests
   - vendor/bin/phpunit
