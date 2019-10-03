@@ -21,5 +21,6 @@ script:
   - yarn run prod
   - yarn run doc
 
-  # Run tests
-  - vendor/bin/phpunit
+  # Run tests and upload code coverage results
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - bash <(curl -s https://codecov.io/bash)
