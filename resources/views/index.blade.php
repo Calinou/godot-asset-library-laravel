@@ -11,13 +11,17 @@
     {{ session('status') }}
   @endif
 
-  <a href="{{ route('register') }}">{{ __('Sign up') }}</a>
-  <a href="{{ route('login') }}">{{ __('Log in') }}</a>
-
+@if (Auth::check())
+  {{ Auth::user()->name }}
   <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button type="submit">{{ __('Log out') }}</button>
   </form>
+@else
+  <a href="{{ route('register') }}">{{ __('Sign up') }}</a>
+  <a href="{{ route('login') }}">{{ __('Log in') }}</a>
+@endif
+
 
   <hr>
 
