@@ -53,5 +53,7 @@ class AdminCreate extends Command
             'email' => $email,
             'password' => Hash::make($password),
         ])->markEmailAsVerified();
+
+        $this->info("Administrator \"$name\" <$email> created!");
     }
 }
