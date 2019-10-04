@@ -19,7 +19,7 @@
   <ul class="text-sm">
     <li><strong>{{ __('Version:') }}</strong> {{ $asset->version_string }}</li>
     <li><strong>{{ __('Compatible with:') }}</strong> Godot {{ $asset->godot_version }}</li>
-    <li><strong>{{ __('License:') }}</strong> {{ $asset->cost }}</li>
+    <li><strong>{{ __('License:') }}</strong> {{ $asset->license_name }}</li>
   </ul>
 </div>
 @endsection

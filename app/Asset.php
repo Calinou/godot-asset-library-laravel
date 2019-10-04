@@ -180,6 +180,34 @@ class Asset extends Model
     }
 
     /**
+     * Return the asset's license name as an human-readable name.
+     */
+    public static function getLicenseName(string $license): string
+    {
+        $licenseNames = [
+            'Apache-2.0' => 'Apache 2',
+            'BSD-2-Clause' => 'BSD 2-Clause',
+            'BSD-3-Clause' => 'BSD 3-Clause',
+            'CC-BY-3.0' => 'CC BY 3.0',
+            'CC-BY-4.0' => 'CC BY 4.0',
+            'CC-BY-SA-3.0' => 'CC BY-SA 3.0',
+            'CC-BY-SA-4.0' => 'CC BY-SA 4.0',
+            'GPL-2.0-only' => 'GPLv2 only',
+            'GPL-2.0-or-later' => 'GPLv2 or later',
+            'GPL-3.0-only' => 'GPLv3 only',
+            'GPL-3.0-or-later' => 'GPLv3 or later',
+            'MPL-2.0' => 'MPL v2',
+        ];
+
+        if (array_key_exists($license, $licenseNames)) {
+            return $licenseNames[$license];
+        } else {
+            // Return the license name as-is
+            return $license;
+        }
+    }
+
+    /**
      * Non-static variant of `getCategoryName()` (used in serialization).
      */
     public function getCategoryAttribute(): string
@@ -196,7 +224,15 @@ class Asset extends Model
     }
 
     /**
-     * Returns the given category's type.
+     * Non-static variant of `getLicenseName` (used in templates).
+     */
+    public function getLicenseNameAttribute(): string
+    {
+        return self::getLicenseName($this->cost);
+    }
+
+    /**
+     * Return the given category's type.
      */
     public static function getCategoryType(int $category): int
     {
