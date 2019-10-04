@@ -1,3 +1,30 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+
+/*
+ * Tailwind classes must be applied below.
+ * See <https://tailwindcss.com/docs/extracting-components>.
+ */
+
+.navbar-link {
+  @apply block;
+  @apply leading-none;
+  @apply px-3;
+  @apply py-3;
+
+  &:hover {
+    background-color: hsla(0, 0%, 0%, 0.05);
+  }
+
+  &:active {
+    background-color: hsla(0, 0%, 0%, 0.1);
+  }
+}
+
+/* Tailwind classes must be applied above */
+
+@tailwind utilities;
+
+body {
+  background-color: #eff1f5;
+}
