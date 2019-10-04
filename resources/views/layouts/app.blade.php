@@ -13,7 +13,7 @@
 </head>
 <body data-barba="wrapper">
   <header>
-    <nav class="shadow bg-white p-2">
+    <nav class="shadow bg-white p-2 mb-8">
       <div class="container flex flex-wrap justify-between">
 
         <div class="flex items-center mr-6">
