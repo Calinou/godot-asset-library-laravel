@@ -121,19 +121,16 @@ class Asset extends Model
      */
     public static function getSupportLevelName(int $supportLevel): string
     {
-        switch ($supportLevel) {
-            case self::SUPPORT_LEVEL_TESTING:
-                return 'Testing';
-                break;
-            case self::SUPPORT_LEVEL_COMMUNITY:
-                return 'Community';
-                break;
-            case self::SUPPORT_LEVEL_OFFICIAL:
-                return 'Official';
-                break;
-            default:
-                throw new \Exception("Invalid support level: $supportLevel");
-                break;
+        $supportLevelNames = [
+            self::SUPPORT_LEVEL_TESTING => 'Testing',
+            self::SUPPORT_LEVEL_COMMUNITY => 'Community',
+            self::SUPPORT_LEVEL_OFFICIAL => 'Official',
+        ];
+
+        if (array_key_exists($supportLevel, $supportLevelNames)) {
+            return $supportLevelNames[$supportLevel];
+        } else {
+            throw new \Exception("Invalid support level: $supportLevel");
         }
     }
 
@@ -142,40 +139,23 @@ class Asset extends Model
      */
     public static function getCategoryName(int $category): string
     {
-        switch ($category) {
-            case self::CATEGORY_2D_TOOLS:
-                return '2D Tools';
-                break;
-            case self::CATEGORY_3D_TOOLS:
-                return '3D Tools';
-                break;
-            case self::CATEGORY_SHADERS:
-                return 'Shaders';
-                break;
-            case self::CATEGORY_MATERIALS:
-                return 'Materials';
-                break;
-            case self::CATEGORY_TOOLS:
-                return 'Tools';
-                break;
-            case self::CATEGORY_SCRIPTS:
-                return 'Scripts';
-                break;
-            case self::CATEGORY_MISC:
-                return 'Misc';
-                break;
-            case self::CATEGORY_TEMPLATES:
-                return 'Templates';
-                break;
-            case self::CATEGORY_PROJECTS:
-                return 'Projects';
-                break;
-            case self::CATEGORY_DEMOS:
-                return 'Demos';
-                break;
-            default:
-                throw new \Exception("Invalid category: $category");
-                break;
+        $categoryNames = [
+            self::CATEGORY_2D_TOOLS => '2D Tools',
+            self::CATEGORY_3D_TOOLS => '3D Tools',
+            self::CATEGORY_SHADERS => 'Shaders',
+            self::CATEGORY_MATERIALS => 'Materials',
+            self::CATEGORY_TOOLS => 'Tools',
+            self::CATEGORY_SCRIPTS => 'Scripts',
+            self::CATEGORY_MISC => 'Misc',
+            self::CATEGORY_TEMPLATES => 'Templates',
+            self::CATEGORY_PROJECTS => 'Projects',
+            self::CATEGORY_DEMOS => 'Demos',
+        ];
+
+        if (array_key_exists($category, $categoryNames)) {
+            return $categoryNames[$category];
+        } else {
+            throw new \Exception("Invalid category: $category");
         }
     }
 
