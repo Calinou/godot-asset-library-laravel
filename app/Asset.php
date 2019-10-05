@@ -117,6 +117,14 @@ class Asset extends Model
     }
 
     /**
+     * Get the asset's previews.
+     */
+    public function previews()
+    {
+        return $this->hasMany('App\AssetPreview', 'asset_id');
+    }
+
+    /**
      * Return the given support level's name.
      */
     public static function getSupportLevelName(int $supportLevel): string

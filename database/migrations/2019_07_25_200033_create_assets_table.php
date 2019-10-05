@@ -15,10 +15,8 @@ class CreateAssetsTable extends Migration
     public function up()
     {
         Schema::create('assets', function (Blueprint $table) {
-            // The primary key must be named `asset_id` for compatibility with the existing asset library API
             $table->bigIncrements('asset_id');
             $table->string('title');
-            $table->unsignedBigInteger('author_id');
             $table->tinyInteger('category_id');
             $table->string('cost'); // SPDX license identifier
             $table->string('godot_version');
@@ -26,11 +24,10 @@ class CreateAssetsTable extends Migration
             $table->text('description');
             $table->text('browse_url');
             $table->text('download_url');
-            // The update date must be named `modify_date` for compatibility
-            // with the existing asset library API
             $table->dateTime('created_at');
             $table->dateTime('modify_date');
 
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
         });
     }

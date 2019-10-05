@@ -49,6 +49,15 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
+        $asset->load(['author', 'previews']);
+
+        // Flatten the author array for compatibility with the existing API
+        // We have to unset the old value before setting it with the string
+        // for some reason...
+        $authorName = $asset['author']['name'];
+        unset($asset['author']);
+        $asset['author'] = $authorName;
+
         return $asset;
     }
 }
