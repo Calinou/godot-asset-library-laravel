@@ -24,6 +24,7 @@ class CreateAssetsTable extends Migration
             $table->text('description');
             $table->text('browse_url');
             $table->text('download_url');
+            $table->text('icon_url');
             $table->dateTime('created_at');
             $table->dateTime('modify_date');
 

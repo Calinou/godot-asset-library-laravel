@@ -36,9 +36,9 @@
     @foreach ($assets as $asset)
     <div class="w-full lg:w-1/2 px-2 my-2">
       <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
-        <article class="flex bg-white rounded shadow p-3">
+        <article class="flex bg-white rounded shadow p-3 pl-5">
           <div class="flex-shrink-0 self-center">
-            <img class="w-16 h-16">
+            <img class="w-16 h-16 bg-gray-400" src="{{ $asset->icon_url }}">
           </div>
           <div class="ml-6 pt-1">
             <div class="title leading-relaxed">{{ $asset->title }}</div>

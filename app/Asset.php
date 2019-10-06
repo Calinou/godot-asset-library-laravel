@@ -86,6 +86,7 @@ class Asset extends Model
         'support_level',
         'browse_url',
         'download_url',
+        'icon_url',
     ];
 
     /**
