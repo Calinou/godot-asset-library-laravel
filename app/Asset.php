@@ -17,7 +17,7 @@ class Asset extends Model
     /**
      * The number of assets per page to display by default.
      */
-    public const ASSETS_PER_PAGE = 10;
+    public const ASSETS_PER_PAGE = 20;
 
     /**
      * The support level voluntarily set by users who are submitting assets
