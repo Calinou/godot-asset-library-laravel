@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container">
-  <h2>Welcome</h2>
+  <h2>Welcome to the Godot Asset Library</h2>
 
   @if (session('status'))
   {{ session('status') }}
@@ -32,8 +32,14 @@
     </form>
   </section>
 
+  {{--
+    We must append the query parameters so that search filters carry on
+    when the user clicks a page number
+  --}}
+  {{ $assets->appends(Request::all())->links() }}
+
   <section class="flex flex-wrap -mx-2">
-    @foreach ($assets as $asset)
+    @foreach ($assets->items() as $asset)
     <div class="w-full lg:w-1/2 px-2 my-2">
       <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
         <article class="flex bg-white rounded shadow p-3 pl-5">
@@ -54,5 +60,7 @@
     </div>
     @endforeach
   </section>
+
+  {{ $assets->appends(Request::all())->links() }}
 </div>
 @endsection

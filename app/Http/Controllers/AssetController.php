@@ -25,7 +25,7 @@ class AssetController extends Controller
             $itemsPerPage
         );
 
-        return view('index', ['assets' => $paginator->items()]);
+        return view('index', ['assets' => $paginator]);
     }
 
     /**
