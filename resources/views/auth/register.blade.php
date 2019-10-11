@@ -13,7 +13,7 @@
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
       <div class="mb-6">
-        <label for="email" class="form-label">{{ __('Name') }}</label>
+        <label for="name" class="form-label">{{ __('Name') }}</label>
         <input
           id="name"
           type="name"
