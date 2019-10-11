@@ -6,7 +6,7 @@
   <input type="hidden" name="token" value="{{ $token }}">
 
   <label for="email">{{ __('Email address') }}</label>
-  <input id="email" type="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+  <input id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
   @error('email')
     <span role="alert">
