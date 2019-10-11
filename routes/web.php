@@ -16,4 +16,4 @@ Route::get('/', 'AssetController@index')->name('asset.index');
 Route::permanentRedirect('/asset', '/');
 Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
 
-Auth::routes();
+Auth::routes(['verify' => true]);

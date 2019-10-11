@@ -7,10 +7,6 @@
 <div class="container">
   <h2>Welcome to the Godot Asset Library</h2>
 
-  @if (session('status'))
-  {{ session('status') }}
-  @endif
-
   <section>
     <form method="GET" action="{{ route('asset.index') }}">
       <label for="category">{{ __('Category') }}</label>

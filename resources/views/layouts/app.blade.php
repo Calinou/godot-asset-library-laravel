@@ -59,6 +59,24 @@
   </header>
 
   <main data-barba="container">
+    {{-- Display flash message --}}
+    @if (session('status'))
+    <div class="container">
+      <div class="bg-white p-3 rounded shadow mb-4">
+        {{ session('status') }}
+      </div>
+    </div>
+    @endif
+
+    {{-- Display email verification success --}}
+    @if (session('verified'))
+    <div class="container">
+      <div class="bg-white p-3 rounded shadow mb-4">
+        {{ __("You've successfully verified your email address!") }}
+      </div>
+    </div>
+    @endif
+
     @yield('content')
   </main>
 </body>
