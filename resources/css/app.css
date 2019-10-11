@@ -23,6 +23,18 @@
   }
 }
 
+.button-primary {
+  @apply bg-blue-500 text-white;
+
+  &:hover {
+    @apply bg-blue-600;
+  }
+
+  &:active {
+    @apply bg-blue-700;
+  }
+}
+
 .button-success {
   @apply bg-green-500 text-white;
 
@@ -66,6 +78,31 @@
 
 .pagination-item-disabled {
   @apply bg-gray-200 text-gray-500 pointer-events-none;
+}
+
+.form-label {
+  @apply block text-sm font-bold mb-2;
+}
+
+.form-input-text {
+  @apply appearance-none shadow border rounded w-full py-2 px-3 leading-tight text-sm;
+
+  &:focus {
+    @apply outline-none shadow-outline;
+  }
+}
+
+.link {
+  @apply text-blue-600;
+
+  &:hover,
+  &:focus {
+    @apply text-blue-700 underline;
+  }
+
+  &:active {
+    @apply text-blue-800;
+  }
 }
 
 /* Tailwind classes must be applied above */

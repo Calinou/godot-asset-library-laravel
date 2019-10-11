@@ -1,40 +1,74 @@
 @extends('layouts.app')
 
+@section('title', 'Log in')
+
 @section('content')
-<form method="POST" action="{{ route('login') }}">
-  @csrf
+<div class="container">
+  <form method="POST" action="{{ route('login') }}">
+    @csrf
+    {{--
+      Always remember the user as is increasingly being done on other websites.
+      These days, people usually use private browsing mode for "one-off" navigation instead.
+      This makes the UI simpler.
+    --}}
+    <input type="hidden" name="remember" value="on">
 
-  <label for="email">{{ __('Email address') }}</label>
-  <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+    <div class="text-center text-xl font-medium">
+      Log in to Godot Asset Library
+    </div>
 
-  @error('email')
-    <span role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-  @enderror
+    <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
+      <div class="mb-6">
+        <label for="email" class="form-label">{{ __('Email address') }}</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          value="{{ old('email') }}"
+          required
+          autocomplete="email"
+          autofocus
+          class="form-input-text"
+        >
 
-  <label for="password">{{ __('Password') }}</label>
-  <input id="password" type="password" name="password" required autocomplete="current-password">
+        @error('email')
+        <div role="alert" class="mt-2 text-sm text-red-600">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
 
-  @error('password')
-    <span role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-  @enderror
+      <div class="mb-8">
+        <div class="flex items-center justify-between">
+          <label for="password" class="form-label">{{ __('Password') }}</label>
 
-  <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-  <label for="remember">
-    {{ __('Remember Me') }}
-  </label>
+          @if (Route::has('password.request'))
+          <a href="{{ route('password.request') }}" class="form-label link text-right" tabindex="1">
+            {{ __('Forgot your password?') }}
+          </a>
+          @endif
+        </div>
 
-  <button type="submit">
-    {{ __('Login') }}
-  </button>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          required
+          autocomplete="current-password"
+          class="form-input-text"
+        >
 
-  @if (Route::has('password.request'))
-    <a href="{{ route('password.request') }}">
-      {{ __('Forgot Your Password?') }}
-    </a>
-  @endif
-</form>
+        @error('password')
+        <div role="alert" class="mt-2 text-sm text-red-600">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
+
+      <button class="button button-primary w-full" type="submit">
+        {{ __('Login') }}
+      </button>
+    </section>
+  </form>
+</div>
 @endsection
