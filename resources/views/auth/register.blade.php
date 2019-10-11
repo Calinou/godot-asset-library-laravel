@@ -8,7 +8,7 @@
     @csrf
 
     <div class="text-center text-xl font-medium">
-      Sign up to Godot Asset Library
+      {{ __('Sign up to Godot Asset Library') }}
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
@@ -24,13 +24,13 @@
           autofocus
           class="form-input-text"
         >
-
         @error('name')
         <div role="alert" class="form-error">
           {{ $message }}
         </div>
         @enderror
       </div>
+
       <div class="mb-6">
         <label for="email" class="form-label">{{ __('Email address') }}</label>
         <input
@@ -42,7 +42,6 @@
           autocomplete="email"
           class="form-input-text"
         >
-
         @error('email')
         <div role="alert" class="form-error">
           {{ $message }}
@@ -60,7 +59,6 @@
           autocomplete="current-password"
           class="form-input-text"
         >
-
         @error('password')
         <div role="alert" class="form-error">
           {{ $message }}

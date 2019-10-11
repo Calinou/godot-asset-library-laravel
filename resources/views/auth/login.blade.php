@@ -14,7 +14,7 @@
     <input type="hidden" name="remember" value="on">
 
     <div class="text-center text-xl font-medium">
-      Log in to Godot Asset Library
+      {{ __('Log in to Godot Asset Library') }}
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
@@ -30,7 +30,6 @@
           autofocus
           class="form-input-text"
         >
-
         @error('email')
         <div role="alert" class="form-error">
           {{ $message }}
@@ -57,7 +56,6 @@
           autocomplete="current-password"
           class="form-input-text"
         >
-
         @error('password')
         <div role="alert" class="form-error">
           {{ $message }}
