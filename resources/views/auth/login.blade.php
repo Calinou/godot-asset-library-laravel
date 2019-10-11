@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Log in')
+@section('title', __('Log in'))
 
 @section('content')
 <div class="container">
@@ -32,7 +32,7 @@
         >
 
         @error('email')
-        <div role="alert" class="mt-2 text-sm text-red-600">
+        <div role="alert" class="form-error">
           {{ $message }}
         </div>
         @enderror
@@ -59,7 +59,7 @@
         >
 
         @error('password')
-        <div role="alert" class="mt-2 text-sm text-red-600">
+        <div role="alert" class="form-error">
           {{ $message }}
         </div>
         @enderror

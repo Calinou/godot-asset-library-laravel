@@ -92,6 +92,10 @@
   }
 }
 
+.form-error {
+  @apply mt-2 text-sm text-red-600;
+}
+
 .link {
   @apply text-blue-600;
 

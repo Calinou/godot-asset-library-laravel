@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @inject('assetClass', 'App\Asset')
 
-@section('title', 'Home')
+@section('title', __('Home'))
 
 @section('content')
 <div class="container">
