@@ -39,10 +39,11 @@
 
         <div class="w-full lg:flex lg:items-center lg:w-auto">
           @if (Auth::check())
-          {{ Auth::user()->name }}
           <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">{{ __('Log out') }}</button>
+            <button class="navbar-link" type="submit">
+              {{ __('Log out') }} ({{ Auth::user()->name }})
+            </button>
           </form>
           @else
           <a href="{{ route('register') }}" class="navbar-link">
