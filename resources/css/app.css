@@ -48,7 +48,7 @@
 }
 
 .navbar-link {
-  @apply block leading-none p-3;
+  @apply block rounded leading-none p-3;
 
   &:hover {
     background-color: var(--hover-overlay);

@@ -25,7 +25,7 @@
       <div class="container flex flex-wrap justify-between">
 
         <div class="flex items-center mr-6">
-          <a href="{{ route('asset.index') }}" class="font-medium text-lg">Godot Asset Library</a>
+          <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">Godot Asset Library</a>
         </div>
 
         <div class="block lg:hidden">
