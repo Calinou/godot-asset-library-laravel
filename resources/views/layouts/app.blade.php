@@ -1,3 +1,5 @@
+@inject('assetClass', 'App\Asset')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -35,6 +37,18 @@
               class="form-input-text shadow-none bg-gray-200"
             >
           </form>
+
+          <div class="navbar-dropdown">
+            <a href="{{ route('asset.index') }}" class="button ml-2">Categories</a>
+            <div class="navbar-dropdown-content">
+              @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
+
+              <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
+                {{ $assetClass::getCategoryName($categoryId) }}
+              </a>
+              @endforeach
+            </div>
+          </div>
         </div>
 
         <div class="block lg:hidden">

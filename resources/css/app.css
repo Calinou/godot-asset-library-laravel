@@ -12,7 +12,7 @@
 }
 
 .button {
-  @apply px-4 py-2 rounded;
+  @apply inline-block px-4 py-2 rounded;
 
   &:hover {
     background-color: var(--hover-overlay);
@@ -57,6 +57,18 @@
   &:active {
     background-color: var(--active-overlay);
   }
+}
+
+.navbar-dropdown-content {
+  @apply bg-white rounded shadow;
+
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.navbar-dropdown:hover .navbar-dropdown-content {
+  display: block;
 }
 
 .pagination-item {
