@@ -12,7 +12,7 @@
 }
 
 .button {
-  @apply px-3 py-2 rounded;
+  @apply px-4 py-2 rounded;
 
   &:hover {
     background-color: var(--hover-overlay);
@@ -89,6 +89,10 @@
 
   &:focus {
     @apply outline-none shadow-outline;
+  }
+
+  &::placeholder {
+    @apply text-gray-700;
   }
 }
 

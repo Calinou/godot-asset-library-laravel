@@ -5,28 +5,9 @@
 
 @section('content')
 <div class="container">
-  <h2>Welcome to the Godot Asset Library</h2>
-
-  <section>
-    <form method="GET" action="{{ route('asset.index') }}">
-      <label for="category">{{ __('Category') }}</label>
-      <select id="category" name="category">
-        <option value="" @if (Request::get('category') === null) selected @endif>Any</option>
-
-        @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
-        <option value="{{ $categoryId }}" @if (intval(Request::get('category')) === $categoryId) selected @endif>
-          {{ $assetClass::getCategoryName($categoryId) }}
-        </option>
-        @endforeach
-      </select>
-
-      <label for="reverse">{{ __('Reverse') }}</label>
-      <input type="checkbox" id="reverse" name="reverse" @if (Request::get('reverse')) checked @endif>
-
-      <input name="filter" placeholder="Search assets" value="{{ Request::get('filter') }}">
-      <button>{{ __('Search') }}</button>
-    </form>
-  </section>
+  <h2 class="text-center text-xl font-medium">
+    {{ __('Welcome to the Godot Asset Library') }}
+  </h2>
 
   {{--
     We must append the query parameters so that search filters carry on

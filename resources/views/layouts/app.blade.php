@@ -26,6 +26,15 @@
 
         <div class="flex items-center mr-6">
           <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">Godot Asset Library</a>
+
+          <form method="GET" action="{{ route('asset.index') }}" class="ml-2">
+            <input
+              name="filter"
+              placeholder="{{ __('Search for assets') }}"
+              value="{{ Request::get('filter') }}"
+              class="form-input-text shadow-none bg-gray-200"
+            >
+          </form>
         </div>
 
         <div class="block lg:hidden">
