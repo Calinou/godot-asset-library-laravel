@@ -26,17 +26,24 @@
     <nav class="shadow bg-white p-2 mb-8">
       <div class="container flex flex-wrap justify-between">
 
-        <div class="flex items-center mr-6">
+        <div class="flex items-center">
           <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">Godot Asset Library</a>
 
-          <form method="GET" action="{{ route('asset.index') }}" class="ml-2">
-            <input
-              name="filter"
-              placeholder="{{ __('Search for assets') }}"
-              value="{{ Request::get('filter') }}"
-              class="form-input-text shadow-none bg-gray-200"
-            >
-          </form>
+          {{--
+            Must be surrounded with `.relative` so that the absolute-positioned
+            icon visually stays in the input field
+          --}}
+          <div class="relative">
+            <form method="GET" action="{{ route('asset.index') }}" class="ml-2">
+              <input
+                name="filter"
+                placeholder="{{ __('Search for assets') }}"
+                value="{{ Request::get('filter') }}"
+                class="form-input-text shadow-none bg-gray-200 lg:w-64"
+              >
+              <span class="fa fa-search absolute right-0 mt-2 mr-3 pointer-events-none text-gray-500"></span>
+            </form>
+          </div>
 
           <div class="navbar-dropdown">
             <a href="{{ route('asset.index') }}" class="button ml-2">Categories <span class="fa fa-angle-down ml-1"></span></a>
