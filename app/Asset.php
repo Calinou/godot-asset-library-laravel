@@ -79,6 +79,7 @@ class Asset extends Model
      */
     protected $fillable = [
         'title',
+        'blurb',
         'author_id',
         'category_id',
         'cost',

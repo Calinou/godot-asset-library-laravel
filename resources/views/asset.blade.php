@@ -5,12 +5,20 @@
 @section('content')
 <div class="container">
   <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
-  <h2 class="text-lg text-gray-600 mb-8">{{ __('by :author', ['author' => $asset->author->name]) }}</h2>
+  <h2 class="text-lg text-gray-600 mb-8">
+    {{ __('by :author', ['author' => $asset->author->name]) }}
+  </h2>
 
   <div class="mb-8">
     <a href="{{ $asset->download_url }}" class="button button-success">{{ __('Download') }}</a>
     <a href="{{ $asset->browse_url }}" class="button">{{ __('Source code') }}</a>
   </div>
+
+  @if ($asset->blurb)
+  <h2 class="text-lg font-medium mb-8">
+    {{ $asset->blurb }}
+  </h2>
+  @endif
 
   <p>{{ $asset->description }}</p>
 

@@ -17,6 +17,7 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('asset_id');
             $table->string('title');
+            $table->string('blurb')->nullable();
             $table->tinyInteger('category_id');
             $table->string('cost'); // SPDX license identifier
             $table->string('godot_version');

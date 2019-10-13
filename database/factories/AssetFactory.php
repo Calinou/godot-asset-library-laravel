@@ -9,7 +9,8 @@ $factory->define(Asset::class, function (Faker $faker) {
     $colorHex = str_pad(dechex($faker->numberBetween(0, 16777216)), 6, '0', STR_PAD_LEFT);
 
     return [
-        'title' => $faker->text(28),
+        'title' => rtrim($faker->text(28), '.'),
+        'blurb' => rtrim($faker->text(60), '.'),
         'category_id' => $faker->numberBetween(0, Asset::CATEGORY_MAX - 1),
         'cost' => $faker->randomElement([
             'MIT',

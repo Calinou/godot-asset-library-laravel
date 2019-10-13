@@ -30,6 +30,7 @@ class AssetsTest extends TestCase
                 [
                     'asset_id',
                     'title',
+                    'blurb',
                     'author',
                     'author_id',
                     'category',
@@ -92,6 +93,7 @@ class AssetsTest extends TestCase
         $response->assertOk()->assertJsonStructure([
             'asset_id',
             'title',
+            'blurb',
             'author',
             'author_id',
             'category',

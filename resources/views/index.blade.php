@@ -25,7 +25,13 @@
           </div>
           <div class="ml-6 pt-1">
             <div class="title leading-relaxed">{{ $asset->title }}</div>
-            <div class="author text-gray-600 text-sm">{{ $asset->author->name }}</div>
+            <div class="author text-gray-600 text-sm">
+              @if ($asset->blurb)
+              {{ $asset->blurb }}
+              @else
+              {{ __('by :author', ['author' => $asset->author->name]) }}
+              @endif
+            </div>
             <div class="text-sm -ml-px mt-2">
               <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->category }}</span>
               <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->godot_version }}</span>
