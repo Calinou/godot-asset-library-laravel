@@ -1,8 +1,8 @@
-const mix = require('laravel-mix')
-require('laravel-mix-purgecss')
-const postCssImport = require('postcss-import')
-const postCssNesting = require('postcss-nesting')
-const tailwindCss = require('tailwindcss')
+const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
+const postCssImport = require('postcss-import');
+const postCssNesting = require('postcss-nesting');
+const tailwindCss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -19,8 +19,8 @@ mix
   .js('resources/js/app.js', 'public/js')
   .extract(['@barba/core'])
   .postCss('resources/css/app.css', 'public/css', [postCssImport, postCssNesting, tailwindCss])
-  .purgeCss()
+  .purgeCss();
 
 if (mix.inProduction()) {
-  mix.version()
+  mix.version();
 }
