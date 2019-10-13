@@ -29,7 +29,31 @@
             <div class="text-sm -ml-px mt-2">
               <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->category }}</span>
               <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->godot_version }}</span>
-              <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->support_level }}</span>
+              @php
+                switch (intval($asset->support_level_id)) {
+                  case ($assetClass::SUPPORT_LEVEL_OFFICIAL):
+                    $supportLevelClasses = 'bg-green-100 text-green-800';
+                    $supportLevelIcon = 'fa-check';
+                    break;
+                  case ($assetClass::SUPPORT_LEVEL_COMMUNITY):
+                    $supportLevelClasses = 'bg-gray-200';
+                    $supportLevelIcon = '';
+                    break;
+                  case ($assetClass::SUPPORT_LEVEL_TESTING):
+                    $supportLevelClasses = 'bg-yellow-200 text-yellow-800';
+                    $supportLevelIcon = 'fa-exclamation-circle';
+                    break;
+                  default:
+                    throw new \Exception("Invalid support level: $asset->support_level_id");
+                    break;
+                }
+              @endphp
+              <span class="m-1 px-3 py-1 rounded-full {{ $supportLevelClasses }}">
+                @if ($supportLevelIcon)
+                  <span class="fa {{ $supportLevelIcon }} mr-1 opacity-75"></span>
+                @endif
+                {{ $asset->support_level }}
+              </span>
             </div>
           </div>
         </article>
