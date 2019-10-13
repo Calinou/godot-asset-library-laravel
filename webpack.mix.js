@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 require('laravel-mix-purgecss');
 const postCssImport = require('postcss-import');
+const postCssUrl = require('postcss-url');
 const postCssNesting = require('postcss-nesting');
 const tailwindCss = require('tailwindcss');
 
@@ -18,7 +19,16 @@ const tailwindCss = require('tailwindcss');
 mix
   .js('resources/js/app.js', 'public/js')
   .extract(['@barba/core'])
-  .postCss('resources/css/app.css', 'public/css', [postCssImport, postCssNesting, tailwindCss])
+  .postCss(
+    'resources/css/app.css',
+    'public/css',
+    [
+      postCssImport,
+      postCssUrl,
+      postCssNesting,
+      tailwindCss,
+    ],
+  )
   .purgeCss();
 
 if (mix.inProduction()) {

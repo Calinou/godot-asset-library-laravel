@@ -39,7 +39,7 @@
           </form>
 
           <div class="navbar-dropdown">
-            <a href="{{ route('asset.index') }}" class="button ml-2">Categories</a>
+            <a href="{{ route('asset.index') }}" class="button ml-2">Categories <span class="fa fa-angle-down ml-1"></span></a>
             <div class="navbar-dropdown-content">
               @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
 
