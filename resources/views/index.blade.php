@@ -33,7 +33,10 @@
               @endif
             </div>
             <div class="text-sm -ml-px mt-2">
-              <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->category }}</span>
+              <span class="m-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
+                {{ $asset->category }}
+              </span>
               <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->godot_version }}</span>
               @php
                 switch (intval($asset->support_level_id)) {
@@ -56,7 +59,7 @@
               @endphp
               <span class="m-1 px-3 py-1 rounded-full {{ $supportLevelClasses }}">
                 @if ($supportLevelIcon)
-                  <span class="fa {{ $supportLevelIcon }} mr-1 opacity-75"></span>
+                  <span class="fa {{ $supportLevelIcon }} fa-fw mr-1 -ml-1 opacity-75"></span>
                 @endif
                 {{ $asset->support_level }}
               </span>

@@ -170,6 +170,31 @@ class Asset extends Model
     }
 
     /**
+     * Return the given category's Fork Awesome icon code.
+     */
+    public static function getCategoryIcon(int $category): string
+    {
+        $categoryNames = [
+            self::CATEGORY_2D_TOOLS => 'fa-picture-o',
+            self::CATEGORY_3D_TOOLS => 'fa-cube',
+            self::CATEGORY_SHADERS => 'fa-book',
+            self::CATEGORY_MATERIALS => 'fa-archive',
+            self::CATEGORY_TOOLS => 'fa-cogs',
+            self::CATEGORY_SCRIPTS => 'fa-file-text',
+            self::CATEGORY_MISC => 'fa-gamepad',
+            self::CATEGORY_TEMPLATES => 'fa-folder-open',
+            self::CATEGORY_PROJECTS => 'fa-folder-open',
+            self::CATEGORY_DEMOS => 'fa-folder-open',
+        ];
+
+        if (array_key_exists($category, $categoryNames)) {
+            return $categoryNames[$category];
+        } else {
+            throw new \Exception("Invalid category: $category");
+        }
+    }
+
+    /**
      * Return the asset's license name as an human-readable name.
      */
     public static function getLicenseName(string $license): string
@@ -203,6 +228,14 @@ class Asset extends Model
     public function getCategoryAttribute(): string
     {
         return self::getCategoryName($this->category_id);
+    }
+
+    /**
+     * Non-static variant of `getCategoryIcon()` (used in templates).
+     */
+    public function getCategoryIconAttribute(): string
+    {
+        return self::getCategoryIcon($this->category_id);
     }
 
     /**
