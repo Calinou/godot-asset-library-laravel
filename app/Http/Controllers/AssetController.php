@@ -18,7 +18,7 @@ class AssetController extends Controller
         $itemsPerPage = $validated['max_results'] ?? Asset::ASSETS_PER_PAGE;
         $page = $validated['page'] ?? 1;
 
-        $assets = Asset::with('author')->filterSearch($validated);
+        $assets = Asset::with('author', 'versions')->filterSearch($validated);
         $paginator = new LengthAwarePaginator(
             $assets->slice(intval(($page - 1) * $itemsPerPage), $itemsPerPage)->values(),
             $assets->count(),

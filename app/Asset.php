@@ -83,10 +83,8 @@ class Asset extends Model
         'author_id',
         'category_id',
         'cost',
-        'godot_version',
         'support_level',
         'browse_url',
-        'download_url',
         'icon_url',
     ];
 
@@ -107,7 +105,11 @@ class Asset extends Model
      */
     protected $appends = [
         'category',
+        'download_url',
+        'godot_version',
+        'icon_url',
         'support_level',
+        'version_string',
     ];
 
     /**
@@ -124,6 +126,14 @@ class Asset extends Model
     public function previews()
     {
         return $this->hasMany('App\AssetPreview', 'asset_id');
+    }
+
+    /**
+     * Get the asset's versions.
+     */
+    public function versions()
+    {
+        return $this->hasMany('App\AssetVersion', 'asset_id');
     }
 
     /**
@@ -220,6 +230,62 @@ class Asset extends Model
             // Return the license name as-is
             return $license;
         }
+    }
+
+    /**
+     * Return the download URL corresponding to the latest version
+     * (for compatibility with the existing API).
+     */
+    public function getDownloadUrlAttribute(): string
+    {
+        return $this->versions->last()->getDownloadUrlAttribute($this->browse_url);
+    }
+
+    /**
+     * Return the Godot version corresponding to the latest version
+     * (for compatibility with the existing API).
+     */
+    public function getGodotVersionAttribute(): string
+    {
+        return $this->versions->last()->godot_version;
+    }
+
+    /**
+     * Return the icon URL (will infer an URL if no custom URL is specified by the asset).
+     */
+    public function getIconUrlAttribute(): string
+    {
+        // Return the custom icon URL if defined
+        if ($this->getOriginal('icon_url')) {
+            return $this->getOriginal('icon_url');
+        }
+
+        $splitUrl = explode('/', $this->browse_url);
+
+        // Slug of the form `user/repository`
+        $slug = "$splitUrl[3]/$splitUrl[4]";
+
+        // Try to infer an icon URL based on the repository host
+        // (`icon.png` at the repository root)
+        if ($splitUrl[2] === 'github.com') {
+            return "https://raw.githubusercontent.com/$slug/master/icon.png";
+        } elseif ($splitUrl[2] === 'gitlab.com') {
+            return "https://gitlab.com/$slug/raw/master/icon.png";
+        } elseif ($splitUrl[2] === 'bitbucket.org') {
+            return "https://bitbucket.org/$slug/raw/master/icon.png";
+        }
+
+        // Couldn't infer an icon URL
+        return '';
+    }
+
+    /**
+     * Return the asset version corresponding to the latest version
+     * (for compatibility with the existing API).
+     */
+    public function getVersionStringAttribute(): string
+    {
+        return $this->versions->last()->version_string;
     }
 
     /**

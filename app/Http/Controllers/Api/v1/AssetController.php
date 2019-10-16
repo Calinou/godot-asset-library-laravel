@@ -19,7 +19,7 @@ class AssetController extends Controller
         $itemsPerPage = $validated['max_results'] ?? Asset::ASSETS_PER_PAGE;
         $page = $validated['page'] ?? 1;
 
-        $assets = Asset::with('author')->filterSearch($validated)->map(function (Asset $asset) {
+        $assets = Asset::with(['author', 'versions'])->filterSearch($validated)->map(function (Asset $asset) {
             // Flatten the author array for compatibility with the existing API
             // We have to unset the old value before setting it with the string
             // for some reason...

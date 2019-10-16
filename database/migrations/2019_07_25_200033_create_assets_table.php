@@ -20,12 +20,10 @@ class CreateAssetsTable extends Migration
             $table->string('blurb')->nullable();
             $table->tinyInteger('category_id');
             $table->string('cost'); // SPDX license identifier
-            $table->string('godot_version');
             $table->tinyInteger('support_level_id')->default(Asset::SUPPORT_LEVEL_COMMUNITY);
             $table->text('description');
             $table->text('browse_url');
-            $table->text('download_url');
-            $table->text('icon_url');
+            $table->text('icon_url')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('modify_date');
 
