@@ -51,7 +51,7 @@
               @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
 
               <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
-                <span class="fa {{ $assetClass::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2"></span>
+                <span class="fa {{ $assetClass::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
                 {{ $assetClass::getCategoryName($categoryId) }}
               </a>
               @endforeach
