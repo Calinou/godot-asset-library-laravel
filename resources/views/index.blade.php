@@ -23,9 +23,13 @@
           <div class="flex-shrink-0 self-center">
             <img class="w-16 h-16 bg-gray-400" src="{{ $asset->icon_url }}">
           </div>
-          <div class="ml-6 pt-1">
-            <div class="title leading-relaxed">{{ $asset->title }}</div>
-            <div class="author text-gray-600 text-sm">
+          {{--
+            Offset the right panel slightly on the Y axis to make tags
+            appear slightly further from the bottom, which looks better
+          --}}
+          <div class="ml-6 pt-1 -mt-px mb-px">
+            <div class="leading-relaxed font-medium">{{ $asset->title }}</div>
+            <div class="text-gray-600 text-sm my-px">
               @if ($asset->blurb)
               {{ $asset->blurb }}
               @else
