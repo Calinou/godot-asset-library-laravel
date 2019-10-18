@@ -19,17 +19,17 @@
     @foreach ($assets->items() as $asset)
     <div class="w-full lg:w-1/2 px-2 my-2">
       <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
-        <article class="flex bg-white rounded shadow p-3 pl-5">
+        <article class="flex bg-white rounded shadow">
           <div class="flex-shrink-0 self-center">
-            <img class="w-16 h-16 bg-gray-400" src="{{ $asset->icon_url }}">
+            <img class="object-cover w-26 h-26 bg-gray-400 rounded-l" src="{{ $asset->icon_url }}">
           </div>
           {{--
             Offset the right panel slightly on the Y axis to make tags
             appear slightly further from the bottom, which looks better
           --}}
-          <div class="ml-6 pt-1 -mt-px mb-px">
+          <div class="ml-6 py-3 pl-1 -mt-px mb-px">
             <div class="leading-relaxed font-medium">{{ $asset->title }}</div>
-            <div class="text-gray-600 text-sm my-px">
+            <div class="leading-relaxed text-gray-600 text-sm my-px">
               @if ($asset->blurb)
               {{ $asset->blurb }}
               @else
