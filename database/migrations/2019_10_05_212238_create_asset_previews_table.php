@@ -17,8 +17,8 @@ class CreateAssetPreviewsTable extends Migration
             $table->bigIncrements('preview_id');
             $table->tinyInteger('type_id');
             $table->text('link');
-            $table->text('thumbnail');
-            $table->text('caption');
+            $table->text('thumbnail')->nullable();
+            $table->text('caption')->nullable();
 
             $table->unsignedBigInteger('asset_id');
             $table->foreign('asset_id')->references('asset_id')->on('assets');
