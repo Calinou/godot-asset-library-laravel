@@ -5,9 +5,9 @@
 
 @section('content')
 <div class="container">
-  <div class="lg:flex lg:-mx-4">
+  <div class="lg:flex lg:-mx-6">
 
-    <div class="lg:w-1/2 lg:px-4">
+    <div class="lg:w-1/2 lg:px-6">
       <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
       <h2 class="text-lg text-gray-600 mb-8">
         {{ __('by :author', ['author' => $asset->author->name]) }}
@@ -35,16 +35,37 @@
       </ul>
     </div>
 
-    <div class="lg:w-1/2 lg:px-4">
-      @foreach ($asset->previews as $preview)
-      @if ($preview->type_id === $assetPreviewClass::TYPE_IMAGE)
-      <a href="{{ $preview->link }}" rel="nofollow">
-        <div class="relative pb-9/16 bg-gray-400">
-          <img src="{{ $preview->thumbnail }}" alt="{{ $preview->caption }}" class="absolute h-full w-full object-cover">
+    <div class="lg:w-1/2 lg:px-6">
+      {{-- Large image display --}}
+      @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === $assetPreviewClass::TYPE_IMAGE)
+      <a href="{{ $asset->previews[0]->link }}" rel="nofollow">
+        <div class="relative pb-9/16 bg-gray-400 rounded">
+          <img src="{{ $asset->previews[0]->thumbnail }}" alt="{{ $asset->previews[0]->caption }}" class="absolute h-full w-full object-cover rounded">
         </div>
       </a>
+      @else
+      <div class="flex items-center justify-center h-64 bg-gray-400 rounded">
+        <div class="text-lg text-gray-600">
+          <div>{{ __('No preview available') }}</div>
+      </div>
       @endif
-      @endforeach
+
+      {{-- Small image displays --}}
+      @if (count($asset->previews) >= 2)
+      <div class="flex justify-center mt-2 -mx-px">
+        @foreach ($asset->previews as $preview)
+        @if ($preview->type_id === $assetPreviewClass::TYPE_IMAGE)
+        <div class="w-1/4 px-px">
+          <a href="{{ $preview->link }}" rel="nofollow">
+            <div class="relative pb-9/16 bg-gray-400 rounded">
+              <img src="{{ $preview->thumbnail }}" alt="{{ $preview->caption }}" class="absolute h-full w-full object-cover rounded">
+            </div>
+          </a>
+        </div>
+        @endif
+        @endforeach
+      </div>
+      @endif
     </div>
 
   </div>
