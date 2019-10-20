@@ -17,7 +17,7 @@ const tailwindCss = require('tailwindcss');
  */
 
 mix
-  .js('resources/js/app.js', 'public/js')
+  .ts('resources/ts/app.ts', 'public/js')
   .extract(['@barba/core'])
   .postCss(
     'resources/css/app.css',

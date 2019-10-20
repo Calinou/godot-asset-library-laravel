@@ -4,9 +4,9 @@
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "doc": "redoc-cli bundle public/developer/v1/openapi.yaml && move-file redoc-static.html public/developer/v1/index.html",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "lint": "npm-run-all --sequential lint:css lint:js",
+    "lint": "npm-run-all --sequential lint:css lint:ts",
     "lint:css": "stylelint \"resources/css/**/*.css\"",
-    "lint:js": "eslint \"resources/js/**/*.js\"",
+    "lint:ts": "eslint \"resources/ts/**/*.ts\"",
     "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "yarn run dev --watch",
     "watch-poll": "yarn run dev --watch --watch-poll"
@@ -25,10 +25,14 @@
     "redoc-cli": "^0.9.2",
     "resolve-url-loader": "^3.1.0",
     "tailwindcss": "^1.1.2",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
@@ -42,15 +46,19 @@
       "es6": true
     },
     "extends": [
-      "airbnb-base"
+      "airbnb-base",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
     },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+      "project": "./tsconfig.json"
     }
   },
   "stylelint": {
