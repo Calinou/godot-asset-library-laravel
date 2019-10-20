@@ -38,9 +38,14 @@
     <div class="lg:w-1/2 lg:px-6">
       {{-- Large image display --}}
       @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === $assetPreviewClass::TYPE_IMAGE)
-      <a href="{{ $asset->previews[0]->link }}" rel="nofollow">
+      <a href="{{ $asset->previews[0]->link }}" target="_blank" rel="nofollow noopener noreferrer">
         <div class="relative pb-9/16 bg-gray-400 rounded">
-          <img src="{{ $asset->previews[0]->thumbnail }}" alt="{{ $asset->previews[0]->caption }}" class="absolute h-full w-full object-cover rounded">
+          <img
+            id="gallery-image-big"
+            src="{{ $asset->previews[0]->thumbnail }}"
+            alt="{{ $asset->previews[0]->caption }}"
+            class="absolute h-full w-full object-cover rounded gallery-image-big"
+          >
         </div>
       </a>
       @else
@@ -56,9 +61,13 @@
         @foreach ($asset->previews as $preview)
         @if ($preview->type_id === $assetPreviewClass::TYPE_IMAGE)
         <div class="w-1/4 px-px">
-          <a href="{{ $preview->link }}" rel="nofollow">
+          <a href="{{ $preview->link }}" target="_blank" rel="nofollow noopener noreferrer">
             <div class="relative pb-9/16 bg-gray-400 rounded">
-              <img src="{{ $preview->thumbnail }}" alt="{{ $preview->caption }}" class="absolute h-full w-full object-cover rounded">
+              <img
+                src="{{ $preview->thumbnail }}"
+                alt="{{ $preview->caption }}"
+                class="absolute h-full w-full object-cover rounded gallery-image-small"
+              >
             </div>
           </a>
         </div>
