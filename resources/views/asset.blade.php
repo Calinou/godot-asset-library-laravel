@@ -46,7 +46,7 @@
       @else
       <div class="flex items-center justify-center h-64 bg-gray-400 rounded">
         <div class="text-lg text-gray-600">
-          <div>{{ __('No preview available') }}</div>
+          {{ __('No preview available') }}
       </div>
       @endif
 

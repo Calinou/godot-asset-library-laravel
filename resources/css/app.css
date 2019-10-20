@@ -135,3 +135,8 @@ body {
   background-color: #eff1f5;
   color: hsl(0, 0%, 20%);
 }
+
+img {
+  /* Lower the `alt` texts' contrast rate */
+  @apply text-gray-600;
+}
