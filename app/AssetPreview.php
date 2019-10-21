@@ -36,6 +36,7 @@ class AssetPreview extends Model
         'link',
         'thumbnail',
         'caption',
+        'asset_id',
     ];
 
     /**

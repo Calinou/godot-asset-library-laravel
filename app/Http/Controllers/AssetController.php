@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\Http\Requests\ListAssets;
+use App\Http\Requests\SubmitAsset;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetController extends Controller
@@ -25,7 +27,7 @@ class AssetController extends Controller
             $itemsPerPage
         );
 
-        return view('index', ['assets' => $paginator]);
+        return view('asset.index', ['assets' => $paginator]);
     }
 
     /**
@@ -33,6 +35,52 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        return view('asset', ['asset' => $asset]);
+        return view('asset.show', ['asset' => $asset]);
+    }
+
+    /**
+     * Display the form used to submit an asset.
+     */
+    public function create()
+    {
+        return view('asset.create');
+    }
+
+    /**
+     * Insert a newly created asset into the database.
+     */
+    public function store(SubmitAsset $request)
+    {
+        $input = $request->all();
+
+        // Remove submodel information from the input array as we don't want it here
+        $assetInput = $input;
+        unset($assetInput['versions']);
+        unset($assetInput['previews']);
+        $asset = new Asset();
+        $asset->fill($assetInput);
+        // The user must be authenticated to submit an asset.
+        // The null coalesce is just here to please PHPStan :)
+        $asset->author_id = Auth::user()->id ?? null;
+
+        // Save the asset without its submodels, so that submodels can be saved.
+        // This must be done *before* creating submodels, otherwise the asset ID
+        // can't be fetched by Eloquent.
+        $asset->save();
+
+        // Create and save the version and preview submodels
+
+        if (array_key_exists('versions', $input)) {
+            $asset->versions()->createMany($input['versions']);
+        }
+
+        if (array_key_exists('previews', $input)) {
+            $asset->previews()->createMany($input['previews']);
+        }
+
+        // Save the asset with its submodels
+        $asset->save();
+
+        return redirect(route('asset.show', $asset));
     }
 }

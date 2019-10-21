@@ -20,6 +20,8 @@ class AssetVersion extends Model
     protected $fillable = [
         'version_string',
         'godot_version',
+        'download_url',
+        'asset_id',
     ];
 
     /**

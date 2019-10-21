@@ -64,6 +64,42 @@ class Asset extends Model
     public const CATEGORY_TYPE_PROJECTS = 1;
 
     /**
+     * The mapping of the available licenses' SPDX identifiers with their human-readable names.
+     * Should be kept in alphabetical order.
+     */
+    public const LICENSES = [
+        'Apache-2.0' => 'Apache 2',
+        'BSD-2-Clause' => 'BSD 2-Clause',
+        'BSD-3-Clause' => 'BSD 3-Clause',
+        'CC0-1.0' => 'CC0 1.0 Universal',
+        'CC-BY-3.0' => 'CC BY 3.0 Unported',
+        'CC-BY-4.0' => 'CC BY 4.0 International',
+        'CC-BY-SA-3.0' => 'CC BY-SA 3.0 Unported',
+        'CC-BY-SA-4.0' => 'CC BY-SA 4.0 International',
+        'LGPL-2.1-only' => 'LGPLv2.1 only',
+        'LGPL-2.1-or-later' => 'LGPLv2.1 or later',
+        'LGPL-3.0-only' => 'LGPLv3 only',
+        'LGPL-3.0-or-later' => 'LGPLv3 or later',
+        'GPL-2.0-only' => 'GPLv2 only',
+        'GPL-2.0-or-later' => 'GPLv2 or later',
+        'GPL-3.0-only' => 'GPLv3 only',
+        'GPL-3.0-or-later' => 'GPLv3 or later',
+        'MIT' => 'MIT',
+        'MPL-2.0' => 'MPLv2',
+    ];
+
+    /**
+     * The available Godot versions.
+     *
+     * TODO: Replace this with a system based on semantic versioning range strings?
+     */
+    public const GODOT_VERSIONS = [
+        '3.0',
+        '3.1',
+        '3.2',
+    ];
+
+    /**
      * The primary key associated with the table.
      * This value has been changed from the default for compatibility with the
      * existing asset library API.
@@ -80,12 +116,16 @@ class Asset extends Model
     protected $fillable = [
         'title',
         'blurb',
+        'description',
         'author_id',
         'category_id',
         'cost',
         'support_level',
         'browse_url',
+        'issues_url',
         'icon_url',
+        'versions',
+        'previews',
     ];
 
     /**
@@ -205,34 +245,6 @@ class Asset extends Model
     }
 
     /**
-     * Return the asset's license name as an human-readable name.
-     */
-    public static function getLicenseName(string $license): string
-    {
-        $licenseNames = [
-            'Apache-2.0' => 'Apache 2',
-            'BSD-2-Clause' => 'BSD 2-Clause',
-            'BSD-3-Clause' => 'BSD 3-Clause',
-            'CC-BY-3.0' => 'CC BY 3.0',
-            'CC-BY-4.0' => 'CC BY 4.0',
-            'CC-BY-SA-3.0' => 'CC BY-SA 3.0',
-            'CC-BY-SA-4.0' => 'CC BY-SA 4.0',
-            'GPL-2.0-only' => 'GPLv2 only',
-            'GPL-2.0-or-later' => 'GPLv2 or later',
-            'GPL-3.0-only' => 'GPLv3 only',
-            'GPL-3.0-or-later' => 'GPLv3 or later',
-            'MPL-2.0' => 'MPL v2',
-        ];
-
-        if (array_key_exists($license, $licenseNames)) {
-            return $licenseNames[$license];
-        } else {
-            // Return the license name as-is
-            return $license;
-        }
-    }
-
-    /**
      * Return the download URL corresponding to the latest version
      * (for compatibility with the existing API).
      */
@@ -317,7 +329,8 @@ class Asset extends Model
      */
     public function getLicenseNameAttribute(): string
     {
-        return self::getLicenseName($this->cost);
+        // Return the SPDX identifier as a fallback
+        return self::LICENSES[$this->cost] ?? $this->cost;
     }
 
     /**
