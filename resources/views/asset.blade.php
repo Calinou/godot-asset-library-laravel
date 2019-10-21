@@ -38,13 +38,13 @@
     <div class="lg:w-1/2 lg:px-6">
       {{-- Large image display --}}
       @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === $assetPreviewClass::TYPE_IMAGE)
-      <a href="{{ $asset->previews[0]->link }}" target="_blank" rel="nofollow noopener noreferrer">
+      <a id="gallery-image-anchor" href="{{ $asset->previews[0]->link }}" target="_blank" rel="nofollow noopener noreferrer">
         <div class="relative pb-9/16 bg-gray-400 rounded">
           <img
             id="gallery-image-big"
-            src="{{ $asset->previews[0]->thumbnail }}"
+            src="{{ $asset->previews[0]->link }}"
             alt="{{ $asset->previews[0]->caption }}"
-            class="absolute h-full w-full object-cover rounded gallery-image-big"
+            class="absolute h-full w-full object-cover rounded"
           >
         </div>
       </a>
@@ -66,7 +66,8 @@
               <img
                 src="{{ $preview->thumbnail }}"
                 alt="{{ $preview->caption }}"
-                class="absolute h-full w-full object-cover rounded gallery-image-small"
+                class="absolute h-full w-full object-cover rounded gallery-image-small @if ($loop->first) gallery-image-small-active @else gallery-image-small-inactive @endif"
+                data-full-size="{{ $preview->link }}"
               >
             </div>
           </a>
