@@ -385,15 +385,30 @@ class Asset extends Model
             $query->where('title', 'like', '%'.$validated['filter'].'%');
         }
 
-        // Filtering must be done above
+        $reverse = isset($validated['reverse']);
+
+        if (isset($validated['sort'])) {
+            // Only valid `sort` options affect the sort order in any way
+            switch ($validated['sort']) {
+                case 'cost':
+                    $query->orderBy('cost', $reverse ? 'desc' : 'asc');
+                    break;
+                case 'name':
+                    $query->orderBy('title', $reverse ? 'desc' : 'asc');
+                    break;
+                default:
+                    // Also handles `updated`
+                    $query->orderBy('modify_date', $reverse ? 'asc' : 'desc');
+                    break;
+            }
+        } else {
+            // Sort by update date by default
+            $query->orderBy('modify_date', $reverse ? 'asc' : 'desc');
+        }
+
+        // Filtering and ordering must be done above
 
         $result = $query->get();
-
-        // Sorting must be done below
-
-        if (isset($validated['reverse'])) {
-            $result = $result->reverse()->values();
-        }
 
         return $result;
     }
