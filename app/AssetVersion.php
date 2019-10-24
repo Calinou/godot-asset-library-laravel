@@ -83,4 +83,15 @@ class AssetVersion extends Model
         // Couldn't infer a download URL
         return '';
     }
+
+    /**
+     * Enforces HTTPS for the download URL.
+     */
+    public function setDownloadUrlAttribute(string $downloadUrl = null): void
+    {
+        // This field is nullable, so we check for the parameter first
+        if ($downloadUrl) {
+            $this->attributes['download_url'] = str_replace('http://', 'https://', $downloadUrl);
+        }
+    }
 }

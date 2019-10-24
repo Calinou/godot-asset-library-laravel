@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -245,6 +246,21 @@ class Asset extends Model
     }
 
     /**
+     * Enforces HTTPS for the repository URL.
+     * This also makes sure the repository URL doesn't end with `.git` or a trailing slash.
+     */
+    public function setBrowseUrlAttribute(string $browseUrl): void
+    {
+        $httpsUrl = str_replace('http://', 'https://', $browseUrl);
+
+        if (Str::endsWith($httpsUrl, '.git')) {
+            $this->attributes['browse_url'] = str_replace('.git', '', $httpsUrl);
+        } else {
+            $this->attributes['browse_url'] = rtrim($httpsUrl, '/');
+        }
+    }
+
+    /**
      * Return the download URL corresponding to the latest version
      * (for compatibility with the existing API).
      */
@@ -289,6 +305,28 @@ class Asset extends Model
 
         // Couldn't infer an icon URL
         return '';
+    }
+
+    /**
+     * Enforces HTTPS for the icon URL.
+     */
+    public function setIconUrlAttribute(string $iconUrl = null): void
+    {
+        // This field is nullable, so we check for the parameter first
+        if ($iconUrl) {
+            $this->attributes['icon_url'] = str_replace('http://', 'https://', $iconUrl);
+        }
+    }
+
+    /**
+     * Enforces HTTPS for the issue reporting URL.
+     */
+    public function setIssuesUrlAttribute(string $issuesUrl = null): void
+    {
+        // This field is nullable, so we check for the parameter first
+        if ($issuesUrl) {
+            $this->attributes['issues_url'] = str_replace('http://', 'https://', $issuesUrl);
+        }
     }
 
     /**
