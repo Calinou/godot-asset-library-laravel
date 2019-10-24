@@ -319,6 +319,15 @@ class Asset extends Model
     }
 
     /**
+     * Return the issue reporting URL (will infer an URL if no custom URL is specified by the asset).
+     */
+    public function getIssuesUrlAttribute(): string
+    {
+        // GitHub, GitLab and Bitbucket all use an `/issues` suffix
+        return $this->getOriginal('issues_url') ?? "$this->browse_url/issues";
+    }
+
+    /**
      * Enforces HTTPS for the issue reporting URL.
      */
     public function setIssuesUrlAttribute(string $issuesUrl = null): void

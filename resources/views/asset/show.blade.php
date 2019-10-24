@@ -16,6 +16,7 @@
       <div class="mb-8">
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success">{{ __('Download') }}</a>
         <a href="{{ $asset->browse_url }}" rel="nofollow" class="button">{{ __('Source code') }}</a>
+        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button">{{ __('Submit an issue') }}</a>
       </div>
 
       @if ($asset->blurb)
