@@ -149,6 +149,7 @@
           <input
             required
             id="browse-url"
+            type="url"
             name="browse_url"
             value="{{ old('browse_url') }}"
             autocomplete="off"
@@ -169,6 +170,7 @@
           <label for="download-url" class="form-label">{{ __('Download URL') }}</label>
           <input
             id="download-url"
+            type="url"
             name="versions[0][download_url]"
             value="{{ old('download_url') }}"
             autocomplete="off"
@@ -190,6 +192,7 @@
           <label for="issues-url" class="form-label">{{ __('Issues URL') }}</label>
           <input
             id="issues-url"
+            type="url"
             name="issues_url"
             value="{{ old('issues_url') }}"
             autocomplete="off"
@@ -210,6 +213,7 @@
           <label for="icon-url" class="form-label">{{ __('Icon URL') }}</label>
           <input
             id="icon-url"
+            type="url"
             name="icon_url"
             value="{{ old('icon_url') }}"
             autocomplete="off"
