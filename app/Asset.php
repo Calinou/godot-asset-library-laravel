@@ -371,7 +371,7 @@ class Asset extends Model
 
         if (isset($validated['user'])) {
             // Prevent the value from being null, assign `-1` if the user isn't found
-            // (no used ID will match it, as IDs are always positive)
+            // (no user ID will match it, as IDs are always positive)
             $queryAuthorId = User::where('name', $validated['user'])->first()['id'] ?? -1;
             $query->where('author_id', $queryAuthorId);
         }
