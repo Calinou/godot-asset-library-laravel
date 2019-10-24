@@ -14,9 +14,18 @@
       </h2>
 
       <div class="mb-8">
-        <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success">{{ __('Download') }}</a>
-        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button">{{ __('Source code') }}</a>
-        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button">{{ __('Submit an issue') }}</a>
+        <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success mr-2 mb-2">
+          <span class="fa fa-download mr-1"></span>
+          {{ __('Download') }}
+        </a>
+        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary mr-2 mb-2">
+            <span class="fa fa-code mr-1"></span>
+            {{ __('Source code') }}
+          </a>
+        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary mb-2">
+            <span class="fa fa-exclamation-circle mr-1 opacity-75"></span>
+            {{ __('Submit an issue') }}
+          </a>
       </div>
 
       @if ($asset->blurb)
