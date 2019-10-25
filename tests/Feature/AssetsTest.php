@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -71,5 +72,12 @@ class AssetsTest extends TestCase
     {
         $response = $this->get('/asset/submit');
         $response->assertRedirect('/login');
+    }
+
+    public function testAssetCreateLoggedIn(): void
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->get('/asset/submit');
+        $response->assertOk()->assertViewIs('asset.create');
     }
 }
