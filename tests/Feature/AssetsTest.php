@@ -67,9 +67,9 @@ class AssetsTest extends TestCase
         $response->assertOk()->assertViewIs('asset.show');
     }
 
-    public function testAssetCreate(): void
+    public function testAssetCreateNotLoggedIn(): void
     {
         $response = $this->get('/asset/submit');
-        $response->assertOk()->assertViewIs('asset.create');
+        $response->assertRedirect('/login');
     }
 }
