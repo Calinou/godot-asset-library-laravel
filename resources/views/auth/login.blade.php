@@ -17,51 +17,34 @@
       {{ __('Log in to Godot Asset Library') }}
     </div>
 
-    <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
-      <div class="mb-6">
-        <label for="email" class="form-label">{{ __('Email address') }}</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value="{{ old('email') }}"
-          required
-          autocomplete="email"
-          autofocus
-          class="form-input-text"
-        >
-        @error('email')
-        <div role="alert" class="form-error">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
+    <section class="w-full max-w-xs mx-auto mt-8 mb-2 bg-white rounded shadow p-4">
+      @component('components/form-input', [
+        'type' => 'email',
+        'name' => 'email',
+        'label' => __('Email address'),
+        'placeholder' => __('user@example.com'),
+        'required' => true,
+        'requiredImplicit' => true,
+        'autofocus' => true,
+      ])
+      @endcomponent
 
-      <div class="mb-8">
-        <div class="flex items-center justify-between">
-          <label for="password" class="form-label">{{ __('Password') }}</label>
-
-          @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}" class="form-label link text-right" tabindex="1">
-            {{ __('Forgot your password?') }}
-          </a>
-          @endif
-        </div>
-
-        <input
-          id="password"
-          type="password"
-          name="password"
-          required
-          autocomplete="current-password"
-          class="form-input-text"
-        >
-        @error('password')
-        <div role="alert" class="form-error">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
+      @component('components/form-input', [
+        'type' => 'password',
+        'name' => 'password',
+        'label' => __('Password'),
+        'placeholder' => __('password'),
+        'required' => true,
+        'requiredImplicit' => true,
+      ])
+      @if (Route::has('password.request'))
+      @slot('labelSuffix')
+      <a href="{{ route('password.request') }}" class="form-label link text-right" tabindex="1">
+        {{ __('Forgot your password?') }}
+      </a>
+      @endslot
+      @endif
+      @endcomponent
 
       <button class="button button-primary w-full" type="submit">
         {{ __('Login') }}

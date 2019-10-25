@@ -12,24 +12,15 @@
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
-      <div class="mb-8">
-        <label for="email" class="form-label">{{ __('Email address') }}</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value="{{ old('email') }}"
-          required
-          autocomplete="email"
-          autofocus
-          class="form-input-text"
-        >
-        @error('email')
-        <div role="alert" class="form-error">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
+      @component('components/form-input', [
+        'type' => 'email',
+        'name' => 'email',
+        'label' => __('Email address'),
+        'placeholder' => __('user@example.com'),
+        'required' => true,
+        'autofocus' => true,
+      ])
+      @endcomponent
 
       <button class="button button-primary w-full" type="submit">
         {{ __('Send password reset link') }}

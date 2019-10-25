@@ -13,63 +13,39 @@
       </div>
 
       <section class="w-full max-w-md mx-auto mt-8">
-        <div class="mb-6">
-          <label for="title" class="form-label form-required">{{ __('Asset name') }}</label>
-          <input
-            required
-            autofocus
-            id="title"
-            name="title"
-            value="{{ old('title') }}"
-            maxlength="50"
-            autocomplete="off"
-            placeholder="{{ __("My Own Asset") }}"
-            class="form-input-text"
-          >
-          @error('title')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-        </div>
+        @component('components/form-input', [
+          'name' => 'title',
+          'label' => __('Asset name'),
+          'placeholder' => __('My Own Asset'),
+          'required' => true,
+          'autofocus' => true,
+          'maxlength' => 50,
+          'autocomplete' => 'off',
+        ])
+        @endcomponent
 
-        <div class="mb-6">
-          <label for="blurb" class="form-label">{{ __('Blurb') }}</label>
-          <input
-            id="blurb"
-            name="blurb"
-            value="{{ old('blurb') }}"
-            maxlength="60"
-            autocomplete="off"
-            placeholder="{{ __('One-line description of the asset') }}"
-            class="form-input-text"
-          >
-          @error('blurb')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-        </div>
+        @component('components/form-input', [
+          'name' => 'blurb',
+          'label' => __('Blurb'),
+          'placeholder' => __('One-line description of the asset'),
+          'maxlength' => 60,
+          'autocomplete' => 'off',
+        ])
+        @endcomponent
 
-        <div class="mb-6">
-          <label for="description" class="form-label form-required">{{ __('Description') }}</label>
-          <textarea
-            required
-            id="description"
-            name="description"
-            maxlength="10000"
-            autocomplete="off"
-            class="form-input-text h-64"
-            placeholder="{{ __('Full description that spans multiple lines…') }}"
-          >{{ old('description') }}</textarea>
-          @error('description')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-        </div>
 
-        <div class="mb-6 sm:flex sm:justify-between">
+        @component('components/form-input', [
+          'type' => 'textarea',
+          'name' => 'description',
+          'label' => __('Description'),
+          'placeholder' => __('Full description that spans multiple lines…'),
+          'required' => true,
+          'autocomplete' => 'off',
+          'class' => 'h-64',
+        ])
+        @endcomponent
+
+        <div class="sm:flex sm:justify-between">
           @php
           $categories = [];
           foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId) {
@@ -96,25 +72,15 @@
           @endcomponent
         </div>
 
-        <div class="mb-6 sm:flex sm:justify-between">
-          <div class="mb-6 sm:mb-0">
-            <label for="version-string" class="form-label form-required">{{ __('Asset version') }}</label>
-            <input
-              required
-              id="version-string"
-              name="versions[0][version_string]"
-              value="{{ old('version_string') }}"
-              maxlength="50"
-              autocomplete="off"
-              placeholder="{{ __('1.0.0') }}"
-              class="form-input-text"
-            >
-            @error('versions[0][version_string]')
-            <div role="alert" class="form-error">
-              {{ $message }}
-            </div>
-            @enderror
-          </div>
+        <div class="sm:flex sm:justify-between">
+          @component('components/form-input', [
+            'name' => 'versions[0][version_string]',
+            'label' => __('Asset version'),
+            'placeholder' => '1.0.0',
+            'required' => true,
+            'autocomplete' => 'off',
+          ])
+          @endcomponent
 
           @component('components/form-select', [
             'name' => 'versions[0][godot_version]',
@@ -130,96 +96,48 @@
           @endcomponent
         </div>
 
-        <div class="mb-6">
-          <label for="browse-url" class="form-label form-required">{{ __('Repository URL') }}</label>
-          <input
-            required
-            id="browse-url"
-            type="url"
-            name="browse_url"
-            value="{{ old('browse_url') }}"
-            maxlength="2000"
-            autocomplete="off"
-            placeholder="{{ __('https://github.com/user/asset') }}"
-            class="form-input-text"
-          >
-          @error('browse_url')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-          <div class="form-help">
-            {{ __('This must be a URL to a public GitHub, GitLab or Bitbucket repository.') }}
-          </div>
-        </div>
+        @component('components/form-input', [
+          'name' => 'browse_url',
+          'label' => __('Repository URL'),
+          'placeholder' => 'https://github.com/user/asset',
+          'required' => true,
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('This must be a URL to a public GitHub, GitLab or Bitbucket repository.') }}
+        @endcomponent
 
-        <div class="mb-6">
-          <label for="download-url" class="form-label">{{ __('Download URL') }}</label>
-          <input
-            id="download-url"
-            type="url"
-            name="versions[0][download_url]"
-            value="{{ old('download_url') }}"
-            maxlength="2000"
-            autocomplete="off"
-            placeholder="{{ __('https://github.com/user/asset/archive/v1.0.0.zip') }}"
-            class="form-input-text"
-          >
-          @error('versions[0][download_url]')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-          <div class="form-help">
-            {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
-            {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
-          </div>
-        </div>
+        @component('components/form-input', [
+          'name' => 'versions[0][download_url]',
+          'label' => __('Download URL'),
+          'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
+        {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
+        @endcomponent
 
-        <div class="mb-6">
-          <label for="issues-url" class="form-label">{{ __('Issues URL') }}</label>
-          <input
-            id="issues-url"
-            type="url"
-            name="issues_url"
-            value="{{ old('issues_url') }}"
-            maxlength="2000"
-            autocomplete="off"
-            placeholder="{{ __('https://github.com/user/asset/issues') }}"
-            class="form-input-text"
-          >
-          @error('issues_url')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-          <div class="form-help">
-            {{ __('If you leave this field empty, the issue reporting URL will be inferred from the repository URL.') }}
-          </div>
-        </div>
+        @component('components/form-input', [
+          'name' => 'issues_url',
+          'label' => __('Issues URL'),
+          'placeholder' => 'https://github.com/user/asset/issues',
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('If you leave this field empty, the issue reporting URL will be inferred from the repository URL.') }}
+        @endcomponent
 
-        <div class="mb-6">
-          <label for="icon-url" class="form-label">{{ __('Icon URL') }}</label>
-          <input
-            id="icon-url"
-            type="url"
-            name="icon_url"
-            value="{{ old('icon_url') }}"
-            maxlength="2000"
-            autocomplete="off"
-            placeholder="{{ __('https://raw.githubusercontent.com/user/asset/master/icon.png') }}"
-            class="form-input-text"
-          >
-          @error('icon_url')
-          <div role="alert" class="form-error">
-            {{ $message }}
-          </div>
-          @enderror
-          <div class="form-help">
-            {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
-            {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
-          </div>
-        </div>
+        @component('components/form-input', [
+          'name' => 'icon_url',
+          'label' => __('Icon URL'),
+          'placeholder' => 'https://raw.githubusercontent.com/user/asset/master/icon.png',
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
+        {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
+        @endcomponent
 
         <button class="button button-primary w-full mt-6" type="submit">
           {{ __('Submit asset') }}

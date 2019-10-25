@@ -145,10 +145,6 @@
   }
 }
 
-.form-help {
-  @apply mt-2 text-sm text-gray-600;
-}
-
 .gallery-image-small-inactive {
   filter: brightness(60%);
 
