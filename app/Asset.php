@@ -279,7 +279,7 @@ class Asset extends Model
     }
 
     /**
-     * Return the icon URL (will infer an URL if no custom URL is specified by the asset).
+     * Return the icon URL (will infer a URL if no custom URL is specified by the asset).
      */
     public function getIconUrlAttribute(): string
     {
@@ -319,7 +319,7 @@ class Asset extends Model
     }
 
     /**
-     * Return the issue reporting URL (will infer an URL if no custom URL is specified by the asset).
+     * Return the issue reporting URL (will infer a URL if no custom URL is specified by the asset).
      */
     public function getIssuesUrlAttribute(): string
     {

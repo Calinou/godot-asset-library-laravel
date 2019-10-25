@@ -53,7 +53,7 @@ class AssetVersion extends Model
     }
 
     /**
-     * Return the download URL (will infer an URL if no custom URL is specified by the asset version).
+     * Return the download URL (will infer a URL if no custom URL is specified by the asset version).
      * For URL inference to work, the asset's browse URL must be passed manually.
      */
     public function getDownloadUrlAttribute(string $browseUrl = null): string

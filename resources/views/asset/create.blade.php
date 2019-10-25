@@ -167,7 +167,7 @@
           </div>
           @enderror
           <div class="form-help">
-            {{ __('This must be an URL to a public GitHub, GitLab or Bitbucket repository.') }}
+            {{ __('This must be a URL to a public GitHub, GitLab or Bitbucket repository.') }}
           </div>
         </div>
 
