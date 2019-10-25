@@ -6,7 +6,19 @@
 @section('content')
 <div class="container">
   <h2 class="text-center text-xl font-medium">
+    @if (Request::get('filter'))
+
+    @if ($assets->count() == 0)
+    {{ __('No results for “:filter”', ['filter' => Request::get('filter')]) }}
+    @elseif ($assets->count() == 1)
+    {{ __('1 result for “:filter”', ['filter' => Request::get('filter')]) }}
+    @else
+    {{ __(':count results for “:filter”', ['count' => $assets->count(), 'filter' => Request::get('filter')]) }}
+    @endif
+
+    @else
     {{ __('Welcome to the Godot Asset Library') }}
+    @endif
   </h2>
 
   {{--
@@ -15,7 +27,8 @@
   --}}
   {{ $assets->appends(Request::all())->links() }}
 
-  <section class="flex flex-wrap -mx-2">
+  @if ($assets->items())
+  <section class="flex flex-wrap -mx-2 mt-8">
     @foreach ($assets->items() as $asset)
     <div class="w-full lg:w-1/2 px-2 my-2">
       <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
@@ -74,6 +87,14 @@
     </div>
     @endforeach
   </section>
+  @else
+  <div class="mt-12 text-lg text-center text-gray-600 leading-loose">
+    {{ __('No assets found.') }}<br>
+    <a class="link" href="{{ route('asset.index') }}">
+      {{ __('View all assets') }}
+    </a>
+  </div>
+  @endif
 
   {{ $assets->appends(Request::all())->links() }}
 </div>
