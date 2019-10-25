@@ -70,43 +70,30 @@
         </div>
 
         <div class="mb-6 sm:flex sm:justify-between">
-          <div class="mb-6 sm:mb-0">
-            <label for="category" class="form-label form-required">{{ __('Category') }}</label>
-            <select
-              required
-              id="category"
-              name="category_id"
-            >
-              <option disabled selected>{{ __('Select a category') }}</option>
-              @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
-                <option value="{{ $categoryId }}">{{ $assetClass::getCategoryName($categoryId) }}</option>
-              @endforeach
-            </select>
-            @error('category_id')
-            <div role="alert" class="form-error">
-              {{ $message }}
-            </div>
-            @enderror
-          </div>
+          @php
+          $categories = [];
+          foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId) {
+            $categories[] = $assetClass::getCategoryName($categoryId);
+          }
+          @endphp
 
-          <div>
-            <label for="license" class="form-label form-required">{{ __('License') }}</label>
-            <select
-              required
-              id="license"
-              name="cost"
-            >
-            <option disabled selected>{{ __('Select a license') }}</option>
-              @foreach ($assetClass::LICENSES as $licenseSpdx => $licenseName)
-                <option value="{{ $licenseSpdx }}">{{ $licenseName }}</option>
-              @endforeach
-            </select>
-            @error('cost')
-            <div role="alert" class="form-error">
-              {{ $message }}
-            </div>
-            @enderror
-          </div>
+          @component('components/form-select', [
+            'name' => 'category_id',
+            'label' => __('Category'),
+            'placeholder' => __('Select a category'),
+            'required' => true,
+            'choices' =>  $categories,
+          ])
+          @endcomponent
+
+          @component('components/form-select', [
+            'name' => 'cost',
+            'label' => __('License'),
+            'placeholder' => __('Select a license'),
+            'required' => true,
+            'choices' =>  $assetClass::LICENSES,
+          ])
+          @endcomponent
         </div>
 
         <div class="mb-6 sm:flex sm:justify-between">
@@ -128,24 +115,19 @@
             </div>
             @enderror
           </div>
-          <div>
-            <label for="godot-version" class="form-label form-required">{{ __('Godot version') }}</label>
-            <select
-              required
-              id="godot-version"
-              name="versions[0][godot_version]"
-            >
-              <option disabled selected>{{ __('Select a Godot version') }}</option>
-              <option value="3.2">Godot 3.2</option>
-              <option value="3.1">Godot 3.1</option>
-              <option value="3.0">Godot 3.0</option>
-            </select>
-            @error('versions[0][godot_version]')
-            <div role="alert" class="form-error">
-              {{ $message }}
-            </div>
-            @enderror
-          </div>
+
+          @component('components/form-select', [
+            'name' => 'versions[0][godot_version]',
+            'label' => __('Godot version'),
+            'placeholder' => __('Select a Godot version'),
+            'required' => true,
+            'choices' => [
+              '3.2' => 'Godot 3.2',
+              '3.1' => 'Godot 3.1',
+              '3.0' => 'Godot 3.0',
+            ],
+          ])
+          @endcomponent
         </div>
 
         <div class="mb-6">
