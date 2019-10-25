@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @inject('assetClass', 'App\Asset')
 
+@if (Request::get('filter'))
+@section('title', __('Search - :filter', ['filter' => Request::get('filter')]))
+@else
 @section('title', __('Home'))
+@endif
 
 @section('content')
 <div class="container">
