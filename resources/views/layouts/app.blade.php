@@ -27,7 +27,9 @@
       <div class="container flex flex-wrap justify-between">
 
         <div class="flex items-center">
-          <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">Godot Asset Library</a>
+          <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">
+            Godot Asset Library
+          </a>
 
           {{--
             Must be surrounded with `.relative` so that the absolute-positioned
@@ -46,7 +48,9 @@
           </div>
 
           <div class="navbar-dropdown">
-            <a href="{{ route('asset.index') }}" class="button ml-2">Categories <span class="fa fa-angle-down ml-1"></span></a>
+            <a href="{{ route('asset.index') }}" class="button ml-2">
+              Categories <span class="fa fa-angle-down ml-1"></span>
+            </a>
             <div class="navbar-dropdown-content">
               @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
 

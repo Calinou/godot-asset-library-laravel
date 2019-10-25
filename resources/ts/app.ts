@@ -23,7 +23,7 @@ function initGalleryImages(): void {
       $oldActiveImage.classList.add('gallery-image-small-inactive');
 
       // Add active status to new image
-      const $target = (event.target as HTMLImageElement);
+      const $target = event.target as HTMLImageElement;
       $target.classList.remove('gallery-image-small-inactive');
       $target.classList.add('gallery-image-small-active');
 
