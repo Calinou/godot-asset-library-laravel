@@ -17,7 +17,7 @@
     @elseif ($assets->count() == 1)
     {{ __('1 result for “:filter”', ['filter' => Request::get('filter')]) }}
     @else
-    {{ __(':count results for “:filter”', ['count' => $assets->count(), 'filter' => Request::get('filter')]) }}
+    {{ __(':count results for “:filter”', ['count' => $assets->total(), 'filter' => Request::get('filter')]) }}
     @endif
 
     @else
