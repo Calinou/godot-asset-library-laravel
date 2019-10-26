@@ -1,165 +1,23 @@
+/*
+ * Don't define CSS classes in this file (other than HTML elements).
+ * Edit one of the files imported below, or create a new one and import it.
+ */
+
 @import "fork-awesome";
+@import "buttons";
+@import "forms";
+@import "gallery";
+@import "navbar";
+@import "pagination";
 
 @tailwind base;
 @tailwind components;
-
-/*
- * Tailwind classes must be applied below.
- * See <https://tailwindcss.com/docs/extracting-components>.
- */
+@tailwind utilities;
 
 :root {
   --hover-overlay: hsla(0, 0%, 0%, 0.065);
   --active-overlay: hsla(0, 0%, 0%, 0.13);
 }
-
-.button {
-  @apply inline-block px-4 py-2 rounded;
-
-  &:hover {
-    background-color: var(--hover-overlay);
-  }
-
-  &:active {
-    background-color: var(--active-overlay);
-  }
-}
-
-.button-primary {
-  @apply bg-blue-500 text-white;
-
-  &:hover {
-    @apply bg-blue-600;
-  }
-
-  &:active {
-    @apply bg-blue-700;
-  }
-}
-
-.button-secondary {
-  @apply bg-gray-300;
-
-  &:hover {
-    @apply bg-gray-400;
-  }
-
-  &:active {
-    @apply bg-gray-500;
-  }
-}
-
-.button-success {
-  @apply bg-green-500 text-white;
-
-  &:hover {
-    @apply bg-green-600;
-  }
-
-  &:active {
-    @apply bg-green-700;
-  }
-}
-
-.navbar-link {
-  @apply block rounded leading-none p-3;
-
-  &:hover {
-    background-color: var(--hover-overlay);
-  }
-
-  &:active {
-    background-color: var(--active-overlay);
-  }
-}
-
-.navbar-dropdown-content {
-  @apply bg-white rounded shadow;
-
-  display: none;
-  position: absolute;
-  z-index: 1;
-}
-
-.navbar-dropdown:hover .navbar-dropdown-content {
-  display: block;
-}
-
-.pagination-item {
-  /* The left border is removed on the leftmost item in the pagination Blade template */
-  @apply bg-gray-300 px-3 py-2 border-l border-gray-100;
-
-  &:hover {
-    @apply bg-gray-400;
-  }
-
-  &:active {
-    @apply bg-gray-500;
-  }
-}
-
-.pagination-item-active {
-  @apply bg-blue-500 text-white font-bold pointer-events-none;
-}
-
-.pagination-item-disabled {
-  @apply bg-gray-200 text-gray-500 pointer-events-none;
-}
-
-.form-label {
-  @apply block text-sm font-bold mb-2;
-}
-
-.form-required::after {
-  @apply text-red-600 ml-1;
-
-  content: '*';
-}
-
-.form-input-text {
-  @apply appearance-none shadow border rounded w-full py-2 px-3 leading-tight text-sm;
-
-  &:focus {
-    @apply outline-none shadow-outline;
-  }
-
-  &::placeholder {
-    @apply text-gray-700;
-  }
-}
-
-.form-error {
-  @apply mt-2 text-sm text-red-600;
-}
-
-.link {
-  @apply text-blue-600;
-
-  &:hover,
-  &:focus {
-    @apply text-blue-700 underline;
-  }
-
-  &:active {
-    @apply text-blue-800;
-  }
-}
-
-.gallery-image-small-inactive {
-  filter: brightness(60%);
-
-  &:hover {
-    filter: brightness(75%);
-  }
-}
-
-.gallery-image-small-active {
-  @apply border-4 border-blue-500;
-}
-
-/* Tailwind classes must be applied above */
-
-@tailwind utilities;
 
 body {
   background-color: #eff1f5;

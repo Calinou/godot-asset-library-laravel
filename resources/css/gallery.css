@@ -1,0 +1,11 @@
+.gallery-image-small-inactive {
+  filter: brightness(60%);
+
+  &:hover {
+    filter: brightness(75%);
+  }
+}
+
+.gallery-image-small-active {
+  @apply border-4 border-blue-500;
+}

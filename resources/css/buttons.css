@@ -1,0 +1,47 @@
+.button {
+  @apply inline-block px-4 py-2 rounded;
+
+  &:hover {
+    background-color: var(--hover-overlay);
+  }
+
+  &:active {
+    background-color: var(--active-overlay);
+  }
+}
+
+.button-primary {
+  @apply bg-blue-500 text-white;
+
+  &:hover {
+    @apply bg-blue-600;
+  }
+
+  &:active {
+    @apply bg-blue-700;
+  }
+}
+
+.button-secondary {
+  @apply bg-gray-300;
+
+  &:hover {
+    @apply bg-gray-400;
+  }
+
+  &:active {
+    @apply bg-gray-500;
+  }
+}
+
+.button-success {
+  @apply bg-green-500 text-white;
+
+  &:hover {
+    @apply bg-green-600;
+  }
+
+  &:active {
+    @apply bg-green-700;
+  }
+}

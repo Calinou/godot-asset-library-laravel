@@ -1,0 +1,23 @@
+.navbar-link {
+  @apply block rounded leading-none p-3;
+
+  &:hover {
+    background-color: var(--hover-overlay);
+  }
+
+  &:active {
+    background-color: var(--active-overlay);
+  }
+}
+
+.navbar-dropdown-content {
+  @apply bg-white rounded shadow;
+
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.navbar-dropdown:hover .navbar-dropdown-content {
+  display: block;
+}

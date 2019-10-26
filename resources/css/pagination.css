@@ -1,0 +1,20 @@
+.pagination-item {
+  /* The left border is removed on the leftmost item in the pagination Blade template */
+  @apply bg-gray-300 px-3 py-2 border-l border-gray-100;
+
+  &:hover {
+    @apply bg-gray-400;
+  }
+
+  &:active {
+    @apply bg-gray-500;
+  }
+}
+
+.pagination-item-active {
+  @apply bg-blue-500 text-white font-bold pointer-events-none;
+}
+
+.pagination-item-disabled {
+  @apply bg-gray-200 text-gray-500 pointer-events-none;
+}
