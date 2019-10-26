@@ -117,6 +117,16 @@
     @endif
 
     @yield('content')
+
+    <footer class="mt-12 py-12 bg-gray-300 text-gray-600 text-center">
+      © 2019 Godot Asset Library
+      @can('admin')
+        —
+        <a class="link text-center" href="{{ route('admin.index') }}">
+          {{ __('Administration panel') }}
+        </a>
+      @endcan
+    </footer>
   </main>
 </body>
 </html>

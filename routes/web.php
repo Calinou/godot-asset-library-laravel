@@ -19,5 +19,7 @@ Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware(
 
 Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
 
+Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('can:admin');
+
 // Register authentication-related routes (including email verification routes)
 Auth::routes(['verify' => true]);
