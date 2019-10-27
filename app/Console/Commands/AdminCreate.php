@@ -48,15 +48,15 @@ class AdminCreate extends Command
         $password = $this->argument('password') ?? $this->secret('Password');
         $name = $this->argument('name') ?? $this->ask('Name');
 
+        // Create an user, mark it as an administrator then save it
+        // (`markEmailAsVerified()` automatically saves the model)
         $user = new User();
-        $user->fill([
+        $user->forceFill([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-        ]);
-        $user->markEmailAsVerified();
-        $user->is_admin = true;
-        $user->save();
+            'is_admin' => true,
+        ])->markEmailAsVerified();
 
         $this->info("Administrator \"$name\" <$email> created!");
     }
