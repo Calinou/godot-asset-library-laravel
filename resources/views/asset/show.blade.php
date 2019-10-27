@@ -17,7 +17,7 @@
       <div class="-mt-4 mb-12 -ml-1 text-sm">
         @foreach ($asset->tags as $tag)
         <a href="{{ route('asset.index', ['filter' => $tag]) }}">
-          <span class="inline-block my-1 px-3 py-1 bg-blue-100 text-blue-600 rounded-full">
+          <span class="tag tag-link">
             {{ $tag }}
           </span>
         </a>

@@ -9,6 +9,7 @@
 @import "gallery";
 @import "navbar";
 @import "pagination";
+@import "tags";
 
 @tailwind base;
 @tailwind components;

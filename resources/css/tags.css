@@ -1,0 +1,18 @@
+.tag {
+  @apply inline-block my-1 px-3 py-1 rounded-full bg-gray-300;
+}
+
+/* Clickable tag (typically on asset detail pages) */
+.tag-link {
+  @apply text-blue-600;
+
+  background-color: hsl(201, 100%, 96%);
+
+  &:hover {
+    background-color: hsl(201, 100%, 92%);
+  }
+
+  &:active {
+    background-color: hsl(201, 100%, 88%);
+  }
+}
