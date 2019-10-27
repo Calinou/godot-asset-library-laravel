@@ -20,6 +20,7 @@ $factory->define(Asset::class, function (Faker $faker) {
         ]),
         'support_level_id' => $faker->numberBetween(0, Asset::SUPPORT_LEVEL_MAX - 1),
         'description' => $faker->text(500),
+        'tags' => $faker->words($faker->numberBetween(0, 8)),
         'browse_url' => 'https://github.com/user/asset',
         'icon_url' => "https://via.placeholder.com/128x128/$colorHex",
     ];

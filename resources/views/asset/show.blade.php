@@ -13,6 +13,18 @@
         {{ __('by :author', ['author' => $asset->author->name]) }}
       </h2>
 
+      @if ($asset->tags)
+      <div class="-mt-4 mb-12 -ml-1 text-sm">
+        @foreach ($asset->tags as $tag)
+        <a href="{{ route('asset.index', ['filter' => $tag]) }}">
+          <span class="inline-block my-1 px-3 py-1 bg-blue-100 text-blue-600 rounded-full">
+            {{ $tag }}
+          </span>
+        </a>
+        @endforeach
+      </div>
+      @endif
+
       <div class="mb-8">
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success mr-2 mb-2">
           <span class="fa fa-download mr-1"></span>

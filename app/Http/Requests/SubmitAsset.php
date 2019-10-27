@@ -28,6 +28,7 @@ class SubmitAsset extends FormRequest
             'title' => 'required|string|max:50',
             'blurb' => 'nullable|string|max:60',
             'description' => 'required|string|max:10000',
+            'tags' => 'nullable|string|max:10000',
             'category_id' => 'required|integer|gte:0|lt:'.Asset::CATEGORY_MAX,
             'cost' => ['required', Rule::in(array_keys(Asset::LICENSES))],
             'browse_url' => 'required|url|max:2000',

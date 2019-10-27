@@ -22,6 +22,7 @@ class CreateAssetsTable extends Migration
             $table->string('cost'); // SPDX license identifier
             $table->tinyInteger('support_level_id')->default(Asset::SUPPORT_LEVEL_COMMUNITY);
             $table->text('description');
+            $table->text('tags')->nullable();
             $table->text('browse_url');
             $table->text('issues_url')->nullable();
             $table->text('icon_url')->nullable();

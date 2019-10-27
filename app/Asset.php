@@ -118,6 +118,7 @@ class Asset extends Model
         'title',
         'blurb',
         'description',
+        'tags',
         'author_id',
         'category_id',
         'cost',
@@ -146,6 +147,7 @@ class Asset extends Model
      */
     protected $appends = [
         'category',
+        'tags',
         'download_url',
         'godot_version',
         'icon_url',
@@ -242,6 +244,34 @@ class Asset extends Model
             return $categoryNames[$category];
         } else {
             throw new \Exception("Invalid category: $category");
+        }
+    }
+
+    /**
+     * Return the list of tags as an array.
+     */
+    public function getTagsAttribute(): array
+    {
+        if (! empty($this->getOriginal('tags'))) {
+            return explode(',', $this->getOriginal('tags'));
+        }
+
+        return [];
+    }
+
+    /**
+     * Set the list of tags (which is stored as a comma-separated string in the database).
+     *
+     * TODO: Use a custom validator to enforce tag naming rules.
+     *
+     * @param string|array $tags The list of tags to assign to the asset
+     */
+    public function setTagsAttribute($tags = null): void
+    {
+        if (is_array($tags)) {
+            $this->attributes['tags'] = implode(',', $tags);
+        } else {
+            $this->attributes['tags'] = strtolower(str_replace(' ', '', $tags ?? ''));
         }
     }
 
@@ -428,8 +458,9 @@ class Asset extends Model
         }
 
         if (isset($validated['filter'])) {
-            // Search anywhere in the asset's title
-            $query->where('title', 'like', '%'.$validated['filter'].'%');
+            // Search anywhere in the asset's title or tags
+            $query->where('title', 'like', "%{$validated['filter']}%");
+            $query->orWhere('tags', 'like', "%{$validated['filter']}%");
         }
 
         $reverse = isset($validated['reverse']);
