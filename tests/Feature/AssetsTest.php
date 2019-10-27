@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use App\Asset;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -12,6 +13,18 @@ class AssetsTest extends TestCase
     use RefreshDatabase {
         refreshDatabase as baseRefreshDatabase;
     }
+
+    public const ASSET_DATA = [
+        'title' => 'My Own Asset',
+        'blurb' => 'One-line description of the asset',
+        'description' => 'A long description…',
+        'tags' => 'platformer, 2d, pixel-art, gdnative',
+        'category' => Asset::CATEGORY_2D_TOOLS,
+        'license' => 'MIT',
+        'versions[0][version_string]' => '1.0.0',
+        'versions[0][godot_version]' => '3.2',
+        'browse_url' => 'https://github.com/user/asset',
+    ];
 
     public function refreshDatabase(): void
     {
@@ -91,5 +104,18 @@ class AssetsTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/asset/submit');
         $response->assertOk()->assertViewIs('asset.create');
+    }
+
+    public function testAssetSubmitNotLoggedIn(): void
+    {
+        $response = $this->post('/asset', self::ASSET_DATA);
+        $response->assertRedirect('/login');
+    }
+
+    public function testAssetSubmitLoggedIn(): void
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
+        $response->assertRedirect('/');
     }
 }
