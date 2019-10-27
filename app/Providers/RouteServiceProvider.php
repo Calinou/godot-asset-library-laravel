@@ -26,6 +26,9 @@ class RouteServiceProvider extends ServiceProvider
         // Asset IDs
         Route::pattern('id', '[0-9]+');
 
+        // OAuth2 provider names (must be supported by Socialite)
+        Route::pattern('provider', 'github|gitlab');
+
         parent::boot();
     }
 

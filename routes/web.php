@@ -23,3 +23,7 @@ Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('
 
 // Register authentication-related routes (including email verification routes)
 Auth::routes(['verify' => true]);
+
+// OAuth2 authentication routes
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.oauth2');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.oauth2.callback');

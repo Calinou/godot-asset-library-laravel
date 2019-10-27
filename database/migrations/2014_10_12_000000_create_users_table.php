@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable()->comment('Can be null if using OAuth2 only');
+            $table->string('provider')->nullable()->comment('The OAuth2 provider name (if any)');
+            $table->string('provider_id')->nullable()->comment('The OAuth2 provider unique identifier (may be used if the provider supports other means of logging in than an email)');
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();

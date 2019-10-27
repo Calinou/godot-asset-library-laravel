@@ -18,6 +18,7 @@
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 mb-2 bg-white rounded shadow p-4">
+
       @component('components/form-input', [
         'type' => 'email',
         'name' => 'email',
@@ -49,6 +50,21 @@
       <button class="button button-primary w-full" type="submit">
         {{ __('Login') }}
       </button>
+
+      <hr class="mt-8 mb-4 border border-gray-300">
+
+      <div class="text-center">{{ __('Or log in with:') }}</div>
+      <div class="mt-4 mb-2 flex justify-center text-sm">
+        <a href="{{ route('login.oauth2', ['provider' => 'github']) }}" class="button button-login-github mr-2">
+          <span class="fa fa-github mr-1"></span>
+          GitHub
+        </a>
+        <a href="{{ route('login.oauth2', ['provider' => 'gitlab']) }}" class="button button-login-gitlab ml-2">
+          <span class="fa fa-gitlab mr-1"></span>
+          GitLab
+        </a>
+      </div>
+
     </section>
   </form>
 </div>

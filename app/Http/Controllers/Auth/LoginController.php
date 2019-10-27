@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -35,5 +39,49 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the OAuth2 provider's authentication page.
+     */
+    public function redirectToProvider(string $provider): RedirectResponse
+    {
+        if ($provider === 'gitlab') {
+            // Only request the `read_user` scope if authenticating with GitLab
+            return Socialite::driver($provider)->scopes(['read_user'])->redirect();
+        }
+
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from the OAuth2 provider.
+     */
+    public function handleProviderCallback(string $provider): RedirectResponse
+    {
+        $userSocial = Socialite::driver($provider)->user();
+
+        // Check if the user is already registered
+        $currentUser = User::where(['email' => $userSocial->getEmail()])->first();
+
+        if ($currentUser) {
+            // Log in as the existing user
+            Auth::login($currentUser);
+        } else {
+            // Register a new account and log in.
+            // The email address is always considered verified,
+            // as the OAuth2 provider has most likely verified it before.
+            $user = new User();
+            $user->fill([
+                'name' => $userSocial->getName(),
+                'email' => $userSocial->getEmail(),
+                'provider' => $provider,
+                'provider_id' => $userSocial->getId(),
+            ])->markEmailAsVerified();
+
+            Auth::login($user);
+        }
+
+        return redirect(route('asset.index'));
     }
 }

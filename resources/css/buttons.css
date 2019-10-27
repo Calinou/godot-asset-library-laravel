@@ -45,3 +45,31 @@
     @apply bg-green-700;
   }
 }
+
+.button-login-github {
+  @apply text-white;
+
+  background-color: hsl(210, 12%, 28%);
+
+  &:hover {
+    background-color: hsl(210, 12%, 22%);
+  }
+
+  &:active {
+    background-color: hsl(210, 12%, 16%);
+  }
+}
+
+.button-login-gitlab {
+  @apply text-white;
+
+  background-color: hsl(19, 84%, 56%);
+
+  &:hover {
+    background-color: hsl(19, 84%, 48%);
+  }
+
+  &:active {
+    background-color: hsl(19, 84%, 40%);
+  }
+}

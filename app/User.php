@@ -19,6 +19,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'provider',
+        'provider_id',
     ];
 
     /**
@@ -30,6 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
         'is_admin',
+        'provider',
+        'provider_id',
     ];
 
     /**
