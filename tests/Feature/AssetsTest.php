@@ -37,6 +37,18 @@ class AssetsTest extends TestCase
         $response->assertRedirect();
     }
 
+    public function testAssetIndexMaxResultsValid(): void
+    {
+        $response = $this->get('/?max_results=15');
+        $response->assertOk()->assertViewIs('asset.index');
+    }
+
+    public function testAssetIndexMaxResultsInvalid(): void
+    {
+        $response = $this->get('/?max_results=0');
+        $response->assertRedirect();
+    }
+
     public function testAssetSearchCategoryValid(): void
     {
         $response = $this->get('/?category=0');
