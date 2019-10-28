@@ -420,14 +420,12 @@ class Asset extends Model
             case self::CATEGORY_PROJECTS:
             case self::CATEGORY_DEMOS:
                 return self::CATEGORY_TYPE_PROJECTS;
-                break;
             default:
                 if ($category >= 0 && $category < self::CATEGORY_MAX) {
                     return self::CATEGORY_TYPE_ADDONS;
                 }
 
                 throw new \Exception("Invalid category: $category");
-                break;
         }
     }
 

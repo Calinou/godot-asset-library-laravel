@@ -75,7 +75,6 @@
                     break;
                   default:
                     throw new \Exception("Invalid support level: $asset->support_level_id");
-                    break;
                 }
               @endphp
               <span class="m-1 px-3 py-1 rounded-full {{ $supportLevelClasses }}">
