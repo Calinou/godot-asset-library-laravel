@@ -42,7 +42,7 @@
       ])
       @endcomponent
 
-      <button class="button button-primary w-full" type="submit">
+      <button class="button button-primary w-full" type="submit" data-loading>
         {{ __('Reset password') }}
       </button>
     </section>
