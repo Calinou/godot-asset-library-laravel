@@ -79,7 +79,7 @@
           </a>
           <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button class="navbar-link" type="submit">
+            <button class="navbar-link" type="submit" data-loading>
               {{ __('Log out') }} ({{ Auth::user()->name }})
             </button>
           </form>

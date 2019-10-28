@@ -35,14 +35,40 @@ function initGalleryImages(): void {
   });
 }
 
+/**
+ * Initialize interactivity for buttons which trigger long operations.
+ */
+function initLoadingButtons(): void {
+  // ESLint wants to remove the type casting, but we need it to compile the script
+  // eslint-disable-next-line
+  const buttonsLoading = document.querySelectorAll('[data-loading]') as NodeListOf<HTMLElement>;
+  const forms = document.querySelectorAll('form');
+
+  buttonsLoading.forEach(($buttonLoading: HTMLElement) => {
+    $buttonLoading.addEventListener('click', () => {
+      if ($buttonLoading instanceof HTMLButtonElement) {
+        forms.forEach((form: HTMLFormElement) => {
+          if (form.contains($buttonLoading) && form.checkValidity()) {
+            $buttonLoading.classList.add('button-loading');
+          }
+        });
+      } else {
+        $buttonLoading.classList.add('button-loading');
+      }
+    });
+  });
+}
+
 // Call functions that need to be called on every page change here,
 // in addition to the `window.addEventListener` call below
 // (so it works on the initial page load as well)
 barba.hooks.after(() => {
   initGalleryImages();
+  initLoadingButtons();
 });
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
   initGalleryImages();
+  initLoadingButtons();
 });

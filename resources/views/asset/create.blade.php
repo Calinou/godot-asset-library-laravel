@@ -148,7 +148,7 @@
         {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
         @endcomponent
 
-        <button class="button button-primary w-full mt-6" type="submit">
+        <button class="button button-primary w-full mt-6" type="submit" data-loading>
           {{ __('Submit asset') }}
         </button>
       </section>

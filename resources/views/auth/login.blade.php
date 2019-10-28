@@ -47,7 +47,7 @@
       @endif
       @endcomponent
 
-      <button class="button button-primary w-full" type="submit">
+      <button class="button button-primary w-full" type="submit" data-loading>
         {{ __('Login') }}
       </button>
 
@@ -55,11 +55,11 @@
 
       <div class="text-center">{{ __('Or log in with:') }}</div>
       <div class="mt-4 mb-2 flex justify-center text-sm">
-        <a href="{{ route('login.oauth2', ['provider' => 'github']) }}" class="button button-login-github mr-2">
+        <a href="{{ route('login.oauth2', ['provider' => 'github']) }}" class="button button-login-github mr-2" data-loading>
           <span class="fa fa-github mr-1"></span>
           GitHub
         </a>
-        <a href="{{ route('login.oauth2', ['provider' => 'gitlab']) }}" class="button button-login-gitlab ml-2">
+        <a href="{{ route('login.oauth2', ['provider' => 'gitlab']) }}" class="button button-login-gitlab ml-2" data-loading>
           <span class="fa fa-gitlab mr-1"></span>
           GitLab
         </a>

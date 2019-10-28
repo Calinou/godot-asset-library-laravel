@@ -73,3 +73,11 @@
     background-color: hsl(19, 84%, 40%);
   }
 }
+
+/*
+ * Applied in JavaScript when a long operation will be done when pressing
+ * the button (such as logging in).
+ */
+.button-loading {
+  @apply opacity-50 pointer-events-none;
+}
