@@ -101,18 +101,22 @@
     {{-- Display flash message --}}
     @if (session('status'))
     <div class="container">
-      <div class="bg-white p-3 rounded shadow mb-4">
-        {{ session('status') }}
-      </div>
+      @component('components/alert', [
+        'type' => 'info',
+      ])
+      {{ session('status') }}
+      @endcomponent
     </div>
     @endif
 
     {{-- Display email verification success --}}
     @if (session('verified'))
     <div class="container">
-      <div class="bg-white p-3 rounded shadow mb-4">
-        {{ __("You've successfully verified your email address!") }}
-      </div>
+      @component('components/alert', [
+        'type' => 'success',
+      ])
+      {{ __("You've successfully verified your email address!") }}
+      @endcomponent
     </div>
     @endif
 

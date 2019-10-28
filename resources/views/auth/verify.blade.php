@@ -3,9 +3,11 @@
 @section('content')
 <div class="container">
   @if (session('resent'))
-    <div class="bg-white p-3 rounded shadow mb-4" role="alert">
-      {{ __('A fresh verification link has been sent to your email address.') }}
-    </div>
+  @component('components/alert', [
+    'type' => 'info',
+  ])
+  {{ __('A fresh verification link has been sent to your email address.') }}
+  @endcomponent
   @endif
 
   {{ __('Before proceeding, please check your email for a verification link.') }}
