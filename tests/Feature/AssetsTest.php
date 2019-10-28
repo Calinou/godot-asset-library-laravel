@@ -96,7 +96,7 @@ class AssetsTest extends TestCase
     public function testAssetCreateNotLoggedIn(): void
     {
         $response = $this->get('/asset/submit');
-        $response->assertRedirect('/login');
+        $response->assertRedirect('/email/verify');
     }
 
     public function testAssetCreateLoggedIn(): void
@@ -109,7 +109,7 @@ class AssetsTest extends TestCase
     public function testAssetSubmitNotLoggedIn(): void
     {
         $response = $this->post('/asset', self::ASSET_DATA);
-        $response->assertRedirect('/login');
+        $response->assertRedirect('/email/verify');
     }
 
     public function testAssetSubmitLoggedIn(): void
