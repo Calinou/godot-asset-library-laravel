@@ -17,6 +17,7 @@
           'label' => __('Name'),
           'placeholder' => __('Nickname or full name'),
           'required' => true,
+          'maxlength' => 30,
           'autofocus' => true,
           'autocomplete' => 'username',
         ])
