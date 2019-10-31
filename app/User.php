@@ -11,6 +11,18 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     /**
+     * The maximum name length (in characters). If this value is changed,
+     * it will only apply to users registering after the change has been made.
+     */
+    public const NAME_MAX_LENGTH = 30;
+
+    /**
+     * The minimum password length (in characters). If this value is changed,
+     * it will only apply to users registering after the change has been made.
+     */
+    public const PASSWORD_MIN_LENGTH = 10;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

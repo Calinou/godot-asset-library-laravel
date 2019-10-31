@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@inject('userClass', 'App\User')
 
 @section('title', __('Sign up'))
 
@@ -17,7 +18,7 @@
           'label' => __('Name'),
           'placeholder' => __('Nickname or full name'),
           'required' => true,
-          'maxlength' => 30,
+          'maxlength' => $userClass::NAME_MAX_LENGTH,
           'autofocus' => true,
           'autocomplete' => 'username',
         ])
@@ -37,9 +38,9 @@
           'name' => 'password',
           'label' => __('Password'),
           'required' => true,
-          'minlength' => 8,
+          'minlength' => $userClass::PASSWORD_MIN_LENGTH,
         ])
-        {{ __('Must be at least 8 characters long.') }}
+        {{ __('Must be at least :passwordMinLength characters long.', ['passwordMinLength' => $userClass::PASSWORD_MIN_LENGTH]) }}
         @endcomponent
 
         @component('components/form-input', [
@@ -47,7 +48,7 @@
           'name' => 'password_confirmation',
           'label' => __('Confirm password'),
           'required' => true,
-          'minlength' => 8,
+          'minlength' => $userClass::PASSWORD_MIN_LENGTH,
         ])
         @endcomponent
 
