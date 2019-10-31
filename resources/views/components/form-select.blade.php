@@ -10,9 +10,13 @@
       name="{{ $name }}"
       class="block appearance-none w-full bg-white shadow border rounded px-3 py-2 pr-8 leading-tight text-sm hover:border-gray-500 focus:outline-none focus:shadow-outline"
     >
-    <option disabled selected>{{ $placeholder }}</option>
-      @foreach ($choices as $key => $value)
-      <option value="{{ $key }}">{{ $value }}</option>
+      <option disabled>
+        {{ $placeholder }}
+      </option>
+      @foreach ($choices as $key => $label)
+      <option value="{{ $key }}" @if ($key === ($value ?? old('name'))) selected @endif>
+        {{ $label }}
+      </option>
       @endforeach
     </select>
 

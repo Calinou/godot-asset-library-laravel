@@ -1,20 +1,33 @@
 @extends('layouts.app')
 @inject('assetClass', 'App\Asset')
 
+@if ($editing)
+@section('title', __('Edit “:asset”', ['asset' => $asset->title]))
+@else
 @section('title', __('Submit an asset'))
+@endif
 
 @section('content')
 <div class="container">
-    <form method="POST" action="{{ route('asset.store') }}">
+    <form method="POST" action="{{ $editing ? route('asset.update', ['asset' => $asset]) : route('asset.store') }}">
       @csrf
 
+      @if ($editing)
+      @method('PUT')
+      @endif
+
       <div class="text-center text-xl font-medium">
+        @if ($editing)
+        {{ __('Edit “:asset”', ['asset' => $asset->title]) }}
+        @else
         {{ __('Submit an asset to Godot Asset Library') }}
+        @endif
       </div>
 
       <section class="w-full max-w-md mx-auto mt-8">
         @component('components/form-input', [
           'name' => 'title',
+          'value' => $editing ? $asset->title : null,
           'label' => __('Asset name'),
           'placeholder' => __('My Own Asset'),
           'required' => true,
@@ -26,6 +39,7 @@
 
         @component('components/form-input', [
           'name' => 'blurb',
+          'value' => $editing ? $asset->blurb : null,
           'label' => __('Blurb'),
           'placeholder' => __('One-line description of the asset'),
           'maxlength' => 60,
@@ -36,6 +50,7 @@
 
         @component('components/form-input', [
           'type' => 'textarea',
+          'value' => $editing ? $asset->description : null,
           'name' => 'description',
           'label' => __('Description'),
           'placeholder' => __('Full description that spans multiple lines…'),
@@ -47,6 +62,7 @@
 
         @component('components/form-input', [
           'name' => 'tags',
+          'value' => $editing ? $asset->getOriginal('tags') : null,
           'label' => __('Tags'),
           'placeholder' => 'platformer, 2d, pixel-art, gdnative',
           'autocomplete' => 'off',
@@ -64,6 +80,7 @@
 
           @component('components/form-select', [
             'name' => 'category_id',
+            'value' => $editing ? $asset->category_id : null,
             'label' => __('Category'),
             'placeholder' => __('Select a category'),
             'required' => true,
@@ -73,6 +90,7 @@
 
           @component('components/form-select', [
             'name' => 'cost',
+            'value' => $editing ? $asset->license : null,
             'label' => __('License'),
             'placeholder' => __('Select a license'),
             'required' => true,
@@ -84,6 +102,7 @@
         <div class="sm:flex sm:justify-between">
           @component('components/form-input', [
             'name' => 'versions[0][version_string]',
+            'value' => $editing ? $asset->versions[0]->version_string : null,
             'label' => __('Asset version'),
             'placeholder' => '1.0.0',
             'required' => true,
@@ -93,6 +112,7 @@
 
           @component('components/form-select', [
             'name' => 'versions[0][godot_version]',
+            'value' => $editing ? $asset->versions[0]->godot_version : null,
             'label' => __('Godot version'),
             'placeholder' => __('Select a Godot version'),
             'required' => true,
@@ -107,6 +127,7 @@
 
         @component('components/form-input', [
           'name' => 'browse_url',
+          'value' => $editing ? $asset->browse_url : null,
           'label' => __('Repository URL'),
           'placeholder' => 'https://github.com/user/asset',
           'required' => true,
@@ -118,6 +139,7 @@
 
         @component('components/form-input', [
           'name' => 'versions[0][download_url]',
+          'value' => $editing ? $asset->versions[0]->download_url : null,
           'label' => __('Download URL'),
           'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
           'maxlength' => 2000,
@@ -129,6 +151,7 @@
 
         @component('components/form-input', [
           'name' => 'issues_url',
+          'value' => $editing ? $asset->issues_url : null,
           'label' => __('Issues URL'),
           'placeholder' => 'https://github.com/user/asset/issues',
           'maxlength' => 2000,
@@ -139,6 +162,7 @@
 
         @component('components/form-input', [
           'name' => 'icon_url',
+          'value' => $editing ? $asset->icon_url : null,
           'label' => __('Icon URL'),
           'placeholder' => 'https://raw.githubusercontent.com/user/asset/master/icon.png',
           'maxlength' => 2000,
@@ -149,7 +173,11 @@
         @endcomponent
 
         <button class="button button-primary w-full mt-6" type="submit" data-loading>
+          @if ($editing)
+          {{ __('Save') }}
+          @else
           {{ __('Submit asset') }}
+          @endif
         </button>
       </section>
     </form>

@@ -46,13 +46,13 @@ if ($type === 'password') {
     id="{{ $name }}"
     type="{{ $type }}"
     name="{{ $name }}"
-    @if ($type !== 'textarea') value="{{ old($name) }}" @endif
+    @if ($type !== 'textarea') value="{{ $value ?? old($name) }}" @endif
     @if ($minlength) minlength="{{ $minlength }}" @endif
     maxlength="{{ $maxlength }}"
     autocomplete="{{ $autocomplete }}"
     placeholder="{{ $placeholder }}"
     class="form-input-text {{ $class }}"
-  >@if ($type === 'textarea'){{ old($name) }}</textarea> @endif
+  >@if ($type === 'textarea'){{ $value ?? old($name) }}</textarea> @endif
 
   @error($name)
   <div role="alert" class="form-error">

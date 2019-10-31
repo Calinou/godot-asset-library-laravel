@@ -43,7 +43,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        return view('asset.create');
+        return view('asset.create', ['editing' => false]);
     }
 
     /**
@@ -79,6 +79,36 @@ class AssetController extends Controller
         }
 
         // Save the asset with its submodels
+        $asset->save();
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    /**
+     * Display the form used to edit an asset.
+     */
+    public function edit(Asset $asset)
+    {
+        return view('asset.create', [
+            'editing' => true,
+            'asset' => $asset,
+        ]);
+    }
+
+    /**
+     * Store modifications to an existing asset.
+     *
+     * TODO: Update the version and preview submodels.
+     */
+    public function update(Asset $asset, SubmitAsset $request)
+    {
+        $input = $request->all();
+
+        // Remove submodel information from the input array as we don't want it here
+        $assetInput = $input;
+        unset($assetInput['versions']);
+        unset($assetInput['previews']);
+        $asset->fill($assetInput);
         $asset->save();
 
         return redirect(route('asset.show', $asset));

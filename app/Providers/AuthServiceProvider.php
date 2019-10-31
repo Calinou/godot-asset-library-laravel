@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\User;
+use App\Asset;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -28,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function (User $user) {
             return $user->is_admin;
+        });
+
+        Gate::define('edit-asset', function (User $user, Asset $asset) {
+            return $user->is_admin || $user->id === $asset->author_id;
         });
     }
 }

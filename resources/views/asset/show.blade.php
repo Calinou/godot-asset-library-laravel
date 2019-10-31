@@ -26,6 +26,12 @@
       @endif
 
       <div class="mb-8">
+        @can('edit-asset', $asset)
+        <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
+          <span class="fa fa-pencil mr-1"></span>
+          {{ __('Edit') }}
+        </a>
+        @endcan
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success mr-2 mb-2">
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}

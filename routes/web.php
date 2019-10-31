@@ -18,6 +18,8 @@ Route::get('/asset/submit', 'AssetController@create')->name('asset.create')->mid
 Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware('verified');
 
 Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
+Route::get('/asset/{asset}/edit', 'AssetController@edit')->name('asset.edit')->middleware('can:edit-asset,asset');
+Route::put('/asset/{asset}', 'AssetController@update')->name('asset.update')->middleware('can:edit-asset,asset');
 
 Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('can:admin');
 
