@@ -97,8 +97,6 @@ class AssetController extends Controller
 
     /**
      * Store modifications to an existing asset.
-     *
-     * TODO: Update the version and preview submodels.
      */
     public function update(Asset $asset, SubmitAsset $request)
     {
@@ -109,6 +107,27 @@ class AssetController extends Controller
         unset($assetInput['versions']);
         unset($assetInput['previews']);
         $asset->fill($assetInput);
+
+        // Recreate the version and preview submodels
+
+        $versions = $asset->versions()->get();
+        foreach ($versions as $version) {
+            $version->delete();
+        }
+
+        $previews = $asset->previews()->get();
+        foreach ($previews as $preview) {
+            $preview->delete();
+        }
+
+        if (array_key_exists('versions', $input)) {
+            $asset->versions()->createMany($input['versions']);
+        }
+
+        if (array_key_exists('previews', $input)) {
+            $asset->previews()->createMany($input['previews']);
+        }
+
         $asset->save();
 
         return redirect(route('asset.show', $asset));

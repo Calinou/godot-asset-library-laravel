@@ -99,6 +99,7 @@
           @endcomponent
         </div>
 
+        @if (!$editing)
         <div class="sm:flex sm:justify-between">
           @component('components/form-input', [
             'name' => 'versions[0][version_string]',
@@ -124,8 +125,10 @@
           ])
           @endcomponent
         </div>
+        @endif
 
         @component('components/form-input', [
+          'type' => 'url',
           'name' => 'browse_url',
           'value' => $editing ? $asset->browse_url : null,
           'label' => __('Repository URL'),
@@ -137,7 +140,9 @@
         {{ __('This must be a URL to a public GitHub, GitLab or Bitbucket repository.') }}
         @endcomponent
 
+        @if (!$editing)
         @component('components/form-input', [
+          'type' => 'url',
           'name' => 'versions[0][download_url]',
           'value' => $editing ? $asset->versions[0]->download_url : null,
           'label' => __('Download URL'),
@@ -148,8 +153,10 @@
         {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
         {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
         @endcomponent
+        @endif
 
         @component('components/form-input', [
+          'type' => 'url',
           'name' => 'issues_url',
           'value' => $editing ? $asset->issues_url : null,
           'label' => __('Issues URL'),
@@ -161,6 +168,7 @@
         @endcomponent
 
         @component('components/form-input', [
+          'type' => 'url',
           'name' => 'icon_url',
           'value' => $editing ? $asset->icon_url : null,
           'label' => __('Icon URL'),
@@ -171,6 +179,57 @@
         {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
         {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
         @endcomponent
+
+        @if ($editing)
+        <h2 class="text-center text-xl font-medium my-8">
+          {{ __('Manage versions') }}
+        </h2>
+        <div class="mt-2 text-sm text-gray-600 my-8">
+          {{ __('For each version, if you leave the download URL field empty, it will be inferred from the repository URL and the asset version.') }}<br>
+          {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
+        </div>
+
+        @foreach ($asset->versions as $version)
+        <div class="my-4 p-4 pb-2 bg-white rounded shadow">
+          <div class="sm:flex sm:justify-between">
+            @component('components/form-input', [
+              'name' => "versions[$loop->index][version_string]",
+              'value' => $asset->versions[$loop->index]->version_string,
+              'label' => __('Asset version'),
+              'placeholder' => '1.0.0',
+              'required' => true,
+              'autocomplete' => 'off',
+            ])
+            @endcomponent
+
+            @component('components/form-select', [
+              'name' => "versions[$loop->index][godot_version]",
+              'value' => $asset->versions[$loop->index]->godot_version,
+              'label' => __('Godot version'),
+              'placeholder' => __('Select a Godot version'),
+              'required' => true,
+              'choices' => [
+                '3.2' => 'Godot 3.2',
+                '3.1' => 'Godot 3.1',
+                '3.0' => 'Godot 3.0',
+              ],
+            ])
+            @endcomponent
+          </div>
+
+          @component('components/form-input', [
+            'type' => 'url',
+            'name' => "versions[$loop->index][download_url]",
+            'value' => $editing ? $asset->versions[$loop->index]->download_url : null,
+            'label' => __('Download URL'),
+            'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
+            'maxlength' => 2000,
+            'autocomplete' => 'off',
+          ])
+          @endcomponent
+        </div>
+        @endforeach
+        @endif
 
         <button class="button button-primary w-full mt-6" type="submit" data-loading>
           @if ($editing)
