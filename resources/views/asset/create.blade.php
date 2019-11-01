@@ -188,47 +188,21 @@
           {{ __('For each version, if you leave the download URL field empty, it will be inferred from the repository URL and the asset version.') }}<br>
           {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
         </div>
+        <button type="button" id="asset-add-version" class="link">
+          <span class="fa fa-plus mr-1"></span>
+          {{ __('Add a new version') }}
+        </button>
 
-        @foreach ($asset->versions as $version)
-        <div class="my-4 p-4 pb-2 bg-white rounded shadow">
-          <div class="sm:flex sm:justify-between">
-            @component('components/form-input', [
-              'name' => "versions[$loop->index][version_string]",
-              'value' => $asset->versions[$loop->index]->version_string,
-              'label' => __('Asset version'),
-              'placeholder' => '1.0.0',
-              'required' => true,
-              'autocomplete' => 'off',
-            ])
-            @endcomponent
+        {{-- Contains the HTML that will be copied when creating a new version --}}
+        <template id="asset-version-prototype" data-index="{{ count($asset->versions) }}">
+          @include('asset.version-form', ['prototype' => true])
+        </template>
 
-            @component('components/form-select', [
-              'name' => "versions[$loop->index][godot_version]",
-              'value' => $asset->versions[$loop->index]->godot_version,
-              'label' => __('Godot version'),
-              'placeholder' => __('Select a Godot version'),
-              'required' => true,
-              'choices' => [
-                '3.2' => 'Godot 3.2',
-                '3.1' => 'Godot 3.1',
-                '3.0' => 'Godot 3.0',
-              ],
-            ])
-            @endcomponent
-          </div>
-
-          @component('components/form-input', [
-            'type' => 'url',
-            'name' => "versions[$loop->index][download_url]",
-            'value' => $editing ? $asset->versions[$loop->index]->download_url : null,
-            'label' => __('Download URL'),
-            'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
-            'maxlength' => 2000,
-            'autocomplete' => 'off',
-          ])
-          @endcomponent
+        <div id="asset-version-list">
+          @foreach ($asset->versions as $version)
+          @include('asset.version-form')
+          @endforeach
         </div>
-        @endforeach
         @endif
 
         <button class="button button-primary w-full mt-6" type="submit" data-loading>

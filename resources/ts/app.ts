@@ -59,16 +59,47 @@ function initLoadingButtons(): void {
   });
 }
 
+/**
+ * Initialize interactivity for the "Add new version" button on the asset editing form.
+ */
+function initAddAssetVersionButton(): void {
+  const $addVersionButton = document.getElementById('asset-add-version') as HTMLButtonElement;
+  const $assetVersionPrototype = document.getElementById('asset-version-prototype') as HTMLTemplateElement;
+  const $assetVersionList = document.getElementById('asset-version-list') as HTMLDivElement;
+
+  if ($addVersionButton) {
+    $addVersionButton.addEventListener('click', () => {
+      // Add a new version at the end
+      $assetVersionList.appendChild($assetVersionPrototype.content.cloneNode(true));
+
+      // Replace the index in the newly created copy
+      const $newVersion = $assetVersionList.lastElementChild;
+      if ($newVersion) {
+        $newVersion.innerHTML = $newVersion.innerHTML.replace(
+          /__index__/g, $assetVersionPrototype.dataset.index || '0',
+        );
+      }
+
+      // Increment the counter (HTML data attributes are always strings)
+      $assetVersionPrototype.dataset.index = (
+        Number($assetVersionPrototype.dataset.index) + 1
+      ).toString();
+    });
+  }
+}
+
 // Call functions that need to be called on every page change here,
 // in addition to the `window.addEventListener` call below
 // (so it works on the initial page load as well)
 barba.hooks.after(() => {
   initGalleryImages();
   initLoadingButtons();
+  initAddAssetVersionButton();
 });
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
   initGalleryImages();
   initLoadingButtons();
+  initAddAssetVersionButton();
 });
