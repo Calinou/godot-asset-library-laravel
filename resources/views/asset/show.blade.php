@@ -13,8 +13,16 @@
         {{ __('by :author', ['author' => $asset->author->name]) }}
       </h2>
 
-      @if ($asset->tags)
       <div class="-mt-4 mb-12 -ml-1 text-sm">
+
+        <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
+          <span class="tag tag-link font-bold">
+            <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
+            {{ $asset->category }}
+          </span>
+        </a>
+
+        @if ($asset->tags)
         @foreach ($asset->tags as $tag)
         <a href="{{ route('asset.index', ['filter' => $tag]) }}">
           <span class="tag tag-link">
@@ -22,8 +30,9 @@
           </span>
         </a>
         @endforeach
+        @endif
+
       </div>
-      @endif
 
       <div class="mb-8">
         @can('edit-asset', $asset)
