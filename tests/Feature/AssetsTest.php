@@ -103,7 +103,7 @@ class AssetsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/asset/submit');
-        $response->assertOk()->assertViewIs('asset.create');
+        $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', false);
     }
 
     public function testAssetSubmitNotLoggedIn(): void
@@ -117,5 +117,19 @@ class AssetsTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
         $response->assertRedirect('/');
+    }
+
+    public function testAssetEditNotLoggedIn(): void
+    {
+        $response = $this->get('/asset/1/edit');
+        $response->assertForbidden();
+    }
+
+    public function testAssetEditLoggedIn(): void
+    {
+        $user = factory(User::class)->create();
+        $user->is_admin = true;
+        $response = $this->actingAs($user)->get('/asset/1/edit');
+        $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', true);
     }
 }
