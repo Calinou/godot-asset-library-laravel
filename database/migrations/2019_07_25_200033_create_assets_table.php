@@ -19,9 +19,23 @@ class CreateAssetsTable extends Migration
             $table->string('title');
             $table->string('blurb')->nullable();
             $table->tinyInteger('category_id');
-            $table->string('cost'); // SPDX license identifier
-            $table->tinyInteger('support_level_id')->default(Asset::SUPPORT_LEVEL_COMMUNITY);
-            $table->text('description');
+            $table
+                ->string('cost')
+                ->comment('SPDX license identifier');
+            $table
+                ->tinyInteger('support_level_id')
+                ->default(Asset::SUPPORT_LEVEL_COMMUNITY)
+                ->comment(
+                    Asset::SUPPORT_LEVEL_TESTING.': Testing, '
+                    .Asset::SUPPORT_LEVEL_COMMUNITY.': Community, '
+                    .Asset::SUPPORT_LEVEL_OFFICIAL.': Official'
+                );
+            $table
+                ->text('description')
+                ->comment('Description in Markdown format');
+            $table
+                ->text('html_description')
+                ->comment('Description rendered as HTML (cached for performance)');
             $table->text('tags')->nullable();
             $table->text('browse_url');
             $table->text('issues_url')->nullable();

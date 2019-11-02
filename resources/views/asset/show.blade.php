@@ -61,7 +61,10 @@
       </h2>
       @endif
 
-      <p>{{ $asset->description }}</p>
+      <div class="content">
+        {{-- The HTML description is already sanitized by the Markdown parser that generates it --}}
+        {!! $asset->html_description !!}
+      </div>
 
       <hr class="my-6">
       <h3 class="font-medium mb-4">{{ __('Details') }}</h3>

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Asset extends Model
 {
@@ -306,6 +307,17 @@ class Asset extends Model
     public function getGodotVersionAttribute(): string
     {
         return $this->versions->last()->godot_version;
+    }
+
+    /**
+     * Set the description, render the Markdown and save the rendered description.
+     * This way, the source Markdown only has to be rendered once
+     * (instead of being rendered every time a page is displayed).
+     */
+    public function setDescriptionAttribute(string $description): void
+    {
+        $this->attributes['description'] = $description;
+        $this->attributes['html_description'] = Markdown::convertToHtml($description);
     }
 
     /**
