@@ -139,6 +139,8 @@ class Asset extends Model
     protected $hidden = [
         'support_level_id',
         'created_at',
+         // The Godot editor can't render HTML, no need to send it
+        'html_description',
     ];
 
     /**
