@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Asset;
 use App\AssetPreview;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubmitAsset extends FormRequest
@@ -15,8 +14,8 @@ class SubmitAsset extends FormRequest
      */
     public function authorize(): bool
     {
-        // The user must be logged in to submit an asset
-        return Auth::check();
+        // We use Laravel gates for authorization, no need to duplicate code here
+        return true;
     }
 
     /**

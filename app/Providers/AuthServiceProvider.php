@@ -34,5 +34,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-asset', function (User $user, Asset $asset) {
             return $user->is_admin || $user->id === $asset->author_id;
         });
+
+        // To submit a review, an user must have a verified email.
+        // Also, they can't review their own assets and can post only one review per asset.
+        Gate::define('submit-review', function (User $user, Asset $asset) {
+            if (! $user->hasVerifiedEmail() || $asset->author_id === $user->id) {
+                return false;
+            }
+
+            foreach ($asset->reviews as $review) {
+                if ($review->author_id === $user->id) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 }

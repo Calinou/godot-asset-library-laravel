@@ -118,6 +118,51 @@
     </div>
   </div>
 
+  @can('submit-review', $asset)
+  <hr class="my-6">
+  <h2 class="text-xl font-medium mb-8">
+    {{ __('Leave a review') }}
+  </h2>
+
+  <form method="POST" action="{{ route('asset.reviews.store', ['asset' => $asset]) }}">
+    @csrf
+
+    @component('components/form-select', [
+      'name' => 'is_positive',
+      'label' => __('Your rating'),
+      'placeholder' => __('Select a rating'),
+      'required' => true,
+      'choices' => [
+        1 => __('Recommended'),
+        0 => __('Not recommended'),
+      ],
+    ])
+    @endcomponent
+
+    @component('components/form-input', [
+      'type' => 'textarea',
+      'name' => 'comment',
+      'label' => __('Comment'),
+      'placeholder' => __('Optional. If you leave a comment, it will be displayed in the list of reviews.'),
+      'maxlength' => 2000,
+      'autocomplete' => 'off',
+      'class' => 'h-32',
+    ])
+    {{ __('Supports') }}
+    <a
+      class="link"
+      href="https://guides.github.com/features/mastering-markdown/"
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >GitHub Flavored Markdown</a>.
+    @endcomponent
+
+    <button class="button button-primary mt-6" type="submit" data-loading>
+      {{ __('Submit review') }}
+    </button>
+  </form>
+  @endcan
+
   <hr class="my-6">
   <h2 class="text-xl font-medium mb-2">
     @if ($asset->reviews->count() == 0)
@@ -128,6 +173,7 @@
     {{ __(':count reviews', ['count' => count($asset->reviews)]) }}
     @endif
   </h2>
+
   @forelse ($asset->reviews as $review)
   <article class="py-6 border-b border-gray-400">
     <div class="text-gray-600 mb-6">
@@ -152,9 +198,11 @@
     </div>
   </article>
   @empty
+  @can('submit-review', $asset)
   <div class="my-6 text-gray-600">
     {{ __('No reviews yet. Be the first to leave a review!') }}
   </div>
+  @endcan
   @endforelse
 
 </div>

@@ -50,10 +50,12 @@ class AssetReview extends Model
      * This way, the source Markdown only has to be rendered once
      * (instead of being rendered every time a page is displayed).
      */
-    public function setCommentAttribute(string $comment): void
+    public function setCommentAttribute(string $comment = null): void
     {
-        $this->attributes['comment'] = $comment;
-        $this->attributes['html_comment'] = Markdown::convertToHtml($comment);
+        if ($comment) {
+            $this->attributes['comment'] = $comment;
+            $this->attributes['html_comment'] = Markdown::convertToHtml($comment);
+        }
     }
 
     /**

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\AssetReview;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
+use App\Http\Requests\SubmitReview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -132,6 +134,20 @@ class AssetController extends Controller
         }
 
         $asset->save();
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    /**
+     * Insert a newly created review into the database.
+     */
+    public function storeReview(Asset $asset, SubmitReview $request)
+    {
+        $review = new AssetReview();
+        $review->fill($request->all());
+        $review->asset_id = $asset->asset_id;
+        $review->author_id = Auth::user()->id ?? null;
+        $review->save();
 
         return redirect(route('asset.show', $asset));
     }
