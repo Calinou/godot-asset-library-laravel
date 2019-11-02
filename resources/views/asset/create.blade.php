@@ -58,6 +58,13 @@
           'autocomplete' => 'off',
           'class' => 'h-64',
         ])
+        {{ __('Supports') }}
+        <a
+          class="link"
+          href="https://guides.github.com/features/mastering-markdown/"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >GitHub Flavored Markdown</a>.
         @endcomponent
 
         @component('components/form-input', [
