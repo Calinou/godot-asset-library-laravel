@@ -5,8 +5,8 @@
 
 @section('content')
 <div class="container">
-  <div class="lg:flex lg:-mx-6">
 
+  <div class="lg:flex lg:-mx-6">
     <div class="lg:w-1/2 lg:px-6">
       <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
       <h2 class="text-lg text-gray-600 mb-8">
@@ -14,7 +14,6 @@
       </h2>
 
       <div class="-mt-4 mb-12 -ml-1 text-sm">
-
         <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
           <span class="tag tag-link font-bold">
             <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
@@ -31,7 +30,6 @@
         </a>
         @endforeach
         @endif
-
       </div>
 
       <div class="mb-8">
@@ -46,13 +44,13 @@
           {{ __('Download') }}
         </a>
         <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary mr-2 mb-2">
-            <span class="fa fa-code mr-1"></span>
-            {{ __('Source code') }}
-          </a>
+          <span class="fa fa-code mr-1"></span>
+          {{ __('Source code') }}
+        </a>
         <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary mb-2">
-            <span class="fa fa-exclamation-circle mr-1 opacity-75"></span>
-            {{ __('Submit an issue') }}
-          </a>
+          <span class="fa fa-exclamation-circle mr-1 opacity-75"></span>
+          {{ __('Submit an issue') }}
+        </a>
       </div>
 
       @if ($asset->blurb)
@@ -92,6 +90,7 @@
       <div class="flex items-center justify-center h-64 bg-gray-400 rounded">
         <div class="text-lg text-gray-600">
           {{ __('No preview available') }}
+        </div>
       </div>
       @endif
 
@@ -117,7 +116,46 @@
       </div>
       @endif
     </div>
-
   </div>
+
+  <hr class="my-6">
+  <h2 class="text-xl font-medium mb-2">
+    @if ($asset->reviews->count() == 0)
+    {{ __('No reviews') }}
+    @elseif ($asset->reviews->count() == 1)
+    {{ __('1 review') }}
+    @else
+    {{ __(':count reviews', ['count' => count($asset->reviews)]) }}
+    @endif
+  </h2>
+  @forelse ($asset->reviews as $review)
+  <article class="py-6 border-b border-gray-400">
+    <div class="text-gray-600 mb-6">
+      @if ($review->is_positive)
+      <span class="font-bold text-blue-500">
+        <span class="fa fa-chevron-circle-up fa-fw opacity-75"></span>
+        {{ __('Recommended') }}
+      </span>
+      @else
+      <span class="font-bold text-red-700">
+        <span class="fa fa-chevron-circle-down fa-fw opacity-75"></span>
+        {{ __('Not recommended') }}</span>
+      @endif
+      —
+      {{ __(':author commented :relativeDate', [
+        'author' => $review->author->name,
+        'relativeDate' => \Carbon\Carbon::parse($review->created_at)->diffForHumans()
+      ]) }}
+    </div>
+    <div class="content">
+      {!! $review->html_comment !!}
+    </div>
+  </article>
+  @empty
+  <div class="my-6 text-gray-600">
+    {{ __('No reviews yet. Be the first to leave a review!') }}
+  </div>
+  @endforelse
+
 </div>
 @endsection

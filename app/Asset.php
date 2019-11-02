@@ -181,6 +181,14 @@ class Asset extends Model
     }
 
     /**
+     * Get the asset's reviews (sorted by reverse creation date).
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\AssetReview', 'asset_id')->orderBy('created_at', 'desc');
+    }
+
+    /**
      * Return the given support level's name.
      */
     public static function getSupportLevelName(int $supportLevel): string

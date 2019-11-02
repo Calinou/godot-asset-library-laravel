@@ -35,6 +35,9 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
+        // Eager load review authors to avoid N+1 queries
+        $asset->load('reviews.author');
+
         return view('asset.show', ['asset' => $asset]);
     }
 
