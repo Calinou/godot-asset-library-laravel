@@ -86,6 +86,12 @@
           >
         </div>
       </a>
+
+      {{-- Caption --}}
+      <div id="gallery-image-caption" class="text-center text-gray-700 my-3">
+        {{-- Use a non-breaking space to ensure consistent height if there is no caption --}}
+        {{ $asset->previews[0]->caption ?: ' ' }}
+      </div>
       @else
       <div class="flex items-center justify-center h-64 bg-gray-400 rounded">
         <div class="text-lg text-gray-600">

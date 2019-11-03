@@ -6,6 +6,7 @@ import barba from '@barba/core';
 function initGalleryImages(): void {
   const $galleryImageBig = document.getElementById('gallery-image-big') as HTMLImageElement;
   const $galleryImageAnchor = document.getElementById('gallery-image-anchor') as HTMLAnchorElement;
+  const $galleryImageCaption = document.getElementById('gallery-image-caption') as HTMLDivElement;
   const galleryImagesSmall = document.getElementsByClassName('gallery-image-small') as HTMLCollectionOf<HTMLImageElement>;
 
   Array.prototype.forEach.call(galleryImagesSmall, ($galleryImageSmall: HTMLImageElement) => {
@@ -31,6 +32,8 @@ function initGalleryImages(): void {
       // if the full-size image is missing for some reason
       $galleryImageBig.src = $target.dataset.fullSize || $target.src;
       $galleryImageAnchor.href = $target.dataset.fullSize || $target.src;
+      // Use a non-breaking space to ensure consistent height if there's no caption
+      $galleryImageCaption.innerText = $target.alt || ' ';
     });
   });
 }
