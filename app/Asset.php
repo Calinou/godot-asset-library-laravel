@@ -478,8 +478,9 @@ class Asset extends Model
         }
 
         if (isset($validated['filter'])) {
-            // Search anywhere in the asset's title or tags
+            // Search anywhere in the asset's title, blurb or tags
             $query->where('title', 'like', "%{$validated['filter']}%");
+            $query->orWhere('blurb', 'like', "%{$validated['filter']}%");
             $query->orWhere('tags', 'like', "%{$validated['filter']}%");
         }
 
