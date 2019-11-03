@@ -163,18 +163,22 @@
   </form>
   @endcan
 
+  @php
+  $reviews = $asset->reviews()->whereNotNull('comment')->get();
+  @endphp
+
   <hr class="my-6">
   <h2 class="text-xl font-medium mb-2">
-    @if ($asset->reviews->count() == 0)
+    @if (count($reviews) == 0)
     {{ __('No reviews') }}
-    @elseif ($asset->reviews->count() == 1)
+    @elseif (count($reviews) == 1)
     {{ __('1 review') }}
     @else
-    {{ __(':count reviews', ['count' => count($asset->reviews)]) }}
+    {{ __(':count reviews', ['count' => count($reviews)]) }}
     @endif
   </h2>
 
-  @forelse ($asset->reviews as $review)
+  @forelse ($reviews as $review)
   <article class="py-6 border-b border-gray-400">
     <div class="text-gray-600 mb-6">
       @if ($review->is_positive)
