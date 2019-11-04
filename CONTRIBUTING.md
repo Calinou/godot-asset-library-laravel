@@ -9,6 +9,7 @@ See the README's [Installation](README.md#installation) section.
 ## Code style guidelines
 
 - Before opening a pull request, run the code style checking tools as described
-  in the [README](README.md).
+  in the [README](README.md). If you've installed frontend dependencies,
+  this will be done automtaically using a Git pre-commit hook.
 - Don't use PHP features only available in PHP 7.3 or later.
   - This is because the production version runs on PHP 7.2.

@@ -7,6 +7,8 @@
 If you wish to contribute code to the Godot Asset Library, you'll need to
 install a local copy so you can test your changes.
 
+To run it locally, you need to install and build both the backend and frontend.
+
 ### Backend
 
 The backend uses the [Laravel](https://laravel.com/) PHP framework.
@@ -40,7 +42,7 @@ and seed test data again.
 #### Code quality tools
 
 - Feature tests are available. They use an in-memory database, so your existing
-  data isn't affected.
+  data isn't affected when running them.
 - This project follows the Laravel code style,
 applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
 - Code is analysed with PHPStan thanks to
