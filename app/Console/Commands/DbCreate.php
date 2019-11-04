@@ -54,5 +54,7 @@ class DbCreate extends Command
         DB::statement($query);
 
         config(['database.connections.mysql.database' => $schemaName]);
+
+        $this->info("Database \"$schemaName\" created!");
     }
 }
