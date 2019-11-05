@@ -1,3 +1,9 @@
+@php
+if (!isset($name)) {
+  throw new \Exception('A form element "name" is required');
+}
+@endphp
+
 <div class="mb-6">
   <label for="{{ $name }}" class="form-label @if ($required) form-required @endif">
     {{ $label }}

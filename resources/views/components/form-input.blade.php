@@ -1,4 +1,8 @@
 @php
+if (!isset($name)) {
+  throw new \Exception('A form element "name" is required');
+}
+
 // Set the variables' default values
 $type = $type ?? 'text';
 $required = $required ?? false;
