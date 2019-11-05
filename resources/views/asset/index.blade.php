@@ -11,15 +11,11 @@
 <div class="container">
   <h2 class="text-center text-xl font-medium">
     @if (Request::get('filter'))
-
-    @if ($assets->count() == 0)
-    {{ __('No results for “:filter”', ['filter' => Request::get('filter')]) }}
-    @elseif ($assets->count() == 1)
-    {{ __('1 result for “:filter”', ['filter' => Request::get('filter')]) }}
-    @else
-    {{ __(':count results for “:filter”', ['count' => $assets->total(), 'filter' => Request::get('filter')]) }}
-    @endif
-
+    {{ trans_choice(
+      '{0} No results for :filter|{1} :count result for :filter|[2,*] :count results for :filter',
+      $assets->total(),
+      ['filter' => Request::get('filter')]
+    ) }}
     @else
     {{ __('Welcome to the Godot Asset Library') }}
     @endif

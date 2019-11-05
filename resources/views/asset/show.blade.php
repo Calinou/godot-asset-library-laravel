@@ -183,13 +183,10 @@
 
   <hr class="my-6">
   <h2 class="text-xl font-medium mb-2">
-    @if (count($reviews) == 0)
-    {{ __('No reviews') }}
-    @elseif (count($reviews) == 1)
-    {{ __('1 review') }}
-    @else
-    {{ __(':count reviews', ['count' => count($reviews)]) }}
-    @endif
+    {{ trans_choice(
+      '{0} No reviews|{1} :count review|[2,*] :count reviews',
+      count($reviews)
+    ) }}
   </h2>
 
   @forelse ($reviews as $review)
