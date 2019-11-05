@@ -161,6 +161,14 @@
       target="_blank"
       rel="nofollow noopener noreferrer"
     >GitHub Flavored Markdown</a>.
+    {{ __('Please follow the') }}
+    <a
+      class="link"
+      href="https://godotengine.org/code-of-conduct"
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    </a>{{ __('Code of Conduct') }}</a>
+    {{ __('when writing your review.') }}
     @endcomponent
 
     <button class="button button-primary mt-6" type="submit" data-loading>
