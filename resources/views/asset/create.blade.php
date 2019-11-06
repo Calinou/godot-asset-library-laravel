@@ -144,7 +144,7 @@
           'maxlength' => 2000,
           'autocomplete' => 'off',
         ])
-        {{ __('This must be a URL to a public GitHub, GitLab or Bitbucket repository.') }}
+        {{ __('This must be a URL to a public GitHub, GitLab.com or Bitbucket repository.') }}
         @endcomponent
 
         @if (!$editing)

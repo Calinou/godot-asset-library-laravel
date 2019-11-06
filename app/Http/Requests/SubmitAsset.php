@@ -6,7 +6,9 @@ namespace App\Http\Requests;
 
 use App\Asset;
 use App\AssetPreview;
+use App\Rules\GitRepositoryUrl;
 use Illuminate\Validation\Rule;
+use App\Rules\SuccessRespondingUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubmitAsset extends FormRequest
@@ -32,21 +34,71 @@ class SubmitAsset extends FormRequest
             'tags' => 'nullable|string|max:10000',
             'category_id' => 'required|integer|gte:0|lt:'.Asset::CATEGORY_MAX,
             'cost' => ['required', Rule::in(array_keys(Asset::LICENSES))],
-            'browse_url' => 'required|url|max:2000',
-            'issues_url' => 'nullable|url|max:2000',
-            'icon_url' => 'nullable|url|max:2000',
+            'browse_url' => [
+                'required',
+                'bail',
+                'url',
+                'max:2000',
+                new GitRepositoryUrl(),
+                new SuccessRespondingUrl(),
+            ],
+            'issues_url' => [
+                'nullable',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
+            'icon_url' => [
+                'nullable',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
 
             // An asset must have at least one version registered
             'versions' => 'required|array|min:1',
             'versions.*.version_string' => 'required|string|max:50',
             'versions.*.godot_version' => ['required', Rule::in(Asset::GODOT_VERSIONS)],
-            'versions.*.download_url' => 'nullable|url',
+            'versions.*.download_url' => [
+                'nullable',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
 
             // Asset previews are optional, though (even if recommended)
             'previews' => 'nullable|array',
             'previews.*.type_id' => 'required|integer|gte:0|lt:'.AssetPreview::TYPE_MAX,
-            'previews.*.link' => 'required|url|max:2000',
-            'previews.*.download_url' => 'nullable|url|max:2000',
+            'previews.*.link' => [
+                'required',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
+            'previews.*.thumbnail' => [
+                'nullable',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     */
+    public function attributes(): array
+    {
+        return [
+            'browse_url' => __('repository URL'),
+            'issues_url' => __('issue reporting URL'),
+            'icon_url' => __('icon URL'),
+            'versions.*.download_url' => __('download URL'),
         ];
     }
 }
