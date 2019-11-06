@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -56,6 +58,15 @@ class AssetPreview extends Model
      */
     protected $appends = [
         'type',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'type_id' => 'integer',
     ];
 
     /**

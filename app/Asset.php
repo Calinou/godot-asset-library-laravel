@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Support\Str;
@@ -156,6 +158,16 @@ class Asset extends Model
         'icon_url',
         'support_level',
         'version_string',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'category_id' => 'integer',
+        'support_level_id' => 'integer',
     ];
 
     /**

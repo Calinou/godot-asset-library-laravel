@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Asset;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

@@ -1,6 +1,8 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+declare(strict_types=1);
+
+/* @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\AssetPreview;
 use Faker\Generator as Faker;
 
