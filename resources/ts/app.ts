@@ -30,10 +30,10 @@ function initGalleryImages(): void {
 
       // Use the full-size image if available, or the thumbnail
       // if the full-size image is missing for some reason
-      $galleryImageBig.src = $target.dataset.fullSize || $target.src;
-      $galleryImageAnchor.href = $target.dataset.fullSize || $target.src;
+      $galleryImageBig.src = $target.dataset.fullSize ?? $target.src;
+      $galleryImageAnchor.href = $target.dataset.fullSize ?? $target.src;
       // Use a non-breaking space to ensure consistent height if there's no caption
-      $galleryImageCaption.innerText = $target.alt || ' ';
+      $galleryImageCaption.innerText = $target.alt ?? ' ';
     });
   });
 }
@@ -79,7 +79,7 @@ function initAddAssetVersionButton(): void {
       const $newVersion = $assetVersionList.lastElementChild;
       if ($newVersion) {
         $newVersion.innerHTML = $newVersion.innerHTML.replace(
-          /__index__/g, $assetVersionPrototype.dataset.index || '0',
+          /__index__/g, $assetVersionPrototype.dataset.index ?? '0',
         );
       }
 
