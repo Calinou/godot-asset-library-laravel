@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0f0e022421b8c2e78ebd6af1b26c7ae",
+    "content-hash": "ab1dfc125e04a1e09c9d4322ec06a3ca",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -4046,6 +4046,61 @@
             "time": "2019-08-11T13:17:40+00:00"
         },
         {
+            "name": "beyondcode/laravel-query-detector",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beyondcode/laravel-query-detector.git",
+                "reference": "12ca2c9864f8aef2cbe20287682cd3764b291eb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/12ca2c9864f8aef2cbe20287682cd3764b291eb0",
+                "reference": "12ca2c9864f8aef2cbe20287682cd3764b291eb0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5|^6",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.6.*",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\QueryDetector\\QueryDetectorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\QueryDetector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel N+1 Query Detector",
+            "homepage": "https://github.com/beyondcode/laravel-query-detector",
+            "keywords": [
+                "beyondcode",
+                "laravel-query-detector"
+            ],
+            "time": "2019-09-18T19:07:08+00:00"
+        },
+        {
             "name": "composer/ca-bundle",
             "version": "1.2.4",
             "source": {
@@ -7564,8 +7619,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",

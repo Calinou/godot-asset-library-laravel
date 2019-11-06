@@ -40,6 +40,17 @@ class AssetReview extends Model
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * (We use `$with` because we can't use `load()` with nested submodels for some reason...)
+     *
+     * @var array
+     */
+    protected $with = [
+        'author',
+    ];
+
+    /**
      * Get the user that posted the review.
      */
     public function author()
