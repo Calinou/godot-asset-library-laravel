@@ -54,6 +54,7 @@ class SubmitAsset extends FormRequest
                 'bail',
                 'url',
                 'max:2000',
+                'ends_with:.png,.PNG,jpg,JPG,jpeg,JPEG',
                 new SuccessRespondingUrl(),
             ],
 
@@ -84,6 +85,7 @@ class SubmitAsset extends FormRequest
                 'bail',
                 'url',
                 'max:2000',
+                'ends_with:.png,.PNG,jpg,JPG,jpeg,JPEG',
                 new SuccessRespondingUrl(),
             ],
         ];
