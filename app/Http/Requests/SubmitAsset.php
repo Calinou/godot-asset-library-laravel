@@ -67,6 +67,10 @@ class SubmitAsset extends FormRequest
                 'bail',
                 'url',
                 'max:2000',
+                'ends_with:.zip,.ZIP',
+                // Don't allow manually linking to a moving branch (typically `master`).
+                // This can't detect all branches in the repository, it's just here as a basic deterrent.
+                'not_regex:/.+master\.zip/',
                 new SuccessRespondingUrl(),
             ],
 

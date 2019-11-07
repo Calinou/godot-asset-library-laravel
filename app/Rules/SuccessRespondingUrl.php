@@ -11,6 +11,8 @@ use GuzzleHttp\Exception\RequestException;
 
 /**
  * Only accept URLs that respond with a successful status code (e.g. 200 OK).
+ * Since this check is time-consuming, it should be placed at the end of the
+ * validation chain while making it use the `bail` validator so it can fail early.
  */
 class SuccessRespondingUrl implements Rule
 {
