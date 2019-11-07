@@ -6,7 +6,6 @@ namespace App\Http\Requests;
 
 use App\Asset;
 use App\AssetPreview;
-use App\Rules\GitRepositoryUrl;
 use Illuminate\Validation\Rule;
 use App\Rules\SuccessRespondingUrl;
 use Illuminate\Foundation\Http\FormRequest;
@@ -39,7 +38,8 @@ class SubmitAsset extends FormRequest
                 'bail',
                 'url',
                 'max:2000',
-                new GitRepositoryUrl(),
+                // Only allow well-formed GitHub, GitLab.com and Bitbucket repository URLs
+                'regex:/\/\/(github\.com|gitlab\.com|bitbucket\.org).+\/.+/',
                 new SuccessRespondingUrl(),
             ],
             'issues_url' => [
@@ -70,7 +70,7 @@ class SubmitAsset extends FormRequest
                 'ends_with:.zip,.ZIP',
                 // Don't allow manually linking to a moving branch (typically `master`).
                 // This can't detect all branches in the repository, it's just here as a basic deterrent.
-                'not_regex:/.+master\.zip/',
+                'not_regex:/master\.zip/',
                 new SuccessRespondingUrl(),
             ],
 
@@ -105,6 +105,16 @@ class SubmitAsset extends FormRequest
             'issues_url' => __('issue reporting URL'),
             'icon_url' => __('icon URL'),
             'versions.*.download_url' => __('download URL'),
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'browse_url.regex' => __('The :attribute must point to a public GitHub, GitLab.com or Bitbucket repository.'),
         ];
     }
 }
