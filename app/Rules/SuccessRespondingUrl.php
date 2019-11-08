@@ -24,7 +24,9 @@ class SuccessRespondingUrl implements Rule
         $client = new Client();
 
         try {
-            $response = $client->get($value, [
+            // Use a HEAD request to return only headers, as we don't care about
+            // the full response
+            $response = $client->head($value, [
                 'synchronous' => true,
                 'timeout' => 10,
                 'http_errors' => false,
