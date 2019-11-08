@@ -464,6 +464,28 @@ class Asset extends Model
     }
 
     /**
+     * Return the Tailwind CSS class used to color the score displayed.
+     * Higher scores will be displayed in a color with a warmer temperature
+     * to attract the user's attention.
+     *
+     * @see https://tailwindcss.com/docs/text-color/ Tailwind's color classes.
+     */
+    public function getScoreColorAttribute(): string
+    {
+        if ($this->score >= 15) {
+            return 'text-blue-500';
+        } elseif ($this->score >= 10) {
+            return 'text-blue-600';
+        } elseif ($this->score >= 5) {
+            return 'text-blue-700';
+        } elseif ($this->score >= 0) {
+            return 'text-gray-700';
+        } else {
+            return 'text-red-700';
+        }
+    }
+
+    /**
      * Filter and sort the list of assets according to user-specified parameters.
      * This function doesn't perform any validation. The data passed must be
      * validated first!

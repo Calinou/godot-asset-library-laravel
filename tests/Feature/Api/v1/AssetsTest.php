@@ -46,6 +46,7 @@ class AssetsTest extends TestCase
                     'icon_url',
                     'modify_date',
                     'support_level',
+                    'score',
                 ],
             ],
         ]);
@@ -110,6 +111,7 @@ class AssetsTest extends TestCase
             'icon_url',
             'modify_date',
             'support_level',
+            'score',
         ]);
     }
 }

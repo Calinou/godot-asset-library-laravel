@@ -40,8 +40,14 @@
             Offset the right panel slightly on the Y axis to make tags
             appear slightly further from the bottom, which looks better
           --}}
-          <div class="ml-6 py-3 pl-1 -mt-px mb-px">
-            <div class="leading-relaxed font-medium">{{ $asset->title }}</div>
+          <div class="ml-6 py-3 pl-1 -mt-px mb-px w-full pr-3">
+            <div class="flex space-between">
+              <div class="leading-relaxed font-medium">{{ $asset->title }}</div>
+              <div class="flex-grow text-right text-sm {{ $asset->score_color }}">
+                <span class="fa mr-1 opacity-50 @if ($asset->score >= 0) fa-thumbs-up @else fa-thumbs-down @endif"></span>
+                {{ $asset->score }}
+              </div>
+            </div>
             <div class="leading-relaxed text-gray-600 text-sm my-px">
               @if ($asset->blurb)
               {{ $asset->blurb }}

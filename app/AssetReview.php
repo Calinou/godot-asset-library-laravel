@@ -51,6 +51,14 @@ class AssetReview extends Model
     ];
 
     /**
+     * Get the asset which is the subject of the review.
+     */
+    public function asset()
+    {
+        return $this->belongsTo('App\Asset', 'asset_id');
+    }
+
+    /**
      * Get the user that posted the review.
      */
     public function author()

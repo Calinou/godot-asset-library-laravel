@@ -187,7 +187,13 @@
       '{0} No reviews|{1} :count review|[2,*] :count reviews',
       count($reviews)
     ) }}
+    <span class="ml-3 pl-5 border-l border-gray-400 {{ $asset->score_color }}">
+      <span class="fa mr-1 opacity-50 @if ($asset->score >= 0) fa-thumbs-up @else fa-thumbs-down @endif"></span>
+      {{ $asset->score }}
+    </span>
   </h2>
+
+
 
   @forelse ($reviews as $review)
   <article class="py-6 border-b border-gray-400">
