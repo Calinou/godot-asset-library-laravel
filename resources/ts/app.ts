@@ -39,6 +39,39 @@ function initGalleryImages(): void {
 }
 
 /**
+ * Make it possible to submit forms while focused on a `textarea` element
+ * by pressing Ctrl + Enter (or Cmd + Enter on macOS).
+ */
+function initTextAreas(): void {
+  const textareas = document.querySelectorAll('textarea');
+
+  textareas.forEach(($textarea: HTMLTextAreaElement) => {
+    $textarea.addEventListener('keydown', (event) => {
+      // <https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea>
+      if ((event.ctrlKey || event.metaKey) && (event.keyCode === 10 || event.keyCode === 13)) {
+        const forms = document.querySelectorAll('form');
+        // ESLint wants to remove the type casting, but we need it to compile the script
+        // eslint-disable-next-line
+        const buttonsLoading = document.querySelectorAll('[data-loading]') as NodeListOf<HTMLElement>;
+
+        forms.forEach((form: HTMLFormElement) => {
+          if (form.contains($textarea) && form.checkValidity()) {
+            form.submit();
+
+            // Make the form button display its "loading" state to confirm submission
+            buttonsLoading.forEach(($buttonLoading: HTMLElement) => {
+              if (form.contains($buttonLoading)) {
+                $buttonLoading.classList.add('button-loading');
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+}
+
+/**
  * Initialize interactivity for buttons which trigger long operations.
  */
 function initLoadingButtons(): void {
@@ -109,16 +142,18 @@ function initAssetSortSelect(): void {
 // in addition to the `window.addEventListener` call below
 // (so it works on the initial page load as well)
 barba.hooks.after(() => {
-  initAssetSortSelect();
   initGalleryImages();
+  initTextAreas();
   initLoadingButtons();
   initAddAssetVersionButton();
+  initAssetSortSelect();
 });
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
-  initAssetSortSelect();
   initGalleryImages();
+  initTextAreas();
   initLoadingButtons();
   initAddAssetVersionButton();
+  initAssetSortSelect();
 });
