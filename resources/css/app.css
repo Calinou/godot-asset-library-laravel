@@ -10,6 +10,7 @@
 @import "navbar";
 @import "pagination";
 @import "tags";
+@import "utilities";
 
 @tailwind base;
 @tailwind components;
