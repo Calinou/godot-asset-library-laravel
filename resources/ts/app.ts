@@ -91,10 +91,25 @@ function initAddAssetVersionButton(): void {
   }
 }
 
+/**
+ * Initialize interactivity for the asset list sorting options.
+ */
+function initAssetSortSelect(): void {
+  const $assetSortSelect = document.getElementById('sort') as HTMLSelectElement;
+  const $sortForm = document.getElementById('sort-form') as HTMLFormElement;
+
+  if ($assetSortSelect && $sortForm) {
+    $assetSortSelect.addEventListener('change', () => {
+      $sortForm.submit();
+    });
+  }
+}
+
 // Call functions that need to be called on every page change here,
 // in addition to the `window.addEventListener` call below
 // (so it works on the initial page load as well)
 barba.hooks.after(() => {
+  initAssetSortSelect();
   initGalleryImages();
   initLoadingButtons();
   initAddAssetVersionButton();
@@ -102,6 +117,7 @@ barba.hooks.after(() => {
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
+  initAssetSortSelect();
   initGalleryImages();
   initLoadingButtons();
   initAddAssetVersionButton();

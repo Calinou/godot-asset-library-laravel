@@ -21,6 +21,25 @@
     @endif
   </h2>
 
+  <div class="relative text-right">
+    <form method="GET" action="{{ route('asset.index') }}" id="sort-form" class="md:absolute md:right-0">
+      @component('components/form-select', [
+        'name' => 'sort',
+        'value' => old('sort'),
+        'label' => __('Sort by'),
+        'placeholder' => __('.'),
+        'required' => false,
+        'choices' => [
+          'updated' => 'Updated',
+          'name' => 'Name',
+          'rating' => 'Score',
+          'cost' => 'License',
+        ],
+      ])
+      @endcomponent
+    </form>
+  </div>
+
   {{--
     We must append the query parameters so that search filters carry on
     when the user clicks a page number
