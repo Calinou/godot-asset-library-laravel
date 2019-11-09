@@ -110,7 +110,7 @@
         <div class="sm:flex sm:justify-between">
           @component('components/form-input', [
             'name' => 'versions[0][version_string]',
-            'value' => $editing ? $asset->versions[0]->version_string : null,
+            'value' => old('versions.0.version_string'),
             'label' => __('Asset version'),
             'placeholder' => '1.0.0',
             'required' => true,
@@ -120,7 +120,7 @@
 
           @component('components/form-select', [
             'name' => 'versions[0][godot_version]',
-            'value' => $editing ? $asset->versions[0]->godot_version : null,
+            'value' => old('versions.0.godot_version'),
             'label' => __('Godot version'),
             'placeholder' => __('Select a Godot version'),
             'required' => true,
@@ -151,7 +151,7 @@
         @component('components/form-input', [
           'type' => 'url',
           'name' => 'versions[0][download_url]',
-          'value' => $editing ? $asset->versions[0]->download_url : null,
+          'value' => old('versions.0.download_url'),
           'label' => __('Download URL'),
           'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
           'maxlength' => 2000,
