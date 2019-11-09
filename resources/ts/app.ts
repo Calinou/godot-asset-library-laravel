@@ -140,7 +140,7 @@ function initAssetSortSelect(): void {
 
 // Call functions that need to be called on every page change here.
 // This is also called on the initial page load.
-const barbaAfterHook = (): void => {
+const initAll = (): void => {
   initGalleryImages();
   initTextAreas();
   initLoadingButtons();
@@ -148,9 +148,17 @@ const barbaAfterHook = (): void => {
   initAssetSortSelect();
 };
 
-barba.hooks.after(barbaAfterHook);
+barba.hooks.leave(() => {
+  // Make it clear the browser is waiting for another page to load
+  document.body.classList.add('opacity-50');
+});
+
+barba.hooks.after(() => {
+  document.body.classList.remove('opacity-50');
+  initAll();
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
-  barbaAfterHook();
+  initAll();
 });
