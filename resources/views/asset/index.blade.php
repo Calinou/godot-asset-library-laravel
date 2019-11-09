@@ -17,7 +17,7 @@
       ['filter' => Request::get('filter')]
     ) }}
     @else
-    {{ __('Welcome to the Godot Asset Library') }}
+    {{ __('Welcome to the :appName', ['appName' => config('app.name')]) }}
     @endif
   </h2>
 

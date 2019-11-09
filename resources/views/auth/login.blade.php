@@ -14,7 +14,7 @@
     <input type="hidden" name="remember" value="on">
 
     <div class="text-center text-xl font-medium">
-      {{ __('Log in to Godot Asset Library') }}
+      {{ __('Log in to :appName', ['appName' => config('app.name')]) }}
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 mb-2 bg-white rounded shadow p-4">

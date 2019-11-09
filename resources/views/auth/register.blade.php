@@ -9,7 +9,7 @@
     @csrf
 
     <div class="text-center text-xl font-medium">
-      {{ __('Sign up to Godot Asset Library') }}
+      {{ __('Sign up to :appName', ['appName' => config('app.name')]) }}
     </div>
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">

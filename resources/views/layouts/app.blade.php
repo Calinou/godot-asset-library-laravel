@@ -6,11 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="apple-mobile-web-app-title" content="Godot Asset Library">
-  <meta name="application-name" content="Godot Asset Library">
+  <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+  <meta name="application-name" content="{{ config('app.name') }}">
   <meta name="theme-color" content="#3d8fcc">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <title>@yield('title') - Godot Asset Library</title>
+  <title>@yield('title') - {{ config('app.name') }}</title>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/apple-touch-icon.png') }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/favicon-32x32.png') }}">
@@ -28,7 +28,7 @@
 
         <div class="flex items-center">
           <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">
-            Godot Asset Library
+            {{ config('app.name') }}
           </a>
 
           {{--
@@ -123,7 +123,7 @@
     @yield('content')
 
     <footer class="mt-12 py-12 bg-gray-300 text-gray-600 text-center">
-      © 2019 Godot Asset Library
+      © 2019 {{ config('app.name') }}
       @can('admin')
         —
         <a class="link text-center" href="{{ route('admin.index') }}">

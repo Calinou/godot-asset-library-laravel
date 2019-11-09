@@ -20,7 +20,7 @@
         @if ($editing)
         {{ __('Edit “:asset”', ['asset' => $asset->title]) }}
         @else
-        {{ __('Submit an asset to Godot Asset Library') }}
+        {{ __('Submit an asset to :appName', ['appName' => config('app.name')]) }}
         @endif
       </div>
 
