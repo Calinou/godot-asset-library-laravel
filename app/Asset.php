@@ -529,6 +529,10 @@ class Asset extends Model
                 case 'name':
                     $query->orderBy('title', $reverse ? 'desc' : 'asc');
                     break;
+                case 'rating':
+                    // Having the best ratings first by default makes more sense
+                    $query->orderBy('score', $reverse ? 'asc' : 'desc');
+                    break;
                 default:
                     // Also handles `updated`
                     $query->orderBy('modify_date', $reverse ? 'asc' : 'desc');
