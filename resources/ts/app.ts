@@ -138,22 +138,19 @@ function initAssetSortSelect(): void {
   }
 }
 
-// Call functions that need to be called on every page change here,
-// in addition to the `window.addEventListener` call below
-// (so it works on the initial page load as well)
-barba.hooks.after(() => {
+// Call functions that need to be called on every page change here.
+// This is also called on the initial page load.
+const barbaAfterHook = (): void => {
   initGalleryImages();
   initTextAreas();
   initLoadingButtons();
   initAddAssetVersionButton();
   initAssetSortSelect();
-});
+};
+
+barba.hooks.after(barbaAfterHook);
 
 window.addEventListener('DOMContentLoaded', () => {
   barba.init();
-  initGalleryImages();
-  initTextAreas();
-  initLoadingButtons();
-  initAddAssetVersionButton();
-  initAssetSortSelect();
+  barbaAfterHook();
 });
