@@ -29,3 +29,9 @@ yarn run doc
 # Run database migrations, seed test data and create a test user
 php artisan migrate:refresh --seed
 php artisan admin:create "demo@example.com" "demo" "Demo User"
+
+# Cache all the things
+php artisan config:cache
+php artisan event:cache
+php artisan route:cache
+php artisan view:cache
