@@ -12,7 +12,7 @@
     </li>
     @else
     <li>
-      <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="pagination-item rounded-l border-0">
+      <a href="{{ url($paginator->previousPageUrl()) }}" rel="prev" class="pagination-item rounded-l border-0">
         @lang('pagination.previous')
       </a>
     </li>
@@ -40,7 +40,7 @@
     </li>
     @else
     <li>
-      <a href="{{ $url }}" class="pagination-item">
+      <a href="{{ url($url) }}" class="pagination-item">
         {{ $page }}
       </a>
     </li>
@@ -52,7 +52,7 @@
     {{-- "Next page" link --}}
     @if ($paginator->hasMorePages())
     <li>
-      <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="pagination-item rounded-r">
+      <a href="{{ url($paginator->nextPageUrl()) }}" rel="next" class="pagination-item rounded-r">
         @lang('pagination.next')
       </a>
     </li>
