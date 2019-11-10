@@ -209,10 +209,8 @@
         {{ __('Not recommended') }}</span>
       @endif
       —
-      {{ __(':author commented :relativeDate', [
-        'author' => $review->author->name,
-        'relativeDate' => \Carbon\Carbon::parse($review->created_at)->diffForHumans()
-      ]) }}
+      {{ __(':author commented', ['author' => $review->author->name]) }}
+      @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
     </div>
     <div class="content">
       {!! $review->html_comment !!}
