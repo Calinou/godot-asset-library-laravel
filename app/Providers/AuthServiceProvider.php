@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\User;
 use App\Asset;
+use App\AssetReview;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -51,6 +52,15 @@ class AuthServiceProvider extends ServiceProvider
             }
 
             return true;
+        });
+
+        // To reply to a review, the user must have a verified email and must be the asset's author.
+        // Also, they mustn't have already replied to the review.
+        Gate::define('submit-review-reply', function (User $user, AssetReview $assetReview) {
+            return
+                $user->hasVerifiedEmail() &&
+                $assetReview->asset->author_id === $user->id &&
+                $assetReview->reply === null;
         });
     }
 }

@@ -167,7 +167,7 @@
       href="https://godotengine.org/code-of-conduct"
       target="_blank"
       rel="nofollow noopener noreferrer"
-    </a>{{ __('Code of Conduct') }}</a>
+    >{{ __('Code of Conduct') }}</a>
     {{ __('when writing your review.') }}
     @endcomponent
 
@@ -215,6 +215,50 @@
     <div class="content">
       {!! $review->html_comment !!}
     </div>
+    @if ($review->reply)
+    <div class="content">
+      <strong>Reply from {{ $asset->author->name }}</strong>
+      {!! $review->reply->html_comment !!}
+    </div>
+    @endif
+    @can('submit-review-reply', $review)
+    <details>
+      <form method="POST" action="{{ route('asset.reviews.replies.store', ['asset_review' => $review]) }}">
+        @csrf
+
+        @component('components/form-input', [
+          'type' => 'textarea',
+          'name' => 'comment',
+          'label' => __('Reply'),
+          'placeholder' => __('Your reply to the comment above…'),
+          'required' => true,
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+          'class' => 'h-32',
+        ])
+        {{ __('Supports') }}
+        <a
+          class="link"
+          href="https://guides.github.com/features/mastering-markdown/"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >GitHub Flavored Markdown</a>.
+        {{ __('Please follow the') }}
+        <a
+          class="link"
+          href="https://godotengine.org/code-of-conduct"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >{{ __('Code of Conduct') }}</a>
+        {{ __('when writing your reply.') }}
+        @endcomponent
+
+        <button class="button button-primary mt-6" type="submit" data-loading>
+          {{ __('Submit reply') }}
+        </button>
+      </form>
+    </details>
+    @endcan
   </article>
   @empty
   @can('submit-review', $asset)

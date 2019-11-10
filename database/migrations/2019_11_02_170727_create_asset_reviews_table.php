@@ -28,14 +28,6 @@ class CreateAssetReviewsTable extends Migration
                 ->text('html_comment')
                 ->nullable()
                 ->comment('Comment rendered as HTML (cached for performance)');
-            $table
-                ->text('comment_reply')
-                ->nullable()
-                ->comment('Reply by the asset author (in Markdown format)');
-            $table
-                ->text('html_comment_reply')
-                ->nullable()
-                ->comment('Reply by the asset author (rendered as HTML)');
             $table->timestamps();
 
             $table->unsignedBigInteger('asset_id');

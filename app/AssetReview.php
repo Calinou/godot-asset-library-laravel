@@ -43,11 +43,15 @@ class AssetReview extends Model
      * The relationships that should always be loaded.
      *
      * (We use `$with` because we can't use `load()` with nested submodels for some reason...)
+     * `asset` is used in authorization gates, so it should always be
+     * eager loaded to avoid N+1 queries.
      *
      * @var array
      */
     protected $with = [
+        'asset',
         'author',
+        'reply',
     ];
 
     /**
@@ -67,6 +71,14 @@ class AssetReview extends Model
     }
 
     /**
+     * Get the comment reply by the asset author.
+     */
+    public function reply()
+    {
+        return $this->hasOne('App\AssetReviewReply');
+    }
+
+    /**
      * Set the comment, render the Markdown and save the rendered comment.
      * This way, the source Markdown only has to be rendered once
      * (instead of being rendered every time a page is displayed).
@@ -77,16 +89,5 @@ class AssetReview extends Model
             $this->attributes['comment'] = $comment;
             $this->attributes['html_comment'] = Markdown::convertToHtml($comment);
         }
-    }
-
-    /**
-     * Set the comment reply, render the Markdown and save the rendered comment reply.
-     * This way, the source Markdown only has to be rendered once
-     * (instead of being rendered every time a page is displayed).
-     */
-    public function setCommentReplyAttribute(string $commentReply): void
-    {
-        $this->attributes['comment_reply'] = $commentReply;
-        $this->attributes['html_comment_reply'] = Markdown::convertToHtml($commentReply);
     }
 }

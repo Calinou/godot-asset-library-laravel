@@ -23,6 +23,7 @@ Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
 Route::get('/asset/{asset}/edit', 'AssetController@edit')->name('asset.edit')->middleware('can:edit-asset,asset');
 Route::put('/asset/{asset}', 'AssetController@update')->name('asset.update')->middleware('can:edit-asset,asset');
 Route::post('/asset/{asset}/reviews', 'AssetController@storeReview')->name('asset.reviews.store')->middleware('can:submit-review,asset');
+Route::post('/asset/reviews/{asset_review}', 'AssetController@storeReviewReply')->name('asset.reviews.replies.store')->middleware('can:submit-review-reply,asset_review');
 
 Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('can:admin');
 

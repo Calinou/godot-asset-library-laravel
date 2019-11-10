@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\AssetReview;
+use App\AssetReviewReply;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
 use App\Http\Requests\SubmitReview;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SubmitReviewReply;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetController extends Controller
@@ -149,5 +151,18 @@ class AssetController extends Controller
         $review->save();
 
         return redirect(route('asset.show', $asset));
+    }
+
+    /**
+     * Update a review with a reply from the asset author.
+     */
+    public function storeReviewReply(AssetReview $assetReview, SubmitReviewReply $request)
+    {
+        $reviewReply = new AssetReviewReply();
+        $reviewReply->fill($request->all());
+        $reviewReply->asset_review_id = $assetReview->id;
+        $reviewReply->save();
+
+        return redirect(route('asset.show', $assetReview->asset));
     }
 }
