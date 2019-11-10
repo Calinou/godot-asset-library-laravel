@@ -11,15 +11,19 @@
   <meta name="theme-color" content="#3d8fcc">
   <meta name="msapplication-TileColor" content="#ffffff">
   <title>@yield('title') - {{ config('app.name') }}</title>
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  {{--
+    Wrap `mix()` calls in `asset()` to keep working paths when hosting the app in a subdirectory.
+    <https://github.com/JeffreyWay/laravel-mix/issues/1026>
+  --}}
+  <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/apple-touch-icon.png') }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/favicon-32x32.png') }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/favicon-16x16.png') }}">
   <link rel="manifest" href="{{ asset('/site.webmanifest') }}">
   <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }}" color="#3d8fcc">
-  <script defer src="{{ mix('js/manifest.js') }}"></script>
-  <script defer src="{{ mix('js/vendor.js') }}"></script>
-  <script defer src="{{ mix('js/app.js') }}"></script>
+  <script defer src="{{ asset(mix('js/manifest.js')) }}"></script>
+  <script defer src="{{ asset(mix('js/vendor.js')) }}"></script>
+  <script defer src="{{ asset(mix('js/app.js')) }}"></script>
 </head>
 <body data-barba="wrapper">
   <header>
