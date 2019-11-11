@@ -22,7 +22,11 @@
   </h2>
 
   <div class="relative text-right">
-    <form method="GET" action="{{ route('asset.index') }}" id="sort-form" class="md:absolute md:right-0">
+    {{--
+      Avoid overlapping the list of assets when browsing a specific category
+      by adding a negative margin
+    --}}
+    <form method="GET" action="{{ route('asset.index') }}" id="sort-form" class="md:absolute md:right-0 md:-mt-10">
       @component('components/form-select', [
         'name' => 'sort',
         'value' => old('sort'),
