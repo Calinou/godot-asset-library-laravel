@@ -215,15 +215,26 @@
     <div class="content">
       {!! $review->html_comment !!}
     </div>
+
     @if ($review->reply)
-    <div class="content">
-      <strong>Reply from {{ $asset->author->name }}</strong>
+    <div class="content px-4 py-3 mt-6 ml-8 bg-gray-300 rounded relative text-sm">
+      <div class="absolute border-gray-300 top-0 -mt-6 arrow-up"></div>
+      <div class="font-bold text-gray-600 mb-1">
+        {{ __('Reply from :author', ['author' => $asset->author->name]) }}
+        <span class="ml-4 opacity-75">
+          @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->reply->created_at)])
+        </span>
+      </div>
       {!! $review->reply->html_comment !!}
     </div>
-    @endif
+    @else
     @can('submit-review-reply', $review)
     <details>
-      <form method="POST" action="{{ route('asset.reviews.replies.store', ['asset_review' => $review]) }}">
+      <summary class="inline-block ml-6 mt-3 px-2 py-1 link cursor-pointer">
+        {{ __('Reply') }}
+      </summary>
+
+      <form method="POST" action="{{ route('asset.reviews.replies.store', ['asset_review' => $review]) }}" class="mt-6 ml-8">
         @csrf
 
         @component('components/form-input', [
@@ -259,6 +270,7 @@
       </form>
     </details>
     @endcan
+    @endif
   </article>
   @empty
   @can('submit-review', $asset)

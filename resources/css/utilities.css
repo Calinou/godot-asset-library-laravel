@@ -8,3 +8,15 @@
     filter: brightness(87%);
   }
 }
+
+/*
+  Upwards-pointing arrow (used for comment replies).
+  See <https://css-tricks.com/snippets/css/css-triangle/> for details on
+  how this works.
+*/
+.arrow-up {
+  border-width: 0.75rem;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
