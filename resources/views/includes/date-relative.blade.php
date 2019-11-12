@@ -8,6 +8,7 @@ if (!isset($date)) {
 }
 @endphp
 
-<abbr title="{{ $date }}">
+{{-- Force 24-hour format --}}
+<abbr title="{{ $date->isoFormat('MMMM D, YYYY, HH:MM') }}">
   {{ $date->diffForHumans() }}
 </abbr>
