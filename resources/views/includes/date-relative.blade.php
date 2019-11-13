@@ -8,7 +8,13 @@ if (!isset($date)) {
 }
 @endphp
 
-{{-- Force 24-hour format --}}
-<abbr title="{{ $date->isoFormat('MMMM D, YYYY, HH:MM') }}">
+<span
+  {{-- Make the tooltip easier to target --}}
+  class="has-tooltip p-1 -m-1"
+  {{-- Force 24-hour format --}}
+  aria-label="{{ $date->isoFormat('MMMM D, YYYY, HH:MM') }}"
+  data-balloon-pos="up"
+  data-balloon-blunt
+>
   {{ $date->diffForHumans() }}
-</abbr>
+</span>

@@ -20,3 +20,12 @@
   border-left-color: transparent !important;
   border-right-color: transparent !important;
 }
+
+/*
+  Used to denote that a certain element has a tooltip associated
+  (using the balloon.css library).
+*/
+.has-tooltip {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
