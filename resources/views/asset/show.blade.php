@@ -2,6 +2,8 @@
 @inject('assetPreviewClass', 'App\AssetPreview')
 
 @section('title', $asset->title)
+@section('description', $asset->blurb)
+@section('image', count($asset->previews) >= 1 ? $asset->previews[0]->link : '')
 
 @section('content')
 <div class="container">

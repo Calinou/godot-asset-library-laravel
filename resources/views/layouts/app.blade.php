@@ -10,7 +10,17 @@
   <meta name="application-name" content="{{ config('app.name') }}">
   <meta name="theme-color" content="#3d8fcc">
   <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="description" content="@yield('description')">
+
   <title>@yield('title') - {{ config('app.name') }}</title>
+
+  <meta property="og:title" content="@yield('title') - {{ config('app.name') }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:image" content="@yield('image')">
+  <meta property="og:description" content="@yield('description')">
+  <meta property="og:site_name" content="{{ config('app.name') }}">
+
   {{--
     Wrap `mix()` calls in `asset()` to keep working paths when hosting the app in a subdirectory.
     <https://github.com/JeffreyWay/laravel-mix/issues/1026>

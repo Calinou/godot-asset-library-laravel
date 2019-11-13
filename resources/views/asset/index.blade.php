@@ -7,6 +7,11 @@
 @section('title', __('Home'))
 @endif
 
+@php
+$description = __('Find add-ons, assets and scripts for your projects here.');
+@endphp
+@section('description', $description)
+
 @section('content')
 @if (!Request::get('filter') && $assets->currentPage() === 1)
 <div class="bg-indigo-700 text-white -mt-8 mb-8 py-10">
@@ -15,7 +20,7 @@
       {{ __('Welcome to the :appName', ['appName' => config('app.name')]) }}
     </h1>
     <p class="text-lg">
-      {{ __('Find add-ons, assets and scripts for your projects here.') }}
+      {{ $description }}
     </p>
   </div>
 </div>
