@@ -12,7 +12,7 @@
   <h2 class="text-center text-xl font-medium">
     @if (Request::get('filter'))
     {{ trans_choice(
-      '{0} No results for :filter|{1} :count result for :filter|[2,*] :count results for :filter',
+      '{0} No results for “:filter”|{1} :count result for “:filter”|[2,*] :count results for “:filter”',
       $assets->total(),
       ['filter' => Request::get('filter')]
     ) }}
