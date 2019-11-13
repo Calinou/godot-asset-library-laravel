@@ -7,6 +7,12 @@ module.exports = {
       padding: '0.75rem',
     },
     extend: {
+      colors: {
+        indigo: {
+          // Hero background color from the main godotengine.org website
+          700: '#333f67',
+        },
+      },
       spacing: {
         // Used to enforce a 16:9 aspect ratio on images while avoiding reflows
         // during loading

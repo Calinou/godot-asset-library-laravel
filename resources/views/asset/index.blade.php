@@ -8,8 +8,21 @@
 @endif
 
 @section('content')
+@if (!Request::get('filter') && $assets->currentPage() === 1)
+<div class="bg-indigo-700 text-white -mt-8 mb-8 py-10">
+  <div class="container">
+    <h1 class="text-3xl font-medium mb-6">
+      {{ __('Welcome to the :appName', ['appName' => config('app.name')]) }}
+    </h1>
+    <p class="text-lg">
+      {{ __('Find add-ons, assets and scripts for your projects here.') }}
+    </p>
+  </div>
+</div>
+@endif
+
 <div class="container">
-  <h2 class="text-center text-xl font-medium">
+  <h2 class="text-center text-2xl font-medium">
     @if (Request::get('filter'))
     {{ trans_choice(
       '{0} No results for “:filter”|{1} :count result for “:filter”|[2,*] :count results for “:filter”',
@@ -17,7 +30,23 @@
       ['filter' => Request::get('filter')]
     ) }}
     @else
-    {{ __('Welcome to the :appName', ['appName' => config('app.name')]) }}
+
+    @switch (Request::get('sort'))
+    @case ('name')
+    {{ __('Assets by name') }}
+    @break
+    @case ('rating')
+    {{ __('Top-scoring assets') }}
+    @break
+    @case ('cost')
+    {{ __('Assets by license') }}
+    @break
+    @default
+    {{-- Also handles `updated` --}}
+    {{ __('Recent assets') }}
+    @break
+    @endswitch
+
     @endif
   </h2>
 
