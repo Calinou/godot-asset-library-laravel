@@ -24,6 +24,10 @@
 :root {
   --hover-overlay: hsla(0, 0%, 0%, 0.065);
   --active-overlay: hsla(0, 0%, 0%, 0.13);
+
+  /* <https://github.com/kazzkiq/balloon.css#customizing-tooltips> */
+  --balloon-color: hsla(0, 0%, 0%, 0.75);
+  --balloon-font-size: 0.85rem;
 }
 
 body {
