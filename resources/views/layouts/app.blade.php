@@ -40,7 +40,23 @@
             icon visually stays in the input field
           --}}
           <div class="relative">
-            <form method="GET" action="{{ route('asset.index') }}" class="ml-2">
+            @php
+            $searchTooltip = __(<<<EOF
+This will search in the asset's title, blurb and tags.
+This field supports search string syntax. Examples:
+
+Hello world  —  Search for "Hello" and "world" individually
+"Hello world"  —  Perform an exact match instead of matching words individually
+score >= 3  —  Show assets with a score greater than or equal to 3
+license = MIT  —  Show assets licensed under the MIT license (use SPDX identifiers)
+updated_at > 2019-01-01  —  Show assets updated after January 1 2019
+EOF);
+            @endphp
+            <form method="GET" action="{{ route('asset.index') }}" class="ml-2"
+              aria-label="{{ $searchTooltip }}"
+              data-balloon-pos="down"
+              data-balloon-break
+            >
               <input
                 name="filter"
                 placeholder="{{ __('Search for assets') }}"

@@ -3,7 +3,11 @@
  * Edit one of the files imported below, or create a new one and import it.
  */
 
+/* Third-party libraries */
 @import "fork-awesome";
+@import "balloon-css";
+
+/* Our files */
 @import "buttons";
 @import "forms";
 @import "gallery";
@@ -12,6 +16,7 @@
 @import "tags";
 @import "utilities";
 
+/* Initialize Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
