@@ -8,9 +8,12 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 class Asset extends Model
 {
+    use SearchString;
+
     /**
      * The key used to store the last modification date and time.
      * This value has been changed from the default for compatibility with the
@@ -168,6 +171,36 @@ class Asset extends Model
     protected $casts = [
         'category_id' => 'integer',
         'support_level_id' => 'integer',
+    ];
+
+    /**
+     * The columns that can be searched for using the search string syntax.
+     *
+     * @see https://github.com/lorisleiva/laravel-search-string#configuring-columns
+     */
+    protected $searchStringColumns = [
+        'title' => ['searchable' => true],
+        'blurb' => ['searchable' => true],
+        'cost' => 'license',
+        'support_level_id',
+        'tags' => ['searchable' => true],
+        'created_at',
+        'modify_date' => 'updated_at',
+        'score',
+    ];
+
+    /**
+     * The special keywords allowed in the search string syntax.
+     *
+     * @see https://github.com/lorisleiva/laravel-search-string#configuring-special-keywords
+     */
+    protected $searchStringKeywords = [
+        // Don't allow restricting the fields returned as it results in SQL errors
+        'select' => false,
+        // Don't allow sorting as it results in SQL errors when using a non-existing field
+        'order_by' => false,
+        // Don't allow offsetting as it results in SQL errors if not using `limit` at the same time
+        'offset' => false,
     ];
 
     /**
@@ -512,10 +545,8 @@ class Asset extends Model
         }
 
         if (isset($validated['filter'])) {
-            // Search anywhere in the asset's title, blurb or tags
-            $query->where('title', 'like', "%{$validated['filter']}%");
-            $query->orWhere('blurb', 'like', "%{$validated['filter']}%");
-            $query->orWhere('tags', 'like', "%{$validated['filter']}%");
+            // Search string options are defined in the Asset model
+            $query->usingSearchString($validated['filter']);
         }
 
         $reverse = isset($validated['reverse']);
