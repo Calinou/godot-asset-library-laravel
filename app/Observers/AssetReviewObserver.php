@@ -10,11 +10,8 @@ class AssetReviewObserver
      * Handle the asset review "saved" event.
      * This calculates the asset score and stores it for performance
      * (so we don't have to fetch all reviews on every page load).
-     *
-     * @param  \App\AssetReview  $assetReview
-     * @return void
      */
-    public function saved(AssetReview $assetReview)
+    public function saved(AssetReview $assetReview): void
     {
         // This method reads all reviews to calculate the score.
         // It's slower with large amounts of reviews, but it works well
