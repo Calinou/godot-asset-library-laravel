@@ -305,6 +305,8 @@ class Asset extends Model
 
     /**
      * Return the list of tags as an array.
+     *
+     * @return string[]
      */
     public function getTagsAttribute(): array
     {
