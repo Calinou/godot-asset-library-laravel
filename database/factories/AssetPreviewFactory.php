@@ -13,8 +13,8 @@ $factory->define(AssetPreview::class, function (Faker $faker) {
     return [
         // TODO: Generate video links
         'type_id' => AssetPreview::TYPE_IMAGE,
-        'link' => "https://via.placeholder.com/1280x720/$colorHex",
-        'thumbnail' => "https://via.placeholder.com/320x180/$colorHex",
+        'link' => "https://via.placeholder.com/1280x720/$colorHex.png",
+        'thumbnail' => "https://via.placeholder.com/320x180/$colorHex.png",
         'caption' => $faker->text(50),
     ];
 });
