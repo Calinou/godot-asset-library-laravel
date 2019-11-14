@@ -10,20 +10,26 @@
 
   <div class="lg:flex lg:-mx-6">
     <div class="lg:w-1/2 lg:px-6">
-      <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
-      <h2 class="text-lg text-gray-600 mb-8">
-        {{ __('by :author', ['author' => $asset->author->name]) }}
-      </h2>
+      <div class="flex">
+        <div class="flex-shrink-0 self-center">
+          <img class="object-cover w-26 h-26 bg-gray-400 rounded" src="{{ $asset->icon_url }}">
+        </div>
+        <div class="ml-6">
+          <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
+          <h2 class="text-lg text-gray-600 mb-2">
+            {{ __('by :author', ['author' => $asset->author->name]) }}
+          </h2>
+          <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
+            <span class="tag tag-link font-bold text-sm">
+              <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
+              {{ $asset->category }}
+            </span>
+          </a>
+        </div>
+      </div>
 
-      <div class="-mt-4 mb-12 -ml-1 text-sm">
-        <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
-          <span class="tag tag-link font-bold">
-            <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
-            {{ $asset->category }}
-          </span>
-        </a>
-
-        @if ($asset->tags)
+      @if ($asset->tags)
+      <div class="mt-5 mb-10 -ml-1 text-sm">
         @foreach ($asset->tags as $tag)
         <a href="{{ route('asset.index', ['filter' => $tag]) }}">
           <span class="tag tag-link">
@@ -31,8 +37,8 @@
           </span>
         </a>
         @endforeach
-        @endif
       </div>
+      @endif
 
       <div class="mb-8">
         @can('edit-asset', $asset)
