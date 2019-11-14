@@ -183,6 +183,11 @@
       {{ __('Submit review') }}
     </button>
   </form>
+  @elseif (!Auth::check())
+  <hr class="my-6">
+  <a class="link" href="{{ route('login') }}">
+    {{ __('Please log in to submit a review.') }}
+  </a>
   @endcan
 
   @php
