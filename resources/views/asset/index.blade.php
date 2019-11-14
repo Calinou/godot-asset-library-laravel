@@ -66,7 +66,6 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
         {{-- Preserve the form value across reloads --}}
         'value' => Request::get('sort'),
         'label' => __('Sort by'),
-        'placeholder' => __('.'),
         'required' => false,
         'choices' => [
           'updated' => 'Updated',

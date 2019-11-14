@@ -16,9 +16,12 @@ if (!isset($name)) {
       name="{{ $name }}"
       class="block appearance-none w-full bg-white shadow border rounded px-3 py-2 pr-8 leading-tight text-sm hover:border-gray-500 focus:outline-none focus:shadow-outline"
     >
+      @if (isset($placeholder))
       <option disabled>
         {{ $placeholder }}
       </option>
+      @endif
+
       @foreach ($choices as $key => $label)
       <option value="{{ $key }}" @if ($key === ($value ?? old('name'))) selected @endif>
         {{ $label }}
