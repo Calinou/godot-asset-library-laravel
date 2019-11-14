@@ -63,7 +63,8 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
     <form method="GET" action="{{ route('asset.index') }}" id="sort-form" class="md:absolute md:right-0 md:-mt-10">
       @component('components/form-select', [
         'name' => 'sort',
-        'value' => old('sort'),
+        {{-- Preserve the form value across reloads --}}
+        'value' => Request::get('sort'),
         'label' => __('Sort by'),
         'placeholder' => __('.'),
         'required' => false,
