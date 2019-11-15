@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable()->comment('The OAuth2 provider name (if any)');
             $table->string('provider_id')->nullable()->comment('The OAuth2 provider unique identifier (may be used if the provider supports other means of logging in than an email)');
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_blocked')->default(false)->comment("If `true`, the user can't post/edit anything but their existing content is still visible");
             $table->rememberToken();
             $table->timestamps();
         });

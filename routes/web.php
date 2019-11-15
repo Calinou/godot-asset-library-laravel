@@ -16,8 +16,8 @@ declare(strict_types=1);
 Route::get('/', 'AssetController@index')->name('asset.index');
 // Redirect for compatibility with the old asset library homepage URL
 Route::permanentRedirect('/asset', '/');
-Route::get('/asset/submit', 'AssetController@create')->name('asset.create')->middleware('verified');
-Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware('verified');
+Route::get('/asset/submit', 'AssetController@create')->name('asset.create')->middleware('can:submit-asset');
+Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware('can:submit-asset');
 
 Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
 Route::get('/asset/{asset}/edit', 'AssetController@edit')->name('asset.edit')->middleware('can:edit-asset,asset');
@@ -26,6 +26,8 @@ Route::post('/asset/{asset}/reviews', 'AssetController@storeReview')->name('asse
 Route::post('/asset/reviews/{asset_review}', 'AssetController@storeReviewReply')->name('asset.reviews.replies.store')->middleware('can:submit-review-reply,asset_review');
 
 Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('can:admin');
+Route::post('/admin/users/{user}/block', 'AdminController@block')->name('admin.block')->middleware('can:admin');
+Route::post('/admin/users/{user}/unblock', 'AdminController@unblock')->name('admin.unblock')->middleware('can:admin');
 
 // Register authentication-related routes (including email verification routes)
 Auth::routes(['verify' => true]);

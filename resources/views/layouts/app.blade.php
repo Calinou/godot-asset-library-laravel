@@ -104,9 +104,11 @@ EOF);
 
         <div class="w-full lg:flex lg:items-center lg:w-auto">
           @if (Auth::check())
+          @can('submit-asset')
           <a href="{{ route('asset.create') }}" class="navbar-link">
             {{ __('Submit asset') }}
           </a>
+          @endcan
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button class="navbar-link" type="submit" data-loading>

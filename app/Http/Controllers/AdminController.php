@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -16,5 +17,39 @@ class AdminController extends Controller
         $users = User::all();
 
         return view('admin.index', ['users' => $users]);
+    }
+
+    /**
+     * Block an user. Once the user is blocked, they can't participate anymore.
+     */
+    public function block(User $user, Request $request)
+    {
+        $user->is_blocked = true;
+        $user->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The user “:user” has been blocked!', ['user' => $user->name])
+        );
+
+        return redirect(route('admin.index'));
+    }
+
+    /**
+     * Unblock an user. The user may now participate again.
+     */
+    public function unblock(User $user, Request $request)
+    {
+        $user->is_blocked = false;
+        $user->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The user “:user” has been unblocked!', ['user' => $user->name])
+        );
+
+        return redirect(route('admin.index'));
     }
 }

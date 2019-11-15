@@ -34,14 +34,18 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
+        Gate::define('submit-asset', function (User $user) {
+            return ! $user->is_blocked;
+        });
+
         Gate::define('edit-asset', function (User $user, Asset $asset) {
-            return $user->is_admin || $user->id === $asset->author_id;
+            return ! $user->is_blocked && ($user->is_admin || $user->id === $asset->author_id);
         });
 
         // To submit a review, an user must have a verified email.
         // Also, they can't review their own assets and can post only one review per asset.
         Gate::define('submit-review', function (User $user, Asset $asset) {
-            if (! $user->hasVerifiedEmail() || $asset->author_id === $user->id) {
+            if ($user->is_blocked || ! $user->hasVerifiedEmail() || $asset->author_id === $user->id) {
                 return false;
             }
 
@@ -58,6 +62,7 @@ class AuthServiceProvider extends ServiceProvider
         // Also, they mustn't have already replied to the review.
         Gate::define('submit-review-reply', function (User $user, AssetReview $assetReview) {
             return
+                ! $user->is_blocked &&
                 $user->hasVerifiedEmail() &&
                 $assetReview->asset->author_id === $user->id &&
                 $assetReview->reply === null;
