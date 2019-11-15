@@ -138,6 +138,22 @@ function initAssetSortSelect(): void {
   }
 }
 
+/**
+ * Make flash messages dismissable by clicking a button.
+ */
+function initFlashClose(): void {
+  // eslint-disable-next-line
+  const flashCloseButtons = document.querySelectorAll('[data-flash-close]') as NodeListOf<HTMLButtonElement>;
+
+  flashCloseButtons.forEach(($button: HTMLButtonElement) => {
+    $button.addEventListener('click', () => {
+      if ($button.parentElement) {
+        $button.parentElement.remove();
+      }
+    });
+  });
+}
+
 // Call functions that need to be called on every page change here.
 // This is also called on the initial page load.
 const initAll = (): void => {
@@ -146,6 +162,7 @@ const initAll = (): void => {
   initLoadingButtons();
   initAddAssetVersionButton();
   initAssetSortSelect();
+  initFlashClose();
 };
 
 barba.hooks.leave(() => {

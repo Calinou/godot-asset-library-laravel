@@ -128,14 +128,18 @@ EOF);
   </header>
 
   <main data-barba="container">
-    {{-- Display flash message --}}
     @if (session('status'))
-    <div class="container">
+    {{-- Display a dismissable flash message --}}
+    <div class="container relative">
       @component('components/alert', [
         'type' => session('statusType', 'info'),
       ])
       {{ session('status') }}
       @endcomponent
+
+      <button type="button" data-flash-close class="absolute top-0 right-0 px-4 py-3 mr-3">
+        <span class="fa fa-close fa-fw opacity-50"></span>
+      </button>
     </div>
     @endif
 
