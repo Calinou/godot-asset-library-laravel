@@ -10,7 +10,7 @@
 
   <div class="lg:flex lg:-mx-6">
     <div class="lg:w-1/2 lg:px-6">
-      <div class="flex">
+      <div class="flex mb-5">
         <div class="flex-shrink-0 self-center">
           <img class="object-cover w-26 h-26 bg-gray-400 rounded" src="{{ $asset->icon_url }}">
         </div>
@@ -40,7 +40,7 @@
       </div>
       @endif
 
-      <div class="mb-8">
+      <div class="mt-10 mb-8">
         @can('edit-asset', $asset)
         <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
           <span class="fa fa-pencil mr-1"></span>
