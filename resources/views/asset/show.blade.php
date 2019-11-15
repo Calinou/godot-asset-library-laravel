@@ -211,6 +211,7 @@
   @forelse ($reviews as $review)
   <article class="py-6 border-b border-gray-400">
     <div class="text-gray-600 mb-6">
+
       @if ($review->is_positive)
       <span class="font-bold text-blue-500">
         <span class="fa fa-chevron-circle-up fa-fw opacity-75"></span>
@@ -221,9 +222,12 @@
         <span class="fa fa-chevron-circle-down fa-fw opacity-75"></span>
         {{ __('Not recommended') }}</span>
       @endif
-      —
-      {{ __(':author commented', ['author' => $review->author->name]) }}
-      @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
+
+      <span class="hidden md:inline">—</span>
+      <div class="ml-6 md:ml-0 md:inline">
+        {{ __(':author commented', ['author' => $review->author->name]) }}
+        @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
+      </div>
     </div>
     <div class="content">
       {!! $review->html_comment !!}
