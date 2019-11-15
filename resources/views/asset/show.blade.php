@@ -190,25 +190,38 @@
   </a>
   @endcan
 
-  @php
-  $reviews = $asset->reviews()->whereNotNull('comment')->get();
-  @endphp
-
   <hr class="my-6">
   <h2 class="text-xl font-medium mb-2">
     {{ trans_choice(
       '{0} No reviews|{1} :count review|[2,*] :count reviews',
-      count($reviews)
+      $asset->reviews->count()
     ) }}
     <span class="ml-3 pl-5 border-l border-gray-400 {{ $asset->score_color }}">
       <span class="fa mr-1 opacity-50 @if ($asset->score >= 0) fa-thumbs-up @else fa-thumbs-down @endif"></span>
       {{ $asset->score }}
     </span>
+
+    @php
+    $positiveReviewsCount = $asset->reviews->filter(function ($review) {
+      return $review->is_positive;
+    })->count();
+    @endphp
+
+    <span class="ml-16 text-sm text-blue-500">
+      <span class="fa fa-chevron-circle-up fa-fw opacity-75"></span>
+      {{ $positiveReviewsCount }}
+    </span>
+    <span class="ml-4 text-sm text-red-700">
+      <span class="fa fa-chevron-circle-down fa-fw opacity-75"></span>
+      {{-- Infer the number of negative reviews based on the total number of reviews --}}
+      {{ $asset->reviews->count() - $positiveReviewsCount }}
+    </span>
   </h2>
 
 
 
-  @forelse ($reviews as $review)
+  @forelse ($asset->reviews as $review)
+  @if ($review->comment)
   <article class="py-6 border-b border-gray-400">
     <div class="text-gray-600 mb-6">
 
@@ -289,6 +302,7 @@
     @endcan
     @endif
   </article>
+  @endif
   @empty
   @can('submit-review', $asset)
   <div class="my-6 text-gray-600">
