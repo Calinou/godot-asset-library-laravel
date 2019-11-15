@@ -692,13 +692,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@barba/core@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@barba/core/-/core-2.6.0.tgz#f4a6754bbfbcdf9b199679825ff11f51780cec97"
-  integrity sha512-J+umrsK6tT1PevD32jg+N4j4CLvnXgxhHCfbJqlP/i+lTeS18wQUmvZwqU7QDr5hUBsfu8AKE/xwEqZthd7RzA==
+"@barba/core@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@barba/core/-/core-2.8.0.tgz#09b332b07f4b880554b83f0e07178b19d32b4254"
+  integrity sha512-n4xHXHqQwqgcGNPy/yVo8BDR4PSvOIgb0ZJ4UyYpdP0srcsDvja4Lrkzhb6sUCRHeHC5Y5lcdlvN33WCiOKRxw==
   dependencies:
+    is-promise "^2.1.0"
     path-to-regexp "^3.0.0"
-    run-async "^2.3.0"
 
 "@emotion/is-prop-valid@^0.8.1":
   version "0.8.3"
@@ -7647,7 +7647,7 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-run-async@^2.2.0, run-async@^2.3.0:
+run-async@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"
   integrity sha1-A3GrSuC91yDUFm19/aZP96RFpsA=

@@ -165,17 +165,19 @@ const initAll = (): void => {
   initFlashClose();
 };
 
-barba.hooks.leave(() => {
-  // Make it clear the browser is waiting for another page to load
-  document.body.classList.add('opacity-50');
-});
-
-barba.hooks.after(() => {
-  document.body.classList.remove('opacity-50');
-  initAll();
-});
-
 window.addEventListener('DOMContentLoaded', () => {
-  barba.init();
+  barba.init({
+    transitions: [{
+      leave(): void {
+        // Make it clear the browser is waiting for another page to load
+        document.body.classList.add('opacity-50');
+      },
+      after(): void {
+        document.body.classList.remove('opacity-50');
+        initAll();
+      },
+    }],
+  });
+
   initAll();
 });

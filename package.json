@@ -12,7 +12,7 @@
     "watch-poll": "yarn run dev --watch --watch-poll"
   },
   "dependencies": {
-    "@barba/core": "^2.6.0",
+    "@barba/core": "^2.8.0",
     "balloon-css": "^1.0.3",
     "cross-env": "^6.0.3",
     "fork-awesome": "^1.1.7",
