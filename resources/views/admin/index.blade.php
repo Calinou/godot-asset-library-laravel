@@ -18,8 +18,16 @@
         </tr>
       <tbody>
         @foreach ($users as $user)
-        <tr class="{{ $user->is_blocked ? 'bg-red-100' : 'bg-white' }}">
-
+        @php
+        if ($user->id === Auth::user()->id) {
+          $rowClasses = 'bg-blue-100 text-blue-800';
+        } elseif ($user->is_blocked) {
+          $rowClasses = 'bg-red-100 text-red-800';
+        } else {
+          $rowClasses = 'bg-white';
+        }
+        @endphp
+        <tr class="{{ $rowClasses }}">
           <td class="border px-3 py-1 text-right">
             <div
               @if ($user->is_admin)
