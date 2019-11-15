@@ -132,7 +132,7 @@ EOF);
     @if (session('status'))
     <div class="container">
       @component('components/alert', [
-        'type' => 'info',
+        'type' => session('statusType', 'info'),
       ])
       {{ session('status') }}
       @endcomponent

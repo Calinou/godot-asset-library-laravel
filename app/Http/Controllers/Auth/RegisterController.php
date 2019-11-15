@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -60,7 +59,8 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        Session::flash(
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
             'status',
             __('Account created successfully! Please verify your email address to enable the account.')
         );

@@ -87,6 +87,12 @@ class AssetController extends Controller
         // Save the asset with its submodels
         $asset->save();
 
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('Your asset “:asset” has been submitted!', ['asset' => $asset->title])
+        );
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -150,6 +156,12 @@ class AssetController extends Controller
         $review->author_id = Auth::user()->id ?? null;
         $review->save();
 
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('Your review for “:asset” has been posted!', ['asset' => $asset->title])
+        );
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -162,6 +174,12 @@ class AssetController extends Controller
         $reviewReply->fill($request->all());
         $reviewReply->asset_review_id = $assetReview->id;
         $reviewReply->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __("Your reply to :author's review has been posted!", ['author' => $assetReview->author->name])
+        );
 
         return redirect(route('asset.show', $assetReview->asset));
     }
