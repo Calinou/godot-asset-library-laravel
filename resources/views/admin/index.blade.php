@@ -20,7 +20,21 @@
         @foreach ($users as $user)
         <tr class="{{ $user->is_blocked ? 'bg-red-100' : 'bg-white' }}">
 
-          <td class="border px-3 py-1 text-right">{{ $user->name }}</td>
+          <td class="border px-3 py-1 text-right">
+            <div
+              @if ($user->is_admin)
+              aria-label="{{ __('Administrator') }}"
+              data-balloon-pos="up"
+              data-balloon-blunt
+              class="py-1"
+              @endif
+            >
+              @if ($user->is_admin)
+              <span class="fa fa-shield fa-fw mr-1 text-yellow-600"></span>
+              @endif
+              {{ $user->name }}
+            </div>
+          </td>
 
           <td class="border px-3 py-1">
             <a class="link" href="mailto:{{ $user->email }}">
@@ -29,10 +43,11 @@
           </td>
 
           <td class="border px-3 py-1">
+            @can('block-user', $user)
             @if ($user->is_blocked)
             <form method="POST" action="{{ route('admin.unblock', ['user' => $user]) }}">
               @csrf
-              <button type="submit" class="button">
+              <button type="submit" class="button button-sm">
                 <span class="fa fa-circle-o fa-fw mr-1 opacity-75"></span>
                 {{ __('Unblock') }}
               </button>
@@ -40,12 +55,13 @@
             @else
             <form method="POST" action="{{ route('admin.block', ['user' => $user]) }}">
               @csrf
-              <button type="submit" class="button text-red-700">
+              <button type="submit" class="button button-sm text-red-700">
                 <span class="fa fa-ban fa-fw mr-1 opacity-75"></span>
                 {{ __('Block') }}
               </button>
             </form>
             @endif
+            @endcan
           </td>
 
         </tr>

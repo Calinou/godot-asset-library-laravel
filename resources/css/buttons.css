@@ -10,6 +10,11 @@
   }
 }
 
+/* A compact button for use in lists where space is precious. */
+.button-sm {
+  @apply px-3 py-1 !important;
+}
+
 .button-primary {
   @apply bg-blue-500 text-white;
 

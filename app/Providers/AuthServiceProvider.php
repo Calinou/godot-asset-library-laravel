@@ -67,5 +67,11 @@ class AuthServiceProvider extends ServiceProvider
                 $assetReview->asset->author_id === $user->id &&
                 $assetReview->reply === null;
         });
+
+        // To (un)block an user, the user must be an administrator and must not be
+        // carrying out the action against another administrator.
+        Gate::define('block-user', function (User $user, User $targetUser) {
+            return $user->is_admin && ! $targetUser->is_admin;
+        });
     }
 }
