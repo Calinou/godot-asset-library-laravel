@@ -31,8 +31,8 @@ Route::post('/asset/{asset}/reviews', 'AssetController@storeReview')->name('asse
 Route::post('/asset/reviews/{asset_review}', 'AssetController@storeReviewReply')->name('asset.reviews.replies.store')->middleware('can:submit-review-reply,asset_review');
 
 Route::get('/admin', 'AdminController@index')->name('admin.index')->middleware('can:admin');
-Route::post('/admin/users/{user}/block', 'AdminController@block')->name('admin.block')->middleware('can:admin');
-Route::post('/admin/users/{user}/unblock', 'AdminController@unblock')->name('admin.unblock')->middleware('can:admin');
+Route::put('/admin/users/{user}/block', 'AdminController@block')->name('admin.block')->middleware('can:admin');
+Route::put('/admin/users/{user}/unblock', 'AdminController@unblock')->name('admin.unblock')->middleware('can:admin');
 
 // Register authentication-related routes (including email verification routes)
 Auth::routes(['verify' => true]);

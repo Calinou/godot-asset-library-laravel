@@ -55,6 +55,7 @@
             @if ($user->is_blocked)
             <form method="POST" action="{{ route('admin.unblock', ['user' => $user]) }}">
               @csrf
+              @method('PUT')
               <button type="submit" class="button button-sm">
                 <span class="fa fa-circle-o fa-fw mr-1 opacity-75"></span>
                 {{ __('Unblock') }}
@@ -63,6 +64,7 @@
             @else
             <form method="POST" action="{{ route('admin.block', ['user' => $user]) }}">
               @csrf
+              @method('PUT')
               <button type="submit" class="button button-sm text-red-700">
                 <span class="fa fa-ban fa-fw mr-1 opacity-75"></span>
                 {{ __('Block') }}

@@ -61,6 +61,7 @@
           <span class="fa fa-pencil mr-1"></span>
           {{ __('Edit') }}
         </a>
+
         <form
           method="POST"
           action="{{ route($asset->is_archived ? 'asset.unarchive' : 'asset.archive', ['asset' => $asset]) }}"
@@ -68,12 +69,12 @@
         >
           @csrf
           @method('PUT')
-
           <button type="submit" class="button button-secondary text-sm mr-2 mb-2">
             <span class="fa {{ $asset->is_archived ? 'fa-unlock' : 'fa-lock' }} mr-1 opacity-75"></span>
             {{ $asset->is_archived ? __('Unarchive') : __('Archive') }}
           </button>
         </form>
+
         @can('admin')
         <form
           method="POST"
@@ -82,13 +83,13 @@
         >
           @csrf
           @method('PUT')
-
           <button type="submit" class="button button-secondary text-sm mb-2">
             <span class="fa {{ $asset->is_published ? 'fa-eye-slash' : 'fa-eye' }} mr-1 opacity-75"></span>
             {{ $asset->is_published ? __('Unpublish') : __('Publish') }}
           </button>
         </form>
         @endcan
+
       </div>
       @endcan
 
