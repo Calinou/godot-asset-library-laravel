@@ -172,6 +172,8 @@ class Asset extends Model
     protected $casts = [
         'category_id' => 'integer',
         'support_level_id' => 'integer',
+        'is_published' => 'boolean',
+        'is_archived' => 'boolean',
     ];
 
     /**

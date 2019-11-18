@@ -44,8 +44,14 @@ class AuthServiceProvider extends ServiceProvider
 
         // To submit a review, an user must have a verified email.
         // Also, they can't review their own assets and can post only one review per asset.
+        // Archived assets also can't receive any further reviews.
         Gate::define('submit-review', function (User $user, Asset $asset) {
-            if ($user->is_blocked || ! $user->hasVerifiedEmail() || $asset->author_id === $user->id) {
+            if (
+                $user->is_blocked ||
+                ! $user->hasVerifiedEmail() ||
+                $asset->author_id === $user->id ||
+                $asset->is_archived
+            ) {
                 return false;
             }
 

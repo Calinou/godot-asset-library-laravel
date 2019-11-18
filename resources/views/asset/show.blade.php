@@ -41,12 +41,6 @@
       @endif
 
       <div class="mt-10 mb-8">
-        @can('edit-asset', $asset)
-        <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
-          <span class="fa fa-pencil mr-1"></span>
-          {{ __('Edit') }}
-        </a>
-        @endcan
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success mr-2 mb-2">
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}
@@ -60,6 +54,41 @@
           {{ __('Submit an issue') }}
         </a>
       </div>
+
+      @can('edit-asset', $asset)
+      <div class="mt-10 mb-8">
+        <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
+          <span class="fa fa-pencil mr-1"></span>
+          {{ __('Edit') }}
+        </a>
+        <form
+          method="POST"
+          action="{{ route($asset->is_archived ? 'asset.unarchive' : 'asset.archive', ['asset' => $asset]) }}"
+          class="inline-block"
+        >
+          @csrf
+          @method('PUT')
+
+          <button type="submit" class="button button-secondary mr-2 mb-2">
+            {{ $asset->is_archived ? __('Unarchive') : __('Archive') }}
+          </button>
+        </form>
+        @can('admin')
+        <form
+          method="POST"
+          action="{{ route($asset->is_published ? 'asset.unpublish' : 'asset.publish', ['asset' => $asset]) }}"
+          class="inline-block"
+        >
+          @csrf
+          @method('PUT')
+
+          <button type="submit" class="button button-secondary mr-2 mb-2">
+            {{ $asset->is_published ? __('Unpublish') : __('Publish') }}
+          </button>
+        </form>
+        @endcan
+      </div>
+      @endcan
 
       @if ($asset->blurb)
       <h2 class="text-lg font-medium mb-8">

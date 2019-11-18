@@ -48,6 +48,10 @@ class CreateAssetsTable extends Migration
                 ->boolean('is_published')
                 ->default(true)
                 ->comment('If `false`, the asset will be hidden from the list and search results. It also will be only visible by its author');
+            $table
+                ->boolean('is_archived')
+                ->default(false)
+                ->comment("If `true`, the asset will be marked as archived. This can be added voluntarily by the author to indicate the asset won't receive further updates");
             $table->integer('score')->default(0)->comment('Calculated from reviews (+1 for positive, -1 for negative)');
 
             $table->unsignedBigInteger('author_id');

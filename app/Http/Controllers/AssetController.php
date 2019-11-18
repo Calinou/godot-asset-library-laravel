@@ -154,6 +154,62 @@ class AssetController extends Controller
         return redirect(route('asset.show', $asset));
     }
 
+    public function publish(Asset $asset, Request $request)
+    {
+        $asset->is_published = true;
+        $asset->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The asset is now public again.')
+        );
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    public function unpublish(Asset $asset, Request $request)
+    {
+        $asset->is_published = false;
+        $asset->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The asset is no longer public.')
+        );
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    public function archive(Asset $asset, Request $request)
+    {
+        $asset->is_archived = true;
+        $asset->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The asset is now marked as archived. Users can no longer leave reviews, but it can still be downloaded.')
+        );
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    public function unarchive(Asset $asset, Request $request)
+    {
+        $asset->is_archived = false;
+        $asset->save();
+
+        $request->session()->flash('statusType', 'success');
+        $request->session()->flash(
+            'status',
+            __('The asset is no longer marked as archived. Welcome back!')
+        );
+
+        return redirect(route('asset.show', $asset));
+    }
+
     /**
      * Insert a newly created review into the database.
      */
