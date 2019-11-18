@@ -45,18 +45,18 @@
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}
         </a>
-        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary mr-2 mb-2">
+        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary text-sm mr-2 mb-2">
           <span class="fa fa-code mr-1"></span>
           {{ __('Source code') }}
         </a>
-        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary mb-2">
+        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary text-sm mb-2">
           <span class="fa fa-exclamation-circle mr-1 opacity-75"></span>
           {{ __('Submit an issue') }}
         </a>
       </div>
 
       @can('edit-asset', $asset)
-      <div class="mt-10 mb-8">
+      <div class="mb-8">
         <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
           <span class="fa fa-pencil mr-1"></span>
           {{ __('Edit') }}
@@ -69,7 +69,8 @@
           @csrf
           @method('PUT')
 
-          <button type="submit" class="button button-secondary mr-2 mb-2">
+          <button type="submit" class="button button-secondary text-sm mr-2 mb-2">
+            <span class="fa {{ $asset->is_archived ? 'fa-unlock' : 'fa-lock' }} mr-1 opacity-75"></span>
             {{ $asset->is_archived ? __('Unarchive') : __('Archive') }}
           </button>
         </form>
@@ -82,7 +83,8 @@
           @csrf
           @method('PUT')
 
-          <button type="submit" class="button button-secondary mr-2 mb-2">
+          <button type="submit" class="button button-secondary text-sm mb-2">
+            <span class="fa {{ $asset->is_published ? 'fa-eye-slash' : 'fa-eye' }} mr-1 opacity-75"></span>
             {{ $asset->is_published ? __('Unpublish') : __('Publish') }}
           </button>
         </form>
