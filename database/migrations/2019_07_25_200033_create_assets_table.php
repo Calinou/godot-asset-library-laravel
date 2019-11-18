@@ -44,6 +44,10 @@ class CreateAssetsTable extends Migration
             $table->text('icon_url')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('modify_date');
+            $table
+                ->boolean('is_published')
+                ->default(true)
+                ->comment('If `false`, the asset will be hidden from the list and search results. It also will be only visible by its author');
             $table->integer('score')->default(0)->comment('Calculated from reviews (+1 for positive, -1 for negative)');
 
             $table->unsignedBigInteger('author_id');

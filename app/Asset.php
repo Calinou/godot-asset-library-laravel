@@ -146,6 +146,7 @@ class Asset extends Model
         'created_at',
          // The Godot editor can't render HTML, no need to send it
         'html_description',
+        'is_published',
     ];
 
     /**
@@ -529,8 +530,12 @@ class Asset extends Model
      *
      * @see App\Http\Requests\ListAssets
      */
-    public function scopeFilterSearch($query, array $validated): Collection
+    public function scopeFilterSearch($query, array $validated, bool $publishedOnly = true): Collection
     {
+        if ($publishedOnly) {
+            $query->where('is_published', true);
+        }
+
         if (isset($validated['category'])) {
             $query->where('category_id', $validated['category']);
         }

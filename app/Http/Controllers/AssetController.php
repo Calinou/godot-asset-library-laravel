@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Asset;
 use App\AssetReview;
 use App\AssetReviewReply;
+use Illuminate\Http\Request;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
 use App\Http\Requests\SubmitReview;
@@ -39,8 +40,16 @@ class AssetController extends Controller
     /**
      * Display a single asset.
      */
-    public function show(Asset $asset)
+    public function show(Asset $asset, Request $request)
     {
+        if (! $asset->is_published) {
+            $request->session()->flash('statusType', 'warning');
+            $request->session()->flash(
+                'status',
+                __("This asset won't be visible by other users until it's made public by an administrator.")
+            );
+        }
+
         return view('asset.show', ['asset' => $asset]);
     }
 
