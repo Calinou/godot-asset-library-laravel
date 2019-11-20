@@ -17,7 +17,10 @@
         <div class="ml-6">
           <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
           <h2 class="text-lg text-gray-600 mb-2">
-            {{ __('by :author', ['author' => $asset->author->name]) }}
+            {{ __('by') }}
+            <a href="{{ route('user.show', $asset->author) }}" class="link">
+              {{ $asset->author->name }}
+            </a>
           </h2>
           <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
             <span class="tag tag-link font-bold text-sm">
@@ -270,7 +273,8 @@
 
       <span class="hidden md:inline">—</span>
       <div class="ml-6 md:ml-0 md:inline">
-        {{ __(':author commented', ['author' => $review->author->name]) }}
+        <a href="{{ route('user.show', $review->author) }}" class="link">{{ $review->author->name }}</a>
+        {{ __('commented') }}
         @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
       </div>
     </div>
