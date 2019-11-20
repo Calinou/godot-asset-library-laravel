@@ -31,6 +31,7 @@
           'placeholder' => __('user@example.com'),
           'required' => true,
         ])
+        {{ __('Will not be displayed publicly.') }}
         @endcomponent
 
         @component('components/form-input', [
