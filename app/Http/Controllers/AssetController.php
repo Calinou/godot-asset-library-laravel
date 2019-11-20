@@ -66,7 +66,7 @@ class AssetController extends Controller
      */
     public function store(SubmitAsset $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
 
         // Remove submodel information from the input array as we don't want it here
         $assetInput = $input;
@@ -121,7 +121,7 @@ class AssetController extends Controller
      */
     public function update(Asset $asset, SubmitAsset $request)
     {
-        $input = $request->all();
+        $input = $request->validated();
 
         // Remove submodel information from the input array as we don't want it here
         $assetInput = $input;
@@ -216,7 +216,7 @@ class AssetController extends Controller
     public function storeReview(Asset $asset, SubmitReview $request)
     {
         $review = new AssetReview();
-        $review->fill($request->all());
+        $review->fill($request->validated());
         $review->asset_id = $asset->asset_id;
         $review->author_id = Auth::user()->id ?? null;
         $review->save();
@@ -236,7 +236,7 @@ class AssetController extends Controller
     public function storeReviewReply(AssetReview $assetReview, SubmitReviewReply $request)
     {
         $reviewReply = new AssetReviewReply();
-        $reviewReply->fill($request->all());
+        $reviewReply->fill($request->validated());
         $reviewReply->asset_review_id = $assetReview->id;
         $reviewReply->save();
 
