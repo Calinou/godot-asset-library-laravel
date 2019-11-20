@@ -109,12 +109,24 @@ EOF);
             {{ __('Submit asset') }}
           </a>
           @endcan
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button class="navbar-link" type="submit" data-loading>
-              {{ __('Log out') }} ({{ Auth::user()->name }})
-            </button>
-          </form>
+          <div class="navbar-dropdown">
+            <a href="{{ route('asset.index') }}" class="button">
+              {{ Auth::user()->name }} <span class="fa fa-angle-down ml-1"></span>
+            </a>
+            <div class="navbar-dropdown-content">
+              <a href="{{ route('profile.edit') }}" class="block button rounded-none px-6">
+                <span class="fa fa-cogs fa-fw mr-1 -ml-2 opacity-75"></span>
+                {{ __('Settings') }}
+                </a>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="block button rounded-none px-6" type="submit" data-loading>
+                  <span class="fa fa-sign-out fa-fw mr-1 -ml-2 opacity-75"></span>
+                  {{ __('Log out') }}
+                </button>
+              </form>
+            </div>
+          </div>
           @else
           <a href="{{ route('register') }}" class="navbar-link">
             {{ __('Sign up') }}

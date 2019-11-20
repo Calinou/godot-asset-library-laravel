@@ -7,6 +7,7 @@ if (!isset($name)) {
 $type = $type ?? 'text';
 $required = $required ?? false;
 $requiredImplicit = $requiredImplicit ?? false;
+$disabled = $disabled ?? false;
 $placeholder = $placeholder ?? '';
 $minlength = $minlength ?? 0;
 $maxlength = $maxlength ?? 10000;
@@ -46,6 +47,7 @@ if ($type === 'password') {
   @endphp
   <{{ $tag }}
     @if ($required) required @endif
+    @if ($disabled) disabled @endif
     @if ($autofocus) autofocus @endif
     id="{{ $name }}"
     type="{{ $type }}"
