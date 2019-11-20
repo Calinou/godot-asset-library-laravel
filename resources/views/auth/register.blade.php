@@ -16,7 +16,7 @@
         @component('components/form-input', [
           'name' => 'name',
           'label' => __('Name'),
-          'placeholder' => __('Nickname or full name'),
+          'placeholder' => __('Username or full name'),
           'required' => true,
           'maxlength' => $userClass::NAME_MAX_LENGTH,
           'autofocus' => true,
