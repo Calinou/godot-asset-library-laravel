@@ -52,6 +52,7 @@
           <div class="relative">
             @php
             $searchTooltip = __(<<<EOF
+Press / to focus this field.
 This will search in the asset's title, blurb and tags.
 This field supports search string syntax. Examples:
 
@@ -68,6 +69,7 @@ EOF);
               data-balloon-break
             >
               <input
+                id="asset-search"
                 name="filter"
                 placeholder="{{ __('Search for assets') }}"
                 value="{{ Request::get('filter') }}"

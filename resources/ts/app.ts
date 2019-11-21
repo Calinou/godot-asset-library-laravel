@@ -1,6 +1,25 @@
 import barba from '@barba/core';
 
 /**
+ * Initialize the `/` keyboard shortcut for the asset search field.
+ */
+function initAssetSearch(): void {
+  const $assetSearch = document.getElementById('asset-search') as HTMLInputElement;
+
+  document.addEventListener('keydown', (event) => {
+    if (event.keyCode === 58) {
+      // Don't type a slash at the beginning of the field
+      event.preventDefault();
+
+      $assetSearch.focus();
+
+      // Select all the text in the field. This must be done after focusing the field.
+      $assetSearch.setSelectionRange(0, -1);
+    }
+  });
+}
+
+/**
  * Initialize interactivity for gallery images.
  */
 function initGalleryImages(): void {
@@ -178,6 +197,10 @@ window.addEventListener('DOMContentLoaded', () => {
       },
     }],
   });
+
+  // Since the search field is part of the navigation bar,
+  // it only needs to be registered on the initial page load
+  initAssetSearch();
 
   initAll();
 });
