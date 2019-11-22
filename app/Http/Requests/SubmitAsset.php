@@ -94,6 +94,7 @@ class SubmitAsset extends FormRequest
                 'ends_with:.png,.PNG,jpg,JPG,jpeg,JPEG',
                 new SuccessRespondingUrl(),
             ],
+            'previews.*.caption' => 'nullable|string|max:60',
         ];
     }
 
