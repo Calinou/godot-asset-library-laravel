@@ -120,29 +120,29 @@ function initLoadingButtons(): void {
 }
 
 /**
- * Initialize interactivity for the "Add new version" button on the asset editing form.
+ * Initialize interactivity for the "Add new <field>" button on the asset editing form.
  */
-function initAddAssetVersionButton(): void {
-  const $addVersionButton = document.getElementById('asset-add-version') as HTMLButtonElement;
-  const $assetVersionPrototype = document.getElementById('asset-version-prototype') as HTMLTemplateElement;
-  const $assetVersionList = document.getElementById('asset-version-list') as HTMLDivElement;
+function initAddAssetFieldButton(field: string): void {
+  const $addFieldButton = document.getElementById(`asset-add-${field}`) as HTMLButtonElement;
+  const $assetFieldPrototype = document.getElementById(`asset-${field}-prototype`) as HTMLTemplateElement;
+  const $assetFieldList = document.getElementById(`asset-${field}-list`) as HTMLDivElement;
 
-  if ($addVersionButton) {
-    $addVersionButton.addEventListener('click', () => {
-      // Add a new version at the end
-      $assetVersionList.appendChild($assetVersionPrototype.content.cloneNode(true));
+  if ($addFieldButton) {
+    $addFieldButton.addEventListener('click', () => {
+      // Add a new field at the end
+      $assetFieldList.appendChild($assetFieldPrototype.content.cloneNode(true));
 
       // Replace the index in the newly created copy
-      const $newVersion = $assetVersionList.lastElementChild;
-      if ($newVersion) {
-        $newVersion.innerHTML = $newVersion.innerHTML.replace(
-          /__index__/g, $assetVersionPrototype.dataset.index ?? '0',
+      const $newField = $assetFieldList.lastElementChild;
+      if ($newField) {
+        $newField.innerHTML = $newField.innerHTML.replace(
+          /__index__/g, $assetFieldPrototype.dataset.index ?? '0',
         );
       }
 
       // Increment the counter (HTML data attributes are always strings)
-      $assetVersionPrototype.dataset.index = (
-        Number($assetVersionPrototype.dataset.index) + 1
+      $assetFieldPrototype.dataset.index = (
+        Number($assetFieldPrototype.dataset.index) + 1
       ).toString();
     });
   }
@@ -184,7 +184,8 @@ const initAll = (): void => {
   initGalleryImages();
   initTextAreas();
   initLoadingButtons();
-  initAddAssetVersionButton();
+  initAddAssetFieldButton('version');
+  initAddAssetFieldButton('preview');
   initAssetSortSelect();
   initFlashClose();
 };

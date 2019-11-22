@@ -77,7 +77,7 @@ class SubmitAsset extends FormRequest
             ],
 
             // Asset previews are optional, though (even if recommended)
-            'previews' => 'nullable|array',
+            'previews' => 'nullable|array|max:4',
             'previews.*.type_id' => 'required|integer|gte:0|lt:'.AssetPreview::TYPE_MAX,
             'previews.*.link' => [
                 'required',

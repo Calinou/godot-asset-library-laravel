@@ -184,6 +184,7 @@
           'autocomplete' => 'off',
         ])
         {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
+        {{ __('Only PNG or JPEG images are allowed.') }}
         {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
         @endcomponent
 
@@ -195,6 +196,13 @@
           {{ __('For each version, if you leave the download URL field empty, it will be inferred from the repository URL and the asset version.') }}<br>
           {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
         </div>
+
+        @error('versions')
+        <div role="alert" class="form-error">
+          {{ $message }}
+        </div>
+        @enderror
+
         <button type="button" id="asset-add-version" class="link">
           <span class="fa fa-plus mr-1"></span>
           {{ __('Add a new version') }}
@@ -211,6 +219,38 @@
           @endforeach
         </div>
         @endif
+
+        <h2 class="text-center text-xl font-medium my-8">
+          {{ __('Manage previews') }}
+        </h2>
+        <div class="mt-2 text-sm text-gray-600 my-8">
+          {{ __('Previews are optional, but help people become more interested in your asset.') }}
+          {{ __('You can have up to 4 images or videos per asset.') }}
+        </div>
+
+        @error('previews')
+        <div role="alert" class="form-error">
+          {{ $message }}
+        </div>
+        @enderror
+
+        {{-- Contains the HTML that will be copied when creating a new preview --}}
+        <template id="asset-preview-prototype" data-index="{{ $editing ? count($asset->previews) : 0 }}">
+          @include('asset.preview-form', ['prototype' => true])
+        </template>
+
+        <div id="asset-preview-list">
+          @if ($editing)
+          @foreach ($asset->previews as $preview)
+          @include('asset.preview-form')
+          @endforeach
+          @endif
+        </div>
+
+        <button type="button" id="asset-add-preview" class="link">
+          <span class="fa fa-plus mr-1"></span>
+          {{ __('Add a new preview') }}
+        </button>
 
         <button class="button button-primary w-full mt-6" type="submit" data-loading>
           @if ($editing)
