@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 Route::get('/', 'AssetController@index')->name('asset.index');
 // Redirect for compatibility with the old asset library homepage URL
-Route::permanentRedirect('/asset', '/');
+Route::permanentRedirect('/asset', url('/'));
 Route::get('/asset/submit', 'AssetController@create')->name('asset.create')->middleware('can:submit-asset');
 Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware('can:submit-asset');
 
