@@ -19,7 +19,7 @@
 
     @component('components/form-select', [
       'name' => "versions[$index][godot_version]",
-      'value' => $prototype ? null : $asset->versions[$index]->godot_versiong,
+      'value' => $prototype ? null : $asset->versions[$index]->godot_version,
       'label' => __('Godot version'),
       'placeholder' => __('Select a Godot version'),
       'required' => true,
