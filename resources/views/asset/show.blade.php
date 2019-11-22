@@ -152,7 +152,7 @@
           <a href="{{ $preview->link }}" target="_blank" rel="nofollow noopener noreferrer">
             <div class="relative pb-9/16 bg-gray-400 rounded">
               <img
-                src="{{ $preview->thumbnail }}"
+                src="{{ $preview->thumbnail ?? $preview->link }}"
                 alt="{{ $preview->caption }}"
                 class="absolute h-full w-full object-cover rounded gallery-image-small @if ($loop->first) gallery-image-small-active @else gallery-image-small-inactive @endif"
                 data-full-size="{{ $preview->link }}"
