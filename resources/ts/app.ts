@@ -7,7 +7,12 @@ function initAssetSearch(): void {
   const $assetSearch = document.getElementById('asset-search') as HTMLInputElement;
 
   document.addEventListener('keydown', (event) => {
-    if (event.keyCode === 58) {
+    // Only focus on the search field if not already entering text in another input field
+    if (
+      document.activeElement?.tagName !== 'INPUT'
+      && document.activeElement?.tagName !== 'TEXTAREA'
+      && event.keyCode === 58
+    ) {
       // Don't type a slash at the beginning of the field
       event.preventDefault();
 
