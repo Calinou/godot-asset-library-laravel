@@ -296,7 +296,8 @@
     @else
     @can('submit-review-reply', $review)
     <details>
-      <summary class="inline-block ml-6 mt-3 px-2 py-1 link cursor-pointer">
+      <summary class="inline-block ml-3 mt-3 px-2 py-1 link cursor-pointer">
+        <span class="fa fa-reply fa-fw mr-1 opacity-75"></span>
         {{ __('Reply') }}
       </summary>
 
