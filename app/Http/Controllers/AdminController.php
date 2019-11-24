@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -33,6 +35,9 @@ class AdminController extends Controller
             __('The user “:user” has been blocked!', ['user' => $user->name])
         );
 
+        $admin = Auth::user();
+        Log::info("$admin blocked $user.");
+
         return redirect(route('admin.index'));
     }
 
@@ -49,6 +54,9 @@ class AdminController extends Controller
             'status',
             __('The user “:user” has been unblocked!', ['user' => $user->name])
         );
+
+        $admin = Auth::user();
+        Log::info("$admin unblocked $user.");
 
         return redirect(route('admin.index'));
     }

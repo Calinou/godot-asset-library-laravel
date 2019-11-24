@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
 use App\Http\Requests\SubmitReview;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SubmitReviewReply;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -102,6 +103,9 @@ class AssetController extends Controller
             __('Your asset “:asset” has been submitted!', ['asset' => $asset->title])
         );
 
+        $author = Auth::user();
+        Log::info("$author submitted the asset $asset.");
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -151,6 +155,9 @@ class AssetController extends Controller
 
         $asset->save();
 
+        $author = Auth::user();
+        Log::info("$author updated the asset $asset.");
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -164,6 +171,9 @@ class AssetController extends Controller
             'status',
             __('The asset is now public again.')
         );
+
+        $admin = Auth::user();
+        Log::info("$admin unpublished $asset.");
 
         return redirect(route('asset.show', $asset));
     }
@@ -179,6 +189,9 @@ class AssetController extends Controller
             __('The asset is no longer public.')
         );
 
+        $admin = Auth::user();
+        Log::info("$admin published $asset.");
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -193,6 +206,9 @@ class AssetController extends Controller
             __('The asset is now marked as archived. Users can no longer leave reviews, but it can still be downloaded.')
         );
 
+        $user = Auth::user();
+        Log::info("$user archived $asset.");
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -206,6 +222,9 @@ class AssetController extends Controller
             'status',
             __('The asset is no longer marked as archived. Welcome back!')
         );
+
+        $user = Auth::user();
+        Log::info("$user unarchived $asset.");
 
         return redirect(route('asset.show', $asset));
     }
@@ -227,6 +246,16 @@ class AssetController extends Controller
             __('Your review for “:asset” has been posted!', ['asset' => $asset->title])
         );
 
+        $user = Auth::user();
+        $rating = $review->is_positive ? 'positive' : 'negative';
+        $log = "$user submitted a $rating review for $asset";
+
+        if ($review->comment) {
+            $log .= ' with a comment';
+        }
+
+        Log::info("$log.");
+
         return redirect(route('asset.show', $asset));
     }
 
@@ -245,6 +274,9 @@ class AssetController extends Controller
             'status',
             __("Your reply to :author's review has been posted!", ['author' => $assetReview->author->name])
         );
+
+        $author = Auth::user();
+        Log::info("$author replied to $assetReview->author's review for $assetReview->asset.");
 
         return redirect(route('asset.show', $assetReview->asset));
     }

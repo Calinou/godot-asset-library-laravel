@@ -589,4 +589,12 @@ class Asset extends Model
 
         return $result;
     }
+
+    /**
+     * Converts the model to a string representation (used for logging purposes).
+     */
+    public function __toString(): string
+    {
+        return "\"$this->title\" (#$this->asset_id)";
+    }
 }

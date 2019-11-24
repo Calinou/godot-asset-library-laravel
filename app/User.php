@@ -69,4 +69,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Asset', 'author_id');
     }
+
+    /**
+     * Converts the model to a string representation (used for logging purposes).
+     */
+    public function __toString(): string
+    {
+        return "$this->name (#$this->id)";
+    }
 }
