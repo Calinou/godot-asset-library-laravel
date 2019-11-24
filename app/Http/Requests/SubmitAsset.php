@@ -32,7 +32,23 @@ class SubmitAsset extends FormRequest
             'title' => 'required|string|max:50',
             'blurb' => 'nullable|string|max:60',
             'description' => 'required|string|max:10000',
-            'tags' => 'nullable|string|max:10000',
+            'tags' => [
+                'nullable',
+                'string',
+                // Allow alphanumeric characters, numbers, whitespace and dashes in the tag list string.
+                // Uppercase characters will become lowercase when persisted to the database.
+                'regex:/^[A-Za-z0-9,\s-]+$/',
+                function ($attribute, $value, $fail) {
+                    $tags = explode(',', $value);
+
+                    if (count($tags) > Asset::MAX_TAGS) {
+                        $fail(
+                            __('An asset may have :maxTags tags at most, but you specified :numTags tags.',
+                                ['maxTags' => Asset::MAX_TAGS, 'numTags' => count($tags)])
+                        );
+                    }
+                },
+            ],
             'category_id' => 'required|integer|gte:0|lt:'.Asset::CATEGORY_MAX,
             'cost' => ['required', Rule::in(array_keys(Asset::LICENSES))],
             'browse_url' => [
@@ -118,6 +134,7 @@ class SubmitAsset extends FormRequest
     {
         return [
             'browse_url.regex' => __('The :attribute must point to a public GitHub, GitLab.com or Bitbucket repository.'),
+            'tags.regex' => __('Tags can only contain lowercase characters, numbers and dashes, and must be separated with commas (,).'),
         ];
     }
 }

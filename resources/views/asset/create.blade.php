@@ -74,7 +74,8 @@
           'placeholder' => 'platformer, 2d, pixel-art, gdnative',
           'autocomplete' => 'off',
         ])
-        {{ __('A comma-separated list of tags. Only lowercase characters, numbers and dashes are allowed in tag names.') }}
+        {{ __('A comma-separated list of tags (up to :maxTags). Only lowercase characters, numbers and dashes are allowed in tag names.',
+            ['maxTags' => $assetClass::MAX_TAGS]) }}
         @endcomponent
 
         <div class="sm:flex sm:justify-between">

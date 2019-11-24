@@ -27,6 +27,11 @@ class Asset extends Model
     public const ASSETS_PER_PAGE = 20;
 
     /**
+     * The maximum number of tags an asset may have.
+     */
+    public const MAX_TAGS = 15;
+
+    /**
      * The support level voluntarily set by users who are submitting assets
      * in "testing" version (can be unstable).
      * Will be distinguished on the Web interface.
@@ -332,7 +337,15 @@ class Asset extends Model
         if (is_array($tags)) {
             $this->attributes['tags'] = implode(',', $tags);
         } else {
-            $this->attributes['tags'] = strtolower(str_replace(' ', '', $tags ?? ''));
+            // Remove empty tags, spaces and replace uppercase characters with lowercase characters
+            $tagsSanitized = array_filter(
+                explode(',', strtolower(str_replace(' ', '', $tags ?? ''))),
+                function ($tag) {
+                    return strlen($tag) >= 1;
+                }
+            );
+
+            $this->attributes['tags'] = implode(',', $tagsSanitized);
         }
     }
 
