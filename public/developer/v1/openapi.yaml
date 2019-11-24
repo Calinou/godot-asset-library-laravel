@@ -97,6 +97,9 @@ components:
         author_id:
           type: integer
           description: The author's unique identifier.
+        blurb:
+          type: string
+          description: The asset's short description (up to 60 characters).
         category:
           type: string
           description: The category the asset belongs to.
@@ -105,41 +108,78 @@ components:
           description: The unique identifier of the category the asset belongs to.
         cost:
           type: string
-          description: |
+          description: >
             The asset's license as a [SPDX license identifier](https://spdx.org/licenses/).
             For compatibility reasons, this field is called `cost` instead of `license`.
         godot_version:
           type: string
-          description: The Godot version the asset is intended for (in `major.minor` format).
+          description: >
+            The Godot version the asset's latest version is intended for (in `major.minor` format).<br>
+            This field is present for compatibility reasons with the Godot editor.
+            See also the `versions` array.
         icon_url:
           type: string
           format: url
           description: The asset's icon URL (should always be a PNG image).
+        is_archived:
+          type: boolean
+          description: >
+            If `true`, the asset is marked as archived by its author.
+            When archived, it can't receive any further reviews but can still be
+            unarchived at any time by the author.
+        issues_url:
+          type: string
+          format: url
+          description: >
+            The asset's issue reporting URL (typically associated with
+            the Git repository specified in `browse_url`).
         modify_date:
           type: string
           format: date-time
-          description: |
+          description: >
             The date on which the asset entry was last updated.
             Note that entries can be edited independently of new asset versions being released.
         rating:
           type: integer
-          description: The asset's rating (unused). For compatibility reasons, a value of 0 is always returned.
-          default: 0
+          description: >
+            The asset's rating (unused). For compatibility reasons, a value of 0 is always returned.
+            You most likely want `score` instead.
+        score:
+          type: integer
+          description: >
+            The asset's score (based on reviews).<br>
+            A positive review increases the score by 1, whereas a negative review
+            decreases the score by 1.
         support_level:
           type: string
           enum: [official, community, testing]
           description: The asset's support level.
+        tags:
+          type: array
+          description: >
+            Tags describing the asset (lowercase alphanumeric characters,
+            numbers and dashes only).
+          items:
+            type: string
         title:
           type: string
           description: The asset's title (usually less than 50 characters).
         version:
           type: integer
-          description: |
-            The asset revision number (starting from 1).
-            Every time the asset is edited (for anyone and for any reason), this number is incremented by 1.
+          description: >
+            The asset revision number (starting from 1).<br>
+            Every time the asset is edited (for anyone and for any reason),
+            this number is incremented by 1.
         version_string:
           type: string
-          description: The asset's version string (free-form, but usually `major.minor` or `major.minor.patch`).
+          description: >
+            The version string of the latest version (free-form, but usually `major.minor`
+            or `major.minor.patch`).<br>
+            This field is present for compatibility reasons with the Godot editor.
+            See also the `versions` array.
+        versions:
+          type: array
+          items: { $ref: "#/components/schemas/AssetVersion" }
 
     PaginatedAssetList:
       description: A paginated list of assets.
@@ -153,8 +193,9 @@ components:
 
     AssetDetails:
       description: |
-        A resource provided by the asset library (add-on, project, ...).
-        These properties are only returned when requesting a specific asset, not a list of assets.
+        A resource provided by the asset library (add-on, project, ...).<br>
+        These properties are only returned when requesting a specific asset,
+        not a list of assets.
       allOf:
         - $ref: "#/components/schemas/AssetSummary"
         - type: object
@@ -169,11 +210,39 @@ components:
             download_url:
               type: string
               format: url
-              description: The asset's download link (should always point to a ZIP archive).
+              description: >
+                The download link of the asset's latest version (should always point to a ZIP archive).<br>
+                This field is present for compatibility reasons with the Godot editor.
+                See also the `versions` array.
+
+    AssetVersion:
+      type: object
+      description: An asset version.
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The version's release date.
+        download_url:
+          type: string
+          format: url
+          description: >
+            The version's custom download URL (if any). Will be an empty string
+            if not set.
+        godot_version:
+          type: string
+          description: >
+            The minor Godot version the asset version was declared to be
+            compatible with (in `major.minor` format).
+        version_string:
+          type: string
+          description: The version identifier.
 
     Category:
       type: object
-      description: A category in which assets belong to. An asset can only belong to one category at a time.
+      description: >
+        A category in which assets belong to. An asset can only belong to
+        one category at a time.
       properties:
         id:
           type: integer
@@ -194,10 +263,15 @@ components:
           description: The requested page number.
         page_length:
           type: integer
-          description: The requested page length. **Note:** This can be higher than the total amount of items returned.
+          description: >
+            The requested page length.<br>
+            **Note:** This can be higher than the total amount of items returned.
         pages:
           type: integer
-          description: The total number of pages available. **Note:** If requesting a page higher than this value, a successful response will be returned (status code 200) but no items will be listed.
+          description: >
+            The total number of pages available.<br>
+            **Note:** If requesting a page higher than this value, a successful
+            response will be returned (status code 200) but no items will be listed.
         total_items:
           type: integer
           description: The total number of items available.
