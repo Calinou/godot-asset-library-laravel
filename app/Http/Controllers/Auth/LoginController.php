@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Socialite;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -81,6 +82,7 @@ class LoginController extends Controller
                 'provider_id' => $userSocial->getId(),
             ])->markEmailAsVerified();
 
+            Log::info("$user registered a new user account using the \"$provider\" OAuth2 provider.");
             Auth::login($user);
         }
 

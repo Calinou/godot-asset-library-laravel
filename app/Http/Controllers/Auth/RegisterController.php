@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -64,6 +65,8 @@ class RegisterController extends Controller
             'status',
             __('Account created successfully! Please verify your email address to enable the account.')
         );
+
+        Log::info("$user registered a new user account.");
 
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
