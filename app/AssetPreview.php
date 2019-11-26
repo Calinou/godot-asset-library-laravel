@@ -47,6 +47,7 @@ class AssetPreview extends Model
      * @var array
      */
     protected $hidden = [
+        'preview_id',
         'type_id',
         'asset_id',
     ];
