@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\AssetReview;
+use App\AssetPreview;
+use App\AssetVersion;
 use App\AssetReviewReply;
 use Illuminate\Http\Request;
 use App\Http\Requests\ListAssets;
@@ -127,30 +129,29 @@ class AssetController extends Controller
     {
         $input = $request->validated();
 
-        // Remove submodel information from the input array as we don't want it here
+        // Remove submodel information from the input array as we don't want it here.
+        // Instead, we update (or create) submodels a few lines below.
         $assetInput = $input;
         unset($assetInput['versions']);
         unset($assetInput['previews']);
         $asset->fill($assetInput);
 
-        // Recreate the version and preview submodels
-
-        $versions = $asset->versions()->get();
-        foreach ($versions as $version) {
-            $version->delete();
+        foreach ($input['versions'] as $version) {
+            $version['asset_id'] = $asset->asset_id;
+            // Prototypes don't have an ID associated, so we fall back to -1 (which will never match)
+            AssetVersion::updateOrCreate(
+                ['id' => $version['id'] ?? -1],
+                $version
+            );
         }
 
-        $previews = $asset->previews()->get();
-        foreach ($previews as $preview) {
-            $preview->delete();
-        }
-
-        if (array_key_exists('versions', $input)) {
-            $asset->versions()->createMany($input['versions']);
-        }
-
-        if (array_key_exists('previews', $input)) {
-            $asset->previews()->createMany($input['previews']);
+        foreach ($input['previews'] as $preview) {
+            $preview['asset_id'] = $asset->asset_id;
+            // Prototypes don't have an ID associated, so we fall back to -1 (which will never match)
+            AssetPreview::updateOrCreate(
+                ['preview_id' => $preview['id'] ?? -1],
+                $preview
+            );
         }
 
         $asset->save();

@@ -6,6 +6,14 @@
   $index = $prototype ? '__index__' : $loop->index;
   @endphp
 
+  @if (!$prototype)
+  {{--
+    Used to associate the previews on the backend to update them correctly
+    (instead of removing all of them and recreating them)
+  --}}
+  <input type="hidden" name="previews[{{ $index }}][id]" value="{{ $asset->previews[$index]->preview_id }}">
+  @endif
+
   {{-- TODO: Allow adding video previews --}}
   <input type="hidden" name="previews[{{ $index }}][type_id]" value="0">
 

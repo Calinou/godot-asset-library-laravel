@@ -78,6 +78,7 @@ class SubmitAsset extends FormRequest
 
             // An asset must have at least one version registered
             'versions' => 'required|array|min:1',
+            'versions.*.id' => 'nullable|integer|gte:1',
             'versions.*.version_string' => 'required|string|max:50',
             'versions.*.godot_version' => ['required', Rule::in(Asset::GODOT_VERSIONS)],
             'versions.*.download_url' => [
@@ -94,6 +95,7 @@ class SubmitAsset extends FormRequest
 
             // Asset previews are optional, though (even if recommended)
             'previews' => 'nullable|array|max:4',
+            'previews.*.id' => 'nullable|integer|gte:1',
             'previews.*.type_id' => 'required|integer|gte:0|lt:'.AssetPreview::TYPE_MAX,
             'previews.*.link' => [
                 'required',

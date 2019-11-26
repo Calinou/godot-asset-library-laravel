@@ -7,6 +7,14 @@
     $index = $prototype ? '__index__' : $loop->index;
     @endphp
 
+    @if (!$prototype)
+    {{--
+      Used to associate the versions on the backend to update them correctly
+      (instead of removing all of them and recreating them)
+    --}}
+    <input type="hidden" name="versions[{{ $index }}][id]" value="{{ $asset->versions[$index]->id }}">
+    @endif
+
     @component('components/form-input', [
       'name' => "versions[$index][version_string]",
       'value' => $prototype ? null : $asset->versions[$index]->version_string,
