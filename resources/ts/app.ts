@@ -120,6 +120,19 @@ function initLoadingButtons(): void {
 }
 
 /**
+ * Initialize interactivity for buttons which delete fields on the asset editing form.
+ */
+function initDeleteAssetFieldButtons(field: string): void {
+  const deleteButtons = document.querySelectorAll(`[data-delete-${field}]`);
+
+  deleteButtons.forEach(($deleteButton) => {
+    $deleteButton.addEventListener('click', () => {
+      $deleteButton.parentElement?.remove();
+    });
+  });
+}
+
+/**
  * Initialize interactivity for the "Add new <field>" button on the asset editing form.
  */
 function initAddAssetFieldButton(field: string): void {
@@ -139,6 +152,9 @@ function initAddAssetFieldButton(field: string): void {
           /__index__/g, $assetFieldPrototype.dataset.index ?? '0',
         );
       }
+
+      // Make the delete button functional
+      initDeleteAssetFieldButtons(field);
 
       // Increment the counter (HTML data attributes are always strings)
       $assetFieldPrototype.dataset.index = (

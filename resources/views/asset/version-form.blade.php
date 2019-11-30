@@ -1,20 +1,27 @@
-<div class="my-4 p-4 pb-2 bg-white rounded shadow">
+@php
+// If `$prototype` is `true`, the array index will be replaced with
+// a placeholder value that must be replaced with JavaScript (see `$index`).
+$prototype = $prototype ?? false;
+$index = $prototype ? '__index__' : $loop->index;
+@endphp
+
+<div class="relative my-4 p-4 pb-2 bg-white rounded shadow">
+  {{-- Only prototypes can be removed, as published versions cannot be removed --}}
+  @if ($prototype)
+  <button type="button" class="absolute top-0 right-0 mt-2 mr-2 opacity-50 hover:opacity-75" data-delete-version>
+    <span class="fa fa-times fa-fw"></span>
+  </button>
+  @endif
+
+  @if (!$prototype)
+  {{--
+    Used to associate the versions on the backend to update them correctly
+    (instead of removing all of them and recreating them)
+  --}}
+  <input type="hidden" name="versions[{{ $index }}][id]" value="{{ $asset->versions[$index]->id }}">
+  @endif
+
   <div class="sm:flex sm:justify-between">
-    @php
-    // If `$prototype` is `true`, the array index will be replaced with
-    // a placeholder value that must be replaced with JavaScript (see `$index`).
-    $prototype = $prototype ?? false;
-    $index = $prototype ? '__index__' : $loop->index;
-    @endphp
-
-    @if (!$prototype)
-    {{--
-      Used to associate the versions on the backend to update them correctly
-      (instead of removing all of them and recreating them)
-    --}}
-    <input type="hidden" name="versions[{{ $index }}][id]" value="{{ $asset->versions[$index]->id }}">
-    @endif
-
     @component('components/form-input', [
       'name' => "versions[$index][version_string]",
       'value' => $prototype ? null : $asset->versions[$index]->version_string,
