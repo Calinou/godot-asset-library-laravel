@@ -14,7 +14,7 @@
         "htmlmin/htmlmin": "^6.0",
         "laravel/framework": "6.6.*",
         "laravel/socialite": "^4.2",
-        "laravel/tinker": "^1.0",
+        "laravel/tinker": "^2.0",
         "league/commonmark-extras": "^1.1",
         "lorisleiva/laravel-search-string": "^0.1.4"
     },
