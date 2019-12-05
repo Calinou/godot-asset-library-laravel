@@ -248,8 +248,8 @@
   </a>
   @endcan
 
-  <hr class="my-6">
-  <h2 class="text-xl font-medium mb-2">
+  <hr class="my-8">
+  <h2 class="text-xl font-medium mb-8">
     {{ trans_choice(
       '{0} No reviews|{1} :count review|[2,*] :count reviews',
       $asset->reviews->count()
@@ -276,11 +276,9 @@
     </span>
   </h2>
 
-
-
   @forelse ($asset->reviews as $review)
   @if ($review->comment)
-  <article class="py-6 border-b border-gray-400">
+  <article class="px-4 md:px-6 pt-4 pb-5 my-4 bg-white rounded shadow md:w-3/4 xl:w-3/5">
     <div class="text-gray-600 mb-6">
 
       @if ($review->is_positive)
@@ -301,7 +299,7 @@
         @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
       </div>
     </div>
-    <div class="content">
+    <div class="content text-gray-700">
       {!! $review->html_comment !!}
     </div>
 
