@@ -278,7 +278,8 @@
 
   @forelse ($asset->reviews as $review)
   @if ($review->comment)
-  <article class="px-4 md:px-6 pt-4 pb-5 my-4 bg-white rounded shadow md:w-3/4 xl:w-3/5">
+  {{-- Highlight the review posted by the current user --}}
+  <article class="px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if ($review->author->id === Auth::user()->id) bg-blue-100 @else bg-white @endif">
     <div class="text-gray-600 mb-6">
 
       @if ($review->is_positive)
