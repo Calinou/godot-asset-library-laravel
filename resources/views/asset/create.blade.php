@@ -234,7 +234,6 @@
         </h2>
         <div class="mt-2 text-sm text-gray-600 my-8">
           {{ __('Previews are optional, but help people become more interested in your asset.') }}
-          {{ __('You can have up to 4 images or videos per asset.') }}
         </div>
 
         @error('previews')
