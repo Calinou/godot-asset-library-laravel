@@ -227,10 +227,17 @@
       target="_blank"
       rel="nofollow noopener noreferrer"
     >{{ __('Code of Conduct') }}</a>
-    {{ __('when writing your review.') }}
+    {{ __('when writing your review.') }}<br>
+    {{ __("Don't use this form for support requests. Instead, report issues with the asset") }}
+    <a
+      class="link"
+      href="{{ $asset->issues_url }}"
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+    >{{ __('here') }}</a>.
     @endcomponent
 
-    <button class="button button-primary mt-6" type="submit" data-loading>
+    <button class="button button-primary mt-4" type="submit" data-loading>
       {{ __('Submit review') }}
     </button>
   </form>
