@@ -104,6 +104,14 @@
             'required' => true,
             'choices' =>  $assetClass::LICENSES,
           ])
+          {{ __('See') }}
+          <a
+            class="link"
+            href="https://choosealicense.com/"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >Choose a License</a>
+          {{ __('for guidance.') }}
           @endcomponent
         </div>
 

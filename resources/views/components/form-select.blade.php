@@ -41,4 +41,11 @@ if (!isset($name)) {
     {{ $message }}
   </div>
   @enderror
+
+  {{-- Display form help if available --}}
+  @if ($slot)
+  <div class="mt-2 text-sm text-gray-600">
+    {{ $slot }}
+  </div>
+  @endif
 </div>
