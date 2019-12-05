@@ -45,14 +45,6 @@ class AssetController extends Controller
      */
     public function show(Asset $asset, Request $request)
     {
-        if (! $asset->is_published) {
-            $request->session()->flash('statusType', 'warning');
-            $request->session()->flash(
-                'status',
-                __("This asset won't be visible by other users until it's made public by an administrator.")
-            );
-        }
-
         return view('asset.show', ['asset' => $asset]);
     }
 

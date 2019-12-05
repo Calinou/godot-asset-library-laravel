@@ -8,6 +8,22 @@
 @section('content')
 <div class="container">
 
+  @if ($asset->is_archived)
+  @component('components/alert', [
+    'type' => 'warning',
+  ])
+  {{ __("This asset is marked as archived by its author. No further updates will be provided.") }}
+  @endcomponent
+  @endif
+
+  @if (!$asset->is_published)
+  @component('components/alert', [
+    'type' => 'warning',
+  ])
+  {{ __("This asset won't be visible by other users until it's made public by an administrator.") }}
+  @endcomponent
+  @endif
+
   <div class="lg:flex lg:-mx-6">
     <div class="lg:w-1/2 lg:px-6">
       <div class="flex mb-5">
