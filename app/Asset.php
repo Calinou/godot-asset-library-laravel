@@ -551,6 +551,26 @@ class Asset extends Model
             $query->where('is_published', true);
         }
 
+        if (isset($validated['type'])) {
+            // FIXME: Avoid duplicating the category type detection
+            switch ($validated['type']) {
+                case 'addon':
+                    $query->whereNotIn(
+                        'category_id',
+                        [self::CATEGORY_TEMPLATES, self::CATEGORY_PROJECTS, self::CATEGORY_DEMOS]
+                    );
+                    break;
+                case 'project':
+                    $query->whereIn(
+                        'category_id',
+                        [self::CATEGORY_TEMPLATES, self::CATEGORY_PROJECTS, self::CATEGORY_DEMOS]
+                    );
+                    break;
+                default:
+                    break;
+            }
+        }
+
         if (isset($validated['category'])) {
             $query->where('category_id', $validated['category']);
         }
