@@ -6,6 +6,7 @@ namespace App;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
@@ -545,7 +546,7 @@ class Asset extends Model
      *
      * @see App\Http\Requests\ListAssets
      */
-    public function scopeFilterSearch($query, array $validated, bool $publishedOnly = true): Collection
+    public function scopeFilterSearch(Builder $query, array $validated, bool $publishedOnly = true): Collection
     {
         if ($publishedOnly) {
             $query->where('is_published', true);
