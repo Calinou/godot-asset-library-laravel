@@ -305,7 +305,7 @@
     </div>
 
     @if ($review->reply)
-    <div class="content px-4 py-3 mt-6 ml-8 bg-gray-300 rounded relative text-sm">
+    <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 rounded relative text-sm">
       <div class="absolute border-gray-300 top-0 -mt-6 arrow-up"></div>
       <div class="font-bold text-gray-600 mb-1">
         {{ __('Reply from :author', ['author' => $asset->author->name]) }}
