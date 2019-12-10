@@ -71,6 +71,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the user's reviews.
+     */
+    public function assetReviews()
+    {
+        return $this->hasMany('App\AssetReview', 'author_id');
+    }
+
+    /**
      * Converts the model to a string representation (used for logging purposes).
      */
     public function __toString(): string

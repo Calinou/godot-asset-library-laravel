@@ -10,6 +10,12 @@
   <h2 class="text-center text-gray-600 mt-2 mb-2">
     {{ __('Joined') }}
     @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($user->created_at)])
+    —
+    {{ trans_choice(
+      '{0} Reviewed no assets|{1} Reviewed :count asset|[2,*] Reviewed :count assets',
+      $user->assetReviews->count(),
+      ['count' => $user->assetReviews->count()]
+    ) }}
   </h2>
 
   <h2 class="text-center text-xl font-medium mt-16">
