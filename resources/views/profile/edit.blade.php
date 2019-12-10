@@ -33,6 +33,7 @@
           'label' => __('Email address'),
           'disabled' => true,
         ])
+        {{ __('Changing your email address is not implemented yet. Sorry!') }}
         @endcomponent
 
         @component('components/form-input', [
