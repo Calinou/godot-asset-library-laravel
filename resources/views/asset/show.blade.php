@@ -304,6 +304,21 @@
       {!! $review->html_comment !!}
     </div>
 
+    @can('remove-review', $review)
+    <form
+      method="POST"
+      action="{{ route('asset.reviews.destroy', ['asset_review' => $review]) }}"
+    >
+      @csrf
+      @method('DELETE')
+
+      <button type="submit" class="mt-2 button button-sm text-red-700 opacity-75">
+        <span class="fa fa-fw mr-1 opacity-75 fa-block"></span>
+        {{ __('Remove') }}
+      </button>
+    </form>
+    @endcan
+
     @if ($review->reply)
     <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 rounded relative text-sm">
       <div class="absolute border-gray-300 top-0 -mt-6 arrow-up"></div>

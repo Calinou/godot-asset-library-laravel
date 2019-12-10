@@ -253,6 +253,39 @@ class AssetController extends Controller
     }
 
     /**
+     * Remove a review from the database.
+     * This can only done by its author or an administrator.
+     */
+    public function destroyReview(AssetReview $assetReview, Request $request)
+    {
+        $asset = $assetReview->asset;
+        $user = Auth::user();
+        $author = $assetReview->author;
+
+        $assetReview->delete();
+
+        $request->session()->flash('statusType', 'success');
+
+        if ($user->is_admin && $assetReview->author->id !== $user->id) {
+            $request->session()->flash(
+                'status',
+                __("You removed :author's review for “:asset”!", ['author' => $author->name, 'asset' => $asset->title])
+            );
+
+            Log::info("$user removed $author's review for $asset.");
+        } else {
+            $request->session()->flash(
+                'status',
+                __('You removed your review for “:asset”!', ['asset' => $asset->title])
+            );
+
+            Log::info("$user removed their review for $asset.");
+        }
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    /**
      * Update a review with a reply from the asset author.
      */
     public function storeReviewReply(AssetReview $assetReview, SubmitReviewReply $request)

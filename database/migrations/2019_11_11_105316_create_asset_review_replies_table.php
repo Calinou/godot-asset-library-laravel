@@ -26,7 +26,7 @@ class CreateAssetReviewRepliesTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('asset_review_id')->unique();
-            $table->foreign('asset_review_id')->references('id')->on('asset_reviews');
+            $table->foreign('asset_review_id')->references('id')->on('asset_reviews')->onDelete('cascade');
         });
     }
 
