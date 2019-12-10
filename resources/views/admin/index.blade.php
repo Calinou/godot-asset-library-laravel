@@ -40,7 +40,9 @@
               @if ($user->is_admin)
               <span class="fa fa-shield fa-fw mr-1 text-yellow-600"></span>
               @endif
-              {{ $user->name }}
+              <a class="link" href="{{ route('user.show', ['user' => $user]) }}">
+                {{ $user->name }}
+              </a>
             </div>
           </td>
 
