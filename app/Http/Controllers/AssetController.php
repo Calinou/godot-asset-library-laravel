@@ -43,7 +43,7 @@ class AssetController extends Controller
     /**
      * Display a single asset.
      */
-    public function show(Asset $asset, Request $request)
+    public function show(Asset $asset)
     {
         return view('asset.show', ['asset' => $asset]);
     }
