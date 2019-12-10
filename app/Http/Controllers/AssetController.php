@@ -154,6 +154,11 @@ class AssetController extends Controller
         return redirect(route('asset.show', $asset));
     }
 
+    /**
+     * Publishes an asset (only effective if it has been unpublished).
+     * This can only be done by an administrator.
+     * Once published, the asset will be visible in the list of assets again.
+     */
     public function publish(Asset $asset, Request $request)
     {
         $asset->is_published = true;
@@ -171,6 +176,10 @@ class AssetController extends Controller
         return redirect(route('asset.show', $asset));
     }
 
+    /**
+     * Unpublishes an asset. This can only be done by an administrator.
+     * Once unpublished, the asset will no longer appear in the list of assets.
+     */
     public function unpublish(Asset $asset, Request $request)
     {
         $asset->is_published = false;
@@ -188,6 +197,11 @@ class AssetController extends Controller
         return redirect(route('asset.show', $asset));
     }
 
+    /**
+     * Mark an asset as archived. This can be done by its author or an administrator.
+     * Once an asset is archived, it can no longer receive any reviews.
+     * The asset can be unarchived at any time by its author or an administrator.
+     */
     public function archive(Asset $asset, Request $request)
     {
         $asset->is_archived = true;
@@ -205,6 +219,10 @@ class AssetController extends Controller
         return redirect(route('asset.show', $asset));
     }
 
+    /**
+     * Mark an asset as unarchived.
+     * This can be done by its author or an administrator.
+     */
     public function unarchive(Asset $asset, Request $request)
     {
         $asset->is_archived = false;
@@ -266,7 +284,7 @@ class AssetController extends Controller
 
         $request->session()->flash('statusType', 'success');
 
-        if ($user->is_admin && $assetReview->author->id !== $user->id) {
+        if ($user && $user->is_admin && $assetReview->author->id !== $user->id) {
             $request->session()->flash(
                 'status',
                 __("You removed :author's review for “:asset”!", ['author' => $author->name, 'asset' => $asset->title])
