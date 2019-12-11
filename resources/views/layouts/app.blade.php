@@ -112,7 +112,7 @@ EOF);
           </a>
           @endcan
           <div class="navbar-dropdown">
-            <a href="{{ route('asset.index') }}" class="button">
+            <a href="{{ route('user.show', ['user' => Auth::user()]) }}" class="button">
               {{ Auth::user()->name }} <span class="fa fa-angle-down ml-1"></span>
             </a>
             <div class="navbar-dropdown-content">
