@@ -279,7 +279,7 @@
   @forelse ($asset->reviews as $review)
   @if ($review->comment)
   {{-- Highlight the review posted by the current user --}}
-  <article class="px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if (Auth::user() && $review->author->id === Auth::user()->id) bg-blue-100 @else bg-white @endif">
+  <article class="review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if (Auth::user() && $review->author->id === Auth::user()->id) bg-blue-100 @else bg-white @endif">
     <div class="text-gray-600 mb-6">
 
       @if ($review->is_positive)
@@ -312,8 +312,8 @@
       @csrf
       @method('DELETE')
 
-      <button type="submit" class="mt-2 button button-sm text-red-700 opacity-75">
-        <span class="fa fa-fw mr-1 opacity-75 fa-block"></span>
+      <button type="submit" class="mt-2 button button-sm text-red-700 remove-review">
+        <span class="fa fa-fw mr-1 fa-ban"></span>
         {{ __('Remove') }}
       </button>
     </form>

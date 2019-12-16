@@ -29,3 +29,15 @@
   text-decoration: underline;
   text-decoration-style: dotted;
 }
+
+/*
+  Fade out the Remove button unless the review is being hovered
+  (to be less distracting).
+*/
+.review .remove-review {
+  opacity: 0.25;
+}
+
+.review:hover .remove-review {
+  opacity: 0.75;
+}
