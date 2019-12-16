@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\v1;
 
 use App\Asset;
-use App\Http\Requests\Configure;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Configure;
 
 class ConfigureController extends Controller
 {

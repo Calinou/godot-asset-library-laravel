@@ -6,8 +6,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use App\User;
 use App\Asset;
-use App\AssetReview;
 use App\AssetPreview;
+use App\AssetReview;
 use App\AssetVersion;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Asset;
-use App\AssetReview;
 use App\AssetPreview;
-use App\AssetVersion;
+use App\AssetReview;
 use App\AssetReviewReply;
-use Illuminate\Http\Request;
+use App\AssetVersion;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
 use App\Http\Requests\SubmitReview;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SubmitReviewReply;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AssetController extends Controller
 {

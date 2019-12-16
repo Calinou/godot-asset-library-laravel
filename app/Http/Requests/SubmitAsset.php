@@ -6,9 +6,9 @@ namespace App\Http\Requests;
 
 use App\Asset;
 use App\AssetPreview;
-use Illuminate\Validation\Rule;
 use App\Rules\SuccessRespondingUrl;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubmitAsset extends FormRequest
 {

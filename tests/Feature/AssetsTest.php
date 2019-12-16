@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Asset;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AssetsTest extends TestCase
 {

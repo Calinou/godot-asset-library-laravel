@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Rules;
 
 use GuzzleHttp\Client;
-use Illuminate\Contracts\Validation\Rule;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Contracts\Validation\Rule;
 
 /**
  * Only accept URLs that respond with a successful status code (e.g. 200 OK).

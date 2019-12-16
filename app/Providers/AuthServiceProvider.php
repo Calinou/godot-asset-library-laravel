@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\User;
 use App\Asset;
 use App\AssetReview;
-use Illuminate\Support\Facades\Gate;
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {

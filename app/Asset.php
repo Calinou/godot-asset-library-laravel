@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use GrahamCampbell\Markdown\Facades\Markdown;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 class Asset extends Model
