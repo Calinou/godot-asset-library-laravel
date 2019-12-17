@@ -20,6 +20,16 @@
   }
 }
 
+@screen dark {
+  .form-input-text {
+    @apply bg-gray-800 text-gray-400;
+
+    &::placeholder {
+      @apply text-gray-500;
+    }
+  }
+}
+
 .form-error {
   @apply mt-2 text-sm text-red-600;
 }
@@ -34,5 +44,20 @@
 
   &:active {
     @apply text-blue-800;
+  }
+}
+
+@screen dark {
+  .link {
+    @apply text-blue-300;
+
+    &:hover,
+    &:focus {
+      @apply text-blue-200;
+    }
+
+    &:active {
+      @apply text-blue-500;
+    }
   }
 }

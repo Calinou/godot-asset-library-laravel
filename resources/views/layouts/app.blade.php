@@ -37,7 +37,7 @@
 </head>
 <body data-barba="wrapper">
   <header>
-    <nav class="shadow bg-white p-2 mb-8">
+    <nav class="shadow bg-white dark:bg-gray-800 p-2 mb-8">
       <div class="container flex flex-wrap justify-between">
 
         <div class="flex items-center">
@@ -73,7 +73,7 @@ EOF);
                 name="filter"
                 placeholder="{{ __('Search for assets') }}"
                 value="{{ Request::get('filter') }}"
-                class="form-input-text shadow-none bg-gray-200 lg:w-64"
+                class="form-input-text shadow-none bg-gray-200 dark:bg-gray-700 lg:w-64"
               >
               <span class="fa fa-search absolute right-0 mt-2 mr-3 pointer-events-none text-gray-500"></span>
             </form>
@@ -172,7 +172,7 @@ EOF);
 
     @yield('content')
 
-    <footer class="mt-12 py-12 bg-gray-300 text-gray-600 text-center">
+    <footer class="mt-12 py-12 bg-gray-300 text-gray-600 dark:bg-gray-900 text-center">
       © 2019 {{ config('app.name') }}
       @can('admin')
         —

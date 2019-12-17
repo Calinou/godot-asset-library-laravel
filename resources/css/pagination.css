@@ -18,3 +18,25 @@
 .pagination-item-disabled {
   @apply bg-gray-200 text-gray-500 pointer-events-none;
 }
+
+@screen dark {
+  .pagination-item {
+    @apply bg-gray-800 text-gray-400 border-gray-700;
+
+    &:hover {
+      @apply bg-gray-700;
+    }
+
+    &:active {
+      @apply bg-gray-900;
+    }
+  }
+
+  .pagination-item-active {
+    @apply bg-blue-500 text-gray-300;
+  }
+
+  .pagination-item-disabled {
+    @apply bg-gray-800 text-gray-700;
+  }
+}

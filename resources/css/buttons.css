@@ -86,3 +86,41 @@
 .button-loading {
   @apply opacity-50 pointer-events-none;
 }
+
+@screen dark {
+  .button-primary {
+    @apply bg-blue-600;
+
+    &:hover {
+      @apply bg-blue-500;
+    }
+
+    &:active {
+      @apply bg-blue-700;
+    }
+  }
+
+  .button-secondary {
+    @apply bg-gray-700;
+
+    &:hover {
+      @apply bg-gray-600;
+    }
+
+    &:active {
+      @apply bg-gray-800;
+    }
+  }
+
+  .button-success {
+    @apply bg-green-600;
+
+    &:hover {
+      @apply bg-green-500;
+    }
+
+    &:active {
+      @apply bg-green-700;
+    }
+  }
+}

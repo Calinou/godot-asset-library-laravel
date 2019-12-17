@@ -29,11 +29,25 @@
   /* <https://github.com/kazzkiq/balloon.css#customizing-tooltips> */
   --balloon-color: hsla(0, 0%, 0%, 0.75);
   --balloon-font-size: 0.85rem;
+  --body-background-color: #eff1f5;
+  --body-color: hsl(0, 0%, 20%);
+  --border-color: theme('colors.gray.300');
+}
+
+@screen dark {
+  :root {
+    --hover-overlay: hsla(0, 0%, 100%, 0.065);
+    --active-overlay: hsla(0, 0%, 100%, 0.13);
+    --balloon-color: hsla(0, 0%, 30%, 0.75);
+    --body-background-color: theme('colors.gray.900');
+    --body-color: theme('colors.gray.300');
+    --border-color: theme('colors.gray.700');
+  }
 }
 
 body {
-  background-color: #eff1f5;
-  color: hsl(0, 0%, 20%);
+  background-color: var(--body-background-color);
+  color: var(--body-color);
 }
 
 img {

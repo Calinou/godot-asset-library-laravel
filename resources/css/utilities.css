@@ -1,11 +1,21 @@
 /* Generic visual feedback for hover and active cards */
 .hover-active-darken {
+  --filter-hover: brightness(93.5%);
+  --filter-active: brightness(87%);
+
   &:hover {
-    filter: brightness(93.5%);
+    filter: var(--filter-hover);
   }
 
   &:active {
-    filter: brightness(87%);
+    filter: var(--filter-active);
+  }
+}
+
+@screen dark {
+  .hover-active-darken {
+    --filter-hover: brightness(125%);
+    --filter-active: brightness(75%);
   }
 }
 

@@ -14,7 +14,7 @@ if (!isset($name)) {
       @if ($required) required @endif
       id="{{ $name }}"
       name="{{ $name }}"
-      class="block appearance-none w-full bg-white shadow border rounded px-3 py-2 pr-8 leading-tight text-sm hover:border-gray-500 focus:outline-none focus:shadow-outline"
+      class="block appearance-none w-full bg-white dark:bg-gray-800 shadow border rounded px-3 py-2 pr-8 leading-tight text-sm hover:border-gray-500 focus:outline-none focus:shadow-outline"
     >
       @if (isset($placeholder))
       <option disabled>

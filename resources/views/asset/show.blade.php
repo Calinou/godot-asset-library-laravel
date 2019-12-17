@@ -153,13 +153,13 @@
       </a>
 
       {{-- Caption --}}
-      <div id="gallery-image-caption" class="text-center text-gray-700 my-3">
+      <div id="gallery-image-caption" class="text-center text-gray-700 dark:text-gray-500 my-3">
         {{-- Use a non-breaking space to ensure consistent height if there is no caption --}}
         {{ $asset->previews[0]->caption ?: ' ' }}
       </div>
       @else
-      <div class="flex items-center justify-center h-64 bg-gray-400 rounded">
-        <div class="text-lg text-gray-600">
+      <div class="flex items-center justify-center h-64 bg-gray-400 dark:bg-gray-800 rounded">
+        <div class="text-lg text-gray-600 dark:text-gray-500">
           {{ __('No preview available') }}
         </div>
       </div>
@@ -260,7 +260,7 @@
       '{0} No reviews|{1} :count review|[2,*] :count reviews',
       $asset->reviews->count()
     ) }}
-    <span class="ml-3 pl-5 border-l border-gray-400 {{ $asset->score_color }}">
+    <span class="ml-3 pl-5 border-l border-gray-400 {{ $asset->score_color }} dark:text-gray-400">
       <span class="fa mr-1 opacity-50 @if ($asset->score >= 0) fa-thumbs-up @else fa-thumbs-down @endif"></span>
       {{ $asset->score }}
     </span>
@@ -285,16 +285,16 @@
   @forelse ($asset->reviews as $review)
   @if ($review->comment)
   {{-- Highlight the review posted by the current user --}}
-  <article class="review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if (Auth::user() && $review->author->id === Auth::user()->id) bg-blue-100 @else bg-white @endif">
-    <div class="text-gray-600 mb-6">
+  <article class="review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if (Auth::user() && $review->author->id === Auth::user()->id) bg-blue-100 @else bg-white dark:bg-gray-800 @endif">
+    <div class="text-gray-600 dark:text-gray-500 mb-6">
 
       @if ($review->is_positive)
-      <span class="font-bold text-blue-500">
+      <span class="font-bold text-blue-500 dark:text-blue-400">
         <span class="fa fa-chevron-circle-up fa-fw opacity-75"></span>
         {{ __('Recommended') }}
       </span>
       @else
-      <span class="font-bold text-red-700">
+      <span class="font-bold text-red-700 dark:text-red-600">
         <span class="fa fa-chevron-circle-down fa-fw opacity-75"></span>
         {{ __('Not recommended') }}</span>
       @endif
@@ -306,7 +306,7 @@
         @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
       </div>
     </div>
-    <div class="content text-gray-700">
+    <div class="content text-gray-700 dark:text-gray-400">
       {!! $review->html_comment !!}
     </div>
 
@@ -318,7 +318,7 @@
       @csrf
       @method('DELETE')
 
-      <button type="submit" class="mt-2 button button-sm text-red-700 remove-review">
+      <button type="submit" class="mt-2 button button-sm text-red-700 dark:text-red-500 remove-review">
         <span class="fa fa-fw mr-1 fa-ban"></span>
         {{ __('Remove') }}
       </button>
@@ -326,9 +326,9 @@
     @endcan
 
     @if ($review->reply)
-    <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 rounded relative text-sm">
+    <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 dark:bg-gray-700 rounded relative text-sm">
       <div class="absolute border-gray-300 top-0 -mt-6 arrow-up"></div>
-      <div class="font-bold text-gray-600 mb-1">
+      <div class="font-bold text-gray-600 dark:text-gray-300 mb-1">
         {{ __('Reply from :author', ['author' => $asset->author->name]) }}
         <span class="ml-4 opacity-75">
           @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->reply->created_at)])

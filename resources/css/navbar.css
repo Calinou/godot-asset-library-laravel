@@ -18,6 +18,12 @@
   z-index: 1;
 }
 
+@screen dark {
+  .navbar-dropdown-content {
+    @apply bg-gray-800;
+  }
+}
+
 .navbar-dropdown:hover .navbar-dropdown-content {
   display: block;
 }

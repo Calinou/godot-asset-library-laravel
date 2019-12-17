@@ -12,20 +12,20 @@
     <table class="w-full shadow rounded text-sm">
       <thead>
         <tr class="font-bold">
-          <td class="bg-white border px-3 py-1 text-right">{{ __('Name') }}</td>
-          <td class="bg-white border px-3 py-1">{{ __('Email address') }}</td>
-          <td class="bg-white border px-3 py-1">{{ __('Registered') }}</td>
-          <td class="bg-white border px-3 py-1">{{ __('Actions') }}</td>
+          <td class="bg-white border dark:bg-gray-800 px-3 py-1 text-right">{{ __('Name') }}</td>
+          <td class="bg-white border dark:bg-gray-800 px-3 py-1">{{ __('Email address') }}</td>
+          <td class="bg-white border dark:bg-gray-800 px-3 py-1">{{ __('Registered') }}</td>
+          <td class="bg-white border dark:bg-gray-800 px-3 py-1">{{ __('Actions') }}</td>
         </tr>
       <tbody>
         @foreach ($users as $user)
         @php
         if ($user->id === Auth::user()->id) {
-          $rowClasses = 'bg-blue-100 text-blue-800';
+          $rowClasses = 'bg-blue-100 text-blue-800 dark:bg-blue-1000 dark:text-blue-200';
         } elseif ($user->is_blocked) {
-          $rowClasses = 'bg-red-100 text-red-800';
+          $rowClasses = 'bg-red-100 text-red-800 dark:bg-red-1000 dark:text-red-200';
         } else {
-          $rowClasses = 'bg-white';
+          $rowClasses = 'bg-white dark:bg-gray-800';
         }
         @endphp
         <tr class="{{ $rowClasses }}">

@@ -2,7 +2,7 @@
 
 <div class="w-full lg:w-1/2 px-2 my-2">
   <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
-    <article class="flex bg-white rounded shadow hover-active-darken">
+    <article class="flex bg-white dark:bg-gray-800 rounded shadow hover-active-darken">
       <div class="flex-shrink-0 self-center">
         <img class="object-cover w-26 h-26 bg-gray-400 rounded-l" src="{{ $asset->icon_url }}">
       </div>
@@ -26,23 +26,23 @@
           @endif
         </div>
         <div class="text-sm -ml-px mt-2">
-          <span class="m-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+          <span class="m-1 px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
             <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
             {{ $asset->category }}
           </span>
-          <span class="m-1 px-3 py-1 bg-gray-200 rounded-full">{{ $asset->godot_version }}</span>
+          <span class="m-1 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">{{ $asset->godot_version }}</span>
           @php
             switch (intval($asset->support_level_id)) {
               case ($assetClass::SUPPORT_LEVEL_OFFICIAL):
-                $supportLevelClasses = 'bg-green-100 text-green-800';
+                $supportLevelClasses = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
                 $supportLevelIcon = 'fa-check';
                 break;
               case ($assetClass::SUPPORT_LEVEL_COMMUNITY):
-                $supportLevelClasses = 'bg-gray-200';
+                $supportLevelClasses = 'bg-gray-200 dark:bg-gray-700';
                 $supportLevelIcon = '';
                 break;
               case ($assetClass::SUPPORT_LEVEL_TESTING):
-                $supportLevelClasses = 'bg-yellow-200 text-yellow-800';
+                $supportLevelClasses = 'bg-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
                 $supportLevelIcon = 'fa-exclamation-circle';
                 break;
               default:

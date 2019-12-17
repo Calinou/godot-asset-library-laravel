@@ -5,7 +5,7 @@ $prototype = $prototype ?? false;
 $index = $prototype ? '__index__' : $loop->index;
 @endphp
 
-<div class="relative my-4 p-4 pb-2 bg-white rounded shadow">
+<div class="relative my-4 p-4 pb-2 bg-white dark:bg-gray-800 rounded shadow">
   {{-- Only prototypes can be removed, as published previews cannot be removed yet --}}
   @if ($prototype)
   <button type="button" class="absolute top-0 right-0 mt-2 mr-2 opacity-50 hover:opacity-75" data-delete-preview>

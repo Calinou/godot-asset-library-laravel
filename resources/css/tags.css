@@ -4,15 +4,29 @@
 
 /* Clickable tag (typically on asset detail pages) */
 .tag-link {
+  --tag-background-color: hsl(201, 100%, 96%);
+  --tag-background-color-hover: hsl(201, 100%, 92%);
+  --tag-background-color-active: hsl(201, 100%, 88%);
+
   @apply text-blue-600;
 
-  background-color: hsl(201, 100%, 96%);
+  background-color: var(--tag-background-color);
 
   &:hover {
-    background-color: hsl(201, 100%, 92%);
+    background-color: var(--tag-background-color-hover);
   }
 
   &:active {
-    background-color: hsl(201, 100%, 88%);
+    background-color: var(--tag-background-color-active);
+  }
+}
+
+@screen dark {
+  .tag-link {
+    --tag-background-color: theme('colors.blue.900');
+    --tag-background-color-hover: theme('colors.blue.800');
+    --tag-background-color-active: theme('colors.blue.1000');
+
+    @apply text-blue-200;
   }
 }
