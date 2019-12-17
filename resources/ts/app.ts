@@ -187,9 +187,7 @@ function initFlashClose(): void {
 
   flashCloseButtons.forEach(($button: HTMLButtonElement) => {
     $button.addEventListener('click', () => {
-      if ($button.parentElement) {
-        $button.parentElement.remove();
-      }
+      $button.parentElement?.remove();
     });
   });
 }
