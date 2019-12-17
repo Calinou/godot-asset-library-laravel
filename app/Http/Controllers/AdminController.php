@@ -16,7 +16,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        // Display the most recently registered users first as those are
+        // more likely to require attention.
+        $users = User::all()->sortByDesc('created_at');
 
         return view('admin.index', ['users' => $users]);
     }
