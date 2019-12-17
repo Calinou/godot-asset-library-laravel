@@ -8,12 +8,13 @@
     {{ __('Administration panel') }}
   </h2>
 
-  <div class="flex justify-center mt-8">
-    <table class="shadow rounded text-sm">
+  <div class="mt-8">
+    <table class="w-full shadow rounded text-sm">
       <thead>
         <tr class="font-bold">
           <td class="bg-white border px-3 py-1 text-right">{{ __('Name') }}</td>
           <td class="bg-white border px-3 py-1">{{ __('Email address') }}</td>
+          <td class="bg-white border px-3 py-1">{{ __('Registered') }}</td>
           <td class="bg-white border px-3 py-1">{{ __('Actions') }}</td>
         </tr>
       <tbody>
@@ -53,13 +54,17 @@
           </td>
 
           <td class="border px-3 py-1">
+            @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($user->created_at)])
+          </td>
+
+          <td class="border px-3 py-1">
             @can('block-user', $user)
             @if ($user->is_blocked)
             <form method="POST" action="{{ route('admin.unblock', ['user' => $user]) }}">
               @csrf
               @method('PUT')
               <button type="submit" class="button button-sm">
-                <span class="fa fa-circle-o fa-fw mr-1 opacity-75"></span>
+                <span class="fa fa-circle-o fa-fw -ml-1 mr-1 opacity-75"></span>
                 {{ __('Unblock') }}
               </button>
             </form>
@@ -68,7 +73,7 @@
               @csrf
               @method('PUT')
               <button type="submit" class="button button-sm text-red-700">
-                <span class="fa fa-ban fa-fw mr-1 opacity-75"></span>
+                <span class="fa fa-ban fa-fw -ml-1 mr-1 opacity-75"></span>
                 {{ __('Block') }}
               </button>
             </form>
