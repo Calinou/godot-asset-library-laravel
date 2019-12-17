@@ -1,0 +1,5 @@
+/* This class should be applied to all HTML generated from Markdown input. */
+.content {
+  /* Use the golden ratio as line height */
+  line-height: 1.618;
+}

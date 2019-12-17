@@ -9,6 +9,7 @@
 
 /* Our files */
 @import "buttons";
+@import "content";
 @import "forms";
 @import "gallery";
 @import "navbar";
