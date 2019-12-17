@@ -48,7 +48,7 @@
       </div>
 
       @if ($asset->tags)
-      <div class="mt-5 mb-10 -ml-1 text-sm">
+      <div class="mt-5 mb-6 -ml-1 text-sm">
         @foreach ($asset->tags as $tag)
         <a href="{{ route('asset.index', ['filter' => $tag]) }}">
           <span class="tag tag-link">
@@ -59,24 +59,41 @@
       </div>
       @endif
 
-      <div class="mt-10 mb-8">
-        <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success mr-2 mb-2">
+      @if ($asset->blurb)
+      <h2 class="text-lg font-medium mb-6">
+        {{ $asset->blurb }}
+      </h2>
+      @endif
+
+      <div class="content">
+        {{-- The HTML description is already sanitized by the Markdown parser that generates it --}}
+        {!! $asset->html_description !!}
+      </div>
+
+      <div class="mt-10 mb-6 text-sm">
+        <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success font-bold mr-1 mb-2">
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}
         </a>
-        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary text-sm mr-2 mb-2">
+        <a href="{{ $asset->browse_url }}" rel="nofollow" class="button button-secondary mr-1 mb-2">
           <span class="fa fa-code mr-1"></span>
           {{ __('Source code') }}
         </a>
-        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary text-sm mb-2">
+        <a href="{{ $asset->issues_url }}" rel="nofollow" class="button button-secondary mr-1 mb-2">
           <span class="fa fa-exclamation-circle mr-1 opacity-75"></span>
           {{ __('Submit an issue') }}
         </a>
+        @if (!empty($asset->changelog_url))
+        <a href="{{ $asset->changelog_url }}" rel="nofollow" class="button button-secondary">
+          <span class="fa fa-newspaper-o mr-1 opacity-75"></span>
+          {{ __('Changelog') }}
+        </a>
+        @endif
       </div>
 
       @can('edit-asset', $asset)
-      <div class="mb-8">
-        <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary mr-2 mb-2">
+      <div class="mb-8 text-sm">
+        <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary font-bold mr-1 mb-2">
           <span class="fa fa-pencil mr-1"></span>
           {{ __('Edit') }}
         </a>
@@ -88,7 +105,7 @@
         >
           @csrf
           @method('PUT')
-          <button type="submit" class="button button-secondary text-sm mr-2 mb-2">
+          <button type="submit" class="button button-secondary mr-1 mb-2">
             <span class="fa {{ $asset->is_archived ? 'fa-unlock' : 'fa-lock' }} mr-1 opacity-75"></span>
             {{ $asset->is_archived ? __('Unarchive') : __('Archive') }}
           </button>
@@ -102,7 +119,7 @@
         >
           @csrf
           @method('PUT')
-          <button type="submit" class="button button-secondary text-sm mb-2">
+          <button type="submit" class="button button-secondary">
             <span class="fa {{ $asset->is_published ? 'fa-eye-slash' : 'fa-eye' }} mr-1 opacity-75"></span>
             {{ $asset->is_published ? __('Unpublish') : __('Publish') }}
           </button>
@@ -111,17 +128,6 @@
 
       </div>
       @endcan
-
-      @if ($asset->blurb)
-      <h2 class="text-lg font-medium mb-8">
-        {{ $asset->blurb }}
-      </h2>
-      @endif
-
-      <div class="content">
-        {{-- The HTML description is already sanitized by the Markdown parser that generates it --}}
-        {!! $asset->html_description !!}
-      </div>
 
       <hr class="my-6">
       <h3 class="font-medium mb-4">{{ __('Details') }}</h3>

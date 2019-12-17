@@ -185,6 +185,18 @@
 
         @component('components/form-input', [
           'type' => 'url',
+          'name' => 'changelog_url',
+          'value' => $editing ? $asset->changelog_url : null,
+          'label' => __('Changelog URL'),
+          'placeholder' => 'https://github.com/user/asset/blob/master/CHANGELOG.md',
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('Optional. This URL should point to a changelog documenting user-facing changes (i.e. not an automatically generated commit log).') }}
+        @endcomponent
+
+        @component('components/form-input', [
+          'type' => 'url',
           'name' => 'icon_url',
           'value' => $editing ? $asset->icon_url : null,
           'label' => __('Icon URL'),

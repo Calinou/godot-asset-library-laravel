@@ -137,6 +137,7 @@ class Asset extends Model
         'support_level',
         'browse_url',
         'issues_url',
+        'changelog_url',
         'icon_url',
         'versions',
         'previews',
