@@ -42,6 +42,7 @@ class CreateAssetsTable extends Migration
             $table->text('browse_url');
             $table->text('issues_url')->nullable();
             $table->text('changelog_url')->nullable();
+            $table->text('donate_url')->nullable();
             $table->text('icon_url')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('modify_date');

@@ -138,6 +138,7 @@ class Asset extends Model
         'browse_url',
         'issues_url',
         'changelog_url',
+        'donate_url',
         'icon_url',
         'versions',
         'previews',

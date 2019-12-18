@@ -74,6 +74,13 @@ class SubmitAsset extends FormRequest
                 'max:2000',
                 new SuccessRespondingUrl(),
             ],
+            'donate_url' => [
+                'nullable',
+                'bail',
+                'url',
+                'max:2000',
+                new SuccessRespondingUrl(),
+            ],
             'icon_url' => [
                 'nullable',
                 'bail',
@@ -132,6 +139,7 @@ class SubmitAsset extends FormRequest
             'browse_url' => __('repository URL'),
             'issues_url' => __('issue reporting URL'),
             'changelog_url' => __('changelog URL'),
+            'donate_url' => __('donate URL'),
             'icon_url' => __('icon URL'),
             'versions.*.download_url' => __('download URL'),
         ];

@@ -111,6 +111,11 @@ components:
           format: url
           description: >
             The asset's changelog URL.
+        donate_url:
+          type: string
+          format: url
+          description: >
+            The asset's donation URL. This can be set by the author to receive donations (using services like Patreon or GitHub Sponsors).
         cost:
           type: string
           description: >

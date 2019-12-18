@@ -24,8 +24,9 @@ $factory->define(Asset::class, function (Faker $faker) {
         'description' => $faker->text(500),
         'tags' => $faker->words($faker->numberBetween(0, 8)),
         'browse_url' => 'https://github.com/user/asset',
-        // 50% chance of having a changelog set (as it's optional)
+        // 50% chance of having a changelog and donation link set (as they're optional)
         'changelog_url' => $faker->boolean() ? 'https://github.com/user/asset/blob/master/CHANGELOG.md' : null,
+        'donate_url' => $faker->boolean() ? 'https://patreon.com/user' : null,
         'icon_url' => "https://via.placeholder.com/128x128/$colorHex.png",
     ];
 });

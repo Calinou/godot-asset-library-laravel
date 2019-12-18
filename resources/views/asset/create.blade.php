@@ -197,6 +197,18 @@
 
         @component('components/form-input', [
           'type' => 'url',
+          'name' => 'donate_url',
+          'value' => $editing ? $asset->donate_url : null,
+          'label' => __('Donate URL'),
+          'placeholder' => 'https://patreon.com/user',
+          'maxlength' => 2000,
+          'autocomplete' => 'off',
+        ])
+        {{ __('Optional. This URL should point to a page to be used for donations (such as Patreon or GitHub Sponsors).') }}
+        @endcomponent
+
+        @component('components/form-input', [
+          'type' => 'url',
           'name' => 'icon_url',
           'value' => $editing ? $asset->icon_url : null,
           'label' => __('Icon URL'),

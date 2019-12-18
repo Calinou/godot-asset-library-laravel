@@ -84,9 +84,15 @@
           {{ __('Submit an issue') }}
         </a>
         @if (!empty($asset->changelog_url))
-        <a href="{{ $asset->changelog_url }}" rel="nofollow" class="button button-secondary">
+        <a href="{{ $asset->changelog_url }}" rel="nofollow" class="button button-secondary mr-1">
           <span class="fa fa-newspaper-o mr-1 opacity-75"></span>
           {{ __('Changelog') }}
+        </a>
+        @endif
+        @if (!empty($asset->donate_url))
+        <a href="{{ $asset->donate_url }}" rel="nofollow" class="button button-secondary">
+          <span class="fa fa-heart mr-1 opacity-75"></span>
+          {{ __('Donate') }}
         </a>
         @endif
       </div>
