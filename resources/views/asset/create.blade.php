@@ -252,7 +252,7 @@
               @endforeach
             </div>
 
-            <button type="button" id="asset-add-version" class="link">
+            <button type="button" id="asset-add-version" class="px-2 link">
               <span class="fa fa-plus mr-1"></span>
               {{ __('Add a new version') }}
             </button>
@@ -284,7 +284,7 @@
               @endif
             </div>
 
-            <button type="button" id="asset-add-preview" class="link">
+            <button type="button" id="asset-add-preview" class="px-2 link">
               <span class="fa fa-plus mr-1"></span>
               {{ __('Add a new preview') }}
             </button>
