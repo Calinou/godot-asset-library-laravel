@@ -288,15 +288,17 @@
               <span class="fa fa-plus mr-1"></span>
               {{ __('Add a new preview') }}
             </button>
-
-          <button class="button button-primary w-full mt-6" type="submit" data-loading>
+          </section>
+        </section>
+        <div class="flex justify-center">
+          <button class="button button-primary px-8 mt-6" type="submit" data-loading>
             @if ($editing)
-            {{ __('Save') }}
+            {{ __('Save changes') }}
             @else
             {{ __('Submit asset') }}
             @endif
           </button>
-        </section>
+        </div>
       </div>
     </form>
   </div>
