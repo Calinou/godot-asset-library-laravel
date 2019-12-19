@@ -241,11 +241,6 @@
             </div>
             @enderror
 
-            <button type="button" id="asset-add-version" class="link">
-              <span class="fa fa-plus mr-1"></span>
-              {{ __('Add a new version') }}
-            </button>
-
             {{-- Contains the HTML that will be copied when creating a new version --}}
             <template id="asset-version-prototype" data-index="{{ count($asset->versions) }}">
               @include('asset.version-form', ['prototype' => true])
@@ -256,6 +251,11 @@
               @include('asset.version-form')
               @endforeach
             </div>
+
+            <button type="button" id="asset-add-version" class="link">
+              <span class="fa fa-plus mr-1"></span>
+              {{ __('Add a new version') }}
+            </button>
             @endif
 
             <h2 class="text-center text-xl font-medium my-8">
