@@ -527,15 +527,15 @@ class Asset extends Model
     public function getScoreColorAttribute(): string
     {
         if ($this->score >= 15) {
-            return 'text-blue-500';
+            return 'text-blue-500 dark:text-blue-400';
         } elseif ($this->score >= 10) {
-            return 'text-blue-600';
+            return 'text-blue-600 dark:text-blue-300';
         } elseif ($this->score >= 5) {
-            return 'text-blue-700';
+            return 'text-blue-700 dark:text-blue-200';
         } elseif ($this->score >= 0) {
-            return 'text-gray-700';
+            return 'text-gray-700 dark:text-gray-500';
         } else {
-            return 'text-red-700';
+            return 'text-red-700 dark:text-red-400';
         }
     }
 
