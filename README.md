@@ -22,11 +22,17 @@ The backend uses the [Laravel](https://laravel.com/) PHP framework.
 4. Run the following commands in order:
 
 ```bash
+# Install composer dependencies
+composer install
+
 # Create a database (credentials must be set in `.env` first)
 php artisan db:create
 
 # Run migrations and seed test data into the database
 php artisan migrate --seed
+
+# Create application key
+php artisan key:generate
 
 # Create an user with administrator privileges
 # (you will be prompted for username/email/password)
