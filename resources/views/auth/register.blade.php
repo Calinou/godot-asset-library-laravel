@@ -12,7 +12,7 @@
       {{ __('Sign up to :appName', ['appName' => config('app.name')]) }}
     </div>
 
-    <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
+    <section class="w-full max-w-xs mx-auto mt-8 bg-white dark:bg-gray-800 rounded shadow p-4">
         @component('components/form-input', [
           'name' => 'name',
           'label' => __('Name'),

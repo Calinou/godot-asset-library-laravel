@@ -17,7 +17,7 @@
       {{ __('Log in to :appName', ['appName' => config('app.name')]) }}
     </div>
 
-    <section class="w-full max-w-xs mx-auto mt-8 mb-2 bg-white rounded shadow p-4">
+    <section class="w-full max-w-xs mx-auto mt-8 mb-2 bg-white dark:bg-gray-800 rounded shadow p-4">
 
       @component('components/form-input', [
         'type' => 'email',
@@ -51,7 +51,7 @@
         {{ __('Login') }}
       </button>
 
-      <hr class="mt-8 mb-4 border border-gray-300">
+      <hr class="mt-8 mb-4 border border-gray-300 dark:border-gray-700">
 
       <div class="text-center">{{ __('Or log in with:') }}</div>
       <div class="mt-4 mb-2 flex justify-center text-sm">

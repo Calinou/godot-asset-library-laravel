@@ -12,7 +12,7 @@
       {{ __('Choose a new password') }}
     </div>
 
-    <section class="w-full max-w-xs mx-auto mt-8 bg-white rounded shadow p-4">
+    <section class="w-full max-w-xs mx-auto mt-8 bg-white dark:bg-gray-800 rounded shadow p-4">
       @component('components/form-input', [
         'type' => 'email',
         'name' => 'email',
