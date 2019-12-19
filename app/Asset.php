@@ -532,7 +532,7 @@ class Asset extends Model
             return 'text-blue-600 dark:text-blue-300';
         } elseif ($this->score >= 5) {
             return 'text-blue-700 dark:text-blue-200';
-        } elseif ($this->score >= 0) {
+        } elseif ($this->score >= -1) {
             return 'text-gray-700 dark:text-gray-500';
         } else {
             return 'text-red-700 dark:text-red-400';
