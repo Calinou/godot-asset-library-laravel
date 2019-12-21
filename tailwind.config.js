@@ -13,7 +13,7 @@ module.exports = {
         // Add ultra-dark color variants for use in the dark theme
         blue: {
           ...colors.blue,
-          1000: '#1a2355',
+          1000: '#162d4f',
         },
         green: {
           ...colors.green,
