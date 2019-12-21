@@ -15,6 +15,4 @@ if (!isset($date)) {
   aria-label="{{ $date->isoFormat('MMMM D, YYYY, HH:MM') }}"
   data-balloon-pos="up"
   data-balloon-blunt
->
-  {{ $date->diffForHumans() }}
-</span>
+>{{ $date->diffForHumans() }}</span>
