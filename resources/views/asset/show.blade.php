@@ -310,6 +310,11 @@
         <a href="{{ route('user.show', $review->author) }}" class="link">{{ $review->author->name }}</a>
         {{ __('commented') }}
         @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
+        @if ($review->updated_at !== $review->created_at)
+        <div class="md:inline md:ml-2 text-sm opacity-75">
+          ({{ __('edited') }} @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->updated_at)]))
+        </div>
+        @endif
       </div>
     </div>
     <div class="content text-gray-700 dark:text-gray-400">
@@ -339,6 +344,11 @@
         <span class="ml-4 opacity-75">
           @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->reply->created_at)])
         </span>
+        @if ($review->reply->updated_at !== $review->reply->created_at)
+        <div class="md:inline md:ml-2 text-sm opacity-75">
+          ({{ __('edited') }} @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->reply->updated_at)]))
+        </div>
+        @endif
       </div>
       {!! $review->reply->html_comment !!}
     </div>
