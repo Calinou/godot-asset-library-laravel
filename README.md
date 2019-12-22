@@ -50,7 +50,7 @@ and seed test data again.
 - Feature tests are available. They use an in-memory database, so your existing
   data isn't affected when running them.
 - This project follows the Laravel code style,
-applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
+  applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
 - Code is analysed with PHPStan thanks to
   [Larastan](https://github.com/nunomaduro/larastan).
 
@@ -72,7 +72,8 @@ vendor/bin/php-cs-fixer fix
 The frontend uses the [Tailwind](https://tailwindcss.com/) CSS framework
 and [TypeScript](https://www.typescriptlang.org/).
 
-1. Install [Node.js](https://nodejs.org/en/) (10.x or later) and [Yarn](https://nodejs.org/en/) (recommended over npm).
+1. Install [Node.js](https://nodejs.org/en/) (10.x or later)
+   and [Yarn](https://nodejs.org/en/) (recommended over npm).
 2. Run the following commands in the project folder depending on your needs:
 
 ```bash
