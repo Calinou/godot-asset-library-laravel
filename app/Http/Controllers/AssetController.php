@@ -281,7 +281,7 @@ class AssetController extends Controller
         $asset = $assetReview->asset;
         $user = Auth::user();
 
-        if ($assetReview->author_id === $user->id) {
+        if ($user && $assetReview->author_id === $user->id) {
             $request->session()->flash('statusType', 'success');
             $request->session()->flash(
                 'status',
