@@ -201,58 +201,11 @@
     {{ __('Leave a review') }}
   </h2>
 
-  <form method="POST" action="{{ route('asset.reviews.store', ['asset' => $asset]) }}">
-    @csrf
+  @include('includes/asset-review-form', [
+    'editing' => false,
+    'action' => route('asset.reviews.store', ['asset' => $asset]),
+  ])
 
-    @component('components/form-select', [
-      'name' => 'is_positive',
-      'label' => __('Your rating'),
-      'placeholder' => __('Select a rating'),
-      'required' => true,
-      'choices' => [
-        1 => __('Recommended'),
-        0 => __('Not recommended'),
-      ],
-    ])
-    @endcomponent
-
-    @component('components/form-input', [
-      'type' => 'textarea',
-      'name' => 'comment',
-      'label' => __('Comment'),
-      'placeholder' => __('Optional. If you leave a comment, it will be displayed in the list of reviews.'),
-      'maxlength' => 2000,
-      'autocomplete' => 'off',
-      'class' => 'h-32',
-    ])
-    {{ __('Supports') }}
-    <a
-      class="link"
-      href="https://guides.github.com/features/mastering-markdown/"
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >GitHub Flavored Markdown</a>.
-    {{ __('Please follow the') }}
-    <a
-      class="link"
-      href="https://godotengine.org/code-of-conduct"
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >{{ __('Code of Conduct') }}</a>
-    {{ __('when writing your review.') }}<br>
-    {{ __("Don't use this form for support requests. Instead, report issues with the asset") }}
-    <a
-      class="link"
-      href="{{ $asset->issues_url }}"
-      target="_blank"
-      rel="nofollow noopener noreferrer"
-    >{{ __('here') }}</a>.
-    @endcomponent
-
-    <button class="button button-primary mt-4" type="submit" data-loading>
-      {{ __('Submit review') }}
-    </button>
-  </form>
   @elseif (!Auth::check())
   <hr class="my-6">
   <a class="link" href="{{ route('login') }}">
@@ -289,9 +242,18 @@
   </h2>
 
   @forelse ($asset->reviews as $review)
-  @if ($review->comment)
+  @php
+  $isOwnReview = Auth::user() && $review->author->id === Auth::user()->id;
+  @endphp
+
+  @if ($review->comment || $isOwnReview)
   {{-- Highlight the review posted by the current user --}}
-  <article class="review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if (Auth::user() && $review->author->id === Auth::user()->id) bg-blue-100 dark:bg-blue-1000 @else bg-white dark:bg-gray-800 @endif">
+  <article class="relative review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if ($isOwnReview) bg-blue-100 dark:bg-blue-1000 @else bg-white dark:bg-gray-800 @endif">
+    @can('edit-review', $review)
+    <button type="button" class="button absolute top-0 right-0 mr-2 mt-2 cursor-pointer" data-review-edit>
+      <span class="fa fa-pencil opacity-50"></span>
+    </button>
+    @endcan
     <div class="text-gray-600 dark:text-gray-500 mb-6">
 
       @if ($review->is_positive)
@@ -317,24 +279,38 @@
         @endif
       </div>
     </div>
-    <div class="content text-gray-700 dark:text-gray-400">
+    <div class="content text-gray-700 dark:text-gray-400" data-review-comment>
+      @if (!empty($review->html_comment))
       {!! $review->html_comment !!}
+      @else
+      <span class="opacity-50 italic">
+        {{ __('No comment attached. (Only you can see this notice.)') }}
+      </span>
+      @endif
+
+      @can('edit-review', $review)
+      <form
+        method="POST"
+        action="{{ route('asset.reviews.destroy', ['asset_review' => $review]) }}"
+      >
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="mt-2 button button-sm text-red-700 dark:text-red-500 remove-review">
+          <span class="fa fa-fw mr-1 fa-ban"></span>
+          {{ __('Remove') }}
+        </button>
+      </form>
     </div>
 
-    @can('remove-review', $review)
-    <form
-      method="POST"
-      action="{{ route('asset.reviews.destroy', ['asset_review' => $review]) }}"
-    >
-      @csrf
-      @method('DELETE')
-
-      <button type="submit" class="mt-2 button button-sm text-red-700 dark:text-red-500 remove-review">
-        <span class="fa fa-fw mr-1 fa-ban"></span>
-        {{ __('Remove') }}
-      </button>
-    </form>
-    @endcan
+    <div class="hidden" data-review-edit-form>
+        @include('includes/asset-review-form', [
+          'editing' => true,
+          'action' => route('asset.reviews.update', ['asset_review' => $review]),
+          'value' => $review->comment,
+        ])
+        @endcan
+      </div>
 
     @if ($review->reply)
     <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 dark:bg-gray-700 rounded relative text-sm">

@@ -64,8 +64,8 @@ class AuthServiceProvider extends ServiceProvider
             return true;
         });
 
-        // To remove a review, an user must have posted the review or be an administrator.
-        Gate::define('remove-review', function (User $user, AssetReview $assetReview) {
+        // To edit or remove a review, an user must have posted the review or be an administrator.
+        Gate::define('edit-review', function (User $user, AssetReview $assetReview) {
             return ! $user->is_blocked && ($user->is_admin || $user->id === $assetReview->author->id);
         });
 

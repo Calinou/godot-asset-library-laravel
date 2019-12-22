@@ -63,6 +63,34 @@ function initGalleryImages(): void {
 }
 
 /**
+ * Initialize interactivity for the review editing buttons.
+ */
+function initEditReviewButtons(): void {
+  // eslint-disable-next-line
+  const editReviewButtons = document.querySelectorAll('[data-review-edit]') as NodeListOf<HTMLButtonElement>;
+
+  editReviewButtons.forEach(($editReviewButton) => {
+    $editReviewButton.addEventListener('click', () => {
+      // Make a reference to avoid modifying the function parameter directly
+      const $editReviewButton2 = $editReviewButton;
+      const $comment = $editReviewButton.parentElement?.querySelector('[data-review-comment]') as HTMLDivElement;
+      const $editForm = $editReviewButton.parentElement?.querySelector('[data-review-edit-form]') as HTMLFormElement;
+
+      $editReviewButton2.style.display = 'none';
+      $comment.style.display = 'none';
+      $editForm.style.display = 'block';
+
+      const $cancelButton = $editForm.querySelector('[data-review-edit-cancel]') as HTMLButtonElement;
+      $cancelButton.addEventListener('click', () => {
+        $editReviewButton2.style.display = 'inline-block';
+        $comment.style.display = 'block';
+        $editForm.style.display = 'none';
+      });
+    });
+  });
+}
+
+/**
  * Make it possible to submit forms while focused on a `textarea` element
  * by pressing Ctrl + Enter (or Cmd + Enter on macOS).
  */
@@ -196,6 +224,7 @@ function initFlashClose(): void {
 // This is also called on the initial page load.
 const initAll = (): void => {
   initGalleryImages();
+  initEditReviewButtons();
   initTextAreas();
   initLoadingButtons();
   initAddAssetFieldButton('version');

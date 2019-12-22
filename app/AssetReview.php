@@ -88,6 +88,9 @@ class AssetReview extends Model
         if ($comment) {
             $this->attributes['comment'] = $comment;
             $this->attributes['html_comment'] = Markdown::convertToHtml($comment);
+        } else {
+            $this->attributes['comment'] = null;
+            $this->attributes['html_comment'] = null;
         }
     }
 }

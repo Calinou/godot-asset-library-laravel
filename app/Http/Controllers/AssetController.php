@@ -271,6 +271,38 @@ class AssetController extends Controller
     }
 
     /**
+     * Update an existing review in the database.
+     */
+    public function updateReview(AssetReview $assetReview, SubmitReview $request)
+    {
+        $assetReview->fill($request->validated());
+        $assetReview->save();
+
+        $asset = $assetReview->asset;
+        $user = Auth::user();
+
+        if ($assetReview->author_id === $user->id) {
+            $request->session()->flash('statusType', 'success');
+            $request->session()->flash(
+                'status',
+                __('You edited your review for “:asset”!', ['asset' => $asset->title])
+            );
+
+            Log::info("$user edited their review for $asset.");
+        } else {
+            $request->session()->flash('statusType', 'success');
+            $request->session()->flash(
+                'status',
+                __("You edited :author's review for “:asset”!", ['author' => $assetReview->author->name, 'asset' => $asset->title])
+            );
+
+            Log::info("$user edited $assetReview->author's review for $asset.");
+        }
+
+        return redirect(route('asset.show', $asset));
+    }
+
+    /**
      * Remove a review from the database.
      * This can only done by its author or an administrator.
      */
