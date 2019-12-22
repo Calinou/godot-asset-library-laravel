@@ -7,6 +7,11 @@ namespace App;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * An asset author's reply to an asset review. Its optional comment can use
+ * Markdown formatting. An author may only reply once to each review, and
+ * the reply can't be replied to by another user.
+ */
 class AssetReviewReply extends Model
 {
     /**

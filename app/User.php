@@ -8,6 +8,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * A registered user. Users can publish assets and submit reviews (except for their
+ * own assets).
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;

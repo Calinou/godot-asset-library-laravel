@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
+/**
+ * An asset published by an user (called "author" in this case).
+ */
 class Asset extends Model
 {
     use SearchString;

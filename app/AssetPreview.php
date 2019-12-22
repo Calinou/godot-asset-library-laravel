@@ -6,6 +6,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * An externally-hosted asset preview (can be an image or a video).
+ * It can optionally have a caption defined.
+ */
 class AssetPreview extends Model
 {
     public const TYPE_IMAGE = 0;

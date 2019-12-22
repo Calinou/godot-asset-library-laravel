@@ -7,6 +7,10 @@ namespace App;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * An asset review published by an user. Its optional comment can use
+ * Markdown formatting.
+ */
 class AssetReview extends Model
 {
     /**

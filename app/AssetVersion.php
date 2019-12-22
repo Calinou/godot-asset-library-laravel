@@ -6,6 +6,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * An asset version. An asset may have multiple versions, each with their own
+ * compatible Godot version.
+ */
 class AssetVersion extends Model
 {
     /**
