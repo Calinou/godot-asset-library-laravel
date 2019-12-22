@@ -13,6 +13,35 @@ use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 /**
  * An asset published by an user (called "author" in this case).
+ *
+ * @property int $asset_id The asset's unique ID.
+ * @property string $title The asset's title.
+ * @property ?string $blurb The asset's blurb (short description).
+ * @property int $category_id The asset's category ID (see the `CATEGORY_*` constants).
+ * @property-read string $category The asset's category as an human-readable name.
+ * @property-read string $category_icon The asset's category Fork Awesome icon class.
+ * @property string $cost The asset's license as an SPDX identifier.
+ * @property-read string $license_name The asset's license as human-readable name.
+ * @property int $support_level_id The asset's support level (see the `SUPPORT_LEVEL_*` constants).
+ * @property-read string $support_level The asset's support level as an human-readable name.
+ * @property string $description The asset's full description in Markdown format.
+ * @property string $html_description The asset's full description in HTML format (generated from the Markdown source).
+ * @property array $tags The asset's tags.
+ * @property string $browse_url The asset's browsable repository URL.
+ * @property string $issues_url The asset's issue reporting URL (will be inferred from `$browse_url` if empty).
+ * @property ?string $changelog_url The asset's changelog URL.
+ * @property ?string $donate_url The asset's donate URL.
+ * @property string $icon_url The asset's icon URL (will be inferred from `$browse_url` if empty).
+ * @property-read string $download_url The asset's latest version download URL (for compatibility with the existing asset library API).
+ * @property-read string $version_string The asset's latest version's supported Godot minor version (e.g. "0.4.2", for compatibility with the existing asset library API).
+ * @property string $godot_version The asset's latest version's human-readable identifier (e.g. "3.2", for compatibility with the existing asset library API).
+ * @property \Illuminate\Support\Carbon $created_at The asset's creation date.
+ * @property \Illuminate\Support\Carbon $modify_date The asset's last modification date.
+ * @property bool $is_published If `false`, the asset can only be viewed by its author and won't appear in the list and search results.
+ * @property bool $is_archived If `true`, the asset can no longer receive reviews.
+ * @property int $score The score calculated from reviews (+1 for positive, -1 for negative).
+ * @property-read string $score_color The Tailwind CSS classes used to color the asset's score in templates.
+ * @property int $author_id The asset's author ID.
  */
 class Asset extends Model
 {

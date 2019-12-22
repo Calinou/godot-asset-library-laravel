@@ -8,8 +8,18 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * An asset review published by an user. Its optional comment can use
- * Markdown formatting.
+ * An asset review published by an user (called "author" in this case).
+ * Its optional comment can use Markdown formatting. An user may only leave
+ * one review per asset.
+ *
+ * @property int $id The review's unique ID.
+ * @property bool $is_positive If `true`, the review is positive. If `false`, the review is negative.
+ * @property ?string $comment The review's comment in Markdown format.
+ * @property ?string $html_comment The review's comment in HTML format (generated from the Markdown source).
+ * @property \Illuminate\Support\Carbon $created_at The review's creation date.
+ * @property \Illuminate\Support\Carbon $updated_at The review's last modification date.
+ * @property int $asset_id The ID of the asset being reviewed.
+ * @property int $author_id The review's author ID.
  */
 class AssetReview extends Model
 {

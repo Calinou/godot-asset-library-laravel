@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * An externally-hosted asset preview (can be an image or a video).
  * It can optionally have a caption defined.
+ *
+ * @property int $preview_id The preview's unique ID.
+ * @property int $type_id The preview's type (see the `TYPE_*` constants).
+ * @property string $link The preview's full-size URL.
+ * @property ?string $thumbnail The preview's thumbnail URL.
+ * @property ?string $caption The preview's caption (displayed below the preview and used as `alt` text).
+ * @property int $asset_id The asset the preview belongs to.
  */
 class AssetPreview extends Model
 {

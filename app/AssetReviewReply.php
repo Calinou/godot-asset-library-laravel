@@ -11,6 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  * An asset author's reply to an asset review. Its optional comment can use
  * Markdown formatting. An author may only reply once to each review, and
  * the reply can't be replied to by another user.
+ *
+ * @property int $id The review reply's unique ID.
+ * @property ?string $comment The review reply's comment in Markdown format.
+ * @property ?string $html_comment The review reply's comment in HTML format (generated from the Markdown source).
+ * @property \Illuminate\Support\Carbon $created_at The review reply's creation date.
+ * @property \Illuminate\Support\Carbon $updated_at The review reply's last modification date.
+ * @property int $asset_review_id The ID of the asset review being replied to.
  */
 class AssetReviewReply extends Model
 {

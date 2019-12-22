@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * An asset version. An asset may have multiple versions, each with their own
  * compatible Godot version.
+ *
+ * @property int $id The version's unique ID.
+ * @property string $version_string The version's human-readable identifier (e.g. "0.4.2").
+ * @property string $godot_version The Godot minor version the asset version is compatible with (e.g. "3.2").
+ * @property string $download_url The download URL (will be inferred from the asset's `$browse_url` and the `$version_string` if empty).
+ * @property \Illuminate\Support\Carbon $created_at The version's creation date.
+ * @property \Illuminate\Support\Carbon $modify_date The version's last modification date.
  */
 class AssetVersion extends Model
 {
