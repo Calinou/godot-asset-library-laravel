@@ -138,7 +138,7 @@
       <hr class="my-6">
       <h3 class="font-medium mb-4">{{ __('Details') }}</h3>
       <ul class="text-sm">
-        <li><strong>{{ __('Version:') }}</strong> {{ $asset->version_string }}</li>
+        <li><strong>{{ __('Latest version:') }}</strong> {{ $asset->version_string }}</li>
         <li><strong>{{ __('Compatible with:') }}</strong> Godot {{ $asset->godot_version }}</li>
         <li><strong>{{ __('License:') }}</strong> {{ $asset->license_name }}</li>
       </ul>
@@ -250,9 +250,24 @@
   {{-- Highlight the review posted by the current user --}}
   <article class="relative review px-4 md:px-6 pt-4 pb-5 my-4 rounded shadow md:w-3/4 xl:w-3/5 @if ($isOwnReview) bg-blue-100 dark:bg-blue-1000 @else bg-white dark:bg-gray-800 @endif">
     @can('edit-review', $review)
-    <button type="button" class="button absolute top-0 right-0 mr-2 mt-2 cursor-pointer" data-review-edit>
-      <span class="fa fa-pencil opacity-50"></span>
-    </button>
+    {{-- Remove spacing between items --}}
+    <div class="absolute top-0 right-0 mr-2 mt-2" style="font-size: 0">
+      <button type="button" class="text-base button cursor-pointer" data-review-edit>
+        <span class="fa fa-pencil opacity-50"></span>
+      </button>
+      <form
+        class="inline-block"
+        method="POST"
+        action="{{ route('asset.reviews.destroy', ['asset_review' => $review]) }}"
+      >
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="text-base button cursor-pointer">
+          <span class="fa fa-times opacity-50"></span>
+        </button>
+      </form>
+    </div>
     @endcan
     <div class="text-gray-600 dark:text-gray-500 mb-6">
 
@@ -287,30 +302,17 @@
         {{ __('No comment attached. (Only you can see this notice.)') }}
       </span>
       @endif
-
-      @can('edit-review', $review)
-      <form
-        method="POST"
-        action="{{ route('asset.reviews.destroy', ['asset_review' => $review]) }}"
-      >
-        @csrf
-        @method('DELETE')
-
-        <button type="submit" class="mt-2 button button-sm text-red-700 dark:text-red-500 remove-review">
-          <span class="fa fa-fw mr-1 fa-ban"></span>
-          {{ __('Remove') }}
-        </button>
-      </form>
     </div>
 
+    @can('edit-review', $review)
     <div class="hidden" data-review-edit-form>
-        @include('includes/asset-review-form', [
-          'editing' => true,
-          'action' => route('asset.reviews.update', ['asset_review' => $review]),
-          'value' => $review->comment,
-        ])
-        @endcan
-      </div>
+      @include('includes/asset-review-form', [
+        'editing' => true,
+        'action' => route('asset.reviews.update', ['asset_review' => $review]),
+        'value' => $review->comment,
+      ])
+    </div>
+    @endcan
 
     @if ($review->reply)
     <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 dark:bg-gray-700 rounded relative text-sm">

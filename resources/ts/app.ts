@@ -73,8 +73,8 @@ function initEditReviewButtons(): void {
     $editReviewButton.addEventListener('click', () => {
       // Make a reference to avoid modifying the function parameter directly
       const $editReviewButton2 = $editReviewButton;
-      const $comment = $editReviewButton.parentElement?.querySelector('[data-review-comment]') as HTMLDivElement;
-      const $editForm = $editReviewButton.parentElement?.querySelector('[data-review-edit-form]') as HTMLFormElement;
+      const $comment = $editReviewButton.parentElement?.parentElement?.querySelector('[data-review-comment]') as HTMLDivElement;
+      const $editForm = $editReviewButton.parentElement?.parentElement?.querySelector('[data-review-edit-form]') as HTMLFormElement;
 
       $editReviewButton2.style.display = 'none';
       $comment.style.display = 'none';
