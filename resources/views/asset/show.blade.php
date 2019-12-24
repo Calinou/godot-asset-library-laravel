@@ -70,11 +70,48 @@
         {!! $asset->html_description !!}
       </div>
 
-      <div class="mt-6 opacity-50">
-        <span class="fa fa-gavel mr-1 opacity-75"></span>
-        {{__('License:') }}
-        {{ $asset->license_name }}
+      <div class="mt-6 text-gray-600 dark:text-gray-500 leading-relaxed">
+        <div>
+          <span class="fa fa-fw fa-gavel mr-1 opacity-75"></span>
+          <strong>{{__('License:') }}</strong>
+          {{ $asset->license_name }}
+        </div>
+        <div>
+          <span class="fa fa-fw fa-newspaper-o mr-1 opacity-75"></span>
+          <strong>{{__('Latest version:') }}</strong>
+          {{ $asset->version_string }}
+          ({{ __('released') }} @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($asset->versions[0]->created_at)]))
+        </div>
       </div>
+
+      <details>
+        {{-- Precise positioning --}}
+        <summary
+          class="cursor-pointer text-gray-600 dark:text-gray-500 leading-relaxed mb-4 ml-2 hover:underline"
+        >{{ __('Version history') }}</summary>
+        <table class="w-full shadow rounded text-sm bg-white dark:bg-gray-800">
+          <thead>
+            <tr class="font-bold">
+              <td class="border px-3 py-1 text-right">{{ __('Version') }}</td>
+              <td class="border px-3 py-1">{{ __('Released') }}</td>
+              <td class="border px-3 py-1">{{ __('Compatible with') }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($asset->versions as $version)
+            <tr>
+              <td class="border px-3 py-1 text-right">
+                <a href="{{ $version->getDownloadUrlAttribute($asset->browse_url) }}" class="link">
+                  {{ $version->version_string }}
+                </a>
+              </td>
+              <td class="border px-3 py-1">@include('includes/date-relative', ['date' => \Carbon\Carbon::parse($version->created_at)])</td>
+              <td class="border px-3 py-1">Godot {{ $version->godot_version }}.x</td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </details>
 
       <div class="mt-8 mb-6 text-sm">
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success font-bold mr-1 mb-2">
