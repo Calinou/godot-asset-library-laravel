@@ -29,27 +29,33 @@
         {{-- Use a two-column display on wide screens to reduce the need for scrolling --}}
         <section class="flex flex-wrap mt-8 -mx-6">
           <section class="w-full lg:w-1/2 px-6">
-            @component('components/form-input', [
-              'name' => 'title',
-              'value' => $editing ? $asset->title : null,
-              'label' => __('Asset name'),
-              'placeholder' => __('My Own Asset'),
-              'required' => true,
-              'autofocus' => true,
-              'maxlength' => 50,
-              'autocomplete' => 'off',
-            ])
-            @endcomponent
+            <div class="lg:flex">
+              <div class="lg:mr-2 lg:w-1/2">
+                @component('components/form-input', [
+                  'name' => 'title',
+                  'value' => $editing ? $asset->title : null,
+                  'label' => __('Asset name'),
+                  'placeholder' => __('My Own Asset'),
+                  'required' => true,
+                  'autofocus' => true,
+                  'maxlength' => 50,
+                  'autocomplete' => 'off',
+                ])
+                @endcomponent
+              </div>
 
-            @component('components/form-input', [
-              'name' => 'blurb',
-              'value' => $editing ? $asset->blurb : null,
-              'label' => __('Blurb'),
-              'placeholder' => __('One-line description of the asset'),
-              'maxlength' => 60,
-              'autocomplete' => 'off',
-            ])
-            @endcomponent
+              <div class="lg:ml-2 lg:w-1/2">
+                @component('components/form-input', [
+                  'name' => 'blurb',
+                  'value' => $editing ? $asset->blurb : null,
+                  'label' => __('Blurb'),
+                  'placeholder' => __('One-line description of the asset'),
+                  'maxlength' => 60,
+                  'autocomplete' => 'off',
+                ])
+                @endcomponent
+              </div>
+            </div>
 
             @component('components/form-input', [
               'type' => 'textarea',
