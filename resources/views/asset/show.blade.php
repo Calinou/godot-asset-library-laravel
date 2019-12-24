@@ -70,7 +70,13 @@
         {!! $asset->html_description !!}
       </div>
 
-      <div class="mt-10 mb-6 text-sm">
+      <div class="mt-6 opacity-50">
+        <span class="fa fa-gavel mr-1 opacity-75"></span>
+        {{__('License:') }}
+        {{ $asset->license_name }}
+      </div>
+
+      <div class="mt-8 mb-6 text-sm">
         <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success font-bold mr-1 mb-2">
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}
@@ -98,7 +104,7 @@
       </div>
 
       @can('edit-asset', $asset)
-      <div class="mb-8 text-sm">
+      <div class="mb-4 text-sm">
         <a href="{{ route('asset.edit', ['asset' => $asset]) }}" class="button button-primary font-bold mr-1 mb-2">
           <span class="fa fa-pencil mr-1"></span>
           {{ __('Edit') }}
@@ -134,14 +140,6 @@
 
       </div>
       @endcan
-
-      <hr class="my-6">
-      <h3 class="font-medium mb-4">{{ __('Details') }}</h3>
-      <ul class="text-sm">
-        <li><strong>{{ __('Latest version:') }}</strong> {{ $asset->version_string }}</li>
-        <li><strong>{{ __('Compatible with:') }}</strong> Godot {{ $asset->godot_version }}</li>
-        <li><strong>{{ __('License:') }}</strong> {{ $asset->license_name }}</li>
-      </ul>
     </div>
 
     <div class="lg:w-1/2 lg:px-6">
