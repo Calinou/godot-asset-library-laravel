@@ -39,9 +39,9 @@ $index = $prototype ? '__index__' : $loop->index;
       'placeholder' => __('Select a Godot version'),
       'required' => true,
       'choices' => [
-        '3.2' => 'Godot 3.2',
-        '3.1' => 'Godot 3.1',
-        '3.0' => 'Godot 3.0',
+        '3.2' => 'Godot 3.2.x',
+        '3.1' => 'Godot 3.1.x',
+        '3.0' => 'Godot 3.0.x',
       ],
     ])
     @endcomponent
