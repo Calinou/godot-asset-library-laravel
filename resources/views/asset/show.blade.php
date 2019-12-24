@@ -80,7 +80,7 @@
           <span class="fa fa-fw fa-newspaper-o mr-1 opacity-75"></span>
           <strong>{{__('Latest version:') }}</strong>
           {{ $asset->version_string }}
-          ({{ __('released') }} @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($asset->versions[0]->created_at)]))
+          ({{ __('released') }} @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($asset->versions->last()->created_at)]))
         </div>
       </div>
 
