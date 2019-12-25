@@ -20,6 +20,26 @@ use Illuminate\Database\Eloquent\Model;
 class AssetVersion extends Model
 {
     /**
+     * The available Godot versions for declaring the compatibility range.
+     */
+    public const GODOT_VERSIONS = [
+        // Any version (should only be used for non-code assets)
+        '*' => 'Any',
+
+        // Any version in the Godot 3 series
+        '3.x.x' => 'Godot 3.x.x',
+
+        '3.0.x' => 'Godot 3.0.x',
+        '3.1.x' => 'Godot 3.1.x',
+        '3.2.x' => 'Godot 3.2.x',
+
+        // Any version in the Godot 4 series
+        '4.x.x' => 'Godot 4.x.x',
+
+        '4.0.x' => 'Godot 4.0.x',
+    ];
+
+    /**
      * The key used to store the last modification date and time.
      * This value has been changed from the default for consistency with Asset.
      */

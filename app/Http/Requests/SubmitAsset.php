@@ -6,6 +6,7 @@ namespace App\Http\Requests;
 
 use App\Asset;
 use App\AssetPreview;
+use App\AssetVersion;
 use App\Rules\SuccessRespondingUrl;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -94,7 +95,7 @@ class SubmitAsset extends FormRequest
             'versions' => 'required|array|min:1',
             'versions.*.id' => 'nullable|integer|gte:1',
             'versions.*.version_string' => 'required|string|max:50',
-            'versions.*.godot_version' => ['required', Rule::in(Asset::GODOT_VERSIONS)],
+            'versions.*.godot_version' => ['required', Rule::in(array_keys(AssetVersion::GODOT_VERSIONS))],
             'versions.*.download_url' => [
                 'nullable',
                 'bail',

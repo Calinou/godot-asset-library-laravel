@@ -134,17 +134,6 @@ class Asset extends Model
     ];
 
     /**
-     * The available Godot versions.
-     *
-     * TODO: Replace this with a system based on semantic versioning range strings?
-     */
-    public const GODOT_VERSIONS = [
-        '3.0',
-        '3.1',
-        '3.2',
-    ];
-
-    /**
      * The primary key associated with the table.
      * This value has been changed from the default for compatibility with the
      * existing asset library API.

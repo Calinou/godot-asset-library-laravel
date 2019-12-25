@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @inject('assetClass', 'App\Asset')
+@inject('assetVersionClass', 'App\AssetVersion')
 
 @if ($editing)
 @section('title', __('Edit “:asset”', ['asset' => $asset->title]))
@@ -142,13 +143,13 @@
                 'label' => __('Godot version'),
                 'placeholder' => __('Select a Godot version'),
                 'required' => true,
-                'choices' => [
-                  '3.2' => 'Godot 3.2.x',
-                  '3.1' => 'Godot 3.1.x',
-                  '3.0' => 'Godot 3.0.x',
-                ],
+                'choices' => $assetVersionClass::GODOT_VERSIONS,
               ])
               @endcomponent
+            </div>
+
+            <div class="-mt-4 mb-8 text-sm text-gray-600">
+              {{ __('The "Any" version should only be used for assets that do not contain code (such as engine-agnostic art assets). If in doubt, choose the minor Godot version used to develop the asset.') }}
             </div>
             @endif
 

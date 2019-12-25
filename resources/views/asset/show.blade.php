@@ -106,7 +106,7 @@
                 </a>
               </td>
               <td class="border px-3 py-1">@include('includes/date-relative', ['date' => \Carbon\Carbon::parse($version->created_at)])</td>
-              <td class="border px-3 py-1">Godot {{ $version->godot_version }}.x</td>
+              <td class="border px-3 py-1">Godot {{ $version->godot_version }}</td>
             </tr>
             @endforeach
           </tbody>
