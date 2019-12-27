@@ -11,11 +11,7 @@ function initNavbarToggle(): void {
     const navbarItems = document.querySelectorAll('[data-navbar-collapse]') as NodeListOf<HTMLElement>;
 
     navbarItems.forEach(($navbarItem: HTMLElement) => {
-      if ($navbarItem.classList.contains('hidden')) {
-        $navbarItem.classList.remove('hidden');
-      } else {
-        $navbarItem.classList.add('hidden');
-      }
+      $navbarItem.classList.toggle('hidden');
     });
   });
 }
