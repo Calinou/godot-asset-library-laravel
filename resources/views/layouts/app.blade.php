@@ -38,20 +38,24 @@
 <body data-barba="wrapper">
   <header>
     <nav class="shadow bg-white dark:bg-gray-800 p-2 mb-8">
-      <div class="container flex flex-wrap justify-between">
 
-        <div class="flex items-center">
+      <div class="container px-0 flex flex-wrap justify-between">
+        <div class="lg:flex items-center">
           <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">
             {{ config('app.name') }}
           </a>
 
-          {{--
-            Must be surrounded with `.relative` so that the absolute-positioned
-            icon visually stays in the input field
-          --}}
-          <div class="relative">
-            @php
-            $searchTooltip = __(<<<EOF
+          <div data-navbar-collapse class="hidden lg:flex items-center">
+
+            {{--
+              Must be surrounded with `.relative` so that the absolute-positioned
+              icon visually stays in the input field.
+
+              Some vertical margin is added on mobile devices to separate it from the app name.
+            --}}
+            <div class="relative mt-2 mb-2 lg:mt-0 lg:mb-0">
+              @php
+              $searchTooltip = __(<<<EOF
 Press / to focus this field.
 This will search in the asset's title, blurb and tags.
 This field supports search string syntax. Examples:
@@ -62,55 +66,58 @@ score >= 3  —  Show assets with a score greater than or equal to 3
 license = MIT  —  Show assets licensed under the MIT license (use SPDX identifiers)
 updated_at > 2019-01-01  —  Show assets updated after January 1 2019
 EOF);
-            @endphp
-            <form method="GET" action="{{ route('asset.index') }}" class="ml-2"
-              aria-label="{{ $searchTooltip }}"
-              data-balloon-pos="down"
-              data-balloon-break
-            >
-              <input
-                id="asset-search"
-                name="filter"
-                placeholder="{{ __('Search for assets') }}"
-                value="{{ Request::get('filter') }}"
-                class="form-input-text shadow-none bg-gray-200 dark:bg-gray-700 lg:w-64"
+              @endphp
+              <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2"
+                aria-label="{{ $searchTooltip }}"
+                data-balloon-pos="down"
+                data-balloon-break
               >
-              <span class="fa fa-search absolute right-0 mt-2 mr-3 pointer-events-none text-gray-500"></span>
-            </form>
-          </div>
-
-          <div class="navbar-dropdown">
-            <a href="{{ route('asset.index') }}" class="button ml-2">
-              Categories <span class="fa fa-angle-down ml-1"></span>
-            </a>
-            <div class="navbar-dropdown-content">
-              @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
-
-              <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
-                <span class="fa {{ $assetClass::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
-                {{ $assetClass::getCategoryName($categoryId) }}
-              </a>
-              @endforeach
+                <input
+                  id="asset-search"
+                  name="filter"
+                  placeholder="{{ __('Search for assets') }}"
+                  value="{{ Request::get('filter') }}"
+                  class="form-input-text shadow-none bg-gray-200 dark:bg-gray-700 lg:w-64"
+                >
+                <span class="fa fa-search absolute right-0 mt-2 mr-3 pointer-events-none text-gray-500"></span>
+              </form>
             </div>
+
+            <div data-navbar-collapse class="hidden lg:block navbar-dropdown">
+              <a href="{{ route('asset.index') }}" class="button lg:ml-2">
+                {{ __('Categories') }} <span class="fa fa-angle-down ml-1"></span>
+              </a>
+              <div class="navbar-dropdown-content">
+                @foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId)
+
+                <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
+                  <span class="fa {{ $assetClass::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
+                  {{ $assetClass::getCategoryName($categoryId) }}
+                </a>
+                @endforeach
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="block lg:hidden">
-          <button class="flex items-center px-3 py-2">
+        <div class="absolute top-0 right-0 lg:hidden">
+          <button id="navbar-toggle" class="button flex items-center p-5">
             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <title>Menu</title>
+              <title>{{ __('Menu') }}</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
             </svg>
           </button>
         </div>
 
-        <div class="w-full lg:flex lg:items-center lg:w-auto">
+        <div data-navbar-collapse class="hidden w-full lg:flex lg:items-center lg:w-auto">
           @if (Auth::check())
           @can('submit-asset')
           <a href="{{ route('asset.create') }}" class="navbar-link">
             {{ __('Submit asset') }}
           </a>
           @endcan
+
           <div class="navbar-dropdown">
             <a href="{{ route('user.show', ['user' => Auth::user()]) }}" class="button">
               {{ Auth::user()->name }} <span class="fa fa-angle-down ml-1"></span>

@@ -1,6 +1,26 @@
 import barba from '@barba/core';
 
 /**
+ * Initialize the navigation bar toggle button for mobile devices.
+ * Note: Several areas can be toggled at once.
+ */
+function initNavbarToggle(): void {
+  const $navbarToggle = document.getElementById('navbar-toggle') as HTMLButtonElement;
+  $navbarToggle.addEventListener('click', () => {
+    // eslint-disable-next-line
+    const navbarItems = document.querySelectorAll('[data-navbar-collapse]') as NodeListOf<HTMLElement>;
+
+    navbarItems.forEach(($navbarItem: HTMLElement) => {
+      if ($navbarItem.classList.contains('hidden')) {
+        $navbarItem.classList.remove('hidden');
+      } else {
+        $navbarItem.classList.add('hidden');
+      }
+    });
+  });
+}
+
+/**
  * Initialize the `/` keyboard shortcut for the asset search field.
  */
 function initAssetSearch(): void {
@@ -247,9 +267,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }],
   });
 
-  // Since the search field is part of the navigation bar,
-  // it only needs to be registered on the initial page load
+  // Since the search field and navigation toggle buttons are part of the
+  // navigation bar, they only need to be registered on the initial page load
   initAssetSearch();
+  initNavbarToggle();
 
   initAll();
 });
