@@ -171,7 +171,7 @@
               'type' => 'url',
               'name' => 'versions[0][download_url]',
               'value' => old('versions.0.download_url'),
-              'label' => __('Download URL'),
+              'label' => __('Custom download URL'),
               'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
               'maxlength' => 2000,
               'autocomplete' => 'off',
