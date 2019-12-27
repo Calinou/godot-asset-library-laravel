@@ -4,13 +4,17 @@
   <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
     <article class="flex bg-white dark:bg-gray-800 rounded shadow hover-active-darken">
       <div class="flex-shrink-0 self-center">
-        <img class="object-cover w-26 h-26 bg-gray-400 rounded-l" src="{{ $asset->icon_url }}">
+        {{--
+          Use smaller icons on mobile displays. Do not round the right side of
+          the icon on larger displays, as its height will match the card height.
+        --}}
+        <img class="object-cover w-20 h-20 sm:w-26 sm:h-26 bg-gray-400 rounded sm:rounded-r-none" src="{{ $asset->icon_url }}">
       </div>
       {{--
         Offset the right panel slightly on the Y axis to make tags
         appear slightly further from the bottom, which looks better
       --}}
-      <div class="ml-6 py-3 pl-1 -mt-px mb-px w-full pr-3">
+      <div class="ml-3 md:ml-6 lg:ml-3 xl:ml-6 py-3 pl-1 -mt-px mb-px w-full pr-3">
         <div class="flex space-between">
           <div class="leading-relaxed font-medium">{{ $asset->title }}</div>
           <div class="flex-grow text-right text-sm {{ $asset->score_color }}">

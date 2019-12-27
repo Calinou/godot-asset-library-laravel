@@ -25,7 +25,8 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
 </div>
 @endif
 
-<div class="container">
+{{-- Remove container padding for better display on mobile devices --}}
+<div class="container px-0">
   <h2 class="text-center text-2xl font-medium">
     @if (Request::get('filter'))
     {{ trans_choice(
@@ -54,7 +55,7 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
     @endif
   </h2>
 
-  <div class="relative text-right">
+  <div class="relative text-right mr-2">
     {{--
       Avoid overlapping the list of assets when browsing a specific category
       by adding a negative margin
