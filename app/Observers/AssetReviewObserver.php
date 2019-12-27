@@ -13,13 +13,15 @@ class AssetReviewObserver
      */
     private function calculateScore(AssetReview $assetReview): void
     {
-        $score = 0;
-        foreach ($assetReview->asset->reviews as $review) {
-            $score += $review->is_positive ? 1 : -1;
-        }
+        if ($assetReview->asset) {
+            $score = 0;
+            foreach ($assetReview->asset->reviews as $review) {
+                $score += $review->is_positive ? 1 : -1;
+            }
 
-        $assetReview->asset->score = $score;
-        $assetReview->asset->save();
+            $assetReview->asset->score = $score;
+            $assetReview->asset->save();
+        }
     }
 
     /**

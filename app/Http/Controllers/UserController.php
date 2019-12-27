@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
     /**
      * Display information about an user.
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         $user->load('assets.versions');
 

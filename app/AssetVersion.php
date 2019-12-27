@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * An asset version. An asset may have multiple versions, each with their own
@@ -80,7 +81,7 @@ class AssetVersion extends Model
     /**
      * Get the asset the version belongs to.
      */
-    public function asset()
+    public function asset(): BelongsTo
     {
         return $this->belongsTo('App\Asset', 'asset_id');
     }

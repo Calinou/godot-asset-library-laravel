@@ -8,13 +8,15 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends Controller
 {
     /**
      * Display a list of unapproved and approved users.
      */
-    public function index()
+    public function index(): View
     {
         // Display the most recently registered users first as those are
         // more likely to require attention.
@@ -26,7 +28,7 @@ class AdminController extends Controller
     /**
      * Block an user. Once the user is blocked, they can't participate anymore.
      */
-    public function block(User $user, Request $request)
+    public function block(User $user, Request $request): RedirectResponse
     {
         $user->is_blocked = true;
         $user->save();
@@ -46,7 +48,7 @@ class AdminController extends Controller
     /**
      * Unblock an user. The user may now participate again.
      */
-    public function unblock(User $user, Request $request)
+    public function unblock(User $user, Request $request): RedirectResponse
     {
         $user->is_blocked = false;
         $user->save();

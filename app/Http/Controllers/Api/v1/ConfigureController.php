@@ -13,7 +13,7 @@ class ConfigureController extends Controller
     /**
      * Return the list of available categories (used for editor integration).
      */
-    public function index(Configure $request)
+    public function index(Configure $request): array
     {
         $validated = $request->validated();
 

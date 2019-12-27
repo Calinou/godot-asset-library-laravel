@@ -6,6 +6,8 @@ namespace App;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * An asset review published by an user (called "author" in this case).
@@ -71,7 +73,7 @@ class AssetReview extends Model
     /**
      * Get the asset which is the subject of the review.
      */
-    public function asset()
+    public function asset(): BelongsTo
     {
         return $this->belongsTo('App\Asset', 'asset_id');
     }
@@ -79,7 +81,7 @@ class AssetReview extends Model
     /**
      * Get the user that posted the review.
      */
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo('App\User', 'author_id');
     }
@@ -87,7 +89,7 @@ class AssetReview extends Model
     /**
      * Get the comment reply by the asset author.
      */
-    public function reply()
+    public function reply(): HasOne
     {
         return $this->hasOne('App\AssetReviewReply');
     }

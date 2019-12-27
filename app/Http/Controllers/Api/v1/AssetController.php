@@ -14,7 +14,7 @@ class AssetController extends Controller
     /**
      * Return a paginated list of assets.
      */
-    public function index(ListAssets $request)
+    public function index(ListAssets $request): array
     {
         $validated = $request->validated();
 
@@ -49,7 +49,7 @@ class AssetController extends Controller
     /**
      * Return information about a single asset.
      */
-    public function show(Asset $asset)
+    public function show(Asset $asset): Asset
     {
         $asset->load(['author', 'previews']);
 

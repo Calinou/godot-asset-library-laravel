@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Tweak HTTP headers for better security.
@@ -24,7 +27,12 @@ class SecureHeaders
         'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self' data:",
     ];
 
-    public function handle($request, Closure $next)
+    /**
+     * Handle the request.
+     *
+     * @return Response|RedirectResponse
+     */
+    public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
 

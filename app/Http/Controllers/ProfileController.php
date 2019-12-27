@@ -8,13 +8,15 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ProfileController extends Controller
 {
     /**
      * Display the form used to change the logged in user's name and password.
      */
-    public function edit(Request $request)
+    public function edit(Request $request): View
     {
         $user = $request->user();
 
@@ -27,7 +29,7 @@ class ProfileController extends Controller
      * TODO: Implement changing the email address.
      * This will require the user to confirm their email address again.
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $user = $request->user();
 

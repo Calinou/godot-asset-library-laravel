@@ -18,6 +18,9 @@ class SuccessRespondingUrl implements Rule
 {
     /**
      * Determine if the validation rule passes.
+     *
+     * @param string $attribute
+     * @param mixed $value
      */
     public function passes($attribute, $value): bool
     {
@@ -41,6 +44,8 @@ class SuccessRespondingUrl implements Rule
 
     /**
      * Get the validation error message.
+     *
+     * @return array|string|null
      */
     public function message()
     {

@@ -66,17 +66,25 @@ class AuthServiceProvider extends ServiceProvider
 
         // To edit or remove a review, an user must have posted the review or be an administrator.
         Gate::define('edit-review', function (User $user, AssetReview $assetReview) {
-            return ! $user->is_blocked && ($user->is_admin || $user->id === $assetReview->author->id);
+            if ($assetReview->author) {
+                return ! $user->is_blocked && ($user->is_admin || $user->id === $assetReview->author->id);
+            }
+
+            return false;
         });
 
         // To reply to a review, the user must have a verified email and must be the asset's author.
         // Also, they mustn't have already replied to the review.
         Gate::define('submit-review-reply', function (User $user, AssetReview $assetReview) {
-            return
-                ! $user->is_blocked &&
-                $user->hasVerifiedEmail() &&
-                $assetReview->asset->author_id === $user->id &&
-                $assetReview->reply === null;
+            if ($assetReview->asset) {
+                return
+                    ! $user->is_blocked &&
+                    $user->hasVerifiedEmail() &&
+                    $assetReview->asset->author_id === $user->id &&
+                    $assetReview->reply === null;
+            }
+
+            return false;
         });
 
         // To (un)block an user, the user must be an administrator and must not be

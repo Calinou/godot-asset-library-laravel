@@ -8,6 +8,8 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
@@ -208,6 +210,7 @@ class Asset extends Model
     /**
      * The columns that can be searched for using the search string syntax.
      *
+     * @var array
      * @see https://github.com/lorisleiva/laravel-search-string#configuring-columns
      */
     protected $searchStringColumns = [
@@ -224,6 +227,7 @@ class Asset extends Model
     /**
      * The special keywords allowed in the search string syntax.
      *
+     * @var array<string, bool>
      * @see https://github.com/lorisleiva/laravel-search-string#configuring-special-keywords
      */
     protected $searchStringKeywords = [
@@ -238,7 +242,7 @@ class Asset extends Model
     /**
      * Get the user that posted the asset.
      */
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo('App\User', 'author_id');
     }
@@ -246,7 +250,7 @@ class Asset extends Model
     /**
      * Get the asset's previews.
      */
-    public function previews()
+    public function previews(): HasMany
     {
         return $this->hasMany('App\AssetPreview', 'asset_id');
     }
@@ -254,7 +258,7 @@ class Asset extends Model
     /**
      * Get the asset's versions.
      */
-    public function versions()
+    public function versions(): HasMany
     {
         return $this->hasMany('App\AssetVersion', 'asset_id');
     }
@@ -262,7 +266,7 @@ class Asset extends Model
     /**
      * Get the asset's reviews (sorted by reverse creation date).
      */
-    public function reviews()
+    public function reviews(): HasMany
     {
         return $this->hasMany('App\AssetReview', 'asset_id')->orderBy('created_at', 'desc');
     }

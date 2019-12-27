@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -82,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the user's assets.
      */
-    public function assets()
+    public function assets(): HasMany
     {
         return $this->hasMany('App\Asset', 'author_id');
     }
@@ -90,7 +91,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the user's reviews.
      */
-    public function assetReviews()
+    public function assetReviews(): HasMany
     {
         return $this->hasMany('App\AssetReview', 'author_id');
     }

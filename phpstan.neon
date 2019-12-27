@@ -2,6 +2,14 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-    level: 5
+    level: 8
     paths:
         - app
+
+    # Prevents an error in `Http/Controllers/Auth/LoginController.php`
+    # related to a `scopes()` method call
+    ignoreErrors:
+        - '#Call to an undefined method#'
+
+    # Reduces noise when enforcing static type hints
+    checkMissingIterableValueType: false
