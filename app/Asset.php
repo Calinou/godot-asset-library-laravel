@@ -188,6 +188,7 @@ class Asset extends Model
     protected $appends = [
         'category',
         'tags',
+        'download_hash',
         'download_url',
         'godot_version',
         'icon_url',
@@ -390,6 +391,18 @@ class Asset extends Model
         } else {
             $this->attributes['browse_url'] = rtrim($httpsUrl, '/');
         }
+    }
+
+    /**
+     * Placeholder to make the Godot editor accept the download hash but not verify it.
+     *
+     * TODO: Consider computing the download hash on a per-version basis and store it.
+     *       However, this may not be a good idea as GitHub ZIP hashes aren't guaranteed
+     *       to be the same over a long period of time.
+     */
+    public function getDownloadHashAttribute(): string
+    {
+        return '';
     }
 
     /**

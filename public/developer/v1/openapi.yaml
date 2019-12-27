@@ -111,16 +111,22 @@ components:
           format: url
           description: >
             The asset's changelog URL.
-        donate_url:
+        download_hash:
           type: string
-          format: url
+          default: ''
           description: >
-            The asset's donation URL. This can be set by the author to receive donations (using services like Patreon or GitHub Sponsors).
+            The asset's SHA-256 hash for the latest version.
+            **Note:** This is currently always an empty string as asset versions' hashes aren't computed and stored yet.
         cost:
           type: string
           description: >
             The asset's license as a [SPDX license identifier](https://spdx.org/licenses/).
             For compatibility reasons, this field is called `cost` instead of `license`.
+        donate_url:
+          type: string
+          format: url
+          description: >
+            The asset's donation URL. This can be set by the author to receive donations (using services like Patreon or GitHub Sponsors).
         godot_version:
           type: string
           description: >
