@@ -33,6 +33,7 @@ Route::put('/asset/reviews/{asset_review}', 'AssetController@updateReview')->nam
 Route::delete('/asset/reviews/{asset_review}', 'AssetController@destroyReview')->name('asset.reviews.destroy')->middleware('can:edit-review,asset_review');
 
 Route::get('/user/{user}', 'UserController@show')->name('user.show');
+Route::get('/user/{user}/reviews', 'UserController@indexReviews')->name('user.reviews.index');
 
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit')->middleware('auth');
 Route::patch('/profile', 'ProfileController@update')->name('profile.update')->middleware('auth');

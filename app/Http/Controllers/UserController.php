@@ -21,4 +21,14 @@ class UserController extends Controller
 
         return view('user.show', ['user' => $user]);
     }
+
+    /**
+     * List an user's reviews.
+     */
+    public function indexReviews(User $user): View
+    {
+        $user->assetReviews = $user->assetReviews->sortByDesc('created_at');
+
+        return view('user.reviews.index', ['user' => $user]);
+    }
 }

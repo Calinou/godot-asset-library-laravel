@@ -11,11 +11,17 @@
     {{ __('Joined') }}
     @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($user->created_at)])
     —
+    @if ($user->assetReviews->count() >= 1)
+    <a href="{{ route('user.reviews.index', ['user' => $user]) }}" class="link">
+    @endif
     {{ trans_choice(
       '{0} Reviewed no assets|{1} Reviewed :count asset|[2,*] Reviewed :count assets',
       $user->assetReviews->count(),
       ['count' => $user->assetReviews->count()]
     ) }}
+    @if ($user->assetReviews->count() >= 1)
+    </a>
+    @endif
   </h2>
 
   <h2 class="text-center text-xl font-medium mt-16">
