@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function indexReviews(User $user): View
     {
-        $user->assetReviews = $user->assetReviews->sortByDesc('created_at');
+        $user->assetReviews = $user->assetReviews->load('asset')->sortByDesc('created_at');
 
         return view('user.reviews.index', ['user' => $user]);
     }

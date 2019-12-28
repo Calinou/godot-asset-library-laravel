@@ -56,21 +56,6 @@ class AssetReview extends Model
     ];
 
     /**
-     * The relationships that should always be loaded.
-     *
-     * (We use `$with` because we can't use `load()` with nested submodels for some reason...)
-     * `asset` is used in authorization gates, so it should always be
-     * eager loaded to avoid N+1 queries.
-     *
-     * @var array
-     */
-    protected $with = [
-        'asset',
-        'author',
-        'reply',
-    ];
-
-    /**
      * Get the asset which is the subject of the review.
      */
     public function asset(): BelongsTo

@@ -47,6 +47,8 @@ class AssetController extends Controller
      */
     public function show(Asset $asset): View
     {
+        $asset->reviews->load(['asset', 'author', 'reply']);
+
         return view('asset.show', ['asset' => $asset]);
     }
 

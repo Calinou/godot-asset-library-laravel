@@ -20,7 +20,7 @@ class AdminController extends Controller
     {
         // Display the most recently registered users first as those are
         // more likely to require attention.
-        $users = User::all()->sortByDesc('created_at');
+        $users = User::with(['assets', 'assetReviews'])->orderByDesc('created_at')->get();
 
         return view('admin.index', ['users' => $users]);
     }
