@@ -302,7 +302,7 @@ class AssetController extends Controller
                 $request->session()->flash('statusType', 'success');
                 $request->session()->flash(
                     'status',
-                    __("You edited :author's review for “:asset”!", ['author' => $assetReview->author->name, 'asset' => $asset->title])
+                    __("You edited :author's review for “:asset”!", ['author' => $assetReview->author->username, 'asset' => $asset->title])
                 );
 
                 Log::info("$user edited $assetReview->author's review for $asset.");
@@ -330,7 +330,7 @@ class AssetController extends Controller
             if ($user->is_admin && $assetReview->author->id !== $user->id) {
                 $request->session()->flash(
                     'status',
-                    __("You removed :author's review for “:asset”!", ['author' => $author->name, 'asset' => $asset->title])
+                    __("You removed :author's review for “:asset”!", ['author' => $author->username, 'asset' => $asset->title])
                 );
 
                 Log::info("$user removed $author's review for $asset.");
@@ -361,7 +361,7 @@ class AssetController extends Controller
             $request->session()->flash('statusType', 'success');
             $request->session()->flash(
                 'status',
-                __("Your reply to :author's review has been posted!", ['author' => $assetReview->author->name])
+                __("Your reply to :author's review has been posted!", ['author' => $assetReview->author->username])
             );
 
             $author = Auth::user();

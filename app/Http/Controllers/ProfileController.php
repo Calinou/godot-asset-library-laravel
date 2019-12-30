@@ -24,7 +24,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the logged in user's name and password.
+     * Update the logged in user's information.
      *
      * TODO: Implement changing the email address.
      * This will require the user to confirm their email address again.
@@ -37,17 +37,19 @@ class ProfileController extends Controller
         // name uniqueness check. We can't pass it to a form request as the user
         // isn't part of the controller signature (since it's it's not part of the URL).
         $input = $request->validate([
-            'name' => [
+            'username' => [
                 'required',
                 'string',
-                'max:'.User::NAME_MAX_LENGTH,
+                'max:'.User::USERNAME_MAX_LENGTH,
                 Rule::unique('users')->ignore($user),
             ],
+            'full_name' => ['nullable', 'string', 'max:'.User::FULL_NAME_MAX_LENGTH],
             'current_password' => 'nullable|required_with:new_password|string|password',
             'new_password' => 'nullable|string|min:'.User::PASSWORD_MIN_LENGTH.'|confirmed|different:current_password',
         ]);
 
-        $user->name = $input['name'];
+        $user->username = $input['username'];
+        $user->full_name = $input['full_name'];
 
         if ($input['new_password']) {
             // User is changing their password

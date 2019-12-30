@@ -79,9 +79,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // Bail early and put uniqueness checks last to avoid unnecessary database queries
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:'.User::NAME_MAX_LENGTH, 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'bail', 'string', 'max:'.User::USERNAME_MAX_LENGTH, 'regex:/^[a-zA-Z][a-zA-Z0-9-_]+$/', 'unique:users'],
+            'full_name' => ['nullable', 'string', 'max:'.User::FULL_NAME_MAX_LENGTH],
+            'email' => ['required', 'bail', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:'.User::PASSWORD_MIN_LENGTH, 'confirmed'],
         ]);
     }
@@ -95,7 +97,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

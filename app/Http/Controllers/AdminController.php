@@ -36,7 +36,7 @@ class AdminController extends Controller
         $request->session()->flash('statusType', 'success');
         $request->session()->flash(
             'status',
-            __('The user “:user” has been blocked!', ['user' => $user->name])
+            __('The user “:user” has been blocked!', ['user' => $user->username])
         );
 
         $admin = Auth::user();
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $request->session()->flash('statusType', 'success');
         $request->session()->flash(
             'status',
-            __('The user “:user” has been unblocked!', ['user' => $user->name])
+            __('The user “:user” has been unblocked!', ['user' => $user->username])
         );
 
         $admin = Auth::user();

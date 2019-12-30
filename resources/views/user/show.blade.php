@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', __(":user's profile", ['user' => $user->name]))
+@section('title', __(":user's profile", ['user' => $user->username]))
 
 @section('content')
 <div class="container">
   <h1 class="text-center text-2xl font-medium">
-    {{ __(":user's profile", ['user' => $user->name]) }}
+    {{ __(":user's profile", ['user' => $user->username]) }}
   </h1>
   <h2 class="text-center text-gray-600 mt-2 mb-2">
     {{ __('Joined') }}
@@ -25,7 +25,7 @@
   </h2>
 
   <h2 class="text-center text-xl font-medium mt-16">
-    {{ __('Assets by :user', ['user' => $user->name]) }}
+    {{ __('Assets by :user', ['user' => $user->username]) }}
   </h2>
 
   @if (count($user->assets) >= 1)
@@ -36,7 +36,7 @@
   </section>
   @else
   <div class="mt-8 text-lg text-center text-gray-600">
-    {{ __(":user hasn't posted any assets yet.", ['user' => $user->name]) }}<br>
+    {{ __(":user hasn't posted any assets yet.", ['user' => $user->username]) }}<br>
   </div>
   @endif
 </div>

@@ -26,7 +26,7 @@
           @if ($asset->blurb)
           {{ $asset->blurb }}
           @else
-          {{ __('by :author', ['author' => $asset->author->name]) }}
+          {{ __('by :author', ['author' => $asset->author->username]) }}
           @endif
         </div>
         <div class="text-sm -ml-px mt-2">

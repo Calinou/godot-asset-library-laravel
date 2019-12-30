@@ -19,7 +19,7 @@ class AdminCreate extends Command
         admin:create
         {email? : The administrator's email address (leave blank to prompt)}
         {password? : The administrator's password (leave blank to prompt)}
-        {name? : The administrator's full name (leave blank to prompt)}
+        {username? : The administrator's username (leave blank to prompt)}
     ";
 
     /**
@@ -48,18 +48,18 @@ class AdminCreate extends Command
     {
         $email = $this->argument('email') ?? $this->ask('Email address');
         $password = $this->argument('password') ?? $this->secret('Password');
-        $name = $this->argument('name') ?? $this->ask('Name');
+        $username = $this->argument('username') ?? $this->ask('Username');
 
         // Create an user, mark it as an administrator then save it
         // (`markEmailAsVerified()` automatically saves the model)
         $user = new User();
         $user->forceFill([
-            'name' => $name,
+            'username' => $username,
             'email' => $email,
             'password' => Hash::make($password),
             'is_admin' => true,
         ])->markEmailAsVerified();
 
-        $this->info("Administrator \"$name\" <$email> created!");
+        $this->info("Administrator \"$username\" <$email> created!");
     }
 }

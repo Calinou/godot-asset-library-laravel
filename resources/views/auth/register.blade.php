@@ -14,14 +14,15 @@
 
     <section class="w-full max-w-xs mx-auto mt-8 bg-white dark:bg-gray-800 rounded shadow p-4">
         @component('components/form-input', [
-          'name' => 'name',
-          'label' => __('Name'),
-          'placeholder' => __('Username or full name'),
+          'name' => 'username',
+          'label' => __('Username'),
+          'placeholder' => __('Username'),
           'required' => true,
-          'maxlength' => $userClass::NAME_MAX_LENGTH,
+          'maxlength' => $userClass::USERNAME_MAX_LENGTH,
           'autofocus' => true,
           'autocomplete' => 'username',
         ])
+        {{ __('Can only contain alphanumeric characters, underscores and dashes. Must not begin with a number, underscore or dash.') }}
         @endcomponent
 
         @component('components/form-input', [

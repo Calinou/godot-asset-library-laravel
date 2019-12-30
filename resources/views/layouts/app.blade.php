@@ -120,7 +120,7 @@ EOF);
 
           <div class="navbar-dropdown">
             <a href="{{ route('user.show', ['user' => Auth::user()]) }}" class="button">
-              {{ Auth::user()->name }} <span class="fa fa-angle-down ml-1"></span>
+              {{ Auth::user()->username }} <span class="fa fa-angle-down ml-1"></span>
             </a>
             <div class="navbar-dropdown-content">
               <a href="{{ route('profile.edit') }}" class="block button rounded-none px-6">

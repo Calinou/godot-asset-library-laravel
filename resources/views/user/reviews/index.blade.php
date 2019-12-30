@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', __(":user's reviews", ['user' => $user->name]))
+@section('title', __(":user's reviews", ['user' => $user->username]))
 
 @section('content')
 <div class="container px-0 sm:px-2">
   <h1 class="text-center text-2xl font-medium mb-8">
-    {{ __(":user's reviews", ['user' => $user->name]) }}
+    {{ __(":user's reviews", ['user' => $user->username]) }}
   </h1>
   @if ($user->assetReviews->count() >= 1)
   <table class="w-full lg:w-3/4 xl:w-2/3 mx-auto shadow rounded text-sm">

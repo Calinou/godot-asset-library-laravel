@@ -14,7 +14,8 @@ use Illuminate\Notifications\Notifiable;
  * own assets).
  *
  * @property int $id The user's unique ID.
- * @property string $name The user's nickname or full name (must be unique).
+ * @property string $username The user's username (must be unique). Can only contain alphanumeric characters, underscores and dashes. Must not begin with a number, underscore or dash.
+ * @property ?string $full_name The user's full name.
  * @property string $email The user's email address (must be unique).
  * @property ?\Illuminate\Support\Carbon $email_verified_at The user's email address verficiation date. If not set, the user's email address isn't verified.
  * @property ?string $password The user's hashed password. Can be empty if the user authenticated using OAuth2.
@@ -31,10 +32,16 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     /**
-     * The maximum name length (in characters). If this value is changed,
+     * The maximum username length (in characters). If this value is changed,
      * it will only apply to users registering after the change has been made.
      */
-    public const NAME_MAX_LENGTH = 30;
+    public const USERNAME_MAX_LENGTH = 20;
+
+    /**
+     * The maximum full name length (in characters). If this value is changed,
+     * it will only apply to users registering after the change has been made.
+     */
+    public const FULL_NAME_MAX_LENGTH = 30;
 
     /**
      * The minimum password length (in characters). If this value is changed,
@@ -48,7 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
+        'username',
+        'full_name',
         'email',
         'password',
         'provider',
@@ -101,6 +109,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function __toString(): string
     {
-        return "$this->name (#$this->id)";
+        return "$this->username (#$this->id)";
     }
 }

@@ -35,7 +35,7 @@
           <h2 class="text-lg text-gray-600 mb-2">
             {{ __('by') }}
             <a href="{{ route('user.show', $asset->author) }}" class="link">
-              {{ $asset->author->name }}
+              {{ $asset->author->username }}
             </a>
           </h2>
           <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
@@ -319,7 +319,7 @@
 
       <span class="hidden md:inline">—</span>
       <div class="ml-6 md:ml-0 md:inline">
-        <a href="{{ route('user.show', $review->author) }}" class="link">{{ $review->author->name }}</a>
+        <a href="{{ route('user.show', $review->author) }}" class="link">{{ $review->author->username }}</a>
         {{ __('commented') }}
         @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])
         @if ($review->updated_at->notEqualTo($review->created_at))
@@ -353,7 +353,7 @@
     <div class="content px-4 py-3 mt-6 md:ml-8 bg-gray-300 dark:bg-gray-700 rounded relative text-sm">
       <div class="absolute border-gray-300 dark:border-gray-700 top-0 -mt-6 arrow-up"></div>
       <div class="font-bold text-gray-600 dark:text-gray-300 mb-1">
-        {{ __('Reply from :author', ['author' => $asset->author->name]) }}
+        {{ __('Reply from :author', ['author' => $asset->author->username]) }}
         <span class="ml-4 opacity-75">
           @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->reply->created_at)])
         </span>
