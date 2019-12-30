@@ -34,6 +34,12 @@
   @apply mt-2 text-sm text-red-600;
 }
 
+@screen dark {
+  .form-error {
+    @apply text-red-400;
+  }
+}
+
 .link {
   @apply text-blue-600;
 
