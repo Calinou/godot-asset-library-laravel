@@ -64,7 +64,7 @@ Hello world  —  Search for "Hello" and "world" individually
 "Hello world"  —  Perform an exact match instead of matching words individually
 score >= 3  —  Show assets with a score greater than or equal to 3
 license = MIT  —  Show assets licensed under the MIT license (use SPDX identifiers)
-updated_at > 2019-01-01  —  Show assets updated after January 1 2019
+updated_at > 2020-01-01  —  Show assets updated after January 1 2020
 EOF);
               @endphp
               <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2"
@@ -180,7 +180,7 @@ EOF);
     @yield('content')
 
     <footer class="mt-12 py-12 bg-gray-300 text-gray-600 dark:bg-gray-900 text-center">
-      © 2019 {{ config('app.name') }}
+      © 2019-2020 {{ config('app.name') }}
       @can('admin')
         —
         <a class="link text-center" href="{{ route('admin.index') }}">
