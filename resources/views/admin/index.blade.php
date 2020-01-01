@@ -8,7 +8,13 @@
     {{ __('Administration panel') }}
   </h2>
 
-  <div class="mt-8">
+  {{--
+    We must append the query parameters so that search filters carry on
+    when the user clicks a page number
+  --}}
+  {{ $users->appends(Request::all())->links() }}
+
+  <div class="my-8">
     <table class="w-full xl:w-3/4 mx-auto shadow rounded text-sm">
       <thead>
         <tr class="font-bold">
@@ -91,5 +97,11 @@
       </tbody>
     </table>
   </div>
+
+  {{--
+    We must append the query parameters so that search filters carry on
+    when the user clicks a page number
+  --}}
+  {{ $users->appends(Request::all())->links() }}
 </div>
 @endsection

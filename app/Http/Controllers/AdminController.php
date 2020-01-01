@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListUsers;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -14,15 +16,26 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AdminController extends Controller
 {
     /**
-     * Display a list of unapproved and approved users.
+     * Display a paginated list of users.
      */
-    public function index(): View
+    public function index(ListUsers $request): View
     {
+        $validated = $request->validated();
+
+        $itemsPerPage = $validated['max_results'] ?? 50;
+        $page = $validated['page'] ?? 1;
+
         // Display the most recently registered users first as those are
         // more likely to require attention.
         $users = User::with(['assets', 'assetReviews'])->orderByDesc('created_at')->get();
+        $paginator = new LengthAwarePaginator(
+            $users->slice(intval(($page - 1) * $itemsPerPage), $itemsPerPage)->values(),
+            $users->count(),
+            $itemsPerPage
+        );
+        $paginator->withPath(route('admin.index'));
 
-        return view('admin.index', ['users' => $users]);
+        return view('admin.index', ['users' => $paginator]);
     }
 
     /**
