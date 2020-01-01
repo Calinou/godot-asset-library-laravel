@@ -157,40 +157,13 @@
               'type' => 'url',
               'name' => 'browse_url',
               'value' => $editing ? $asset->browse_url : null,
-              'label' => __('Repository URL'),
+              'label' => __('Git repository URL'),
               'placeholder' => 'https://github.com/user/asset',
               'required' => true,
               'maxlength' => 2000,
               'autocomplete' => 'off',
             ])
             {{ __('This must be a URL to a public GitHub, GitLab.com or Bitbucket repository.') }}
-            @endcomponent
-
-            @if (!$editing)
-            @component('components/form-input', [
-              'type' => 'url',
-              'name' => 'versions[0][download_url]',
-              'value' => old('versions.0.download_url'),
-              'label' => __('Custom download URL'),
-              'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
-              'maxlength' => 2000,
-              'autocomplete' => 'off',
-            ])
-            {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
-            {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
-            @endcomponent
-            @endif
-
-            @component('components/form-input', [
-              'type' => 'url',
-              'name' => 'issues_url',
-              'value' => $editing ? $asset->issues_url : null,
-              'label' => __('Issues URL'),
-              'placeholder' => 'https://github.com/user/asset/issues',
-              'maxlength' => 2000,
-              'autocomplete' => 'off',
-            ])
-            {{ __('If you leave this field empty, the issue reporting URL will be inferred from the repository URL.') }}
             @endcomponent
 
             @component('components/form-input', [
@@ -217,18 +190,45 @@
             {{ __('Optional. This URL should point to a page to be used for donations (such as Patreon or GitHub Sponsors).') }}
             @endcomponent
 
+            @if (!$editing)
+            @component('components/form-input', [
+              'type' => 'url',
+              'name' => 'versions[0][download_url]',
+              'value' => old('versions.0.download_url'),
+              'label' => __('Custom download URL'),
+              'placeholder' => 'https://github.com/user/asset/archive/v1.0.0.zip',
+              'maxlength' => 2000,
+              'autocomplete' => 'off',
+            ])
+            {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
+            {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
+            @endcomponent
+            @endif
+
             @component('components/form-input', [
               'type' => 'url',
               'name' => 'icon_url',
               'value' => $editing ? $asset->icon_url : null,
-              'label' => __('Icon URL'),
+              'label' => __('Custom icon URL'),
               'placeholder' => 'https://raw.githubusercontent.com/user/asset/master/icon.png',
               'maxlength' => 2000,
               'autocomplete' => 'off',
             ])
-            {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
+            {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the repository\'s root directory.') }}
             {{ __('Only PNG or JPEG images are allowed.') }}
-            {{ __('If you leave this field empty, the icon must be committed to the repository as "icon.png" in the root directory.') }}
+            {{ __('The recommended size is 256×256, but lower sizes are allowed.') }}<br>
+            @endcomponent
+
+            @component('components/form-input', [
+              'type' => 'url',
+              'name' => 'issues_url',
+              'value' => $editing ? $asset->issues_url : null,
+              'label' => __('Custom issue reporting URL'),
+              'placeholder' => 'https://github.com/user/asset/issues',
+              'maxlength' => 2000,
+              'autocomplete' => 'off',
+            ])
+            {{ __('If you leave this field empty, the issue reporting URL will be inferred from the repository URL.') }}
             @endcomponent
           </section>
 
