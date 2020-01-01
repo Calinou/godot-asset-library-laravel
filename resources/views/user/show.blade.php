@@ -24,6 +24,33 @@
     @endif
   </h2>
 
+  @can('block-user', $user)
+  <div class="text-center">
+    <h2 class="text-center text-xl font-medium mt-8 mb-4">
+        {{ __('Actions') }}
+      </h2>
+    @if ($user->is_blocked)
+    <form method="POST" action="{{ route('admin.unblock', ['user' => $user]) }}">
+      @csrf
+      @method('PUT')
+      <button type="submit" class="button">
+        <span class="fa fa-circle-o fa-fw -ml-1 mr-1 opacity-75"></span>
+        {{ __('Unblock') }}
+      </button>
+    </form>
+    @else
+    <form method="POST" action="{{ route('admin.block', ['user' => $user]) }}">
+      @csrf
+      @method('PUT')
+      <button type="submit" class="button text-red-700">
+        <span class="fa fa-ban fa-fw -ml-1 mr-1 opacity-75"></span>
+        {{ __('Block') }}
+      </button>
+    </form>
+    @endif
+  </div>
+  @endcan
+
   <h2 class="text-center text-xl font-medium mt-16">
     {{ __('Assets by :user', ['user' => $user->username]) }}
   </h2>
