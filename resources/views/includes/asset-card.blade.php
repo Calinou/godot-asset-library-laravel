@@ -8,7 +8,7 @@
           Use smaller icons on mobile displays. Do not round the right side of
           the icon on larger displays, as its height will match the card height.
         --}}
-        <img class="object-cover w-20 h-20 sm:w-26 sm:h-26 bg-gray-400 rounded sm:rounded-r-none" src="{{ $asset->icon_url }}">
+        <img class="object-cover w-20 h-20 sm:w-26 sm:h-26 bg-gray-400 dark:bg-gray-700 rounded sm:rounded-r-none" src="{{ $asset->icon_url }}">
       </div>
       {{--
         Offset the right panel slightly on the Y axis to make tags

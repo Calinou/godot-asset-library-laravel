@@ -28,7 +28,7 @@
     <div class="lg:w-1/2 lg:px-6">
       <div class="flex mb-5">
         <div class="flex-shrink-0 self-center">
-          <img class="object-cover w-26 h-26 bg-gray-400 rounded" src="{{ $asset->icon_url }}">
+          <img class="object-cover w-26 h-26 bg-gray-400 dark:bg-gray-700 rounded" src="{{ $asset->icon_url }}">
         </div>
         <div class="ml-6">
           <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
