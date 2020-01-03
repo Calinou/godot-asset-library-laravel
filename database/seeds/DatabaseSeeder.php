@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Database\Seeds;
+
 use App\Asset;
 use App\AssetPreview;
 use App\AssetReview;
