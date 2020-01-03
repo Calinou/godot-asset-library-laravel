@@ -32,24 +32,30 @@ class MigrateLegacyDbSeeder extends Seeder
         DB::unprepared('DROP TABLE as_users;');
 
         // Don't return users with a duplicate email address
-        $users->unique('email', true)->each(function ($user) {
-            User::create([
+        $newUsers = $users->unique('email', true)->map(function ($user) {
+            return [
                 'id' => $user->user_id,
                 'username' => $user->username,
                 'email' => $user->email,
                 'password' => $user->password_hash,
                 // Convert level-based privileges to a single administrator status
                 'is_admin' => $user->type >= 50,
-            ])->markEmailAsVerified();
+                'email_verified_at' => now(),
+            ];
         });
+
+        User::insert($newUsers->all());
 
         $assets = DB::table('as_assets')->get();
         DB::unprepared('DROP TABLE as_assets;');
+        $newAssets = [];
+        $newVersions = [];
+
         $assets->reject(function ($asset) {
             // Unpublished assets use a Godot version set to `0` in the old asset library
             return ! $asset->searchable || $asset->godot_version === 0;
-        })->each(function ($asset) {
-            Asset::create([
+        })->each(function ($asset) use (&$newAssets, &$newVersions) {
+            $newAssets[] = [
                 'asset_id' => $asset->asset_id,
                 'title' => $asset->title,
                 'description' => $asset->description,
@@ -64,33 +70,55 @@ class MigrateLegacyDbSeeder extends Seeder
                 'created_at' => $asset->modify_date,
                 'modify_date' => $asset->modify_date,
                 // Fix winston-yallow's user ID due to two accounts sharing the same email address
-                'author_id' => $asset->user_id === 1951 ? 1703 : $asset->user_id,
-            ]);
+                'author_id' => $this->getAuthorId($asset->user_id),
+            ];
 
-            AssetVersion::create([
+            $newVersions[] = [
                 'version_string' => $asset->version_string,
                 'godot_version' => $this->getGodotVersion($asset->godot_version),
                 'download_url' => $this->getDownloadUrl($asset->download_provider, $asset->browse_url, $asset->download_commit),
                 'created_at' => $asset->modify_date,
                 'modify_date' => $asset->modify_date,
                 'asset_id' => $asset->asset_id,
-            ]);
+            ];
         });
+
+        Asset::insert($newAssets);
+        AssetVersion::insert($newVersions);
 
         $assetPreviews = DB::table('as_asset_previews')->get();
         DB::unprepared('DROP TABLE as_asset_previews;');
-        $assetPreviews->each(function ($assetPreview) {
-            AssetPreview::create([
+        $newAssetPreviews = $assetPreviews->map(function ($assetPreview) {
+            return [
                 'type_id' => $assetPreview->type === 'video' ? AssetPreview::TYPE_VIDEO : AssetPreview::TYPE_IMAGE,
                 'link' => $assetPreview->link,
                 'thumbnail' => $assetPreview->thumbnail,
                 'asset_id' => $assetPreview->asset_id,
-            ]);
+            ];
         });
+
+        AssetPreview::insert($newAssetPreviews->all());
 
         // Re-enable mass assignment protection on affected models
         User::reguard();
         Asset::reguard();
+    }
+
+    /**
+     * Return the canonical author ID for an asset.
+     * The old asset library allowed registering several accounts with the same
+     * email address. The new one no longer allows this.
+     */
+    private function getAuthorId(int $userId): int
+    {
+        switch ($userId) {
+            case 1418: // RafaelFreita
+                return 1407;
+            case 1951: // winston-yallow
+                return 1703;
+            default:
+                return $userId;
+        }
     }
 
     /**
