@@ -76,7 +76,7 @@ class LoginController extends Controller
             // as the OAuth2 provider has most likely verified it before.
             $user = new User();
             $user->fill([
-                'name' => $userSocial->getName(),
+                'username' => $userSocial->getNickname(),
                 'email' => $userSocial->getEmail(),
                 'provider' => $provider,
                 'provider_id' => $userSocial->getId(),
