@@ -183,7 +183,7 @@
       {{-- Large image display --}}
       @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === $assetPreviewClass::TYPE_IMAGE)
       <a id="gallery-image-anchor" href="{{ $asset->previews[0]->link }}" target="_blank" rel="nofollow noopener noreferrer">
-        <div class="relative pb-9/16 bg-gray-400 rounded">
+        <div class="relative pb-9/16 bg-gray-400 dark:bg-gray-700 rounded">
           <img
             id="gallery-image-big"
             src="{{ $asset->previews[0]->link }}"
@@ -213,7 +213,7 @@
         @if ($preview->type_id === $assetPreviewClass::TYPE_IMAGE)
         <div class="w-1/4 px-px">
           <a href="{{ $preview->link }}" target="_blank" rel="nofollow noopener noreferrer">
-            <div class="relative pb-9/16 bg-gray-400 rounded">
+            <div class="relative pb-9/16 bg-gray-400 dark:bg-gray-700 rounded">
               <img
                 src="{{ $preview->thumbnail ?? $preview->link }}"
                 alt="{{ $preview->caption }}"
