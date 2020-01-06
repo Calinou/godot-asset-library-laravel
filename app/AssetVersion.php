@@ -41,6 +41,18 @@ class AssetVersion extends Model
     ];
 
     /**
+     * The available Godot versions that can be used for filtering in the API.
+     * The Godot editor sends its version as `major.minor` in the `godot_version`
+     * query string parameter, so this must be done for compatibility reasons.
+     */
+    public const GODOT_VERSION_FILTERS = [
+        '3.0',
+        '3.1',
+        '3.2',
+        '4.0',
+    ];
+
+    /**
      * The key used to store the last modification date and time.
      * This value has been changed from the default for consistency with Asset.
      */

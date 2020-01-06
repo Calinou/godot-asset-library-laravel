@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use App\Asset;
+use App\AssetVersion;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ListAssets extends FormRequest
 {
@@ -30,6 +32,7 @@ class ListAssets extends FormRequest
             'user' => 'nullable|string',
             'type' => 'nullable|string|in:any,addon,project',
             'category' => 'nullable|integer|gte:0|lt:'.Asset::CATEGORY_MAX,
+            'godot_version' => ['nullable', 'string', Rule::in(AssetVersion::GODOT_VERSION_FILTERS)],
             'reverse' => 'nullable|string',
             'sort' => 'nullable|string',
             'filter' => 'nullable|string',

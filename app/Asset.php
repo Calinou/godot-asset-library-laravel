@@ -623,10 +623,6 @@ class Asset extends Model
             $query->where('author_id', $queryAuthorId);
         }
 
-        if (isset($validated['godot_version'])) {
-            $query->where('godot_version', $validated['godot_version']);
-        }
-
         if (isset($validated['filter'])) {
             // Search string options are defined in the Asset model
             $query->usingSearchString($validated['filter']);
@@ -657,9 +653,25 @@ class Asset extends Model
             $query->orderBy('modify_date', $reverse ? 'asc' : 'desc');
         }
 
-        // Filtering and ordering must be done above
+        // Query builder methods must be called above, not below
 
         $result = $query->get();
+
+        if (isset($validated['godot_version'])) {
+            // Filtering on a computed property can't be done with the query builder,
+            // so we have to do it on the returned collection instead.
+            // See `AssetVersion::GODOT_VERSION_FILTERS` for the list of allowed version filters.
+
+            // Only return results compatible with the given Godot version filter.
+            // Assets whose Godot version is `*` are declared to be compatible with
+            // any Godot version (this is typically used for non-code assets).
+            $result = $result->filter(function ($asset) use ($validated) {
+                return $asset->godot_version === '*'
+                || $asset->godot_version === '3.x.x' && Str::startsWith($validated['godot_version'], '3')
+                || $asset->godot_version === '4.x.x' && Str::startsWith($validated['godot_version'], '4')
+                || $asset->godot_version === $validated['godot_version'].'.x';
+            });
+        }
 
         return $result;
     }
