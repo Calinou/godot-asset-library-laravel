@@ -13,10 +13,8 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Create users and associated assets
         factory(User::class, 10)->create()->each(function (User $user) {

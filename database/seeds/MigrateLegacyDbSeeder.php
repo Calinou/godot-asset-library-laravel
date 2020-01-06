@@ -16,10 +16,8 @@ class MigrateLegacyDbSeeder extends Seeder
     /**
      * Seed the application's database.
      * Old tables are removed as soon as they aren't relevant anymore.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Remove unused categories table
         DB::unprepared('DROP TABLE as_categories;');
