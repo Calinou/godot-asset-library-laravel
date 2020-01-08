@@ -20,7 +20,7 @@
   @component('components/alert', [
     'type' => 'warning',
   ])
-  {{ __("This asset won't be visible by other users until it's made public by an administrator.") }}
+  {{ __("This asset has been unpublished. It won't be visible by other users until it's made public by an administrator.") }}
   @endcomponent
   @endif
 
