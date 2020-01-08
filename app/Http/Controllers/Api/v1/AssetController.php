@@ -25,7 +25,7 @@ class AssetController extends Controller
             // Flatten the author array for compatibility with the existing API
             // We have to unset the old value before setting it with the string
             // for some reason...
-            $authorName = $asset['author']['name'];
+            $authorName = $asset['author']['username'];
             unset($asset['author']);
             $asset['author'] = $authorName;
 
@@ -56,7 +56,7 @@ class AssetController extends Controller
         // Flatten the author array for compatibility with the existing API
         // We have to unset the old value before setting it with the string
         // for some reason...
-        $authorName = $asset['author']['name'];
+        $authorName = $asset['author']['username'];
         unset($asset['author']);
         $asset['author'] = $authorName;
 
