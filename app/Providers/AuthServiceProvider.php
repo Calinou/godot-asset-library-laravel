@@ -35,8 +35,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Unpublished assets can only be viewed by administrators or their author.
-        Gate::define('view-asset', function (User $user, Asset $asset) {
-            return $asset->is_published || $user->is_admin || $asset->author_id === $user->id;
+        // Making the type `$user` hint nullable makes the gate callable from
+        // unauthenticated requests as well.
+        Gate::define('view-asset', function (?User $user, Asset $asset) {
+            return $asset->is_published || $user && $user->is_admin || $user && $asset->author_id === $user->id;
         });
 
         Gate::define('submit-asset', function (User $user) {
