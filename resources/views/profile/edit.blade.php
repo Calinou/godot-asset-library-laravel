@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@inject('userClass', 'App\User')
 
 @section('title', __('Edit profile'))
 
@@ -20,7 +19,7 @@
           'label' => __('Username'),
           'placeholder' => __('Username'),
           'required' => true,
-          'maxlength' => $userClass::USERNAME_MAX_LENGTH,
+          'maxlength' => App\User::USERNAME_MAX_LENGTH,
           'autofocus' => true,
           'autocomplete' => 'username',
         ])
@@ -32,7 +31,7 @@
           'value' => $user->full_name,
           'label' => __('Full name'),
           'placeholder' => __('Full name'),
-          'maxlength' => $userClass::FULL_NAME_MAX_LENGTH,
+          'maxlength' => App\User::FULL_NAME_MAX_LENGTH,
         ])
         @endcomponent
 
@@ -60,17 +59,17 @@
           'name' => 'new_password',
           'autocomplete' => 'new-password',
           'label' => __('New password'),
-          'minlength' => $userClass::PASSWORD_MIN_LENGTH,
+          'minlength' => App\User::PASSWORD_MIN_LENGTH,
           'autocomplete' => 'new-password',
         ])
-        {{ __('Must be at least :passwordMinLength characters long.', ['passwordMinLength' => $userClass::PASSWORD_MIN_LENGTH]) }}
+        {{ __('Must be at least :passwordMinLength characters long.', ['passwordMinLength' => App\User::PASSWORD_MIN_LENGTH]) }}
         @endcomponent
 
         @component('components/form-input', [
           'type' => 'password',
           'name' => 'new_password_confirmation',
           'label' => __('Confirm new password'),
-          'minlength' => $userClass::PASSWORD_MIN_LENGTH,
+          'minlength' => App\User::PASSWORD_MIN_LENGTH,
           'autocomplete' => 'new-password',
         ])
         @endcomponent

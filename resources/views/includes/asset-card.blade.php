@@ -1,5 +1,3 @@
-@inject('assetClass', 'App\Asset')
-
 <div class="w-full lg:w-1/2 px-2 my-2">
   <a href="{{ route('asset.show', ['asset' => $asset ]) }}">
     <article class="flex bg-white dark:bg-gray-800 rounded shadow hover-active-darken">
@@ -37,15 +35,15 @@
           <span class="m-1 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">{{ $asset->godot_version }}</span>
           @php
             switch (intval($asset->support_level_id)) {
-              case ($assetClass::SUPPORT_LEVEL_OFFICIAL):
+              case (App\Asset::SUPPORT_LEVEL_OFFICIAL):
                 $supportLevelClasses = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
                 $supportLevelIcon = 'fa-check';
                 break;
-              case ($assetClass::SUPPORT_LEVEL_COMMUNITY):
+              case (App\Asset::SUPPORT_LEVEL_COMMUNITY):
                 $supportLevelClasses = 'bg-gray-200 dark:bg-gray-700';
                 $supportLevelIcon = '';
                 break;
-              case ($assetClass::SUPPORT_LEVEL_TESTING):
+              case (App\Asset::SUPPORT_LEVEL_TESTING):
                 $supportLevelClasses = 'bg-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
                 $supportLevelIcon = 'fa-exclamation-circle';
                 break;

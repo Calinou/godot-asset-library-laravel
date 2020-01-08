@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@inject('assetPreviewClass', 'App\AssetPreview')
 
 @section('title', $asset->title)
 @section('description', $asset->blurb)
@@ -181,7 +180,7 @@
 
     <div class="lg:w-1/2 lg:px-6">
       {{-- Large image display --}}
-      @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === $assetPreviewClass::TYPE_IMAGE)
+      @if (count($asset->previews) >= 1 && $asset->previews[0]->type_id === App\AssetPreview::TYPE_IMAGE)
       <a id="gallery-image-anchor" href="{{ $asset->previews[0]->link }}" target="_blank" rel="nofollow noopener noreferrer">
         <div class="relative pb-9/16 bg-gray-400 dark:bg-gray-700 rounded">
           <img
@@ -210,7 +209,7 @@
       @if (count($asset->previews) >= 2)
       <div class="flex justify-center mt-2 -mx-px">
         @foreach ($asset->previews as $preview)
-        @if ($preview->type_id === $assetPreviewClass::TYPE_IMAGE)
+        @if ($preview->type_id === App\AssetPreview::TYPE_IMAGE)
         <div class="w-1/4 px-px">
           <a href="{{ $preview->link }}" target="_blank" rel="nofollow noopener noreferrer">
             <div class="relative pb-9/16 bg-gray-400 dark:bg-gray-700 rounded">

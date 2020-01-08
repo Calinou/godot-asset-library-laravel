@@ -1,5 +1,3 @@
-@inject('assetVersionClass', 'App\AssetVersion')
-
 @php
 // If `$prototype` is `true`, the array index will be replaced with
 // a placeholder value that must be replaced with JavaScript (see `$index`).
@@ -40,7 +38,7 @@ $index = $prototype ? '__index__' : $loop->index;
       'label' => __('Godot version'),
       'placeholder' => __('Select a Godot version'),
       'required' => true,
-      'choices' => $assetVersionClass::GODOT_VERSIONS,
+      'choices' => App\AssetVersion::GODOT_VERSIONS,
     ])
     @endcomponent
   </div>

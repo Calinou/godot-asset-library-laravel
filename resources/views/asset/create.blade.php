@@ -1,6 +1,4 @@
 @extends('layouts.app')
-@inject('assetClass', 'App\Asset')
-@inject('assetVersionClass', 'App\AssetVersion')
 
 @if ($editing)
 @section('title', __('Edit “:asset”', ['asset' => $asset->title]))
@@ -85,14 +83,14 @@
               'autocomplete' => 'off',
             ])
             {{ __('A comma-separated list of tags (up to :maxTags). Only lowercase characters, numbers and dashes are allowed in tag names.',
-                ['maxTags' => $assetClass::MAX_TAGS]) }}
+                ['maxTags' => App\Asset::MAX_TAGS]) }}
             @endcomponent
 
             <div class="sm:flex sm:justify-between">
               @php
               $categories = [];
-              foreach (range(0, $assetClass::CATEGORY_MAX - 1) as $categoryId) {
-                $categories[] = $assetClass::getCategoryName($categoryId);
+              foreach (range(0, App\Asset::CATEGORY_MAX - 1) as $categoryId) {
+                $categories[] = App\Asset::getCategoryName($categoryId);
               }
               @endphp
 
@@ -112,7 +110,7 @@
                 'label' => __('License'),
                 'placeholder' => __('Select a license'),
                 'required' => true,
-                'choices' =>  $assetClass::LICENSES,
+                'choices' =>  App\Asset::LICENSES,
               ])
               {{ __('See') }}
               <a
@@ -143,7 +141,7 @@
                 'label' => __('Godot version'),
                 'placeholder' => __('Select a Godot version'),
                 'required' => true,
-                'choices' => $assetVersionClass::GODOT_VERSIONS,
+                'choices' => App\AssetVersion::GODOT_VERSIONS,
               ])
               @endcomponent
             </div>
