@@ -19,7 +19,7 @@ Route::permanentRedirect('/asset', url('/'));
 Route::get('/asset/submit', 'AssetController@create')->name('asset.create')->middleware('can:submit-asset');
 Route::post('/asset', 'AssetController@store')->name('asset.store')->middleware('can:submit-asset');
 
-Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show');
+Route::get('/asset/{asset}', 'AssetController@show')->name('asset.show')->middleware('can:view-asset,asset');
 Route::get('/asset/{asset}/edit', 'AssetController@edit')->name('asset.edit')->middleware('can:edit-asset,asset');
 Route::put('/asset/{asset}', 'AssetController@update')->name('asset.update')->middleware('can:edit-asset,asset');
 Route::put('/asset/{asset}/archive', 'AssetController@archive')->name('asset.archive')->middleware('can:edit-asset,asset');

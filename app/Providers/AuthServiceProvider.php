@@ -34,6 +34,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
+        // Unpublished assets can only be viewed by administrators or their author.
+        Gate::define('view-asset', function (User $user, Asset $asset) {
+            return $asset->is_published || $user->is_admin || $asset->author_id === $user->id;
+        });
+
         Gate::define('submit-asset', function (User $user) {
             return ! $user->is_blocked;
         });
