@@ -17,7 +17,7 @@ Route::group([
     'namespace' => 'Api\v1',
     'prefix' => 'v1',
 ], function () {
-    Route::get('/asset', 'AssetController@index')->middleware('can:view-asset,asset');
+    Route::get('/asset', 'AssetController@index');
     Route::get('/asset/{asset}', 'AssetController@show');
 
     Route::get('/configure', 'ConfigureController@index');

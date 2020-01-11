@@ -47,8 +47,8 @@ and seed test data again.
 
 #### Code quality tools
 
-- Feature tests are available. They use an in-memory database, so your existing
-  data isn't affected when running them.
+- Feature tests are available. They use a secondary MySQL database configured
+  in `.env.testing`. You need to create this database before running them.
 - This project follows the Laravel code style,
   applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
 - Code is analysed with PHPStan thanks to

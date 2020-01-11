@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\AssetReview;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(AssetReview::class, function (Faker $faker) {
@@ -12,8 +13,7 @@ $factory->define(AssetReview::class, function (Faker $faker) {
     return [
         'is_positive' => $faker->boolean(75),
         'comment' => $faker->text(250),
-        // The highest ID should be lower than the number of users created in DatabaseSeeder
-        'author_id' => $faker->numberBetween(1, 10),
+        'author_id' => $faker->randomElement(User::all()->pluck('id')->toArray()),
         'created_at' => $creationDate,
         'updated_at' => $creationDate,
     ];
