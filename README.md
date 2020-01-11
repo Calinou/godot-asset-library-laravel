@@ -61,7 +61,7 @@ Use the commands below:
 vendor/bin/phpunit
 
 # Check PHP code for possible errors
-php artisan code:analyse --level 7
+vendor/bin/phpstan analyse
 
 # Try to fix code style violations automatically
 vendor/bin/php-cs-fixer fix
