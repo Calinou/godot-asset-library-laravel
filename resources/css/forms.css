@@ -40,7 +40,8 @@
   }
 }
 
-.link {
+.link,
+.content a {
   @apply text-blue-600;
 
   &:hover,
@@ -54,7 +55,8 @@
 }
 
 @screen dark {
-  .link {
+  .link,
+  .content a {
     @apply text-blue-300;
 
     &:hover,
