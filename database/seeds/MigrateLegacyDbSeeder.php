@@ -8,6 +8,7 @@ use App\Asset;
 use App\AssetPreview;
 use App\AssetVersion;
 use App\User;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -57,6 +58,7 @@ class MigrateLegacyDbSeeder extends Seeder
                 'asset_id' => $asset->asset_id,
                 'title' => $asset->title,
                 'description' => $asset->description,
+                'html_description' => Markdown::convertToHtml($asset->description),
                 // Category indices start at 0 in the new asset library,
                 // whereas they started at 1 in the old one
                 'category_id' => $asset->category_id - 1,
