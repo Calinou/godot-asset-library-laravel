@@ -5213,16 +5213,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.5.1",
+            "version": "v0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "6b929cbb11139d88bcc99a7ba699505fddcbf44f"
+                "reference": "a4cc1d5861123ea4c6b5c966a092063fb70a144b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/6b929cbb11139d88bcc99a7ba699505fddcbf44f",
-                "reference": "6b929cbb11139d88bcc99a7ba699505fddcbf44f",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/a4cc1d5861123ea4c6b5c966a092063fb70a144b",
+                "reference": "a4cc1d5861123ea4c6b5c966a092063fb70a144b",
                 "shasum": ""
             },
             "require": {
@@ -5281,7 +5281,7 @@
                 "php",
                 "static analysis"
             ],
-            "time": "2020-02-04T15:59:04+00:00"
+            "time": "2020-02-10T12:49:03+00:00"
         },
         {
             "name": "phar-io/manifest",
