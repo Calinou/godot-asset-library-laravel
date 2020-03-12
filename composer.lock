@@ -4124,25 +4124,25 @@
         },
         {
             "name": "beyondcode/laravel-query-detector",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beyondcode/laravel-query-detector.git",
-                "reference": "12ca2c9864f8aef2cbe20287682cd3764b291eb0"
+                "reference": "dc41392e3f7ac39f7880cc834dc7387be448f0c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/12ca2c9864f8aef2cbe20287682cd3764b291eb0",
-                "reference": "12ca2c9864f8aef2cbe20287682cd3764b291eb0",
+                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/dc41392e3f7ac39f7880cc834dc7387be448f0c2",
+                "reference": "dc41392e3f7ac39f7880cc834dc7387be448f0c2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^5.5|^6",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0",
                 "php": "^7.1"
             },
             "require-dev": {
-                "orchestra/testbench": "3.6.*",
-                "phpunit/phpunit": "^7.0"
+                "orchestra/testbench": "^3.0 || ^4.0 || ^5.0",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
             "extra": {
@@ -4175,7 +4175,7 @@
                 "beyondcode",
                 "laravel-query-detector"
             ],
-            "time": "2019-09-18T19:07:08+00:00"
+            "time": "2020-03-11T09:06:03+00:00"
         },
         {
             "name": "composer/ca-bundle",
