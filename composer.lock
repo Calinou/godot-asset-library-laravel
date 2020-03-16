@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bc83e422f0ed2a793f3baf54411036d",
+    "content-hash": "d1e5f33c961a20c07a1ed6baef8ffc5e",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -593,32 +593,32 @@
         },
         {
             "name": "htmlmin/htmlmin",
-            "version": "v6.0.1",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HTMLMin/Laravel-HTMLMin.git",
-                "reference": "5351960ee6a9e48d9562b57003db5782a4cc5eab"
+                "reference": "f619d0d52864623261b76ee56084797879cb7a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HTMLMin/Laravel-HTMLMin/zipball/5351960ee6a9e48d9562b57003db5782a4cc5eab",
-                "reference": "5351960ee6a9e48d9562b57003db5782a4cc5eab",
+                "url": "https://api.github.com/repos/HTMLMin/Laravel-HTMLMin/zipball/f619d0d52864623261b76ee56084797879cb7a5d",
+                "reference": "f619d0d52864623261b76ee56084797879cb7a5d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "illuminate/filesystem": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "illuminate/http": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "illuminate/routing": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
+                "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/filesystem": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/http": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/routing": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/view": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
                 "mrclay/minify": "^2.2",
                 "php": ">=5.5.9"
             },
             "require-dev": {
                 "graham-campbell/testbench": "^3.1|^4.0|^5.0",
                 "mockery/mockery": "^0.9.4|^1.0",
-                "phpunit/phpunit": "^4.8|^5.0|^6.0|^7.0"
+                "phpunit/phpunit": "^4.8|^5.0|^6.0|^7.0|^8.0"
             },
             "type": "library",
             "extra": {
@@ -664,7 +664,7 @@
                 "laravel",
                 "minifier"
             ],
-            "time": "2019-10-20T14:34:11+00:00"
+            "time": "2020-03-13T15:59:06+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
