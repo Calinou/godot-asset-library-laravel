@@ -1309,16 +1309,16 @@
         },
         {
             "name": "lorisleiva/laravel-search-string",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lorisleiva/laravel-search-string.git",
-                "reference": "5fd936cb2dd9e604a5786cfbacf0e1e0eb538e8f"
+                "reference": "68189cad7614d0c9cb09a83315e1ccfe49e7f0c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lorisleiva/laravel-search-string/zipball/5fd936cb2dd9e604a5786cfbacf0e1e0eb538e8f",
-                "reference": "5fd936cb2dd9e604a5786cfbacf0e1e0eb538e8f",
+                "url": "https://api.github.com/repos/lorisleiva/laravel-search-string/zipball/68189cad7614d0c9cb09a83315e1ccfe49e7f0c1",
+                "reference": "68189cad7614d0c9cb09a83315e1ccfe49e7f0c1",
                 "shasum": ""
             },
             "require": {
@@ -1351,7 +1351,7 @@
                 }
             ],
             "description": "Generates database queries based on one unique string using a simple and customizable syntax.",
-            "time": "2020-03-01T14:09:46+00:00"
+            "time": "2020-04-05T15:40:30+00:00"
         },
         {
             "name": "monolog/monolog",
