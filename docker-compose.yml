@@ -1,0 +1,32 @@
+version: '2.4'
+
+services:
+
+  web:
+    build:
+      context: .
+    ports:
+      - 80:80
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=mysql
+      - WEB_DOCUMENT_ROOT=/app/public
+      - WEB_DOCUMENT_INDEX=index.php
+      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-localhost}
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_DATABASE
+
+
+volumes:
+
+  mysql_data:

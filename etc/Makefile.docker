@@ -1,0 +1,39 @@
+
+XDEBUG_REMOTE_HOST := $(shell hostname -I | grep -o "^\S*")
+
+
+## Docker - restart docker-compose containers
+docker: docker-restart
+
+## Docker - build docker-compose containers
+docker-build:
+	@docker-compose -f docker-compose.yml build
+.PHONY: docker-build
+
+## Docker - up docker-compose containers
+docker-up:
+	@XDEBUG_REMOTE_HOST=$(XDEBUG_REMOTE_HOST) docker-compose -f docker-compose.yml up -d
+.PHONY: docker-up
+
+## Docker - stop docker-compose containers
+docker-down:
+	@docker-compose -f docker-compose.yml down
+.PHONY: docker-down
+
+## Docker - restart docker-compose containers
+docker-restart: docker-down docker-up
+
+## Docker - remove docker-compose containers
+docker-rm: docker-down
+	@docker-compose -f docker-compose.yml rm -f
+.PHONY: docker-rm
+
+## Docker - view docker-compose containers logs
+docker-logs:
+	@docker-compose -f docker-compose.yml logs -f --tail=100
+.PHONY: docker-logs
+
+## Connect to docker shell
+docker-shell:
+	@docker-compose -f docker-compose.yml exec web bash
+.PHONY: docker-shell
