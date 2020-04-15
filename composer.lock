@@ -336,29 +336,28 @@
         },
         {
             "name": "graham-campbell/markdown",
-            "version": "v11.2.0",
+            "version": "v11.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Laravel-Markdown.git",
-                "reference": "f6271cb869fcf91a9066cd61729750641f5299e9"
+                "reference": "7ead48c43098b562707a30650843d4279786b0d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/f6271cb869fcf91a9066cd61729750641f5299e9",
-                "reference": "f6271cb869fcf91a9066cd61729750641f5299e9",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/7ead48c43098b562707a30650843d4279786b0d9",
+                "reference": "7ead48c43098b562707a30650843d4279786b0d9",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^5.5|^6.0|^7.0",
                 "illuminate/support": "^5.5|^6.0|^7.0",
                 "illuminate/view": "^5.5|^6.0|^7.0",
-                "league/commonmark": "^1.0",
+                "league/commonmark": "^1.3",
                 "php": "^7.1.3"
             },
             "require-dev": {
                 "graham-campbell/analyzer": "^2.4",
                 "graham-campbell/testbench": "^5.4",
-                "league/commonmark-extras": "^1.0",
                 "mockery/mockery": "^1.3.1",
                 "phpunit/phpunit": "^6.5|^7.0|^8.0"
             },
@@ -400,7 +399,7 @@
                 "laravel",
                 "markdown"
             ],
-            "time": "2020-01-25T13:19:30+00:00"
+            "time": "2020-04-14T14:11:12+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -942,16 +941,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "5a67afc2572ec6d430526cdc9c637ef124812389"
+                "reference": "dd3261eb9a322e009fa5d96d19b9ae19708ce04b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/5a67afc2572ec6d430526cdc9c637ef124812389",
-                "reference": "5a67afc2572ec6d430526cdc9c637ef124812389",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/dd3261eb9a322e009fa5d96d19b9ae19708ce04b",
+                "reference": "dd3261eb9a322e009fa5d96d19b9ae19708ce04b",
                 "shasum": ""
             },
             "require": {
@@ -1012,7 +1011,7 @@
                 "md",
                 "parser"
             ],
-            "time": "2020-04-05T16:01:48+00:00"
+            "time": "2020-04-13T20:52:18+00:00"
         },
         {
             "name": "league/commonmark-extras",
