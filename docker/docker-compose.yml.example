@@ -11,8 +11,9 @@ services:
     working_dir: /app
     volumes:
       - ..:/app
+    env_file:
+      - ../.env
     environment:
-      - DB_HOST=mysql
       - WEB_DOCUMENT_ROOT=/app/public
       - WEB_DOCUMENT_INDEX=index.php
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-localhost}
@@ -22,10 +23,22 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     env_file:
-      - .env
+      - ../.env
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
       - MYSQL_DATABASE=$DB_DATABASE
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8068:80
+    env_file:
+      - ../.env
+    environment:
+      - PMA_HOST=$DB_HOST
+      - PMA_USER=$DB_USERNAME
+      - PMA_PASSWORD=$DB_PASSWORD
+
 
 
 volumes:
