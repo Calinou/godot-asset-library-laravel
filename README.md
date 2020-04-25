@@ -9,6 +9,8 @@ install a local copy so you can test your changes.
 
 To run it locally, you need to install and build both the backend and frontend.
 
+For docker setup read [this](docker/README.md).
+
 ### Backend
 
 The backend uses the [Laravel](https://laravel.com/) PHP framework.

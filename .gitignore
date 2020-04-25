@@ -17,4 +17,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 coverage.xml
-/etc/dev.php.ini
+/docker/dev.php.ini
+/docker/docker-compose.yml

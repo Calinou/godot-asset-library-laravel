@@ -53,7 +53,7 @@
             --}}
             <div class="relative mt-2 mb-2 lg:mt-0 lg:mb-0">
               @php
-              $searchTooltip = __(<<<EOF
+              $_searchTooltip = <<<EOF
 Press / to focus this field.
 This will search in the asset's title, blurb and tags.
 This field supports search string syntax. Examples:
@@ -63,7 +63,8 @@ Hello world  —  Search for "Hello" and "world" individually
 score >= 3  —  Show assets with a score greater than or equal to 3
 license = MIT  —  Show assets licensed under the MIT license (use SPDX identifiers)
 updated_at > 2020-01-01  —  Show assets updated after January 1 2020
-EOF);
+EOF;
+              $searchTooltip = __($_searchTooltip);
               @endphp
               <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2"
                 aria-label="{{ $searchTooltip }}"

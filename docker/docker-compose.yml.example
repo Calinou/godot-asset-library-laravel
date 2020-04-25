@@ -1,5 +1,6 @@
 version: '2.4'
 
+
 services:
 
   web:
@@ -9,7 +10,7 @@ services:
       - 80:80
     working_dir: /app
     volumes:
-      - .:/app
+      - ..:/app
     environment:
       - DB_HOST=mysql
       - WEB_DOCUMENT_ROOT=/app/public
