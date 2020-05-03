@@ -25,7 +25,7 @@ cp docker/docker-compose.yml.example docker/docker-compose.yml
 
 If you prefer to use local database you can disable mysql and phpmyadmin by removing them from `docker/docker-compose.yml` and setting proper db connection settings in `.env`.
 
-### 3. Setting XDebug defauts (optional):
+### 3. Setting XDebug defaults (optional):
 
 ```sh
 cp docker/dev.php.ini.example docker/dev.php.ini

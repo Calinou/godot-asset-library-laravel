@@ -1,6 +1,5 @@
 version: '2.4'
 
-
 services:
 
   web:
@@ -38,8 +37,6 @@ services:
       - PMA_HOST=$DB_HOST
       - PMA_USER=$DB_USERNAME
       - PMA_PASSWORD=$DB_PASSWORD
-
-
 
 volumes:
 
