@@ -3740,16 +3740,16 @@
         },
         {
             "name": "beyondcode/laravel-query-detector",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beyondcode/laravel-query-detector.git",
-                "reference": "dc41392e3f7ac39f7880cc834dc7387be448f0c2"
+                "reference": "ec094ceb7d74c1247261ec246176dc4ca2458c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/dc41392e3f7ac39f7880cc834dc7387be448f0c2",
-                "reference": "dc41392e3f7ac39f7880cc834dc7387be448f0c2",
+                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/ec094ceb7d74c1247261ec246176dc4ca2458c99",
+                "reference": "ec094ceb7d74c1247261ec246176dc4ca2458c99",
                 "shasum": ""
             },
             "require": {
@@ -3791,7 +3791,7 @@
                 "beyondcode",
                 "laravel-query-detector"
             ],
-            "time": "2020-03-11T09:06:03+00:00"
+            "time": "2020-05-21T22:21:13+00:00"
         },
         {
             "name": "composer/ca-bundle",
