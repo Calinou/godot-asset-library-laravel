@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Asset;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListAssets;
+use App\Models\Asset;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AssetController extends Controller

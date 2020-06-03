@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
@@ -175,7 +175,7 @@ class Asset extends Model
     protected $hidden = [
         'support_level_id',
         'created_at',
-         // The Godot editor can't render HTML, no need to send it
+        // The Godot editor can't render HTML, no need to send it
         'html_description',
         'is_published',
     ];
@@ -245,7 +245,7 @@ class Asset extends Model
      */
     public function author(): BelongsTo
     {
-        return $this->belongsTo('App\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     /**
@@ -253,7 +253,7 @@ class Asset extends Model
      */
     public function previews(): HasMany
     {
-        return $this->hasMany('App\AssetPreview', 'asset_id');
+        return $this->hasMany(AssetPreview::class, 'asset_id');
     }
 
     /**
@@ -261,7 +261,7 @@ class Asset extends Model
      */
     public function versions(): HasMany
     {
-        return $this->hasMany('App\AssetVersion', 'asset_id');
+        return $this->hasMany(AssetVersion::class, 'asset_id');
     }
 
     /**
@@ -269,7 +269,7 @@ class Asset extends Model
      */
     public function reviews(): HasMany
     {
-        return $this->hasMany('App\AssetReview', 'asset_id')->orderBy('created_at', 'desc');
+        return $this->hasMany(AssetReview::class, 'asset_id')->orderBy('created_at', 'desc');
     }
 
     /**
@@ -667,9 +667,9 @@ class Asset extends Model
             // any Godot version (this is typically used for non-code assets).
             $result = $result->filter(function ($asset) use ($validated) {
                 return $asset->godot_version === '*'
-                || $asset->godot_version === '3.x.x' && Str::startsWith($validated['godot_version'], '3')
-                || $asset->godot_version === '4.x.x' && Str::startsWith($validated['godot_version'], '4')
-                || $asset->godot_version === $validated['godot_version'].'.x';
+                    || $asset->godot_version === '3.x.x' && Str::startsWith($validated['godot_version'], '3')
+                    || $asset->godot_version === '4.x.x' && Str::startsWith($validated['godot_version'], '4')
+                    || $asset->godot_version === $validated['godot_version'].'.x';
             });
         }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeds;
 
-use App\Asset;
-use App\AssetPreview;
-use App\AssetVersion;
-use App\User;
+use App\Models\Asset;
+use App\Models\AssetPreview;
+use App\Models\AssetVersion;
+use App\Models\User;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

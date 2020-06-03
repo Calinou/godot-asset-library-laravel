@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Asset;
-use App\AssetReview;
-use App\User;
+use App\Models\Asset;
+use App\Models\AssetReview;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Asset;
-use App\AssetPreview;
-use App\AssetReview;
-use App\AssetReviewReply;
-use App\AssetVersion;
 use App\Http\Requests\ListAssets;
 use App\Http\Requests\SubmitAsset;
 use App\Http\Requests\SubmitReview;
 use App\Http\Requests\SubmitReviewReply;
+use App\Models\Asset;
+use App\Models\AssetPreview;
+use App\Models\AssetReview;
+use App\Models\AssetReviewReply;
+use App\Models\AssetVersion;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;

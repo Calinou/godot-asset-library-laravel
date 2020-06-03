@@ -83,14 +83,14 @@
               'autocomplete' => 'off',
             ])
             {{ __('A comma-separated list of tags (up to :maxTags). Only lowercase characters, numbers and dashes are allowed in tag names.',
-                ['maxTags' => App\Asset::MAX_TAGS]) }}
+                ['maxTags' => App\Models\Asset::MAX_TAGS]) }}
             @endcomponent
 
             <div class="sm:flex sm:justify-between">
               @php
               $categories = [];
-              foreach (range(0, App\Asset::CATEGORY_MAX - 1) as $categoryId) {
-                $categories[] = App\Asset::getCategoryName($categoryId);
+              foreach (range(0, App\Models\Asset::CATEGORY_MAX - 1) as $categoryId) {
+                $categories[] = App\Models\Asset::getCategoryName($categoryId);
               }
               @endphp
 
@@ -110,7 +110,7 @@
                 'label' => __('License'),
                 'placeholder' => __('Select a license'),
                 'required' => true,
-                'choices' =>  App\Asset::LICENSES,
+                'choices' =>  App\Models\Asset::LICENSES,
               ])
               {{ __('See') }}
               <a
@@ -141,7 +141,7 @@
                 'label' => __('Godot version'),
                 'placeholder' => __('Select a Godot version'),
                 'required' => true,
-                'choices' => App\AssetVersion::GODOT_VERSIONS,
+                'choices' => App\Models\AssetVersion::GODOT_VERSIONS,
               ])
               @endcomponent
             </div>

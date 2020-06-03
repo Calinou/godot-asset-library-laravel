@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
@@ -60,7 +60,7 @@ class AssetReview extends Model
      */
     public function asset(): BelongsTo
     {
-        return $this->belongsTo('App\Asset', 'asset_id');
+        return $this->belongsTo(Asset::class, 'asset_id');
     }
 
     /**
@@ -68,7 +68,7 @@ class AssetReview extends Model
      */
     public function author(): BelongsTo
     {
-        return $this->belongsTo('App\User', 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     /**
@@ -76,7 +76,7 @@ class AssetReview extends Model
      */
     public function reply(): HasOne
     {
-        return $this->hasOne('App\AssetReviewReply');
+        return $this->hasOne(AssetReviewReply::class);
     }
 
     /**

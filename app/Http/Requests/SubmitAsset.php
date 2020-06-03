@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Asset;
-use App\AssetPreview;
-use App\AssetVersion;
+use App\Models\Asset;
+use App\Models\AssetPreview;
+use App\Models\AssetVersion;
 use App\Rules\SuccessRespondingUrl;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -44,8 +44,10 @@ class SubmitAsset extends FormRequest
 
                     if (count($tags) > Asset::MAX_TAGS) {
                         $fail(
-                            __('An asset may have :maxTags tags at most, but you specified :numTags tags.',
-                                ['maxTags' => Asset::MAX_TAGS, 'numTags' => count($tags)])
+                            __(
+                                'An asset may have :maxTags tags at most, but you specified :numTags tags.',
+                                ['maxTags' => Asset::MAX_TAGS, 'numTags' => count($tags)]
+                            )
                         );
                     }
                 },
