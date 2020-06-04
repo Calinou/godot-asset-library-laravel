@@ -74,7 +74,6 @@ class AssetController extends Controller
         $asset = new Asset();
         $asset->fill($assetInput);
         // The user must be authenticated to submit an asset.
-        // The null coalesce is just here to please PHPStan :)
         $asset->author_id = (int) Auth::id();
 
         // Save the asset without its submodels, so that submodels can be saved.
