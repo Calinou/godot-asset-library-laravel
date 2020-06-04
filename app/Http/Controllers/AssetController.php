@@ -75,7 +75,7 @@ class AssetController extends Controller
         $asset->fill($assetInput);
         // The user must be authenticated to submit an asset.
         // The null coalesce is just here to please PHPStan :)
-        $asset->author_id = Auth::user()->id ?? null;
+        $asset->author_id = (int) Auth::id();
 
         // Save the asset without its submodels, so that submodels can be saved.
         // This must be done *before* creating submodels, otherwise the asset ID
@@ -256,7 +256,7 @@ class AssetController extends Controller
         $review = new AssetReview();
         $review->fill($request->validated());
         $review->asset_id = $asset->asset_id;
-        $review->author_id = Auth::user()->id ?? null;
+        $review->author_id = (int) Auth::id();
         $review->save();
 
         $request->session()->flash('statusType', 'success');

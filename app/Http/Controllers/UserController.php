@@ -17,9 +17,9 @@ class UserController extends Controller
         $user->load('assets.versions');
 
         // Only display published assets, with top-scoring assets first
-        $user->assets = $user->assets->where('is_published', true)->sortByDesc('score');
+        $assets = $user->assets->where('is_published', true)->sortByDesc('score');
 
-        return view('user.show', ['user' => $user]);
+        return view('user.show', compact('user', 'assets'));
     }
 
     /**
@@ -27,8 +27,8 @@ class UserController extends Controller
      */
     public function indexReviews(User $user): View
     {
-        $user->assetReviews = $user->assetReviews->load('asset')->sortByDesc('created_at');
+        $assetReviews = $user->assetReviews->load('asset')->sortByDesc('created_at');
 
-        return view('user.reviews.index', ['user' => $user]);
+        return view('user.reviews.index', compact('user', 'assetReviews'));
     }
 }

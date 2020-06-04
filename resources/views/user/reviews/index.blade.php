@@ -7,7 +7,7 @@
   <h1 class="text-center text-2xl font-medium mb-8">
     {{ __(":user's reviews", ['user' => $user->username]) }}
   </h1>
-  @if ($user->assetReviews->count() >= 1)
+  @if ($assetReviews->count() >= 1)
   <table class="w-full lg:w-3/4 xl:w-2/3 mx-auto shadow rounded text-sm">
     <thead>
       <tr class="font-bold">
@@ -16,7 +16,7 @@
         <td class="bg-white border dark:bg-gray-800 px-3 py-1">{{ __('Review') }}</td>
       </tr>
     <tbody>
-      @foreach ($user->assetReviews as $review)
+      @foreach ($assetReviews as $review)
       <tr class="bg-white dark:bg-gray-800">
         <td class="border px-3 py-1 text-right">
           @include('includes/date-relative', ['date' => \Carbon\Carbon::parse($review->created_at)])

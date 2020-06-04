@@ -409,18 +409,26 @@ class Asset extends Model
      * Return the download URL corresponding to the latest version
      * (for compatibility with the existing API).
      */
-    public function getDownloadUrlAttribute(): string
+    public function getDownloadUrlAttribute(): ?string
     {
-        return $this->versions->last()->getDownloadUrlAttribute($this->browse_url);
+        if ($last = $this->versions->last()) {
+            return $last->getDownloadUrlAttribute($this->browse_url);
+        }
+
+        return null;
     }
 
     /**
      * Return the Godot version corresponding to the latest version
      * (for compatibility with the existing API).
      */
-    public function getGodotVersionAttribute(): string
+    public function getGodotVersionAttribute(): ?string
     {
-        return $this->versions->last()->godot_version;
+        if ($last = $this->versions->last()) {
+            return $last->godot_version;
+        }
+
+        return null;
     }
 
     /**
@@ -498,9 +506,13 @@ class Asset extends Model
      * Return the asset version corresponding to the latest version
      * (for compatibility with the existing API).
      */
-    public function getVersionStringAttribute(): string
+    public function getVersionStringAttribute(): ?string
     {
-        return $this->versions->last()->version_string;
+        if ($last = $this->versions->last()) {
+            return $last->version_string;
+        }
+
+        return null;
     }
 
     /**

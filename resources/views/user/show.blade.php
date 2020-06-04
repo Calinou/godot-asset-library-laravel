@@ -55,9 +55,9 @@
     {{ __('Assets by :user', ['user' => $user->username]) }}
   </h2>
 
-  @if (count($user->assets) >= 1)
+  @if (count($assets) >= 1)
   <section class="flex flex-wrap -mx-2 mt-6">
-    @foreach ($user->assets as $asset)
+    @foreach ($assets as $asset)
     @include('includes/asset-card', $asset)
     @endforeach
   </section>
