@@ -1,73 +1,90 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
-    "require": {
-        "php": "^7.2.0",
-        "fideloper/proxy": "^4.0",
-        "graham-campbell/markdown": "^11.1",
-        "htmlmin/htmlmin": "^7.0",
-        "laravel/framework": "6.18.*",
-        "laravel/socialite": "^4.2",
-        "laravel/tinker": "^2.0",
-        "league/commonmark-extras": "^1.1",
-        "lorisleiva/laravel-search-string": "^0.1.4"
-    },
-    "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
-        "beyondcode/laravel-dump-server": "^1.0",
-        "beyondcode/laravel-query-detector": "^1.1",
-        "fzaninotto/faker": "^1.4",
-        "matt-allan/laravel-code-style": "^0.5.0",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "nunomaduro/larastan": "^0.5.0",
-        "phpunit/phpunit": "^8.3"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "platform": {
-            "php": "7.2"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
+  "name": "laravel/laravel",
+  "type": "project",
+  "description": "The Laravel Framework.",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.2.0",
+    "fideloper/proxy": "^4.0",
+    "graham-campbell/markdown": "^11.1",
+    "htmlmin/htmlmin": "^7.0",
+    "laravel/framework": "6.18.*",
+    "laravel/socialite": "^4.2",
+    "laravel/tinker": "^2.0",
+    "league/commonmark-extras": "^1.1",
+    "lorisleiva/laravel-search-string": "^0.1.4"
+  },
+  "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.2",
+    "beyondcode/laravel-dump-server": "^1.0",
+    "beyondcode/laravel-query-detector": "^1.1",
+    "fzaninotto/faker": "^1.4",
+    "matt-allan/laravel-code-style": "^0.5.0",
+    "mockery/mockery": "^1.0",
+    "nunomaduro/collision": "^3.0",
+    "nunomaduro/larastan": "^0.5.0",
+    "phpmd/phpmd": "^2.8",
+    "phpunit/phpunit": "^8.3",
+    "sebastian/phpcpd": "^4.1"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "platform": {
+      "php": "7.2"
     }
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    },
+    "classmap": [
+      "database/seeds",
+      "database/factories"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php artisan key:generate --ansi"
+    ],
+    "test": [
+      "./vendor/bin/phpunit"
+    ],
+    "analyse": [
+      "./vendor/bin/phpstan analyse"
+    ],
+    "format": [
+      "./vendor/bin/php-cs-fixer fix"
+    ],
+    "cpd": [
+      "./vendor/bin/phpcpd ./app --min-lines=50"
+    ],
+    "md": [
+      "./vendor/bin/phpmd ./app html ./phpmd-ruleset.xml --reportfile ./phpmd.html"
+    ]
+  }
 }
