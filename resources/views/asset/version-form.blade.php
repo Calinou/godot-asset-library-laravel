@@ -38,7 +38,7 @@ $index = $prototype ? '__index__' : $loop->index;
       'label' => __('Godot version'),
       'placeholder' => __('Select a Godot version'),
       'required' => true,
-      'choices' => App\AssetVersion::GODOT_VERSIONS,
+      'choices' => App\Models\AssetVersion::GODOT_VERSIONS,
     ])
     @endcomponent
   </div>

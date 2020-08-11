@@ -52,21 +52,8 @@
               Some vertical margin is added on mobile devices to separate it from the app name.
             --}}
             <div class="relative mt-2 mb-2 lg:mt-0 lg:mb-0">
-              @php
-              $searchTooltip = __(<<<EOF
-Press / to focus this field.
-This will search in the asset's title, blurb and tags.
-This field supports search string syntax. Examples:
-
-Hello world  —  Search for "Hello" and "world" individually
-"Hello world"  —  Perform an exact match instead of matching words individually
-score >= 3  —  Show assets with a score greater than or equal to 3
-license = MIT  —  Show assets licensed under the MIT license (use SPDX identifiers)
-updated_at > 2020-01-01  —  Show assets updated after January 1 2020
-EOF);
-              @endphp
               <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2"
-                aria-label="{{ $searchTooltip }}"
+                aria-label="{{ __($searchTooltip) }}"
                 data-balloon-pos="down"
                 data-balloon-break
               >
@@ -86,11 +73,11 @@ EOF);
                 {{ __('Categories') }} <span class="fa fa-angle-down ml-1"></span>
               </a>
               <div class="navbar-dropdown-content">
-                @foreach (range(0, App\Asset::CATEGORY_MAX - 1) as $categoryId)
+                @foreach (range(0, App\Models\Asset::CATEGORY_MAX - 1) as $categoryId)
 
                 <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
-                  <span class="fa {{ App\Asset::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
-                  {{ App\Asset::getCategoryName($categoryId) }}
+                  <span class="fa {{ App\Models\Asset::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
+                  {{ App\Models\Asset::getCategoryName($categoryId) }}
                 </a>
                 @endforeach
               </div>

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\AssetReview;
+use App\Models\AssetReview;
 
 class AssetReviewObserver
 {

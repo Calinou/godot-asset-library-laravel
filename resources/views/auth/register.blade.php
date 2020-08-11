@@ -17,7 +17,7 @@
           'label' => __('Username'),
           'placeholder' => __('Username'),
           'required' => true,
-          'maxlength' => App\User::USERNAME_MAX_LENGTH,
+          'maxlength' => App\Models\User::USERNAME_MAX_LENGTH,
           'autofocus' => true,
           'autocomplete' => 'username',
         ])
@@ -39,9 +39,9 @@
           'name' => 'password',
           'label' => __('Password'),
           'required' => true,
-          'minlength' => App\User::PASSWORD_MIN_LENGTH,
+          'minlength' => App\Models\User::PASSWORD_MIN_LENGTH,
         ])
-        {{ __('Must be at least :passwordMinLength characters long.', ['passwordMinLength' => App\User::PASSWORD_MIN_LENGTH]) }}
+        {{ __('Must be at least :passwordMinLength characters long.', ['passwordMinLength' => App\Models\User::PASSWORD_MIN_LENGTH]) }}
         @endcomponent
 
         @component('components/form-input', [
@@ -49,7 +49,7 @@
           'name' => 'password_confirmation',
           'label' => __('Confirm password'),
           'required' => true,
-          'minlength' => App\User::PASSWORD_MIN_LENGTH,
+          'minlength' => App\Models\User::PASSWORD_MIN_LENGTH,
         ])
         @endcomponent
 

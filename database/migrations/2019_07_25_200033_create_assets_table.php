@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Asset;
+use App\Models\Asset;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -29,8 +29,8 @@ class CreateAssetsTable extends Migration
                 ->default(Asset::SUPPORT_LEVEL_COMMUNITY)
                 ->comment(
                     Asset::SUPPORT_LEVEL_TESTING.': Testing, '
-                    .Asset::SUPPORT_LEVEL_COMMUNITY.': Community, '
-                    .Asset::SUPPORT_LEVEL_OFFICIAL.': Official'
+                        .Asset::SUPPORT_LEVEL_COMMUNITY.': Community, '
+                        .Asset::SUPPORT_LEVEL_OFFICIAL.': Official'
                 );
             $table
                 ->text('description')

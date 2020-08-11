@@ -5,7 +5,7 @@ env:
   - APP_ENV=testing
 
 php:
-  - '7.2'
+  - "7.2"
 
 services:
   - mysql
@@ -27,6 +27,5 @@ script:
   - yarn run doc
 
   # Run tests and upload code coverage results
-  - php artisan db:create
   - vendor/bin/phpunit --coverage-clover=coverage.xml
   - bash <(curl -s https://codecov.io/bash)

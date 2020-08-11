@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\AssetVersion;
+use App\Models\AssetVersion;
 use Faker\Generator as Faker;
 
 $factory->define(AssetVersion::class, function (Faker $faker) {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -93,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function assets(): HasMany
     {
-        return $this->hasMany('App\Asset', 'author_id');
+        return $this->hasMany(Asset::class, 'author_id');
     }
 
     /**
@@ -101,7 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function assetReviews(): HasMany
     {
-        return $this->hasMany('App\AssetReview', 'author_id');
+        return $this->hasMany(AssetReview::class, 'author_id');
     }
 
     /**

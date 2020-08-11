@@ -35,15 +35,15 @@
           <span class="m-1 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">{{ $asset->godot_version }}</span>
           @php
             switch (intval($asset->support_level_id)) {
-              case (App\Asset::SUPPORT_LEVEL_OFFICIAL):
+              case (App\Models\Asset::SUPPORT_LEVEL_OFFICIAL):
                 $supportLevelClasses = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
                 $supportLevelIcon = 'fa-check';
                 break;
-              case (App\Asset::SUPPORT_LEVEL_COMMUNITY):
+              case (App\Models\Asset::SUPPORT_LEVEL_COMMUNITY):
                 $supportLevelClasses = 'bg-gray-200 dark:bg-gray-700';
                 $supportLevelIcon = '';
                 break;
-              case (App\Asset::SUPPORT_LEVEL_TESTING):
+              case (App\Models\Asset::SUPPORT_LEVEL_TESTING):
                 $supportLevelClasses = 'bg-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
                 $supportLevelIcon = 'fa-exclamation-circle';
                 break;

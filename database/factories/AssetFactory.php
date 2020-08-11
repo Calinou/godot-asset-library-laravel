@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Asset;
+
+use App\Models\Asset;
 use Faker\Generator as Faker;
 
 $factory->define(Asset::class, function (Faker $faker) {

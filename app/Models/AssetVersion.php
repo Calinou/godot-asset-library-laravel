@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -95,7 +95,7 @@ class AssetVersion extends Model
      */
     public function asset(): BelongsTo
     {
-        return $this->belongsTo('App\Asset', 'asset_id');
+        return $this->belongsTo(Asset::class, 'asset_id');
     }
 
     /**
