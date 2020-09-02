@@ -47,24 +47,30 @@ and seed test data again.
 
 #### Code quality tools
 
-- Feature tests are available. They use a secondary MySQL database configured
-  in `.env.testing`. You need to create this database before running them.
-- This project follows the Laravel code style,
-  applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
-- Code is analysed with PHPStan thanks to
-  [Larastan](https://github.com/nunomaduro/larastan).
+-   Feature tests are available. They use a secondary MySQL database configured
+    in `.env.testing`. You need to create this database before running them.
+-   This project follows the Laravel code style,
+    applied using [PHP CS Fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer).
+-   Code is analysed with PHPStan thanks to
+    [Larastan](https://github.com/nunomaduro/larastan).
 
 Use the commands below:
 
 ```bash
 # Run unit and feature tests
-vendor/bin/phpunit
+composer test
 
 # Check PHP code for possible errors
-vendor/bin/phpstan analyse
+composer analyse
 
 # Try to fix code style violations automatically
-vendor/bin/php-cs-fixer fix
+composer format
+
+# Helps to find duplicated code
+composer cpd
+
+# Detect mess in the code (it generates an report that can be found at './phpmd.html')
+composer md
 ```
 
 ### Frontend
