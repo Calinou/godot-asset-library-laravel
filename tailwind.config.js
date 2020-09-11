@@ -54,8 +54,9 @@ module.exports = {
       },
     },
   },
-  purge: {
-    mode: 'layers',
-    content: ['resources/views/**/*.blade.php'],
+  purge: ['resources/views/**/*.blade.php'],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
 };
