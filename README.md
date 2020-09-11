@@ -14,7 +14,7 @@ To run it locally, you need to install and build both the backend and frontend.
 The backend uses the [Laravel](https://laravel.com/) PHP framework.
 
 1. Install dependencies as described on the
-   [Laravel 6.x installation page](https://laravel.com/docs/6.x/installation).
+   [Laravel 7.x installation page](https://laravel.com/docs/7.x/installation).
 2. Set up a [MySQL](https://www.mysql.com)
    or [MariaDB](https://mariadb.org/) database.
 3. Copy the `.env.example` file as `.env` and edit the `DB_*` variables

@@ -347,8 +347,8 @@ class Asset extends Model
      */
     public function getTagsAttribute(): array
     {
-        if (! empty($this->getOriginal('tags'))) {
-            return explode(',', $this->getOriginal('tags'));
+        if (! empty($this->getRawOriginal('tags'))) {
+            return explode(',', $this->getRawOriginal('tags'));
         }
 
         return [];
@@ -440,8 +440,8 @@ class Asset extends Model
     public function getIconUrlAttribute(): string
     {
         // Return the custom icon URL if defined
-        if ($this->getOriginal('icon_url')) {
-            return $this->getOriginal('icon_url');
+        if ($this->getRawOriginal('icon_url')) {
+            return $this->getRawOriginal('icon_url');
         }
 
         $splitUrl = explode('/', $this->browse_url);
@@ -480,7 +480,7 @@ class Asset extends Model
     public function getIssuesUrlAttribute(): string
     {
         // GitHub, GitLab and Bitbucket all use an `/issues` suffix
-        return $this->getOriginal('issues_url') ?? "$this->browse_url/issues";
+        return $this->getRawOriginal('issues_url') ?? "$this->browse_url/issues";
     }
 
     /**

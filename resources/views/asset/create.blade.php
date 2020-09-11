@@ -77,7 +77,7 @@
 
             @component('components/form-input', [
               'name' => 'tags',
-              'value' => $editing ? $asset->getOriginal('tags') : null,
+              'value' => $editing ? $asset->getRawOriginal('tags') : null,
               'label' => __('Tags'),
               'placeholder' => 'platformer, 2d, pixel-art, gdnative',
               'autocomplete' => 'off',

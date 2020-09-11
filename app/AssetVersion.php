@@ -105,8 +105,8 @@ class AssetVersion extends Model
     public function getDownloadUrlAttribute(string $browseUrl = null): string
     {
         // Return the custom download URL if defined
-        if ($this->getOriginal('download_url')) {
-            return $this->getOriginal('download_url');
+        if ($this->getRawOriginal('download_url')) {
+            return $this->getRawOriginal('download_url');
         }
 
         // A custom URL must be passed to infer the download URL

@@ -43,7 +43,7 @@ Route::put('/admin/users/{user}/block', 'AdminController@block')->name('admin.bl
 Route::put('/admin/users/{user}/unblock', 'AdminController@unblock')->name('admin.unblock')->middleware('can:admin');
 
 // Register authentication-related routes (including email verification routes)
-Auth::routes(['verify' => true]);
+Auth::Routes(['verify' => true]);
 
 // OAuth2 authentication routes
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.oauth2');
