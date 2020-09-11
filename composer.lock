@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23b76d004a8ba2ac397aefd2c738442e",
+    "content-hash": "6d1fd2dad6e9f9efa69f16c57df78281",
     "packages": [
         {
             "name": "brick/math",
@@ -2003,72 +2003,6 @@
                 }
             ],
             "time": "2020-08-18T01:19:12+00:00"
-        },
-        {
-            "name": "league/commonmark-extras",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/commonmark-extras.git",
-                "reference": "b1961aa4a85465bf884235106a7517e315f14f41"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark-extras/zipball/b1961aa4a85465bf884235106a7517e315f14f41",
-                "reference": "b1961aa4a85465bf884235106a7517e315f14f41",
-                "shasum": ""
-            },
-            "require": {
-                "league/commonmark": "^1.3",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "commonmark-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\CommonMark\\Extras\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Colin O'Dell",
-                    "email": "colinodell@gmail.com",
-                    "homepage": "https://www.colinodell.com",
-                    "role": "Lead Developer"
-                }
-            ],
-            "description": "Useful extensions for customizing the league/commonmark Markdown parser",
-            "homepage": "https://github.com/thephpleague/commonmark-extras",
-            "keywords": [
-                "Extras",
-                "commonmark",
-                "extensions",
-                "gfm",
-                "markdown"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/colinodell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/colinodell",
-                    "type": "patreon"
-                }
-            ],
-            "abandoned": "league/commonmark",
-            "time": "2020-04-04T16:03:32+00:00"
         },
         {
             "name": "league/flysystem",

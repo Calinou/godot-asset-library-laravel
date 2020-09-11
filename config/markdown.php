@@ -42,7 +42,7 @@ return [
     */
 
     'extensions' => [
-        League\CommonMark\Extras\CommonMarkExtrasExtension::class,
+        League\CommonMark\Extension\GithubFlavoredMarkdownExtension::class,
     ],
 
     /*

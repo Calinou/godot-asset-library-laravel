@@ -16,7 +16,7 @@
         "laravel/socialite": "^5.0.0",
         "laravel/tinker": "^2.4.2",
         "laravel/ui": "^2.3",
-        "league/commonmark-extras": "^1.2.0",
+        "league/commonmark": "^1.5.4",
         "lorisleiva/laravel-search-string": "dev-support-laravel-8"
     },
     "repositories": [
