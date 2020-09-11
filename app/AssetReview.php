@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class AssetReview extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

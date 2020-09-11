@@ -2,14 +2,28 @@
 
 declare(strict_types=1);
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\AssetVersion;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(AssetVersion::class, function (Faker $faker) {
-    return [
-        'version_string' => $faker->regexify('[0-2]\.[0-9]\.[0-2]'),
-        'godot_version' => $faker->randomElement(array_keys(AssetVersion::GODOT_VERSIONS)),
-    ];
-});
+class AssetVersionFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = AssetVersion::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        return [
+            'version_string' => $this->faker->regexify('[0-2]\.[0-9]\.[0-2]'),
+            'godot_version' => $this->faker->randomElement(array_keys(AssetVersion::GODOT_VERSIONS)),
+        ];
+    }
+}

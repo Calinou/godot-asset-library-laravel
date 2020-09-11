@@ -2,19 +2,34 @@
 
 declare(strict_types=1);
 
-/* @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
+
 use App\AssetReview;
 use App\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(AssetReview::class, function (Faker $faker) {
-    $creationDate = $faker->dateTimeThisYear();
+class AssetReviewFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = AssetReview::class;
 
-    return [
-        'is_positive' => $faker->boolean(75),
-        'comment' => $faker->text(250),
-        'author_id' => $faker->randomElement(User::all()->pluck('id')->toArray()),
-        'created_at' => $creationDate,
-        'updated_at' => $creationDate,
-    ];
-});
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        $creationDate = $this->faker->dateTimeThisYear();
+
+        return [
+            'is_positive' => $this->faker->boolean(75),
+            'comment' => $this->faker->text(250),
+            'author_id' => $this->faker->randomElement(User::all()->pluck('id')->toArray()),
+            'created_at' => $creationDate,
+            'updated_at' => $creationDate,
+        ];
+    }
+}
