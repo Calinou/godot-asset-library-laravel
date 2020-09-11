@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\v1\AssetController;
+use App\Http\Controllers\Api\v1\ConfigureController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,8 +20,8 @@ Route::group([
     'namespace' => 'Api\v1',
     'prefix' => 'v1',
 ], function () {
-    Route::get('/asset', 'AssetController@index');
-    Route::get('/asset/{asset}', 'AssetController@show');
+    Route::get('/asset', [AssetController::class, 'index']);
+    Route::get('/asset/{asset}', [AssetController::class, 'show']);
 
-    Route::get('/configure', 'ConfigureController@index');
+    Route::get('/configure', [ConfigureController::class, 'index']);
 });
