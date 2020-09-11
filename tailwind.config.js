@@ -54,4 +54,8 @@ module.exports = {
       },
     },
   },
+  purge: {
+    mode: 'layers',
+    content: ['resources/views/**/*.blade.php'],
+  },
 };

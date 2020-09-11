@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-purgecss');
 const postCssImport = require('postcss-import');
 const postCssUrl = require('postcss-url');
 const postCssNesting = require('postcss-nesting');
@@ -28,8 +27,7 @@ mix
       postCssNesting,
       tailwindCss,
     ],
-  )
-  .purgeCss();
+  );
 
 if (mix.inProduction()) {
   mix.version();
