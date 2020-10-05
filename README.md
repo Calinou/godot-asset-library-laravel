@@ -9,6 +9,19 @@ install a local copy so you can test your changes.
 
 To run it locally, you need to install and build both the backend and frontend.
 
+### Browser support
+
+When working on new features, keep in mind this website only supports
+*evergreen browsers*:
+
+- Chrome (latest version and N-1 version)
+- Edge (latest version and N-1 version)
+- Firefox (latest version, N-1 version, and latest ESR version)
+- Opera (latest version and N-1 version)
+- Safari (latest version and N-1 version)
+
+Internet Explorer isn't supported.
+
 ### Backend
 
 The backend uses the [Laravel](https://laravel.com/) PHP framework.
