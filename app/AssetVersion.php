@@ -101,6 +101,11 @@ class AssetVersion extends Model
         return $this->belongsTo('App\Asset', 'asset_id');
     }
 
+    public function getDownloadUrl(): string
+    {
+        return route('api.asset.download', ['asset' => $this->asset, 'version' => $this]);
+    }
+
     /**
      * Return the download URL (will infer a URL if no custom URL is specified by the asset version).
      * For URL inference to work, the asset's browse URL must be passed manually.

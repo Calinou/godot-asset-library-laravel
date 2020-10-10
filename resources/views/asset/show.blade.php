@@ -100,7 +100,7 @@
             @foreach ($asset->versions as $version)
             <tr>
               <td class="border px-3 py-1 text-right">
-                <a href="{{ $version->getDownloadUrlAttribute($asset->browse_url) }}" class="link">
+                <a href="{{ $version->getDownloadUrl() }}" target="_blank" class="link">
                   {{ $version->version_string }}
                 </a>
               </td>
@@ -113,7 +113,7 @@
       </details>
 
       <div class="mt-8 mb-6 text-sm">
-        <a href="{{ $asset->download_url }}" rel="nofollow" class="button button-success font-bold mr-1 mb-2">
+        <a href="{{ $asset->download_url }}" target="_blank" rel="nofollow" class="button button-success font-bold mr-1 mb-2">
           <span class="fa fa-download mr-1"></span>
           {{ __('Download') }}
         </a>
