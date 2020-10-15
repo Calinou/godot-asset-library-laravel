@@ -11,7 +11,7 @@
         "php": "^7.3.0",
         "fideloper/proxy": "^4.4.0",
         "graham-campbell/markdown": "^13.1.1",
-        "htmlmin/htmlmin": "dev-master#e67fe976e3fd1e92568341ce84f338fa4c0ffc47",
+        "htmlmin/htmlmin": "^8.0.0",
         "laravel/framework": "^8.0.4",
         "laravel/socialite": "^5.0.0",
         "laravel/tinker": "^2.4.2",
