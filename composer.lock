@@ -7112,16 +7112,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.6.5",
+            "version": "v0.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "585f53d0bd094f59723e7689601c5a99d6da5ea1"
+                "reference": "a23cfad4b9ba3f8bc285daa79c5a4ca9624987f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/585f53d0bd094f59723e7689601c5a99d6da5ea1",
-                "reference": "585f53d0bd094f59723e7689601c5a99d6da5ea1",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/a23cfad4b9ba3f8bc285daa79c5a4ca9624987f4",
+                "reference": "a23cfad4b9ba3f8bc285daa79c5a4ca9624987f4",
                 "shasum": ""
             },
             "require": {
@@ -7201,7 +7201,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-10-15T12:24:50+00:00"
+            "time": "2020-10-17T12:05:16+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7568,16 +7568,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.49",
+            "version": "0.12.50",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9a6136c2b39d5214da78de37128d5fe08e5d5b05"
+                "reference": "b8248f9c81265af75d6d969ca3252aaf3e998f3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9a6136c2b39d5214da78de37128d5fe08e5d5b05",
-                "reference": "9a6136c2b39d5214da78de37128d5fe08e5d5b05",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b8248f9c81265af75d6d969ca3252aaf3e998f3a",
+                "reference": "b8248f9c81265af75d6d969ca3252aaf3e998f3a",
                 "shasum": ""
             },
             "require": {
@@ -7620,7 +7620,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-12T14:10:44+00:00"
+            "time": "2020-10-16T12:22:23+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
