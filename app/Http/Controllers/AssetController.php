@@ -218,7 +218,7 @@ class AssetController extends Controller
         $request->session()->flash('statusType', 'success');
         $request->session()->flash(
             'status',
-            __('The asset is now marked as archived. Users can no longer leave reviews, but it can still be downloaded.')
+            __("The asset is now marked as archived. Users can no longer leave reviews, but it can still be downloaded. If you no longer maintain this asset, consider also marking this asset's Git repository as archived.")
         );
 
         $user = Auth::user();
@@ -239,7 +239,7 @@ class AssetController extends Controller
         $request->session()->flash('statusType', 'success');
         $request->session()->flash(
             'status',
-            __('The asset is no longer marked as archived. Welcome back!')
+            __("The asset is no longer marked as archived. Welcome back! If you've marked this asset's Git repository as archived, remember to unarchive it there as well.")
         );
 
         $user = Auth::user();
