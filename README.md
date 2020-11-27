@@ -22,6 +22,12 @@ When working on new features, keep in mind this website only supports
 
 Internet Explorer isn't supported.
 
+### Production environment
+
+The production environment uses **PHP 7.3**. To preserve compatibility with the
+production environment, don't use language features only available in PHP 7.4 or
+later.
+
 ### Backend
 
 The backend uses the [Laravel](https://laravel.com/) PHP framework.
