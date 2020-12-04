@@ -55,8 +55,4 @@ module.exports = {
     },
   },
   purge: ['resources/views/**/*.blade.php'],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
 };

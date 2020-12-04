@@ -12,7 +12,7 @@
   @apply appearance-none shadow border rounded w-full py-2 px-3 leading-relaxed text-sm;
 
   &:focus {
-    @apply outline-none shadow-outline;
+    @apply outline-none ring;
   }
 
   &::placeholder {

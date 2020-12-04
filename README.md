@@ -91,7 +91,7 @@ vendor/bin/php-cs-fixer fix
 The frontend uses the [Tailwind](https://tailwindcss.com/) CSS framework
 and [TypeScript](https://www.typescriptlang.org/).
 
-1. Install [Node.js](https://nodejs.org/en/) (10.x or later)
+1. Install [Node.js](https://nodejs.org/en/) (12.13.0 or later)
    and [Yarn](https://nodejs.org/en/) (recommended over npm).
 2. Run the following commands in the project folder depending on your needs:
 
