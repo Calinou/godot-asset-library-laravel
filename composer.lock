@@ -5858,16 +5858,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.17",
+            "version": "1.10.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb"
+                "reference": "196601d50c08c3fae389a417a7689367fcf37cef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/09d42e18394d8594be24e37923031c4b7442a1cb",
-                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb",
+                "url": "https://api.github.com/repos/composer/composer/zipball/196601d50c08c3fae389a417a7689367fcf37cef",
+                "reference": "196601d50c08c3fae389a417a7689367fcf37cef",
                 "shasum": ""
             },
             "require": {
@@ -5876,7 +5876,7 @@
                 "composer/spdx-licenses": "^1.2",
                 "composer/xdebug-handler": "^1.1",
                 "justinrainbow/json-schema": "^5.2.10",
-                "php": "^5.3.2 || ^7.0",
+                "php": "^5.3.2 || ^7.0 || ^8.0",
                 "psr/log": "^1.0",
                 "seld/jsonlint": "^1.4",
                 "seld/phar-utils": "^1.0",
@@ -5948,24 +5948,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-30T21:31:58+00:00"
+            "time": "2020-12-04T08:14:16+00:00"
         },
         {
             "name": "composer/semver",
-            "version": "1.7.1",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "38276325bd896f90dfcfe30029aa5db40df387a7"
+                "reference": "647490bbcaf7fc4891c58f47b825eb99d19c377a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/38276325bd896f90dfcfe30029aa5db40df387a7",
-                "reference": "38276325bd896f90dfcfe30029aa5db40df387a7",
+                "url": "https://api.github.com/repos/composer/semver/zipball/647490bbcaf7fc4891c58f47b825eb99d19c377a",
+                "reference": "647490bbcaf7fc4891c58f47b825eb99d19c377a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.2 || ^7.0"
+                "php": "^5.3.2 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.5 || ^5.0.5"
@@ -6023,20 +6023,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-27T13:13:07+00:00"
+            "time": "2020-12-03T15:47:16+00:00"
         },
         {
             "name": "composer/spdx-licenses",
-            "version": "1.5.4",
+            "version": "1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/spdx-licenses.git",
-                "reference": "6946f785871e2314c60b4524851f3702ea4f2223"
+                "reference": "de30328a7af8680efdc03e396aad24befd513200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/6946f785871e2314c60b4524851f3702ea4f2223",
-                "reference": "6946f785871e2314c60b4524851f3702ea4f2223",
+                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/de30328a7af8680efdc03e396aad24befd513200",
+                "reference": "de30328a7af8680efdc03e396aad24befd513200",
                 "shasum": ""
             },
             "require": {
@@ -6048,7 +6048,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-main": "1.x-dev"
                 }
             },
             "autoload": {
@@ -6097,7 +6097,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-15T15:35:07+00:00"
+            "time": "2020-12-03T16:04:16+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -6992,16 +6992,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v0.6.10",
+            "version": "v0.6.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "555d4cefde563ec9bf93925951615ef344cebd86"
+                "reference": "a036948cdcb09bc374f8be77db4c1262374cb297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/555d4cefde563ec9bf93925951615ef344cebd86",
-                "reference": "555d4cefde563ec9bf93925951615ef344cebd86",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/a036948cdcb09bc374f8be77db4c1262374cb297",
+                "reference": "a036948cdcb09bc374f8be77db4c1262374cb297",
                 "shasum": ""
             },
             "require": {
@@ -7081,7 +7081,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-25T22:57:13+00:00"
+            "time": "2020-12-07T17:05:45+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7448,16 +7448,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.57",
+            "version": "0.12.59",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "f9909d1d0c44b4cbaf72babcf80e8f14d6fdd55b"
+                "reference": "cf4107257c8ca2ad967efdd6a00f12b21acbb779"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f9909d1d0c44b4cbaf72babcf80e8f14d6fdd55b",
-                "reference": "f9909d1d0c44b4cbaf72babcf80e8f14d6fdd55b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cf4107257c8ca2ad967efdd6a00f12b21acbb779",
+                "reference": "cf4107257c8ca2ad967efdd6a00f12b21acbb779",
                 "shasum": ""
             },
             "require": {
@@ -7500,7 +7500,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-21T12:53:28+00:00"
+            "time": "2020-12-07T14:46:03+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -8975,16 +8975,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.1.8",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "df08650ea7aee2d925380069c131a66124d79177"
+                "reference": "bb92ba7f38b037e531908590a858a04d85c0e238"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/df08650ea7aee2d925380069c131a66124d79177",
-                "reference": "df08650ea7aee2d925380069c131a66124d79177",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/bb92ba7f38b037e531908590a858a04d85c0e238",
+                "reference": "bb92ba7f38b037e531908590a858a04d85c0e238",
                 "shasum": ""
             },
             "require": {
@@ -9030,7 +9030,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:01:57+00:00"
+            "time": "2020-11-12T09:58:18+00:00"
         },
         {
             "name": "symfony/options-resolver",
