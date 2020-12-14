@@ -61,7 +61,7 @@ class Asset extends Model
     /**
      * The number of assets per page to display by default.
      */
-    public const ASSETS_PER_PAGE = 20;
+    public const ASSETS_PER_PAGE = 40;
 
     /**
      * The maximum number of tags an asset may have.

@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create users and associated assets
+        // Create users and associated assets.
+        // Create enough assets so that we have at least 2 pages of assets to test pagination.
         // TODO: Figure out how to have multiple authors.
         Asset::factory()
-            ->times(30)
+            ->times(50)
             ->for(User::factory(), 'author')
             ->hasPreviews(3)
             ->hasVersions(3)
