@@ -2,6 +2,8 @@
 
 [![codecov](https://codecov.io/gh/Calinou/godot-asset-library-laravel/branch/master/graph/badge.svg)](https://codecov.io/gh/Calinou/godot-asset-library-laravel)
 
+![Screenshot](https://raw.githubusercontent.com/Calinou/media/master/godot-asset-library-laravel/screenshot.png)
+
 ## Installation
 
 If you wish to contribute code to the Godot Asset Library, you'll need to
