@@ -95,7 +95,7 @@ return [
 
     'languages' => [
         'en' => 'English',
-        'pt-br' => 'Brazilian Portuguese'
+        'pt_BR' => 'Brazilian Portuguese'
     ],
 
     /*
