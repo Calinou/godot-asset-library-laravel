@@ -68,10 +68,10 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
         'label' => __('Sort by'),
         'required' => false,
         'choices' => [
-          'updated' => 'Updated',
-          'name' => 'Name',
-          'rating' => 'Score',
-          'cost' => 'License',
+          'updated' => __('Updated'),
+          'name' => __('Name'),
+          'rating' => __('Score'),
+          'cost' => __('License'),
         ],
       ])
       @endcomponent
