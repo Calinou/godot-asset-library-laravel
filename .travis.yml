@@ -5,7 +5,7 @@ env:
   - APP_ENV=testing
 
 php:
-  - '7.2'
+  - '7.3'
 
 services:
   - mysql
