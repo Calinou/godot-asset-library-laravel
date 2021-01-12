@@ -178,7 +178,7 @@ EOF);
     @yield('content')
 
     <footer class="mt-12 py-12 bg-gray-300 text-gray-600 dark:bg-gray-900 text-center">
-      © 2019-2020 {{ config('app.name') }}
+      © 2019-2021 {{ config('app.name') }}
       @can('admin')
         —
         <a class="link text-center" href="{{ route('admin.index') }}">

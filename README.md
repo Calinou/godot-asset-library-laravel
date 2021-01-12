@@ -117,7 +117,7 @@ yarn lint:ts --fix
 
 ## License
 
-Copyright © 2019-2020 Hugo Locurcio and contributors
+Copyright © 2019-2021 Hugo Locurcio and contributors
 
 Unless otherwise specified, files in this repository are licensed under
 the MIT license; see [LICENSE.md](LICENSE.md) for more information.
