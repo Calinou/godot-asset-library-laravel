@@ -179,11 +179,15 @@ EOF);
 
     <footer class="mt-12 py-12 bg-gray-300 text-gray-600 dark:bg-gray-900 text-center">
       © 2019-2021 {{ config('app.name') }}
+      —
+      <a class="link" href="/developer/v1/" data-barba-prevent>
+        {{ __('API documentation') }}
+      </a>
       @can('admin')
-        —
-        <a class="link text-center" href="{{ route('admin.index') }}">
-          {{ __('Administration panel') }}
-        </a>
+      —
+      <a class="link" href="{{ route('admin.index') }}">
+        {{ __('Administration panel') }}
+      </a>
       @endcan
     </footer>
   </main>
