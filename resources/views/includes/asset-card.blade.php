@@ -1,7 +1,7 @@
 <div class="w-full lg:w-1/2 px-2 my-2">
   <a
     href="{{ route('asset.show', ['asset' => $asset ]) }}"
-    title="Latest version: {{ $asset->version_string }} (released {{ $asset->versions->last()->created_at->diffForHumans() }})&#x0A;Last page update: {{ $asset->modify_date->diffForHumans() }}&#x0A;License: {{ $asset->license_name }}&#x0A;Tags: {{ implode(', ', $asset->tags) }}"
+    title="Latest version: {{ $asset->version_string }} (released {{ $asset->versions->last()->created_at->diffForHumans() }})&#10;Last page update: {{ $asset->modify_date->diffForHumans() }}&#10;License: {{ $asset->license_name }}&#10;Tags: {{ implode(', ', $asset->tags) }}"
   >
     <article class="flex bg-white dark:bg-gray-800 rounded shadow hover-active-darken">
       <div class="flex-shrink-0 self-center">
