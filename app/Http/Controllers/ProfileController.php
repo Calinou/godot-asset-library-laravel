@@ -43,18 +43,10 @@ class ProfileController extends Controller
                 'max:'.User::USERNAME_MAX_LENGTH,
                 Rule::unique('users')->ignore($user),
             ],
-            'language' => ['nullable', 'string', 'in:'. implode(',', array_keys(config('app.languages')))],
             'full_name' => ['nullable', 'string', 'max:'.User::FULL_NAME_MAX_LENGTH],
             'current_password' => 'nullable|required_with:new_password|string|password',
             'new_password' => 'nullable|string|min:'.User::PASSWORD_MIN_LENGTH.'|confirmed|different:current_password',
         ]);
-
-
-        if (!empty($request->input('language')))
-        {
-            session()->put('language', $request->input('language'));
-            app()->setLocale($request->input('language'));
-        }
 
         $user->username = $input['username'];
         $user->full_name = $input['full_name'];

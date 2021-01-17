@@ -45,17 +45,6 @@
         {{ __('Changing your email address is not implemented yet. Sorry!') }}
         @endcomponent
 
-        @component('components/form-select', [
-          'required' => true,
-          'name' => 'language',
-          'value' => app()->getLocale(),
-          'choices' => config('app.languages'),
-          'label' => __('Language'),
-          'disabled' => false,
-        ])
-        {{ __('Changing language.') }}
-        @endcomponent
-
         @component('components/form-input', [
           'type' => 'password',
           'name' => 'current_password',
