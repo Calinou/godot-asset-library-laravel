@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Locale;
 
 class SetLocale
 {
@@ -16,18 +18,18 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!empty($request->input('locale')) && array_key_exists(strtolower($request->route('locale')), config('app.languages')))
+        $language = isset($_COOKIE['locale']) ? str_replace('-', '_', $_COOKIE['locale']) : '';
+        if (array_key_exists($language, config('app.languages')))
         {
-            session()->put('language', $request->input('locale'));
-            $language = $request->input('locale');
+            app()->setLocale($language);
+        }
+        else if (array_key_exists(Locale::getDefault(), config('app.languages')))
+        {
+            app()->setLocale(Locale::getDefault());
         }
         else
         {
-            $language = session('language') ?? config('app.locale');
-        }
-
-        if (isset($language) && config('app.languages.' . $language)) {
-            app()->setLocale($language);
+            app()->setLocale(config('app.locale'));
         }
 
         return $next($request);

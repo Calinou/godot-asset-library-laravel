@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -42,6 +43,8 @@ Route::group(['middleware' => 'locale'], function() {
 
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
     Route::get('/user/{user}/reviews', [UserController::class, 'indexReviews'])->name('user.reviews.index');
+
+    Route::post('/translation/select', [TranslationController::class, 'update'])->name('translation');
 
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
