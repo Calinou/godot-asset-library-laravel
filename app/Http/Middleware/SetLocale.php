@@ -26,15 +26,7 @@ class SetLocale
             app()->setLocale($language);
         }
         /**
-         * If there is no COOKIE, an attempt is made through the Locale
-         * https://www.php.net/manual/en/locale.getdefault.php
-         */
-        else if (array_key_exists(Locale::getDefault(), config('app.languages')))
-        {
-            app()->setLocale(Locale::getDefault());
-        }
-        /**
-         * If none of the above options served then it will be set to the default value
+         * If the language in $_COOKIE['locale'] is not valid, the value will be set as the default
          */
         else
         {
