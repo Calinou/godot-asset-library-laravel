@@ -259,7 +259,7 @@ function initDetectNavigatorLanguage(): void {
     expiresDate.setFullYear(expiresDate.getFullYear() + 5);
     expiresDate.getFullYear();
 
-    document.cookie = `locale=${navigator.language}; expires=Sun, ${expiresDate.toUTCString()}; path=/; sameSite=Lax`;
+    document.cookie = `locale=${navigator.language}; expires=${expiresDate.toUTCString()}; path=/; sameSite=Lax`;
   }
 }
 
