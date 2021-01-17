@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 class TranslationController extends Controller
 {
     /**
+     * Update the language in application.
+     *
      * @param Request $request
      */
     public function update(Request $request)
