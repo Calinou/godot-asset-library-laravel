@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+
+  db:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: godotassetlibrary
+    volumes:
+      - db-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+    working_dir: /app
+    depends_on:
+      - db
+    env_file: .env
+    restart: always
+    expose:
+      - "9000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx.Dockerfile
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
+    networks:
+      - default
+
+volumes:
+  db-data:

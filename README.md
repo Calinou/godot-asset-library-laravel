@@ -24,13 +24,26 @@ When working on new features, keep in mind this website only supports
 
 Internet Explorer isn't supported.
 
-### Production environment
+### With Docker
 
-The production environment uses **PHP 7.3**. To preserve compatibility with the
-production environment, don't use language features only available in PHP 7.4 or
-later.
+Composer and JavaScript dependencies are installed automatically when building
+the container.
 
-### Backend
+```bash
+# Set up containers
+docker-compose up -d
+
+# Run migrations and seed test data into the database
+docker-compose exec app php artisan migrate --seed
+```
+
+You can now work on the application. Local changes to PHP files will be visible
+in the container. Webpack will also run in watch mode, so you can modify
+TypeScript/CSS files and see changes in the container after the build has completed.
+
+### Without Docker
+
+#### Backend
 
 The backend uses the [Laravel](https://laravel.com/) PHP framework.
 
@@ -66,7 +79,7 @@ php artisan serve
 You can run `php artisan migrate:refresh --seed` to run all migrations
 and seed test data again.
 
-#### Code quality tools
+##### Code quality tools
 
 - Feature tests are available. They use a secondary MySQL database configured
   in `.env.testing`. You need to create this database before running them.
@@ -88,7 +101,7 @@ vendor/bin/phpstan analyse
 vendor/bin/php-cs-fixer fix
 ```
 
-### Frontend
+#### Frontend
 
 The frontend uses the [Tailwind](https://tailwindcss.com/) CSS framework
 and [TypeScript](https://www.typescriptlang.org/).
