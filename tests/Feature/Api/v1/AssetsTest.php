@@ -4,22 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\v1;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AssetsTest extends TestCase
 {
-    // https://stackoverflow.com/questions/42350138/how-to-seed-database-migrations-for-laravel-tests
-    use RefreshDatabase {
-        refreshDatabase as baseRefreshDatabase;
-    }
-
-    public function refreshDatabase(): void
-    {
-        $this->baseRefreshDatabase();
-        $this->seed();
-    }
-
     public function testAssetIndex(): void
     {
         $response = $this->get('/api/v1/asset');

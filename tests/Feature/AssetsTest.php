@@ -6,16 +6,10 @@ namespace Tests\Feature;
 
 use App\Asset;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AssetsTest extends TestCase
 {
-    // https://stackoverflow.com/questions/42350138/how-to-seed-database-migrations-for-laravel-tests
-    use RefreshDatabase {
-        refreshDatabase as baseRefreshDatabase;
-    }
-
     public const ASSET_DATA = [
         'title' => 'My Own Asset',
         'blurb' => 'One-line description of the asset',
@@ -27,12 +21,6 @@ class AssetsTest extends TestCase
         'versions[0][godot_version]' => '3.2',
         'browse_url' => 'https://github.com/user/asset',
     ];
-
-    public function refreshDatabase(): void
-    {
-        $this->baseRefreshDatabase();
-        $this->seed();
-    }
 
     public function testAssetIndex(): void
     {
@@ -103,7 +91,7 @@ class AssetsTest extends TestCase
 
     public function testAssetCreateLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/asset/submit');
         $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', false);
     }
@@ -116,7 +104,7 @@ class AssetsTest extends TestCase
 
     public function testAssetSubmitLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
         $response->assertRedirect('/');
     }
@@ -129,7 +117,7 @@ class AssetsTest extends TestCase
 
     public function testAssetEditLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->is_admin = true;
         $response = $this->actingAs($user)->get('/asset/1/edit');
         $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', true);
