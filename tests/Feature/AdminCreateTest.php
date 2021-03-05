@@ -6,9 +6,9 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AdminCreateTest extends TestCase
+class AdminCreateTest extends RefreshTestCase
 {
     /**
      * Test the administrator creation command.

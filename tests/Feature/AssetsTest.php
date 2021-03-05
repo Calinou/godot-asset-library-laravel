@@ -19,7 +19,7 @@ class AssetsTest extends TestCase
         'license' => 'MIT',
         'versions[0][version_string]' => '1.0.0',
         'versions[0][godot_version]' => '3.2',
-        'browse_url' => 'https://github.com/user/asset',
+        'browse_url' => 'https://github.com/Calinou/godot-asset-library-laravel',
     ];
 
     public function testAssetIndex(): void
@@ -106,6 +106,7 @@ class AssetsTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
+        $response->dumpSession();
         $response->assertRedirect('/');
     }
 
