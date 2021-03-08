@@ -105,7 +105,7 @@ yarn
 yarn watch
 
 # Build optimized frontend files for production
-yarn prod
+yarn production
 
 # Lint CSS and TypeScript files for code style violations
 yarn lint

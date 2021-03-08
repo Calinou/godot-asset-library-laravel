@@ -1,44 +1,45 @@
 {
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "development": "mix",
     "doc": "redoc-cli bundle public/developer/v1/openapi.yaml && move-file redoc-static.html public/developer/v1/index.html",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "mix watch --hot",
     "lint": "npm-run-all --sequential lint:css lint:ts",
     "lint:css": "stylelint \"resources/css/**/*.css\"",
     "lint:ts": "eslint \"resources/ts/**/*.ts\"",
-    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "yarn run dev --watch",
-    "watch-poll": "yarn run dev --watch --watch-poll"
+    "production": "mix --production",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000"
   },
   "dependencies": {
     "@barba/core": "^2.9.7",
     "balloon-css": "^1.2.0",
     "cross-env": "^7.0.3",
     "fork-awesome": "^1.1.7",
-    "laravel-mix": "^5.0.5",
+    "laravel-mix": "^6.0.13",
     "move-file-cli": "^2.0.0",
     "npm-run-all": "^4.1.5",
-    "postcss-import": "^12.0.1",
+    "postcss-import": "^14.0.0",
     "postcss-nesting": "^7.0.1",
-    "postcss-url": "^8.0.0",
-    "redoc-cli": "^0.9.12",
+    "postcss-url": "^10.1.1",
+    "redoc-cli": "^0.10.2",
     "resolve-url-loader": "^3.1.2",
     "tailwindcss": "^1.8.7",
-    "ts-loader": "^8.0.14",
-    "typescript": "^4.1.3",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.3",
     "vue-template-compiler": "^2.6.12",
-    "webpack": "^4.41.1"
+    "webpack": "^5.24.4"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.13.0",
-    "eslint": "^7.17.0",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "husky": "^4.3.7",
-    "stylelint": "^13.8.0",
-    "stylelint-config-standard": "^20.0.0"
+    "husky": "^4.3.8",
+    "postcss": "^8.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-standard": "^21.0.0"
   },
   "eslintConfig": {
     "env": {
