@@ -6,19 +6,24 @@ namespace Tests\Feature;
 
 use App\Asset;
 use App\User;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AssetsTest extends TestCase
+class AssetsTest extends RefreshTestCase
 {
     public const ASSET_DATA = [
         'title' => 'My Own Asset',
         'blurb' => 'One-line description of the asset',
         'description' => 'A long description…',
         'tags' => 'platformer, 2d, pixel-art, gdnative',
-        'category' => Asset::CATEGORY_2D_TOOLS,
+        'category_id' => Asset::CATEGORY_2D_TOOLS,
         'license' => 'MIT',
-        'versions[0][version_string]' => '1.0.0',
-        'versions[0][godot_version]' => '3.2',
+        'cost' => 'MIT',
+        'versions' => [
+            0 => [
+                'version_string' => '1.0.0',
+                'godot_version' => '3.x.x',
+            ],
+        ],
         'browse_url' => 'https://github.com/Calinou/godot-asset-library-laravel',
     ];
 
@@ -105,9 +110,11 @@ class AssetsTest extends TestCase
     public function testAssetSubmitLoggedIn(): void
     {
         $user = User::factory()->create();
+        $this->assertDatabaseMissing('assets', ['author_id' => $user->id]);
         $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
-        $response->dumpSession();
-        $response->assertRedirect('/');
+        $response->assertRedirect();
+        $response->assertSessionHas('statusType', 'success');
+        $this->assertDatabaseHas('assets', ['author_id' => $user->id]);
     }
 
     public function testAssetEditNotLoggedIn(): void

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\v1;
 
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class ConfigureTest extends TestCase
+class ConfigureTest extends RefreshTestCase
 {
     /**
      * The JSON structure the response must follow to pass the test.

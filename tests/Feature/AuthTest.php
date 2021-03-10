@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AuthTest extends TestCase
+class AuthTest extends RefreshTestCase
 {
     public function testAuthLoginView(): void
     {

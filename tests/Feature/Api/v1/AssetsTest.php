@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\v1;
 
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AssetsTest extends TestCase
+class AssetsTest extends RefreshTestCase
 {
     public function testAssetIndex(): void
     {

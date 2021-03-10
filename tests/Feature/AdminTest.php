@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AdminTest extends TestCase
+class AdminTest extends RefreshTestCase
 {
     public function testAdminIndexNotLoggedIn(): void
     {

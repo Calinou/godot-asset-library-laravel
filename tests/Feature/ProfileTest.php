@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class ProfileTest extends TestCase
+class ProfileTest extends RefreshTestCase
 {
     public function testProfileEditView(): void
     {
