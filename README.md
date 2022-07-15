@@ -26,18 +26,18 @@ Internet Explorer isn't supported.
 
 ### Development environment
 
-This project uses [Laravel Sail](https://laravel.com/docs/8.x/sail) to supply you with a docker
+This project uses [Laravel Sail](https://laravel.com/docs/sail) to supply you with a docker
 based development environment. Please take a moment to familiarize yourself with its concepts.
 
 We also supply a small convenience shell script named `sail` in the project root which forwards all
 commands to the `vendor/bin/sail` command.
 
-It also
-- asks if it should [install the composer dependencies using a container](https://laravel.com/docs/8.x/sail#installing-composer-dependencies-for-existing-projects),
-  when not finding the sail command
-- asks if it should install `.env.sail` as the current `.env` if none is currently present  
-  **NOTE:** if you already have an `.env` installed, consider replacing it with `.env.sail`
-  as the `DB_*`/`REDIS_*` settings are important for operating inside the sail environment
+It also asks whether it should
+- [install the composer dependencies using a container](https://laravel.com/docs/sail#installing-composer-dependencies-for-existing-projects),
+  if not finding the sail command.
+- install `.env.sail` as the current `.env`, if none is currently present.  
+  **NOTE:** If you already have an `.env` installed, consider replacing it with `.env.sail`
+  as the `DB_*`/`REDIS_*` settings are important for operating inside the sail environment.
 
 ```bash
 # start the development environment
