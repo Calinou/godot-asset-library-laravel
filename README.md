@@ -26,8 +26,8 @@ Internet Explorer isn't supported.
 
 ### Development environment
 
-This project uses [Laravel Sail](https://laravel.com/docs/sail) to supply you with a docker
-based development environment. Please take a moment to familiarize yourself with its concepts.
+This project uses [Laravel Sail](https://laravel.com/docs/sail) to supply you with a Docker-based
+development environment. Please take a moment to familiarize yourself with its concepts.
 
 We also supply a small convenience shell script named `sail` in the project root which forwards all
 commands to the `vendor/bin/sail` command.
