@@ -1,7 +1,8 @@
 APP_ENV=local
 APP_KEY=
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_PORT=8080
+APP_URL=http://localhost:8080
 
 LOG_CHANNEL=stack
 

@@ -52,7 +52,11 @@ It also asks whether it should
 # and the frontend
 ./sail yarn
 ./sail yarn development
+```
 
+The development environment will be available at http://localhost:8080 by default.
+
+```bash
 # stop the development environment
 ./sail stop
 ```
