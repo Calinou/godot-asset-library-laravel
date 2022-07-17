@@ -30,7 +30,7 @@
   <link rel="manifest" href="{{ asset('/site.webmanifest') }}">
   <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }}" color="#3d8fcc">
   <script defer src="{{ asset(mix('js/manifest.js')) }}"></script>
-  <script defer src="{{ asset(mix('js/vendor.js')) }}"></script>
+  <!-- <script defer src="{{ asset(mix('js/vendor.js')) }}"></script> -->
   <script defer src="{{ asset(mix('js/app.js')) }}"></script>
 </head>
 <body data-barba="wrapper">
