@@ -24,6 +24,43 @@ When working on new features, keep in mind this website only supports
 
 Internet Explorer isn't supported.
 
+### Development environment
+
+This project uses [Laravel Sail](https://laravel.com/docs/sail) to supply you with a Docker-based
+development environment. Please take a moment to familiarize yourself with its concepts.
+
+We also supply a small convenience shell script named `sail` in the project root which forwards all
+commands to the `vendor/bin/sail` command.
+
+It also asks whether it should
+- [install the composer dependencies using a container](https://laravel.com/docs/sail#installing-composer-dependencies-for-existing-projects),
+  if not finding the sail command.
+- install `.env.sail` as the current `.env`, if none is currently present.  
+  **NOTE:** If you already have an `.env` installed, consider replacing it with `.env.sail`
+  as the `DB_*`/`REDIS_*` settings are important for operating inside the sail environment.
+
+```bash
+# Start the development environment
+./sail up -d
+
+# Continue with setting up the backend...
+./sail artisan db:create
+./sail artisan migrate --seed
+./sail artisan key:generate
+./sail artisan admin:create
+
+# ...and the frontend
+./sail yarn
+./sail yarn development
+```
+
+The development environment will be available at http://localhost:8080 by default.
+
+```bash
+# Stop the development environment
+./sail stop
+```
+
 ### Production environment
 
 The production environment uses **PHP 7.3**. To preserve compatibility with the
