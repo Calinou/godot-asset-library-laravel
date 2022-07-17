@@ -40,16 +40,16 @@ It also asks whether it should
   as the `DB_*`/`REDIS_*` settings are important for operating inside the sail environment.
 
 ```bash
-# start the development environment
+# Start the development environment
 ./sail up -d
 
-# continue with setting up the backend
+# Continue with setting up the backend...
 ./sail artisan db:create
 ./sail artisan migrate --seed
 ./sail artisan key:generate
 ./sail artisan admin:create
 
-# and the frontend
+# ...and the frontend
 ./sail yarn
 ./sail yarn development
 ```
@@ -57,7 +57,7 @@ It also asks whether it should
 The development environment will be available at http://localhost:8080 by default.
 
 ```bash
-# stop the development environment
+# Stop the development environment
 ./sail stop
 ```
 
