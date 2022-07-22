@@ -65,7 +65,7 @@ license = MIT  —  Show assets licensed under the MIT license (use SPDX identif
 updated_at > 2020-01-01  —  Show assets updated after January 1 2020
 EOF);
               @endphp
-              <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2"
+              <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2 relative"
                 aria-label="{{ $searchTooltip }}"
                 data-balloon-pos="down"
                 data-balloon-break
@@ -77,7 +77,7 @@ EOF);
                   value="{{ Request::get('filter') }}"
                   class="form-input-text shadow-none bg-gray-200 dark:bg-gray-700 lg:w-64"
                 >
-                <span class="fa fa-search absolute right-0 mt-2 mr-3 pointer-events-none text-gray-500"></span>
+                <span class="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500"></span>
               </form>
             </div>
 
