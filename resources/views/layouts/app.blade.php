@@ -81,7 +81,7 @@ EOF);
               <div class="navbar-dropdown-content">
                 @foreach (range(0, App\Asset::CATEGORY_MAX - 1) as $categoryId)
 
-                <a href="{{ route('asset.list', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
+                <a href="{{ route('asset.list', ['category' => $categoryId]) }}" class="block button rounded-none px-6 whitespace-nowrap">
                   <span class="fa {{ App\Asset::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
                   {{ App\Asset::getCategoryName($categoryId) }}
                 </a>
@@ -114,13 +114,13 @@ EOF);
               {{ Auth::user()->username }} <span class="fa fa-angle-down ml-1"></span>
             </a>
             <div class="navbar-dropdown-content lg:right-0">
-              <a href="{{ route('profile.edit') }}" class="block button rounded-none px-6">
+              <a href="{{ route('profile.edit') }}" class="block button rounded-none px-6 whitespace-nowrap">
                 <span class="fa fa-cogs fa-fw mr-1 -ml-2 opacity-75"></span>
                 {{ __('Settings') }}
                 </a>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="block button rounded-none px-6" type="submit" data-loading>
+                <button class="block button rounded-none px-6 whitespace-nowrap" type="submit" data-loading>
                   <span class="fa fa-sign-out fa-fw mr-1 -ml-2 opacity-75"></span>
                   {{ __('Log out') }}
                 </button>
