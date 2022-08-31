@@ -86,6 +86,6 @@ class LoginController extends Controller
             Auth::login($user);
         }
 
-        return redirect(route('asset.index'));
+        return redirect(route('asset.list'));
     }
 }

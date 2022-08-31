@@ -5,7 +5,7 @@
 .form-required::after {
   @apply text-red-600 ml-1;
 
-  content: '*';
+  content: "*";
 }
 
 .form-input-text {

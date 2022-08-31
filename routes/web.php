@@ -19,9 +19,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [AssetController::class, 'index'])->name('asset.index');
-// Redirect for compatibility with the old asset library homepage URL
-Route::permanentRedirect('/asset', url('/'));
+Route::get('/', [AssetController::class, 'list'])->name('asset.list');
+Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
 Route::get('/asset/submit', [AssetController::class, 'create'])->name('asset.create')->middleware('can:submit-asset');
 Route::post('/asset', [AssetController::class, 'store'])->name('asset.store')->middleware('can:submit-asset');
 
@@ -41,6 +40,7 @@ Route::delete('/asset/reviews/{asset_review}', [AssetController::class, 'destroy
 Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/{user}/reviews', [UserController::class, 'indexReviews'])->name('user.reviews.index');
 
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 

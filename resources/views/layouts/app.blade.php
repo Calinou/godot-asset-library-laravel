@@ -19,19 +19,12 @@
   <meta property="og:description" content="@yield('description')">
   <meta property="og:site_name" content="{{ config('app.name') }}">
 
-  {{--
-    Wrap `mix()` calls in `asset()` to keep working paths when hosting the app in a subdirectory.
-    <https://github.com/JeffreyWay/laravel-mix/issues/1026>
-  --}}
-  <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/apple-touch-icon.png') }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/favicon-32x32.png') }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/favicon-16x16.png') }}">
-  <link rel="manifest" href="{{ asset('/site.webmanifest') }}">
   <link rel="mask-icon" href="{{ asset('/safari-pinned-tab.svg') }}" color="#3d8fcc">
-  <script defer src="{{ asset(mix('js/manifest.js')) }}"></script>
-  <!-- <script defer src="{{ asset(mix('js/vendor.js')) }}"></script> -->
-  <script defer src="{{ asset(mix('js/app.js')) }}"></script>
+  <link rel="manifest" href="{{ asset('/build/manifest.json') }}">
+  @vite(['resources/css/app.css', 'resources/ts/app.ts'])
 </head>
 <body data-barba="wrapper">
   <header>
@@ -39,7 +32,7 @@
 
       <div class="container px-0 flex flex-wrap justify-between">
         <div class="lg:flex items-center">
-          <a href="{{ route('asset.index') }}" class="navbar-link font-medium text-lg">
+          <a href="{{ route('asset.list') }}" class="navbar-link font-medium text-lg">
             {{ config('app.name') }}
           </a>
 
@@ -65,7 +58,7 @@ license = MIT  —  Show assets licensed under the MIT license (use SPDX identif
 updated_at > 2020-01-01  —  Show assets updated after January 1 2020
 EOF);
               @endphp
-              <form method="GET" action="{{ route('asset.index') }}" class="lg:ml-2 relative"
+              <form method="GET" action="{{ route('asset.list') }}" class="lg:ml-2 relative"
                 aria-label="{{ $searchTooltip }}"
                 data-balloon-pos="down"
                 data-balloon-break
@@ -82,13 +75,13 @@ EOF);
             </div>
 
             <div data-navbar-collapse class="hidden lg:block navbar-dropdown">
-              <a href="{{ route('asset.index') }}" class="button lg:ml-2">
+              <a href="{{ route('asset.list') }}" class="button lg:ml-2">
                 {{ __('Categories') }} <span class="fa fa-angle-down ml-1"></span>
               </a>
               <div class="navbar-dropdown-content">
                 @foreach (range(0, App\Asset::CATEGORY_MAX - 1) as $categoryId)
 
-                <a href="{{ route('asset.index', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
+                <a href="{{ route('asset.list', ['category' => $categoryId]) }}" class="block button rounded-none px-6">
                   <span class="fa {{ App\Asset::getCategoryIcon($categoryId) }} fa-fw mr-1 -ml-2 opacity-75"></span>
                   {{ App\Asset::getCategoryName($categoryId) }}
                 </a>
@@ -120,7 +113,7 @@ EOF);
             <a href="{{ route('user.show', ['user' => Auth::user()]) }}" class="button">
               {{ Auth::user()->username }} <span class="fa fa-angle-down ml-1"></span>
             </a>
-            <div class="navbar-dropdown-content">
+            <div class="navbar-dropdown-content lg:right-0">
               <a href="{{ route('profile.edit') }}" class="block button rounded-none px-6">
                 <span class="fa fa-cogs fa-fw mr-1 -ml-2 opacity-75"></span>
                 {{ __('Settings') }}
@@ -178,7 +171,7 @@ EOF);
     @yield('content')
 
     <footer class="mt-12 py-12 bg-gray-300 text-gray-600 dark:bg-gray-900 text-center">
-      © 2019-2021 {{ config('app.name') }}
+      © 2019-2022 {{ config('app.name') }}
       —
       <a class="link" href="/developer/v1/" data-barba-prevent>
         {{ __('API documentation') }}

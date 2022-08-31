@@ -1,11 +1,8 @@
 /node_modules
+/public/build
+/public/developer/*/index.html
 /public/hot
 /public/storage
-/public/css
-/public/fonts
-/public/js
-/public/mix-manifest.json
-/public/developer/*/index.html
 /storage/*.key
 /vendor
 .env

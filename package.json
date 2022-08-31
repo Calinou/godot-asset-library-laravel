@@ -1,46 +1,37 @@
 {
   "private": true,
   "scripts": {
-    "development": "mix",
-    "doc": "redoc-cli bundle public/developer/v1/openapi.yaml && move-file redoc-static.html public/developer/v1/index.html",
-    "hot": "mix watch --hot",
+    "dev": "vite",
+    "build": "vite build",
+    "doc": "redoc-cli build public/developer/v1/openapi.yaml && move-file redoc-static.html public/developer/v1/index.html",
     "lint": "npm-run-all --sequential lint:css lint:ts",
     "lint:css": "stylelint \"resources/css/**/*.css\"",
-    "lint:ts": "eslint \"resources/ts/**/*.ts\"",
-    "production": "mix --production",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000"
+    "lint:ts": "eslint \"resources/ts/**/*.ts\""
   },
   "dependencies": {
     "@barba/core": "^2.9.7",
-    "autoprefixer": "^10.4.7",
     "balloon-css": "^1.2.0",
-    "cross-env": "^7.0.3",
-    "fork-awesome": "^1.1.7",
-    "laravel-mix": "^6.0.13",
-    "move-file-cli": "^2.0.0",
-    "npm-run-all": "^4.1.5",
-    "postcss-import": "^14.0.0",
-    "postcss-nesting": "^7.0.1",
-    "postcss-url": "^10.1.1",
-    "redoc-cli": "^0.10.2",
-    "resolve-url-loader": "^3.1.2",
-    "tailwindcss": "^3.1.6",
-    "ts-loader": "^8.0.17",
-    "typescript": "^4.2.3",
-    "vue-template-compiler": "^2.6.12",
-    "webpack": "^5.24.4"
+    "fork-awesome": "^1.1.7"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.0",
+    "@typescript-eslint/parser": "^5.36.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
-    "husky": "^4.3.8",
+    "husky": "^8.0.0",
+    "laravel-vite-plugin": "^0.6.0",
+    "move-file-cli": "^3.0.0",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
-    "stylelint": "^13.12.0",
-    "stylelint-config-standard": "^21.0.0"
+    "postcss-preset-env": "^7.8.0",
+    "redoc-cli": "^0.13.19",
+    "stylelint": "^14.11.0",
+    "stylelint-config-standard": "^28.0.0",
+    "tailwindcss": "^3.1.6",
+    "typescript": "^4.8.0",
+    "vite": "^3.0.9"
   },
   "eslintConfig": {
     "env": {
@@ -80,7 +71,16 @@
             "variants"
           ]
         }
-      ]
+      ],
+      "function-no-unknown": [
+        true,
+        {
+          "ignoreFunctions": [
+            "theme"
+          ]
+        }
+      ],
+      "color-function-notation": "legacy"
     }
   },
   "husky": {

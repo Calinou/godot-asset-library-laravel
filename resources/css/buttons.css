@@ -54,28 +54,28 @@
 .button-login-github {
   @apply text-white;
 
-  background-color: hsl(210, 12%, 28%);
+  background-color: hsl(210deg, 12%, 28%);
 
   &:hover {
-    background-color: hsl(210, 12%, 22%);
+    background-color: hsl(210deg, 12%, 22%);
   }
 
   &:active {
-    background-color: hsl(210, 12%, 16%);
+    background-color: hsl(210deg, 12%, 16%);
   }
 }
 
 .button-login-gitlab {
   @apply text-white;
 
-  background-color: hsl(19, 84%, 56%);
+  background-color: hsl(19deg, 84%, 56%);
 
   &:hover {
-    background-color: hsl(19, 84%, 48%);
+    background-color: hsl(19deg, 84%, 48%);
   }
 
   &:active {
-    background-color: hsl(19, 84%, 40%);
+    background-color: hsl(19deg, 84%, 40%);
   }
 }
 

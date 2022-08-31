@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use GuzzleHttp\Client;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -434,10 +435,12 @@ class Asset extends Model
      * This way, the source Markdown only has to be rendered once
      * (instead of being rendered every time a page is displayed).
      */
-    public function setDescriptionAttribute(string $description): void
+    public function setDescriptionAttribute(string $description = null): void
     {
-        $this->attributes['description'] = $description;
-        $this->attributes['html_description'] = Markdown::convertToHtml($description);
+        if ($description) {
+            $this->attributes['description'] = $description;
+            $this->attributes['html_description'] = Markdown::convert($description)->getContent();
+        }
     }
 
     /**
@@ -450,19 +453,9 @@ class Asset extends Model
             return $this->getRawOriginal('icon_url');
         }
 
-        $splitUrl = explode('/', $this->browse_url);
-
-        // Slug of the form `user/repository`
-        $slug = "$splitUrl[3]/$splitUrl[4]";
-
-        // Try to infer an icon URL based on the repository host
-        // (`icon.png` at the repository root)
-        if ($splitUrl[2] === 'github.com') {
-            return "https://raw.githubusercontent.com/$slug/master/icon.png";
-        } elseif ($splitUrl[2] === 'gitlab.com') {
-            return "https://gitlab.com/$slug/raw/master/icon.png";
-        } elseif ($splitUrl[2] === 'bitbucket.org') {
-            return "https://bitbucket.org/$slug/raw/master/icon.png";
+        $gitIcon = $this->findGitIcon($this->browse_url);
+        if ($gitIcon) {
+            return $gitIcon;
         }
 
         // Couldn't infer an icon URL
@@ -688,5 +681,49 @@ class Asset extends Model
     public function __toString(): string
     {
         return "\"$this->title\" (#$this->asset_id)";
+    }
+
+    /**
+     * Tries to find a icon.png in the git repository.
+     */
+    private function findGitIcon(string $repoUrl): string | null
+    {
+        $splitUrl = explode('/', $repoUrl);
+
+        // Slug of the form `user/repository`
+        $slug = "$splitUrl[3]/$splitUrl[4]";
+
+        // Try to infer an icon URL based on the repository host
+        // (`icon.png` at the repository root)
+
+        $client = new Client(['timeout'  => 1.0, 'http_errors' => false]);
+        try {
+            if ($splitUrl[2] === 'github.com') {
+                if ($client->head("https://raw.githubusercontent.com/$slug/master/icon.png")->getStatusCode() == '200') {
+                    return "https://raw.githubusercontent.com/$slug/master/icon.png";
+                }
+                if ($client->head("https://raw.githubusercontent.com/$slug/main/icon.png")->getStatusCode() == '200') {
+                    return "https://raw.githubusercontent.com/$slug/main/icon.png";
+                }
+            } elseif ($splitUrl[2] === 'gitlab.com') {
+                if ($client->head("https://gitlab.com/$slug/raw/master/icon.png")->getStatusCode() == '200') {
+                    return "https://gitlab.com/$slug/raw/master/icon.png";
+                }
+                if ($client->head("https://gitlab.com/$slug/raw/main/icon.png")->getStatusCode() == '200') {
+                    return "https://gitlab.com/$slug/raw/main/icon.png";
+                }
+            } elseif ($splitUrl[2] === 'bitbucket.org') {
+                if ($client->head("https://bitbucket.org/$slug/raw/master/icon.png")->getStatusCode() == '200') {
+                    return "https://gitlab.com/$slug/raw/master/icon.png";
+                }
+                if ($client->head("https://bitbucket.org/$slug/raw/main/icon.png")->getStatusCode() == '200') {
+                    return "https://gitlab.com/$slug/raw/main/icon.png";
+                }
+            }
+        } catch(ClientException $error) {
+            return null;
+        }
+
+        return null;
     }
 }

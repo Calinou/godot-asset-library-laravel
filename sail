@@ -12,7 +12,7 @@ if [ ! -f "$BASE_DIR/$SAIL_EXECUTABLE" ]; then
             -u "$(id -u):$(id -g)" \
             -v $BASE_DIR:/var/www/html \
             -w /var/www/html \
-            laravelsail/php74-composer:latest \
+            laravelsail/php81-composer:latest \
             composer install --ignore-platform-reqs
     fi
 fi
