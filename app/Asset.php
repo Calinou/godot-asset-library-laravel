@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 /**
@@ -141,6 +142,8 @@ class Asset extends Model
         'MPL-2.0' => 'MPLv2',
         'Unlicense' => 'The Unlicense License',
     ];
+
+    public const CACHEKEY_REPO_ICON = 'ASSET_ICON_REPO';
 
     /**
      * The primary key associated with the table.
@@ -688,40 +691,58 @@ class Asset extends Model
      */
     private function findGitIcon(string $repoUrl): string | null
     {
+        $cacheKey = $this->CACHEKEY_REPO_ICON.'-'.$this->asset_id;
+        $cached = Cache::get($cacheKey);
+        if ($cached) {
+            debug('icon from cache!');
+            return $cached;
+        }
+
         $splitUrl = explode('/', $repoUrl);
 
         // Slug of the form `user/repository`
         $slug = "$splitUrl[3]/$splitUrl[4]";
 
+        $repoIcon = null;
+
         // Try to infer an icon URL based on the repository host
         // (`icon.png` at the repository root)
+        if ($splitUrl[2] === 'github.com') {
+            $repoIcon = $this->getExistingUrl([
+                "https://raw.githubusercontent.com/$slug/main/icon.png",
+                "https://raw.githubusercontent.com/$slug/master/icon.png",
+            ]);
+        } elseif ($splitUrl[2] === 'gitlab.com') {
+            $repoIcon = $this->getExistingUrl([
+                "https://gitlab.com/$slug/raw/main/icon.png",
+                "https://gitlab.com/$slug/raw/master/icon.png",
+            ]);
+        } elseif ($splitUrl[2] === 'bitbucket.org') {
+            $repoIcon = $this->getExistingUrl([
+                "https://bitbucket.org/$slug/raw/main/icon.png",
+                "https://bitbucket.org/$slug/raw/master/icon.png",
+            ]);
+        }
 
-        $client = new Client(['timeout'  => 1.0, 'http_errors' => false]);
-        try {
-            if ($splitUrl[2] === 'github.com') {
-                if ($client->head("https://raw.githubusercontent.com/$slug/master/icon.png")->getStatusCode() == '200') {
-                    return "https://raw.githubusercontent.com/$slug/master/icon.png";
+        if($repoIcon) {
+            // cache the icon for 15min
+            Cache::put($cacheKey, $repoIcon, 900);
+            return $repoIcon;
+        }
+
+        return null;
+    }
+
+    private function getExistingUrl(array $urls): string | null {
+        $client = new Client(['timeout'  => 0.2, 'http_errors' => false]);
+        foreach ($urls as $url) {
+            try {
+                if ($client->head($url)->getStatusCode() == '200') {
+                    return $url;
                 }
-                if ($client->head("https://raw.githubusercontent.com/$slug/main/icon.png")->getStatusCode() == '200') {
-                    return "https://raw.githubusercontent.com/$slug/main/icon.png";
-                }
-            } elseif ($splitUrl[2] === 'gitlab.com') {
-                if ($client->head("https://gitlab.com/$slug/raw/master/icon.png")->getStatusCode() == '200') {
-                    return "https://gitlab.com/$slug/raw/master/icon.png";
-                }
-                if ($client->head("https://gitlab.com/$slug/raw/main/icon.png")->getStatusCode() == '200') {
-                    return "https://gitlab.com/$slug/raw/main/icon.png";
-                }
-            } elseif ($splitUrl[2] === 'bitbucket.org') {
-                if ($client->head("https://bitbucket.org/$slug/raw/master/icon.png")->getStatusCode() == '200') {
-                    return "https://gitlab.com/$slug/raw/master/icon.png";
-                }
-                if ($client->head("https://bitbucket.org/$slug/raw/main/icon.png")->getStatusCode() == '200') {
-                    return "https://gitlab.com/$slug/raw/main/icon.png";
-                }
+            } catch(\Exception $error) {
+                return null;
             }
-        } catch(ClientException $error) {
-            return null;
         }
 
         return null;
