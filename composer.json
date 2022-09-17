@@ -8,33 +8,36 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3.0",
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
         "fideloper/proxy": "^4.4.0",
-        "graham-campbell/markdown": "^13.1.1",
-        "htmlmin/htmlmin": "^8.0.0",
-        "laravel/framework": "^8.0.4",
+        "graham-campbell/markdown": "^14.0.0",
+        "htmlmin/htmlmin": "^9.0.0",
+        "laravel/framework": "^9.19",
         "laravel/socialite": "^5.0.0",
-        "laravel/tinker": "^2.4.2",
-        "laravel/ui": "^3.0",
-        "league/commonmark": "^1.5.4",
+        "laravel/tinker": "^2.7",
+        "laravel/ui": "^4.0",
+        "league/commonmark": "^2.3.5",
         "lorisleiva/laravel-search-string": "^1.0.4"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5.1",
+        "barryvdh/laravel-debugbar": "^3.6.8",
         "fzaninotto/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
         "laravel/sail": "^1.15",
-        "matt-allan/laravel-code-style": "^0.6.0",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0.2",
+        "jubeki/laravel-code-style": "^1.0.2",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^1.0.3",
-        "phpunit/phpunit": "^9.3.8"
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
-        "platform": {
-            "php": "7.3"
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     },
     "extra": {
@@ -60,6 +63,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

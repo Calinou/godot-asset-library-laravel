@@ -193,7 +193,8 @@ function initAddAssetFieldButton(field: string): void {
       const $newField = $assetFieldList.lastElementChild;
       if ($newField) {
         $newField.innerHTML = $newField.innerHTML.replace(
-          /__index__/g, $assetFieldPrototype.dataset.index ?? '0',
+          /__index__/g,
+          $assetFieldPrototype.dataset.index ?? '0',
         );
       }
 

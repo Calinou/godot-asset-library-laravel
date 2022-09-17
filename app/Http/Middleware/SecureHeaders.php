@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Vite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -24,7 +25,7 @@ class SecureHeaders
         'X-XSS-Protection' => '1; mode=block',
         'X-Frame-Options' => 'DENY',
         'Strict-Transport-Security' => 'max-age=31536000',
-        'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self' data:",
+        // 'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self' data:",
     ];
 
     /**
@@ -34,10 +35,18 @@ class SecureHeaders
      */
     public function handle(Request $request, Closure $next)
     {
+        // having nonce active will prevent inline javascript
+        Vite::useCspNonce();
+        $nonce = "'nonce-".Vite::cspNonce()."'";
+
         $response = $next($request);
 
-        foreach (self::WANTED_HEADERS as $header => $value) {
-            $response->headers->set($header, $value);
+        $response->withHeaders(self::WANTED_HEADERS);
+        // add csp if debugbar is not active -> https://github.com/barryvdh/laravel-debugbar/issues/1317
+        if (!env('APP_DEBUG')) {
+            $response->withHeaders([
+                'Content-Security-Policy' => "default-src 'self'; script-src 'self' ".$nonce."; style-src 'self' ".$nonce."; img-src * data:; font-src 'self' data: "
+            ]);
         }
 
         return $response;

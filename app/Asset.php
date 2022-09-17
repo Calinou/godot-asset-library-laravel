@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use GuzzleHttp\Client;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 /**
@@ -140,6 +142,8 @@ class Asset extends Model
         'MPL-2.0' => 'MPLv2',
         'Unlicense' => 'The Unlicense License',
     ];
+
+    public const CACHEKEY_REPO_ICON = 'ASSET_ICON_REPO';
 
     /**
      * The primary key associated with the table.
@@ -434,10 +438,12 @@ class Asset extends Model
      * This way, the source Markdown only has to be rendered once
      * (instead of being rendered every time a page is displayed).
      */
-    public function setDescriptionAttribute(string $description): void
+    public function setDescriptionAttribute(string $description = null): void
     {
-        $this->attributes['description'] = $description;
-        $this->attributes['html_description'] = Markdown::convertToHtml($description);
+        if ($description) {
+            $this->attributes['description'] = $description;
+            $this->attributes['html_description'] = Markdown::convert($description)->getContent();
+        }
     }
 
     /**
@@ -450,19 +456,9 @@ class Asset extends Model
             return $this->getRawOriginal('icon_url');
         }
 
-        $splitUrl = explode('/', $this->browse_url);
-
-        // Slug of the form `user/repository`
-        $slug = "$splitUrl[3]/$splitUrl[4]";
-
-        // Try to infer an icon URL based on the repository host
-        // (`icon.png` at the repository root)
-        if ($splitUrl[2] === 'github.com') {
-            return "https://raw.githubusercontent.com/$slug/master/icon.png";
-        } elseif ($splitUrl[2] === 'gitlab.com') {
-            return "https://gitlab.com/$slug/raw/master/icon.png";
-        } elseif ($splitUrl[2] === 'bitbucket.org') {
-            return "https://bitbucket.org/$slug/raw/master/icon.png";
+        $gitIcon = $this->findGitIcon($this->browse_url);
+        if ($gitIcon) {
+            return $gitIcon;
         }
 
         // Couldn't infer an icon URL
@@ -688,5 +684,67 @@ class Asset extends Model
     public function __toString(): string
     {
         return "\"$this->title\" (#$this->asset_id)";
+    }
+
+    /**
+     * Tries to find a icon.png in the git repository.
+     */
+    private function findGitIcon(string $repoUrl): string | null
+    {
+        $cacheKey = $this->CACHEKEY_REPO_ICON.'-'.$this->asset_id;
+        $cached = Cache::get($cacheKey);
+        if ($cached) {
+            debug('icon from cache!');
+            return $cached;
+        }
+
+        $splitUrl = explode('/', $repoUrl);
+
+        // Slug of the form `user/repository`
+        $slug = "$splitUrl[3]/$splitUrl[4]";
+
+        $repoIcon = null;
+
+        // Try to infer an icon URL based on the repository host
+        // (`icon.png` at the repository root)
+        if ($splitUrl[2] === 'github.com') {
+            $repoIcon = $this->getExistingUrl([
+                "https://raw.githubusercontent.com/$slug/main/icon.png",
+                "https://raw.githubusercontent.com/$slug/master/icon.png",
+            ]);
+        } elseif ($splitUrl[2] === 'gitlab.com') {
+            $repoIcon = $this->getExistingUrl([
+                "https://gitlab.com/$slug/raw/main/icon.png",
+                "https://gitlab.com/$slug/raw/master/icon.png",
+            ]);
+        } elseif ($splitUrl[2] === 'bitbucket.org') {
+            $repoIcon = $this->getExistingUrl([
+                "https://bitbucket.org/$slug/raw/main/icon.png",
+                "https://bitbucket.org/$slug/raw/master/icon.png",
+            ]);
+        }
+
+        if($repoIcon) {
+            // cache the icon for 15min
+            Cache::put($cacheKey, $repoIcon, 900);
+            return $repoIcon;
+        }
+
+        return null;
+    }
+
+    private function getExistingUrl(array $urls): string | null {
+        $client = new Client(['timeout'  => 0.2, 'http_errors' => false]);
+        foreach ($urls as $url) {
+            try {
+                if ($client->head($url)->getStatusCode() == '200') {
+                    return $url;
+                }
+            } catch(\Exception $error) {
+                return null;
+            }
+        }
+
+        return null;
     }
 }

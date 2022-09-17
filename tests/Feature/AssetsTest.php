@@ -37,13 +37,13 @@ class AssetsTest extends TestCase
     public function testAssetIndex(): void
     {
         $response = $this->get('/');
-        $response->assertOk()->assertViewIs('asset.index');
+        $response->assertOk()->assertViewIs('asset.list');
     }
 
     public function testAssetIndexPaginationValid(): void
     {
         $response = $this->get('/?page=2');
-        $response->assertOk()->assertViewIs('asset.index');
+        $response->assertOk()->assertViewIs('asset.list');
     }
 
     public function testAssetIndexPaginationInvalid(): void
@@ -55,7 +55,7 @@ class AssetsTest extends TestCase
     public function testAssetIndexMaxResultsValid(): void
     {
         $response = $this->get('/?max_results=15');
-        $response->assertOk()->assertViewIs('asset.index');
+        $response->assertOk()->assertViewIs('asset.list');
     }
 
     public function testAssetIndexMaxResultsInvalid(): void
@@ -67,7 +67,7 @@ class AssetsTest extends TestCase
     public function testAssetSearchCategoryValid(): void
     {
         $response = $this->get('/?category=0');
-        $response->assertOk()->assertViewIs('asset.index');
+        $response->assertOk()->assertViewIs('asset.list');
     }
 
     public function testAssetSearchCategoryInvalid(): void

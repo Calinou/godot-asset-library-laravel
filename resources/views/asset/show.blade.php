@@ -27,7 +27,7 @@
     <div class="lg:w-1/2 lg:px-6">
       <div class="flex mb-5">
         <div class="flex-shrink-0 self-center">
-          <img class="object-cover w-26 h-26 bg-gray-400 dark:bg-gray-700 rounded" src="{{ $asset->icon_url }}">
+          <img class="object-cover w-26 h-26 bg-gray-400 dark:bg-gray-700 rounded" src="{{ $asset->icon_url ? $asset->icon_url : '/android-chrome-192x192.png' }}">
         </div>
         <div class="ml-6">
           <h1 class="text-xl font-medium">{{ $asset->title }}</h1>
@@ -37,7 +37,7 @@
               {{ $asset->author->username }}
             </a>
           </h2>
-          <a href="{{ route('asset.index', ['category' => $asset->category_id]) }}">
+          <a href="{{ route('asset.list', ['category' => $asset->category_id]) }}">
             <span class="tag tag-link font-bold text-sm">
               <span class="fa {{ $asset->category_icon }} fa-fw mr-1 -ml-1 opacity-75"></span>
               {{ $asset->category }}
@@ -49,7 +49,7 @@
       @if ($asset->tags)
       <div class="mt-5 mb-6 -ml-1 text-sm">
         @foreach ($asset->tags as $tag)
-        <a href="{{ route('asset.index', ['filter' => $tag]) }}">
+        <a href="{{ route('asset.list', ['filter' => $tag]) }}">
           <span class="tag tag-link">
             {{ $tag }}
           </span>

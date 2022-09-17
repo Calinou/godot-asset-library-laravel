@@ -23,9 +23,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AssetController extends Controller
 {
     /**
+     * Redirect for compatibility with the old asset library homepage URL
+     */
+    public function index(): RedirectResponse
+    {
+        return redirect('/', 301);
+    }
+
+    /**
      * Display a paginated list of assets.
      */
-    public function index(ListAssets $request): View
+    public function list(ListAssets $request): View
     {
         $validated = $request->validated();
 
@@ -39,7 +47,7 @@ class AssetController extends Controller
             $itemsPerPage
         );
 
-        return view('asset.index', ['assets' => $paginator]);
+        return view('asset.list', ['assets' => $paginator]);
     }
 
     /**

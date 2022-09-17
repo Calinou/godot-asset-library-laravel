@@ -60,7 +60,7 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
       Avoid overlapping the list of assets when browsing a specific category
       by adding a negative margin
     --}}
-    <form method="GET" action="{{ route('asset.index') }}" id="sort-form" class="md:absolute md:right-0 md:-mt-10">
+    <form method="GET" action="{{ route('asset.list') }}" id="sort-form" class="md:absolute md:right-0 md:-mt-10">
       @component('components/form-select', [
         'name' => 'sort',
         {{-- Preserve the form value across reloads --}}
@@ -93,7 +93,7 @@ $description = __('Find add-ons, assets and scripts for your projects here.');
   @else
   <div class="mt-12 text-lg text-center text-gray-600 leading-loose">
     {{ __('No assets found.') }}<br>
-    <a class="link" href="{{ route('asset.index') }}">
+    <a class="link" href="{{ route('asset.list') }}">
       {{ __('View all assets') }}
     </a>
   </div>

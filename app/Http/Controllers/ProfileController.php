@@ -14,6 +14,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ProfileController extends Controller
 {
     /**
+     * Redirect to current user page
+     */
+    public function index(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        return redirect(route('user.show', $user));
+    }
+
+    /**
      * Display the form used to change the logged in user's name and password.
      */
     public function edit(Request $request): View

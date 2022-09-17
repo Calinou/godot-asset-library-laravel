@@ -51,7 +51,7 @@ It also asks whether it should
 
 # ...and the frontend
 ./sail yarn
-./sail yarn development
+./sail yarn dev
 ```
 
 The development environment will be available at http://localhost:8080 by default.
@@ -63,8 +63,8 @@ The development environment will be available at http://localhost:8080 by defaul
 
 ### Production environment
 
-The production environment uses **PHP 7.3**. To preserve compatibility with the
-production environment, don't use language features only available in PHP 7.4 or
+The production environment uses **PHP 8.1**. To preserve compatibility with the
+production environment, don't use language features only available in PHP 8.1 or
 later.
 
 ### Backend
@@ -139,10 +139,10 @@ and [TypeScript](https://www.typescriptlang.org/).
 yarn
 
 # Build frontend files and watch for changes
-yarn watch
+yarn dev
 
 # Build optimized frontend files for production
-yarn production
+yarn build
 
 # Lint CSS and TypeScript files for code style violations
 yarn lint
