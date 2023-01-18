@@ -147,7 +147,7 @@
             </div>
 
             <div class="-mt-4 mb-8 text-sm text-gray-600">
-              {{ __('The "Any" version should only be used for assets that do not contain code (such as engine-agnostic art assets). If in doubt, choose the minor Godot version used to develop the asset.') }}
+              {!! __('The &quot;Any&quot; version should only be used for assets that do not contain code (such as engine-agnostic art assets). If in doubt, choose the minor Godot version used to develop the asset.') !!}
             </div>
             @endif
 
@@ -199,7 +199,7 @@
               'autocomplete' => 'off',
             ])
             {{ __('If you leave this field empty, the download URL will be inferred from the repository URL and the asset version.') }}<br>
-            {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
+            {!! __('For example, if the asset version is &quot;1.0.0&quot;, the ZIP archive corresponding to the Git tag &quot;v1.0.0&quot; will be used (note the leading &quot;v&quot;).') !!}
             @endcomponent
             @endif
 
@@ -237,7 +237,7 @@
             </h2>
             <div class="mt-2 text-sm text-gray-600 my-8">
               {{ __('For each version, if you leave the download URL field empty, it will be inferred from the repository URL and the asset version.') }}<br>
-              {{ __('For example, if the asset version is "1.0.0", the ZIP archive corresponding to the Git tag "v1.0.0" will be used (note the leading "v").') }}
+              {!! __('For example, if the asset version is &quot;1.0.0&quot;, the ZIP archive corresponding to the Git tag &quot;v1.0.0&quot; will be used (note the leading &quot;v&quot;).') !!}
             </div>
 
             @error('versions')

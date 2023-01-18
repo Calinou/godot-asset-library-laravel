@@ -142,6 +142,23 @@ EOF);
             {{ __('Log in') }}
           </a>
           @endif
+
+          <div class="navbar-dropdown">
+            <button type="button" class="button">
+              <span class="fa fa-language ml-1"></span>
+            </button>
+            <div class="navbar-dropdown-content">
+              <form method="POST" action="{{ route('translation') }}">
+                @csrf
+                @foreach (config('app.languages') as $value => $language)
+                  <button type="submit" name="lang" value="{{ $value }}" title="{{ $value }}" class="w-full text-left block button rounded-none @if(App::currentLocale() == $value) bg-blue-400  hover:bg-blue-500 @endif" data-loading>
+                    {{ $language }}
+                  </button>
+                @endforeach
+              </form>
+            </div>
+          </div>
+
         </div>
 
       </div>

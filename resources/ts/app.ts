@@ -236,6 +236,33 @@ function initFlashClose(): void {
   });
 }
 
+/**
+ * Initialize detection of the user's preferred language
+ */
+function initDetectNavigatorLanguage(): void {
+  // https://stackoverflow.com/questions/14573223/set-cookie-and-get-cookie-with-javascript
+  const cookieArray = document.cookie.split(';');
+  const cookieName = 'locale';
+  let isLocaleExist = false;
+
+  cookieArray.forEach((cookie: string) => {
+    let cookieFormat = cookie;
+
+    while (cookieFormat.charAt(0) === ' ') cookieFormat = cookieFormat.substring(1, cookieFormat.length);
+    if (cookieFormat.indexOf(`${cookieName}=`) === 0) {
+      isLocaleExist = true;
+    }
+  });
+
+  if (!isLocaleExist) {
+    const expiresDate = new Date();
+    expiresDate.setFullYear(expiresDate.getFullYear() + 5);
+    expiresDate.getFullYear();
+
+    document.cookie = `locale=${navigator.language}; expires=${expiresDate.toUTCString()}; path=/; sameSite=Lax`;
+  }
+}
+
 // Call functions that need to be called on every page change here.
 // This is also called on the initial page load.
 const initAll = (): void => {
@@ -247,6 +274,7 @@ const initAll = (): void => {
   initAddAssetFieldButton('preview');
   initAssetSortSelect();
   initFlashClose();
+  initDetectNavigatorLanguage();
 };
 
 window.addEventListener('DOMContentLoaded', () => {
