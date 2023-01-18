@@ -6,33 +6,26 @@ namespace Tests\Feature;
 
 use App\Asset;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AssetsTest extends TestCase
+class AssetsTest extends RefreshTestCase
 {
-    // https://stackoverflow.com/questions/42350138/how-to-seed-database-migrations-for-laravel-tests
-    use RefreshDatabase {
-        refreshDatabase as baseRefreshDatabase;
-    }
-
     public const ASSET_DATA = [
         'title' => 'My Own Asset',
         'blurb' => 'One-line description of the asset',
         'description' => 'A long description…',
         'tags' => 'platformer, 2d, pixel-art, gdnative',
-        'category' => Asset::CATEGORY_2D_TOOLS,
+        'category_id' => Asset::CATEGORY_2D_TOOLS,
         'license' => 'MIT',
-        'versions[0][version_string]' => '1.0.0',
-        'versions[0][godot_version]' => '3.2',
-        'browse_url' => 'https://github.com/user/asset',
+        'cost' => 'MIT',
+        'versions' => [
+            0 => [
+                'version_string' => '1.0.0',
+                'godot_version' => '3.x.x',
+            ],
+        ],
+        'browse_url' => 'https://github.com/Calinou/godot-asset-library-laravel',
     ];
-
-    public function refreshDatabase(): void
-    {
-        $this->baseRefreshDatabase();
-        $this->seed();
-    }
 
     public function testAssetIndex(): void
     {
@@ -103,7 +96,7 @@ class AssetsTest extends TestCase
 
     public function testAssetCreateLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/asset/submit');
         $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', false);
     }
@@ -116,9 +109,12 @@ class AssetsTest extends TestCase
 
     public function testAssetSubmitLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
+        $this->assertDatabaseMissing('assets', ['author_id' => $user->id]);
         $response = $this->actingAs($user)->post('/asset', self::ASSET_DATA);
-        $response->assertRedirect('/');
+        $response->assertRedirect();
+        $response->assertSessionHas('statusType', 'success');
+        $this->assertDatabaseHas('assets', ['author_id' => $user->id]);
     }
 
     public function testAssetEditNotLoggedIn(): void
@@ -129,7 +125,7 @@ class AssetsTest extends TestCase
 
     public function testAssetEditLoggedIn(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->is_admin = true;
         $response = $this->actingAs($user)->get('/asset/1/edit');
         $response->assertOk()->assertViewIs('asset.create')->assertViewHas('editing', true);

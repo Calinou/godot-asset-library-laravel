@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
+use Tests\RefreshTestCase;
 
-class AdminCreateTest extends TestCase
+class AdminCreateTest extends RefreshTestCase
 {
-    use RefreshDatabase;
-
     /**
      * Test the administrator creation command.
      * This also checks whether the newly created user is actually
