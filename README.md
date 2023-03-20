@@ -1,3 +1,13 @@
+___
+
+
+> **Warning**
+> 
+> This repository is discontinued and will no longer be worked on.
+> See [issue #467](https://github.com/Calinou/godot-asset-library-laravel/issues/467) for an explanation.
+
+___
+
 # Godot Asset Library
 
 [![codecov](https://codecov.io/gh/Calinou/godot-asset-library-laravel/branch/master/graph/badge.svg)](https://codecov.io/gh/Calinou/godot-asset-library-laravel)
