@@ -21,6 +21,7 @@ Route::group([
     'prefix' => 'v1',
 ], function () {
     Route::get('/asset', [AssetController::class, 'index']);
+    Route::get('/asset/download/{asset}/{version?}', [AssetController::class, 'download'])->name('api.asset.download');
     Route::get('/asset/{asset}', [AssetController::class, 'show']);
 
     Route::get('/configure', [ConfigureController::class, 'index']);

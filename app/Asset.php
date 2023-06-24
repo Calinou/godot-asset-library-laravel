@@ -35,6 +35,7 @@ use Lorisleiva\LaravelSearchString\Concerns\SearchString;
  * @property ?string $changelog_url The asset's changelog URL.
  * @property ?string $donate_url The asset's donate URL.
  * @property string $icon_url The asset's icon URL (will be inferred from `$browse_url` if empty).
+ * @property int $download_count The asset's download count based on how many time the user pressed the download button
  * @property-read string $download_url The asset's latest version download URL (for compatibility with the existing asset library API).
  * @property-read string $version_string The asset's latest version's supported Godot minor version (e.g. "0.4.2", for compatibility with the existing asset library API).
  * @property string $godot_version The asset's latest version's human-readable identifier (e.g. "3.2", for compatibility with the existing asset library API).
@@ -417,7 +418,7 @@ class Asset extends Model
      */
     public function getDownloadUrlAttribute(): string
     {
-        return $this->versions->last()->getDownloadUrlAttribute($this->browse_url);
+        return route('api.asset.download', ['asset' => $this]);
     }
 
     /**

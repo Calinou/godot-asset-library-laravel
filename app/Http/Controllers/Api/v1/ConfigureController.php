@@ -19,7 +19,7 @@ class ConfigureController extends Controller
 
         if (! isset($validated['type'])) {
             // Default to 'addon' for compatibility with the old asset library
-            $validated['type'] = 'addon';
+            $validated['type'] = 'any';
         }
 
         switch ($validated['type']) {
